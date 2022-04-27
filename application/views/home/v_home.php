@@ -13,25 +13,25 @@
     <title>Start | Landing Page for Startup and SaaS Business</title>
 
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="<?= base_url('home/') ?>assets/images/logo-sm.png" type="image/png">
+    <link rel="shortcut icon" href="<?= base_url('assets/') ?>logo/logo-sm.png" type="image/png">
 
     <!--====== Bootstrap css ======-->
-    <link rel="stylesheet" href="<?= base_url('home/') ?>assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/bootstrap.min.css">
 
     <!--====== Line Icons css ======-->
-    <link rel="stylesheet" href="<?= base_url('home/') ?>assets/css/LineIcons.css">
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/LineIcons.css">
 
     <!--====== Magnific Popup css ======-->
-    <link rel="stylesheet" href="<?= base_url('home/') ?>assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/magnific-popup.css">
 
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!--====== Default css ======-->
-    <link rel="stylesheet" href="<?= base_url('home/') ?>assets/css/default.css">
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/default.css">
 
     <!--====== Style css ======-->
-    <link rel="stylesheet" href="<?= base_url('home/') ?>assets/css/styles.css">
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/styles.css">
 
 
 </head>
@@ -47,7 +47,7 @@
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand" href="#">
-                                <img src="<?= base_url('home/') ?>assets/images/logo-big.png" alt="Logo" class="w-75">
+                                <img src="<?= base_url('assets/') ?>logo/logo-big.png" alt="Logo" class="w-75">
                             </a>
 
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarOne" aria-controls="navbarOne" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,7 @@
             </div> <!-- container -->
         </div> <!-- navgition -->
 
-        <div id="home" class="header-hero bg_cover" style="background-image:  url(home/assets/images/bg-head.png)">
+        <div id="home" class="header-hero bg_cover" style="background-image:  url(assets/home/images/bg-head.png)">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-10">
@@ -90,14 +90,14 @@
                             </div>
                             <p class="text">Siswa dan Guru Pengajar <span>SMK Kesatrian Purwokerto Di SiberHyl</span>, Sebuah platform yang memudahan proses belajar-mengajar anda dengan konsep Hybrid Learning  </p>
                             <div class="header-btn mt-4">
-                                <a class="main-btn btn-one" href="#">Masuk <i class="fa fa-caret-right" style="color: white;"></i></a>
+                                <a href="<?= base_url('C_auth/auth') ?>" class="main-btn btn-one">Masuk <i class="fa fa-caret-right" style="color: white;"></i></a>
                             </div>
                         </div> <!-- header content -->
                     </div>
                 </div> <!-- row -->
             </div> <!-- container -->
             <div class="header-shape">
-                <img src="<?= base_url('home/') ?>assets/images/header-shape.svg" alt="shape">
+                <img src="<?= base_url('assets/') ?>home/images/header-shape.svg" alt="shape">
             </div>
         </div> <!-- header content -->
     </header>
@@ -127,7 +127,7 @@
                             </div>
                             <div class="services-content d-sm-flex pb-15">
                                 <div class="services-icon">
-                                <img class="rotate90" src="<?= base_url('home/') ?>assets/images/favicon.png" alt="">
+                                <img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
                                 </div>
                                 <div class="services-content media-body mt-n2">
                                     <p class="text">
@@ -137,7 +137,7 @@
                             </div> <!-- services content -->
                             <div class="services-content d-sm-flex pb-15">
                                 <div class="services-icon">
-                                    <img class="rotate90" src="<?= base_url('home/') ?>assets/images/favicon.png" alt="">
+                                    <img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
                                 </div>
                                 <div class="services-content media-body mt-n2">
                                     <p class="text">
@@ -147,7 +147,7 @@
                             </div> <!-- services content -->
                             <div class="services-content d-sm-flex pb-15">
                                 <div class="services-icon">
-                                    <img class="rotate90" src="<?= base_url('home/') ?>assets/images/favicon.png" alt="">
+                                    <img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
                                 </div>
                                 <div class="services-content media-body mt-n2">
                                     <p class="text">
@@ -157,7 +157,7 @@
                             </div> <!-- services content -->
                             <div class="services-content d-sm-flex pb-15">
                                 <div class="services-icon">
-                                    <img class="rotate90" src="<?= base_url('home/') ?>assets/images/favicon.png" alt="">
+                                    <img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
                                 </div>
                                 <div class="services-content media-body mt-n2">
                                     <p class="text">
@@ -167,7 +167,7 @@
                             </div> <!-- services content -->
                             <div class="services-content d-sm-flex pb-15">
                                 <div class="services-icon">
-                                    <img class="rotate90" src="<?= base_url('home/') ?>assets/images/favicon.png" alt="">
+                                    <img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
                                 </div>
                                 <div class="services-content media-body mt-n2">
                                     <p class="text">
@@ -182,7 +182,7 @@
         </div> <!-- conteiner -->
         <div class="services-image d-lg-flex align-items-center">
             <div class="image">
-                <img src="<?= base_url('home/') ?>assets/images/service-ilustration.png" alt="Services">
+                <img src="<?= base_url('assets/') ?>home/images/service-ilustration.png" alt="Services">
             </div>
         </div> <!-- services image -->
     </section>
@@ -207,7 +207,7 @@
                 <div class="col-lg-4 col-md-7 col-sm-9">
                     <div class="single-pricing enterprise mt-40">
                         <div class="pricing-flower">
-                            <img src="<?= base_url('home/') ?>assets/images/feature-siswa.png" alt="flower">
+                            <img src="<?= base_url('assets/') ?>home/images/feature-siswa.png" alt="flower">
                         </div>
                         <div class="pricing-header text-right">
                             <h5 class="price sub-title">Siswa</h5>
@@ -229,7 +229,7 @@
                 <div class="col-lg-4 col-md-7 col-sm-9">
                     <div class="single-pricing enterprise mt-40">
                         <div class="pricing-flower">
-                            <img src="<?= base_url('home/') ?>assets/images/feature-guru.png" alt="guru">
+                            <img src="<?= base_url('assets/') ?>home/images/feature-guru.png" alt="guru">
                         </div>
                         <div class="pricing-header text-right">
                             <h5 class="price sub-title">Guru</h5>
@@ -255,7 +255,7 @@
                 <div class="col-lg-4 col-md-7 col-sm-9">
                     <div class="single-pricing enterprise mt-40">
                         <div class="pricing-flower">
-                            <img src="<?= base_url('home/') ?>assets/images/feature-wali-kelas.png" alt="wali kelas">
+                            <img src="<?= base_url('assets/') ?>home/images/feature-wali-kelas.png" alt="wali kelas">
                         </div>
                         <div class="pricing-header text-right">
                             <h5 class="price sub-title">Wali kelas</h5>
@@ -296,7 +296,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="contact-form">
-                        <form id="contact-form" action="assets/contact.php" method="post" data-toggle="validator">
+                        <form id="contact-form" action="<?= base_url('') ?>" method="post" data-toggle="validator">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="single-form form-group">
@@ -401,27 +401,27 @@
 
     <!--====== BACK TO TOP PART START ======-->
 
-    <a class="back-to-top" href="#">  <img class="rotate45" src="<?= base_url('home/') ?>assets/images/favicon.png" alt=""> </a>
+    <a class="back-to-top" href="#">  <img class="rotate45" src="<?= base_url('assets/') ?>home/images/favicon.png" alt=""> </a>
 
     <!--====== BACK TO TOP PART ENDS ======-->
 
     <!--====== jquery js ======-->
-    <script src="<?= base_url('home/') ?>assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="<?= base_url('home/') ?>assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="<?= base_url('assets/') ?>home/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="<?= base_url('assets/') ?>home/js/vendor/jquery-1.12.4.min.js"></script>
 
     <!--====== Bootstrap js ======-->
-    <script src="<?= base_url('home/') ?>assets/js/bootstrap.min.js"></script>
-    <script src="<?= base_url('home/') ?>assets/js/popper.min.js"></script>
+    <script src="<?= base_url('assets/') ?>home/js/bootstrap.min.js"></script>
+    <script src="<?= base_url('assets/') ?>home/js/popper.min.js"></script>
 
     <!--====== Scrolling Nav js ======-->
-    <script src="<?= base_url('home/') ?>assets/js/jquery.easing.min.js"></script>
-    <script src="<?= base_url('home/') ?>assets/js/scrolling-nav.js"></script>
+    <script src="<?= base_url('assets/') ?>home/js/jquery.easing.min.js"></script>
+    <script src="<?= base_url('assets/') ?>home/js/scrolling-nav.js"></script>
 
     <!--====== Magnific Popup js ======-->
-    <script src="<?= base_url('home/') ?>assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="<?= base_url('assets/') ?>home/js/jquery.magnific-popup.min.js"></script>
 
     <!--====== Main js ======-->
-    <script src="<?= base_url('home/') ?>assets/js/main.js"></script>
+    <script src="<?= base_url('assets/') ?>home/js/main.js"></script>
 
 </body>
 
