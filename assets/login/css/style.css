@@ -1,0 +1,84 @@
+.form-group img {
+	width: 25px;
+	height: 25px;
+}
+
+.form-group .form-control {
+    width: 370px;
+}
+
+.btn-masuk {
+    background-color: #2989A8;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.btn-masuk:hover {
+    background-color: #27677c;
+    color: white;
+}
+
+/* tablet */
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+	.logo img {
+		width: 70%;
+	}
+
+	.form-content {
+		padding: 20px;
+	}
+    
+    .form-group .form-control {
+        width: 340px;
+    }
+    
+}
+
+/* phone */
+@media (max-width: 767px) {
+	.logo img {
+		width: 70%;
+	}
+
+	.form-content {
+		padding: 20px;
+	}
+    
+    .form-group .form-control {
+        width: 240px;
+    }
+    
+}
+
+/* Tablet */
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+	.logo img {
+		width: 90%;
+	}
+
+	.form-content {
+		padding: 20px;
+	}
+    
+    .form-group .form-control {
+        width: 340px;
+    }
+    
+}
+
+/* desktop */
+@media only screen and (min-width:992px) {
+	.form-content {
+		padding: 50px;
+	}
+
+    .card {
+        width: 50%;
+    }
+
+    
+}
