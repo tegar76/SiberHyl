@@ -1,27 +1,4 @@
-/*-----------------------------------------------------------------------------------
 
-    Template Name: Start
-    Template URI: UIdeck.com
-    Description: Start | Landing Page for Startup and SaaS Business
-    Author: Uideck
-    Author URI: https://uideck.com/
-    Support: https://uideck.com/support/
-    Version: 1.0
-
------------------------------------------------------------------------------------
-
-    CSS INDEX
-    ===================
-
-    01. Theme default CSS
-	02. Header
-    03. Hero
-	04. Footer
-
------------------------------------------------------------------------------------*/
-/*===========================
-    1. COMMON css 
-===========================*/
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800");
 
 body {
