@@ -45,6 +45,13 @@ body {
 	opacity: 0.8;
 }
 
+.form-group i {
+	margin-left: -23px; 
+	cursor: pointer; 
+	margin-top: 10px;
+	color: gray;
+}
+
 .form-group select {
 	font-size: 14px;
 	color: gray;
