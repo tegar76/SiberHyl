@@ -35,15 +35,23 @@
 					Mengelola Proses Belajar - Mengajar Anda Pada Satu Sistem dengan Konsep Hybrid Learning
 				</div>
 
-				<?= form_open('login/process') ?>
+				<?= form_open('login') ?>
 				<div class="row justify-content-center">
+					<?php if ($this->session->flashdata('message')) : ?>
+						<div class="alert alert-warning" role="alert">
+							<?= $this->session->flashdata('message') ?>
+						</div>
+					<?php endif ?>
 					<div class="row mb-3">
 						<div class="form-group d-flex justify-content-between">
 							<label for="username">
 								<img src="<?= base_url('assets/login/icons/user.png') ?>" alt="user" class="mr-3">
 							</label>
-							<input type="text" name="username" id="username" class="form-control" placeholder="Masukan Username">
+							<input type="text" name="username" id="username" class="form-control <?= (form_error('username')) ? 'is-invalid' : '' ?>" value="<?= set_value('username', 'username') ?>" placeholder="Masukan Username">
 							<img src="<?= base_url('assets/login/icons/info.png') ?>" alt="" class="ml-3" onclick="alertInfoLoginUsername()">
+						</div>
+						<div id="usernameFeedback" class="invalid-feedback">
+							<?= form_error('username', '<div class="text-danger">', '</div>') ?>
 						</div>
 					</div>
 
@@ -56,8 +64,11 @@
 							<label for="password">
 								<img src="<?= base_url('assets/login/icons/pass.png') ?>" alt="user" class="mr-3">
 							</label>
-							<input type="password" name="password" id="password" class="form-control" placeholder="Masukan Password">
+							<input type="password" name="password" id="password" class="form-control <?= (form_error('password')) ? 'is-invalid' : '' ?>" value="<?= set_value('password') ?>" placeholder="Masukan Password">
 							<img src="<?= base_url('assets/login/icons/info.png') ?>" alt="" class="ml-3" onclick="alertInfoLoginPassword()">
+						</div>
+						<div id="passwordFeedback" class="invalid-feedback">
+							<?= form_error('password', '<div class="text-danger">', '</div>') ?>
 						</div>
 					</div>
 				</div>
@@ -68,12 +79,15 @@
 
 				<div class="row d-flex justify-content-center mt-n3">
 					<div class="form-group">
-						<select class="form-control" id="hak_akses" name="hak_akses">
-							<option selected>Masuk Sebagai..?</option>
+						<select class="form-control <?= (form_error('hak_akses')) ? 'is-invalid' : '' ?>" id="hak_akses" name="hak_akses">
+							<option selected value="">Masuk Sebagai..?</option>
 							<option value="siswa">Siswa</option>
-							<option value="guru">Guru</option>
+							<option value="guru">Guru Pengajar</option>
 							<option value="wali-kelas">Wali Kelas</option>
 						</select>
+						<div id="hak_aksesFeedback" class="invalid-feedback">
+							<?= form_error('hak_akses', '<div class="text-danger">', '</div>') ?>
+						</div>
 					</div>
 
 					<div class="form-group mt-3 d-flex justify-content-between">

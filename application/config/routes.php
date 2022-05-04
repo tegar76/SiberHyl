@@ -57,5 +57,13 @@ $route['translate_uri_dashes'] = FALSE;
 	custom route
 */
 
-$route['login'] = 'C_auth/Auth';
-$route['login/process'] = 'C_auth/Auth/process';
+$route['login'] = 'Auth/Auth/login';
+
+// routing siswa
+$route['siswa/dashboard'] = 'Siswa/Dashboard/index';
+
+// routing guru
+$route['guru/dashboard'] = 'Guru/Dashboard/index';
+
+// routing wali kelas
+$route['wali-kelas/dashboard'] = 'WaliKelas/Dashboard/index';

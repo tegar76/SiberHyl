@@ -1,8 +1,8 @@
 <?php
 
-class SiswaModel extends CI_Model
+class GuruModel extends CI_Model
 {
-	protected $table = "siberhyl_siswa";
+	protected $table = "siberhyl_guru";
 
 	public function getAll()
 	{
@@ -20,11 +20,7 @@ class SiswaModel extends CI_Model
 		if ($params == null) {
 			return false;
 		}
-		$query	= $this->db->select('*')
-			->from('siberhyl_siswa as siswa')
-			->join('siberhyl_kelas as kelas', 'siswa.kelas_id=kelas.kelas_id')
-			->where($params)
-			->get();
+		$query	= $this->db->get_where($this->table, $params);
 		$row = $query->num_rows();
 		if ($row > 1) {
 			return $query->result_array();
@@ -40,8 +36,7 @@ class SiswaModel extends CI_Model
 		}
 
 		$this->db->set($update)
-			->where('siswa_nis', $where)
+			->where('guru_nip', $where)
 			->update($this->table);
-		return true;
 	}
 }
