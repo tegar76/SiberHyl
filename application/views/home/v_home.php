@@ -3,32 +3,32 @@
 
 <head>
 
-    <!--====== Required meta tags ======-->
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!--====== Required meta tags ======-->
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--====== Title ======-->
-    <title>Start | Landing Page for Startup and SaaS Business</title>
+	<!--====== Title ======-->
+	<title>Start | Landing Page for Startup and SaaS Business</title>
 
-    <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="<?= base_url('assets/') ?>logo/logo-sm.png" type="image/png">
+	<!--====== Favicon Icon ======-->
+	<link rel="shortcut icon" href="<?= base_url('assets/') ?>logo/logo-sm.png" type="image/png">
 
-    <!--====== Bootstrap css ======-->
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/bootstrap.min.css">
+	<!--====== Bootstrap css ======-->
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/bootstrap.min.css">
 
-    <!--====== Line Icons css ======-->
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/LineIcons.css">
+	<!--====== Line Icons css ======-->
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/LineIcons.css">
 
-    <!--====== Magnific Popup css ======-->
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/magnific-popup.css">
+	<!--====== Magnific Popup css ======-->
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/magnific-popup.css">
 
-    <!-- Font awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Font awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!--====== Default css ======-->
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/default.css">
+	<!--====== Default css ======-->
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/default.css">
 
     <!--====== Style css ======-->
     <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/styless.css">
@@ -38,6 +38,7 @@
 
 <body>
 
+<<<<<<< HEAD
     <!--====== HEADER PART START ======-->
 
     <header class="header-area">
@@ -425,7 +426,6 @@
 
     <!--====== Main js ======-->
     <script src="<?= base_url('assets/') ?>home/js/main.js"></script>
-
 </body>
 
 </html>
