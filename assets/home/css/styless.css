@@ -46,7 +46,7 @@ h4,
 h5,
 h6 {
 	font-family: "Poppins", sans-serif;
-	font-weight: 700;
+	font-weight: 400;
 	color: #121212;
 	margin: 0px;
 }
@@ -101,7 +101,7 @@ p {
 /*===== All Button Style =====*/
 .main-btn {
 	display: inline-block;
-	font-weight: 700;
+	font-weight: 500;
 	text-align: center;
 	white-space: nowrap;
 	vertical-align: middle;
@@ -136,7 +136,14 @@ p {
 /*===== All Section Title Style =====*/
 .section-title .title {
 	font-size: 30px;
-	font-weight: 600;
+	font-weight: 500;
+	line-height: 55px;
+	color: #121212;
+}
+
+.section-title .sub-title {
+	font-size: 24px;
+	font-weight: 500;
 	line-height: 55px;
 	color: #121212;
 }
@@ -153,10 +160,11 @@ p {
 	line-height: 24px;
 	color: #121212;
 	margin-top: 24px;
+	font-weight: 400;
 }
 
 .section-title .text span {
-	font-weight: 600;
+	font-weight: 500;
 }
 
 /*===========================
@@ -273,7 +281,7 @@ p {
 .navgition .navbar .navbar-nav .nav-item a {
 	font-size: 16px;
 	line-height: 24px;
-	font-weight: 700;
+	font-weight: 600;
 	padding: 26px 0;
 	color: #121212;
 	text-transform: uppercase;
@@ -340,7 +348,7 @@ p {
 
 .navgition .navbar .navbar-nav .nav-item.active>a,
 .navgition .navbar .navbar-nav .nav-item:hover>a {
-	color: #0067f4;
+	color: #021a3f;
 }
 
 .navgition .navbar .navbar-nav .nav-item.active>a::before,
@@ -368,7 +376,7 @@ p {
 
 .navgition .navbar .navbar-social span {
 	font-size: 16px;
-	font-weight: 700;
+	font-weight: 600;
 	color: #6c6c6c;
 	line-height: 24px;
 	margin-right: 14px;
@@ -382,7 +390,7 @@ p {
 .navgition .navbar .navbar-social ul li a {
 	font-size: 32px;
 	text-transform: uppercase;
-	font-weight: 700;
+	font-weight: 600;
 	color: #6c6c6c;
 	border-radius: 4px;
 	-webkit-transition: all 0.3s ease-out 0s;
@@ -393,7 +401,7 @@ p {
 }
 
 .navgition .navbar .navbar-social ul li a:hover {
-	color: #0067f4;
+	color: #021a3f
 }
 
 .header-hero {
@@ -447,7 +455,7 @@ p {
 	font-size: 44px;
 	line-height: 55px;
 	color: #121212;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 @media (max-width: 767px) {
@@ -517,7 +525,7 @@ p {
 }
 
 .header-hero .header-content .header-btn a.main-btn.btn-one:hover::before {
-	background-color: #005ad8;
+	background-color: #021a3f;
 	background-position: left center;
 	-webkit-transition: all none ease-out 0s;
 	-moz-transition: all none ease-out 0s;
@@ -533,7 +541,7 @@ p {
 }
 
 .header-hero .header-content span {
-	color: #000;
+	color: #121212;
 }
 
 .header-hero .header-shape {
@@ -615,7 +623,7 @@ p {
 
 .services-content .services-content .services-title {
 	font-size: 24px;
-	font-weight: 500;
+	font-weight: 400;
 	line-height: 30px;
 	color: #121212;
 }
@@ -628,7 +636,7 @@ p {
 }
 
 .services-content .services-content .text span {
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .services-image {
@@ -732,7 +740,7 @@ p {
 
 .single-pricing .pricing-header .sub-title {
 	font-size: 10px;
-	font-weight: 600;
+	font-weight: 500;
 	line-height: 25px;
 	color: #121212;
 	position: relative;
@@ -755,7 +763,7 @@ p {
 	margin-right: 5px;
 	display: block;
 	font-size: 26px;
-	font-weight: 600;
+	font-weight: 500;
 	line-height: 100px;
 	color: #121212;
 }
@@ -913,7 +921,7 @@ p {
 
 .call-action-content .call-title {
 	font-size: 44px;
-	font-weight: 600;
+	font-weight: 500;
 	color: #fff;
 	line-height: 55px;
 }
@@ -988,7 +996,7 @@ p {
 	height: 48px;
 	padding: 0 32px;
 	font-size: 16px;
-	font-weight: 700;
+	font-weight: 500;
 	color: #fff;
 	text-transform: uppercase;
 	cursor: pointer;
@@ -1014,7 +1022,7 @@ p {
 }
 
 .call-action-content .call-newsletter button:hover {
-	background-color: #005ad5;
+	background-color: #021a3f;
 	color: #fff;
 }
 
@@ -1110,7 +1118,7 @@ p.form-message.error {
 }
 
 .contact-form .single-form .main-btn:hover {
-	background-color: #005ad5;
+	background-color: #021a3f;
 }
 
 .list-unstyled li {
@@ -1150,7 +1158,7 @@ p.form-message.error {
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 18px;
-	color: #000000;
+	color: #121212;
 }
 
 .footer-link {
@@ -1175,7 +1183,7 @@ p.form-message.error {
 }
 
 .footer-link ul li a:hover {
-	color: #0067f4;
+	color: #021a3f;
 }
 
 

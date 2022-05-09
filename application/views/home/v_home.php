@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/default.css">
 
     <!--====== Style css ======-->
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/styles.css">
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/styless.css">
 
 
 </head>
@@ -113,7 +113,7 @@
                     <div class="section-title pb-10">
                         <h4 class="title">Tentang SiberHyl</h4>
                         <p class="text">
-                            SiberHyl adalah sebuah platfrom LMS(Learning Management System) dengan menciptakan pembelajaran secara hybrid learning. Hybrid learning sendiri merupakan metode pembelajaran yang menggabungkan kegiatan belajar daring dan luring secara teratur dan efektif.
+                            <span>SiberHyl</span> adalah sebuah platfrom LMS(Learning Management System) dengan menciptakan pembelajaran secara hybrid learning. Hybrid learning sendiri merupakan metode pembelajaran yang menggabungkan kegiatan belajar daring dan luring secara teratur dan efektif.
                         </p>
                     </div> <!-- section title -->
                 </div>
@@ -122,8 +122,8 @@
                 <div class="col-lg-7">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="service-title mt-40 mb-20">
-                                <h4>Tujuan Hybrid Learning</h4>
+                            <div class="section-title mt-40 mb-20">
+                                <h4 class="sub-title">Tujuan Hybrid Learning</h4>
                             </div>
                             <div class="services-content d-sm-flex pb-15">
                                 <div class="services-icon">
@@ -214,13 +214,16 @@
                         </div> 
                         <div class="pricing-list">
                             <ul>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Jadwal</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Melihat data Siswa</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Data Absensi Siswa</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mlihat Jadwal Kelas  yang dipimpin</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi Antara  Wali Kelas & Siswa</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi Antara Wali Kelas & Guru </li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Catatan KBM Dari Guru </li>
+                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Informasi Akademik</li>
+                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Jadwal Pelajaran</li>
+                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Absensi</li>
+                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Materi</li>
+                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Video Pembelajaran</li>
+                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Tugas </li>
+                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Ujian/Ulangan Harian </li>
+                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi</li>
+                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Pengajuan Surat</li>
+                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Konsultasi bersama Wali Kelas </li>
                             </ul>
                         </div>
                     </div> <!-- single pricing -->

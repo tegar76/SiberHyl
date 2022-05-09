@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
     <!-- style -->
-    <link rel="stylesheet" href="<?= base_url('assets/login/css/stylesss.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/login/css/stylessss.css') ?>">
 
     <title>Login</title>
 </head>
