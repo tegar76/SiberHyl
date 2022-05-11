@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
     <!-- style -->
-    <link rel="stylesheet" href="<?= base_url('assets/login/css/stylessss.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/login/css/styless.css') ?>">
     
 	<title>Login</title>
 </head>
@@ -49,29 +49,34 @@
 							</label>
 							<input type="text" name="username" id="username" class="form-control <?= (form_error('username')) ? 'is-invalid' : '' ?>" value="<?= set_value('username', 'username') ?>" placeholder="Masukan Username">
 							<img src="<?= base_url('assets/login/icons/info.png') ?>" alt="" class="ml-3" onclick="alertInfoLoginUsername()">
+							
 						</div>
-						<div id="usernameFeedback" class="invalid-feedback">
-							<?= form_error('username', '<div class="text-danger">', '</div>') ?>
-						</div>
+						
 					</div>
 
+					<div id="usernameFeedback" class="invalid-feedback d-block mt-n4 mb-4" style="margin-left: 57px">
+						<?= form_error('username', '<div class="text-danger">', '</div>') ?>
+					</div>
 					<div class="form-group mt-n3 mb-n1 d-flex justify-content-center">
 						<p id="alertInfoLoginUsername"></p>
 					</div>
 
 					<div class="row">
-						<div class="form-group d-flex justify-content-between">
+						<div class="form-group d-flex justify-content-between ml-0">
 							<label for="password">
 								<img src="<?= base_url('assets/login/icons/pass.png') ?>" alt="user" class="mr-3">
 							</label>
-							<input type="password" name="password" class="form-control <?= (form_error('password')) ? 'is-invalid' : '' ?>" value="<?= set_value('password') ?>" placeholder="Masukan Password" autocomplete="current-password" id="id_password">
-							<i class="far fa-eye fa-xs" id="togglePassword"></i>
-							<img src="<?= base_url('assets/login/icons/info.png') ?>" alt="" class="ml-3" onclick="alertInfoLoginPassword()">
+							<input type="password" name="password" class="form-control mr-2 <?= (form_error('password')) ? 'is-invalid' : '' ?>" value="<?= set_value('password') ?>" placeholder="Masukan Password" autocomplete="current-password" id="id_password">
+							<i class="far fa-eye fa-xs ml-n5" id="togglePassword"></i>
+							<img src="<?= base_url('assets/login/icons/info.png') ?>" alt="" onclick="alertInfoLoginPassword()" style="margin-left: 42px;"> 
+							
 						</div>
-						<div id="passwordFeedback" class="invalid-feedback">
-							<?= form_error('password', '<div class="text-danger">', '</div>') ?>
-						</div>
+						
 					</div>
+				</div>
+
+				<div id="passwordFeedback" class="invalid-feedback d-block mt-n2 mb-1" style="margin-left: 40px">
+					<?= form_error('password', '<div class="text-danger">', '</div>') ?>
 				</div>
 				<div class="form-group d-flex justify-content-center">
 					<p class="alert-login" id="alertInfoLoginPassword"></p>

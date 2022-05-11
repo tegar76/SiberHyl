@@ -38,7 +38,6 @@
 
 <body>
 
-<<<<<<< HEAD
     <!--====== HEADER PART START ======-->
 
     <header class="header-area">
@@ -91,7 +90,7 @@
                             </div>
                             <p class="text">Siswa dan Guru Pengajar <span>SMK Kesatrian Purwokerto Di SiberHyl</span>, Sebuah platform yang memudahan proses belajar-mengajar anda dengan konsep Hybrid Learning  </p>
                             <div class="header-btn mt-4">
-                                <a href="<?= base_url('C_auth/auth') ?>" class="main-btn btn-one">Masuk <i class="fa fa-caret-right" style="color: white;"></i></a>
+                                <a href="<?= base_url('login') ?>" class="main-btn btn-one">Masuk <i class="fa fa-caret-right" style="color: white;"></i></a>
                             </div>
                         </div> <!-- header content -->
                     </div>
