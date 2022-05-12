@@ -1,0 +1,113 @@
+.search-click {
+    border: 1px solid #ccc;
+    outline: none;
+    background-size: 10px;
+    background-position: 13px;
+    border-radius: 10px;
+    width: 35px;
+    padding: 9px;
+    transition: all 0.5s;
+  }
+  .search-click:focus {
+    width: 300px;
+    padding-left: 20px;
+  }
+  .search-click {
+    position: relative;
+    overflow: hidden;
+    height: 35px;
+  }
+  .search-click input {
+    background: transparent;
+    border: 1px solid #ccc;
+    outline: none;
+    position: absolute;
+    width: 300px;
+    height: 10px;
+    left: 0%;
+    padding: 10px;
+  }
+
+  .search-box {
+      margin-top: -60px;
+      margin-bottom: 20px;
+  }
+
+  .content-card .card img {
+      width: 50px;
+      height: 50px;
+  }
+
+  .content-card .card p {
+    font-size: 14px;
+}
+
+.content-card .card .ket-mapel {
+    margin-top: -35px;
+    
+}
+
+.content-card .card .ket-mapel p {
+    font-size: 13px;
+    margin-left: 10px;
+    opacity: 0.9;
+}
+
+.content-card .card .ket-mapel img {
+    width: 18px;
+    height: 18px;
+}
+
+.content-card .card a:hover {
+    text-decoration: none;
+}
+
+
+.content-card .card .card {
+    margin-top: 60px;
+}
+
+.bg-absen-open {
+  background-color: #4ECB71;
+}
+
+.bg-absen-close {
+  background-color: #e24242;
+}
+
+.content-card .card .card img {
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.content-card .card .card p{
+    color: #f4f4f4;
+    margin-bottom: 2px;
+}
+
+  @media screen and (max-width: 767px) {
+    .search-box {
+        margin-top: -40px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .search-box {
+        margin-top: -40px;
+    }
+  }
+
+  @media screen and (min-width: 576px) {
+    .search-box {
+        margin-top: -40px;
+    }
+  }
+
+  @media screen and (min-width: 767px) {
+    .search-box {
+        margin-top: -40px;
+    }
+  }

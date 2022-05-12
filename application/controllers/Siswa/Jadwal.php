@@ -5,6 +5,9 @@ class Jadwal extends CI_Controller
 {
 	public function index()
 	{
-		echo "jadwal";
+		$data = array(
+			'content' => 'siswa/contents/jadwal/v_jadwal',
+		);
+		$this->load->view('siswa/layout/wrapper', $data);
 	}
 }

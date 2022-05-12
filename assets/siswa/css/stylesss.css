@@ -77,6 +77,11 @@ img {
   margin-bottom: 1.5rem;
 }
 
+.section-title {
+  font-size: 16px;
+  color: #121212
+}
+
 .section__height {
   height: 100vh;
 }
