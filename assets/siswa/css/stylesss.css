@@ -119,7 +119,7 @@ img {
 
 .nav__logo {
   color: var(--title-color);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 @media screen and (max-width: 767px) {
@@ -149,7 +149,7 @@ img {
   align-items: center;
   row-gap: 4px;
   color: var(--title-color);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .nav__list {
@@ -163,6 +163,10 @@ img {
 
 .nav__icon {
   font-size: 1.5rem;
+}
+
+.nav__item a:hover {
+  text-decoration: none;
 }
 
 /*Active link*/

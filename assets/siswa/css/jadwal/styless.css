@@ -33,49 +33,49 @@
       margin-bottom: 20px;
   }
 
-  .content-card .card img {
+.mapel .card img {
       width: 50px;
       height: 50px;
   }
 
-  .content-card .card p {
+.mapel .card p {
     font-size: 14px;
 }
 
-.content-card .card .ket-mapel {
+.mapel .card .ket-mapel {
     margin-top: -35px;
     
 }
 
-.content-card .card .ket-mapel p {
+.mapel .card .ket-mapel p {
     font-size: 13px;
     margin-left: 10px;
     opacity: 0.9;
 }
 
-.content-card .card .ket-mapel img {
+.mapel .card .ket-mapel img {
     width: 18px;
     height: 18px;
 }
 
-.content-card .card a:hover {
+.mapel .card a:hover {
     text-decoration: none;
 }
 
 
-.content-card .card .card {
+.mapel .card .absen .card {
     margin-top: 60px;
 }
 
 .bg-absen-open {
-  background-color: #4ECB71;
+  background-color: #52c272;
 }
 
 .bg-absen-close {
-  background-color: #e24242;
+  background-color: #c54242;
 }
 
-.content-card .card .card img {
+.mapel .card .absen .card img {
     width: 20px;
     height: 20px;
     margin-top: -10px;
@@ -83,9 +83,58 @@
     margin-left: 10px;
 }
 
-.content-card .card .card p{
+.mapel .card .absen .card p{
     color: #f4f4f4;
     margin-bottom: 2px;
+}
+
+.mapel .card .absen .card.bg-absen-close:hover {
+  background-color: #852d2d;
+}
+
+.mapel .card .absen .card.bg-absen-open:hover {
+  background-color: #33864b;
+}
+
+.jadwal-pelajaran .row{
+  padding-bottom: 20px;
+}
+
+.hari .card {
+  background:linear-gradient(rgba(255, 255, 255, 1), rgb(231, 237, 238), rgb(169, 200, 211), rgba(41, 137, 168, 1))
+}
+
+.hari .card {
+  border-style: solid;
+  border-color: rgb(172, 210, 221);
+}
+
+.bg-blue {
+  background-color: #2989A8;
+}
+
+.menu .card img {
+  width: 15px;
+  height: 15px;
+}
+
+.menu .card p {
+  font-size: 12px;
+  color: #2989A8;
+}
+
+.section-menu a {
+  text-decoration: none;
+}
+
+.menu .card:hover {
+  background-color: #8bbcce;
+}
+
+footer {
+  font-size: 13px;
+  padding-bottom: 10px;
+  opacity: 0.8;
 }
 
   @media screen and (max-width: 767px) {
