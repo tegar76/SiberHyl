@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/stylesss.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/styles.css') ?>">
 
 <section class="container section section__height mt-n5" id="about">
     <div class="profile">
@@ -17,7 +17,7 @@
                         <p >Smk Kesatrian Purwokerto</p>
                     </div>
                     <div class="button-logout">
-                        <a href="" class="btn btn-sm btn-danger px-4">Logout</a>
+                        <a href="" id="btn-show-dialog" class="btn btn-sm btn-danger px-4">Logout</a>
                     </div>
                 </div>
             </div>
@@ -60,11 +60,12 @@
                     </table>
                     <hr class="mt-n3">
                     <div class="button-action d-flex mb-3 mt-2">
-                        <a href="" class="btn btn-sm btn-outline-info mr-2 px-4" type="submit">Edit Profile</a>
+                        <a href="<?= base_url('Siswa/Profile/editProfile')?>" class="btn btn-sm btn-outline-info mr-2 px-4" type="submit">Edit Profile</a>
                         <a href="" class="btn btn-sm btn-outline-info px-4" type="submit">Edit Password</a>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 
     <footer>
