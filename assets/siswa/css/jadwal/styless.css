@@ -131,12 +131,6 @@
   background-color: #8bbcce;
 }
 
-footer {
-  font-size: 13px;
-  padding-bottom: 10px;
-  opacity: 0.8;
-}
-
   @media screen and (max-width: 767px) {
     .search-box {
         margin-top: -40px;

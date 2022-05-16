@@ -8,13 +8,8 @@
     <h2 class="section__title">Home</h2>
 </section> -->
 
-<!--=============== ABOUT ===============-->
-<!-- <section class="container section section__height" id="about">
-    <h2 class="section__title">About</h2>
-</section> -->
-
 <!--=============== SKILLS ===============-->
-<section class="container section section__height" id="skills">
+<section class="container section section__height id="skills">
 
     <div class="search-box d-flex justify-content-end">
         <input type="text" class="search-click" name="" placeholder="&#xf002 Cari ..." style="font-family: FontAwesome;" />
@@ -1078,7 +1073,7 @@
                                             <div class="menu">
                                                 <div class="card  py-1 mt-2 d-flex align-items-center mb-3">
                                                     <img  src="<?=base_url('assets/siswa/icons/materi-pem.png')?>" alt="">
-                                                    <p class=" my-auto pt-1">materi-pem</p>
+                                                    <p class=" my-auto pt-1">Materi</p>
                                                 </div>
                                             </div>
                                         </a>
@@ -1175,8 +1170,8 @@
                                         <a href="">
                                             <div class="menu">
                                                 <div class="card  py-1 mt-2 d-flex align-items-center mb-3">
-                                                    <img  src="<?=base_url('assets/siswa/icons/materi-pem-pem.png')?>" alt="">
-                                                    <p class=" my-auto pt-1">materi-pem</p>
+                                                    <img  src="<?=base_url('assets/siswa/icons/materi-pem.png')?>" alt="">
+                                                    <p class=" my-auto pt-1">Materi</p>
                                                 </div>
                                             </div>
                                         </a>
