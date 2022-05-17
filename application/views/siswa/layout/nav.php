@@ -20,7 +20,7 @@
                 </li>
 
                 <li class="nav__item">
-                    <a href="" class="nav__link active-link">
+                    <a href="<?= base_url('Siswa/Jadwal')?>" class="nav__link  <?php if($this->uri->segment(2)=="Jadwal"){echo 'active-link';}?> ">
                         <i class='bx bx-calendar nav__icon'></i>
                         <span class="nav__name">Jadwal</span>
                     </a>
@@ -34,7 +34,7 @@
                 </li>
 
                 <li class="nav__item">
-                    <a href="" class="nav__link">
+                    <a href="<?= base_url('Siswa/Profile')?>" class="nav__link <?php if($this->uri->segment(2)=="Profile"){echo 'active-link';}?> ">
                         <i class='bx bx-user nav__icon'></i>
                         <span class="nav__name">Profile</span>
                     </a>
