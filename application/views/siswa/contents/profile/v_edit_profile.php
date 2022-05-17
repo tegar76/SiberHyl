@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/styles.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/stylesss.css') ?>">
 
-<section class="container section section__height mt-n5" id="about">
+<section class="container section section__height mt-n3" id="about">
     <div class="edit-profile">
         <form action="">
             <div class="row">
@@ -101,4 +101,5 @@
     actualBtn.addEventListener('change', function(){
     fileChosen.textContent = this.files[0].name
     })
+
 </script>

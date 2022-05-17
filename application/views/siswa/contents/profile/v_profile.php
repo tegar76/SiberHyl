@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/styles.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/stylesss.css') ?>">
 
-<section class="container section section__height mt-n5" id="about">
+<section class="container section section__height mt-n3" id="about">
     <div class="profile">
         <div class="row">
             <div class="col-md-4 text-center mb-3">
@@ -61,7 +61,7 @@
                     <hr class="mt-n3">
                     <div class="button-action d-flex mb-3 mt-2">
                         <a href="<?= base_url('Siswa/Profile/editProfile')?>" class="btn btn-sm btn-outline-info mr-2 px-4" type="submit">Edit Profile</a>
-                        <a href="" class="btn btn-sm btn-outline-info px-4" type="submit">Edit Password</a>
+                        <a href="<?= base_url('Siswa/Profile/editPassword')?>" class="btn btn-sm btn-outline-info px-4" type="submit">Edit Password</a>
                     </div>
                 </div>
             </div>

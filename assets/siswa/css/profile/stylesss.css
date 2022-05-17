@@ -102,3 +102,27 @@ background-color:#2989A8;
 }
 /* css edit profile end */
 
+/* css edit password */
+.edit-password hr {
+    margin-top: -2px;
+    width: 110px;
+}
+
+.edit-password h6{
+    font-size: 16px;
+    color: #3d4852;
+    font-weight: 200;
+}
+
+.form-group i {
+    margin-left: -30px;
+    margin-top: 10px;
+    cursor: pointer;
+    position: relative;
+    color: #3d4852;
+    opacity: 0.8;
+
+}
+
+/* css edit password end */
+
