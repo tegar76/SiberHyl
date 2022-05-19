@@ -58,9 +58,18 @@ $route['translate_uri_dashes'] = FALSE;
 */
 
 $route['login'] = 'Auth/Auth/login';
+$route['auth/logout'] = 'Auth/Auth/logout';
 
 // routing siswa
-$route['siswa/dashboard'] = 'Siswa/Dashboard/index';
+$route['siswa/jadwal'] = 'Siswa/Jadwal';
+$route['siswa/jadwal/(:any)'] = 'Siswa/Jadwal/$1';
+$route['siswa/jadwal/(:any)/(:any)'] = 'Siswa/Jadwal/$1/$2';
+$route['siswa/jadwal/(:any)/(:any)/(:any)'] = 'Siswa/Jadwal/$1/$2/$3';
+
+$route['siswa/profile'] = 'Siswa/Profile';
+$route['siswa/profile/(:any)'] = 'Siswa/Profile/$1';
+$route['siswa/profile/(:any)/(:any)'] = 'Siswa/Profile/$1/$2';
+$route['siswa/profile/(:any)/(:any)/(:any)'] = 'Siswa/Profile/$1/$2/$3';
 
 // routing guru
 $route['guru/dashboard'] = 'Guru/Dashboard/index';

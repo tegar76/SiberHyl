@@ -10,6 +10,17 @@ class Auth extends CI_Controller
 		$this->load->model('SiswaModel', 'siswa', true);
 		$this->load->model('GuruModel', 'guru', true);
 	}
+
+	// message sweetalert 2 flashdata
+	public function message($title = NULL, $text = NULL, $type = NULL)
+	{
+		return $this->session->set_flashdata([
+			'title' => $title,
+			'text' => $text,
+			'type' => $type,
+		]);
+	}
+
 	public function index()
 	{
 		show_404();
@@ -17,6 +28,7 @@ class Auth extends CI_Controller
 
 	public function login()
 	{
+		checkLoginUser();
 		$this->form_validation->set_rules([
 			[
 				'field' => 'username',
@@ -58,7 +70,7 @@ class Auth extends CI_Controller
 	{
 		$data = $this->input->post();
 		$siswa = $this->siswa->getWhere(['siswa_nis' => $data['username']]);
-		$guru  = $this->guru->getWhere(['guru_nip' => $data['username']]);
+		$guru  = $this->guru->getWhere(['guru_username' => $data['username']]);
 		if ($siswa) {
 			if (password_verify($data['password'], $siswa['siswa_pass'])) {
 				if ($data['hak_akses'] != 'siswa') {
@@ -72,8 +84,9 @@ class Auth extends CI_Controller
 						'logged_in'	=> true
 					];
 					$this->session->set_userdata($set_user);
-					$this->siswa->updateWhere(['siswa_status' => 'online'], $siswa['siswa_nis']);
-					redirect('siswa/dashboard');
+					$this->siswa->updateWhere(['status_online' => 'online'], $siswa['siswa_nis']);
+					$this->message('Selamat Datang ' . $siswa['siswa_nama'] . ' ! ', 'Semoga hari anda menyenangkan :)', 'success');
+					redirect('siswa/jadwal');
 				}
 			} else {
 				$this->session->set_flashdata('message', 'password salah');
@@ -85,21 +98,23 @@ class Auth extends CI_Controller
 					$set_user = [
 						'fullName' => $guru['guru_nama'],
 						'nip' => $guru['guru_nip'],
+						'kode' => $guru['guru_kode'],
 						'level'		=> 'guru',
-						'logged_in'	=> TRUE
+						'logged_in'	=> true
 					];
 					$this->session->set_userdata($set_user);
-					$this->guru->updateWhere(['guru_status' => 'online'], $guru['guru_nip']);
+					$this->guru->updateWhere(['status_online' => 'online'], $guru['guru_nip']);
 					redirect('guru/dashboard');
 				} elseif ($data['hak_akses'] == 'wali-kelas') {
 					$set_user = [
 						'fullName' => $guru['guru_nama'],
 						'nip' 	=> $guru['guru_nip'],
+						'kode' => $guru['guru_kode'],
 						'level'		=> 'wali-kelas',
 						'logged_in'	=> true
 					];
 					$this->session->set_userdata($set_user);
-					$this->guru->updateWhere(['guru_status' => 'online'], $guru['guru_nip']);
+					$this->guru->updateWhere(['status_online' => 'online'], $guru['guru_nip']);
 					redirect('wali-kelas/dashboard');
 				} else {
 					$this->session->set_flashdata('message', 'Pengisian akun tidak sesuai ,silahkan cek kembali');
@@ -113,5 +128,49 @@ class Auth extends CI_Controller
 			$this->session->set_flashdata('message', 'username & password tidak tersedia');
 			redirect('login');
 		}
+	}
+
+	// fungsi logout
+	public function logout()
+	{
+
+		$reponse = [
+			'csrfName' => $this->security->get_csrf_token_name(),
+			'csrfHash' => $this->security->get_csrf_hash(),
+			'success' => false,
+			'messages' => []
+		];
+
+		if ($this->session->userdata('level') == 'siswa') {
+
+			$reponse = [
+				'csrfName' => $this->security->get_csrf_token_name(),
+				'csrfHash' => $this->security->get_csrf_hash(),
+				'success' => true
+			];
+
+			$update_ = [
+				'last_login' => date('Y-m-d H:i:s'),
+				'status_online'	=> 'offline'
+			];
+			$this->siswa->updateWhere($update_, $this->session->userdata('nis'));
+			$this->session->sess_destroy();
+		} elseif ($this->session->userdata('level') == 'guru' or $this->session->userdata('level') == 'wali-kelas') {
+
+			$reponse = [
+				'csrfName' => $this->security->get_csrf_token_name(),
+				'csrfHash' => $this->security->get_csrf_hash(),
+				'success' => true
+			];
+
+			$update_ = [
+				'last_login' => date('Y-m-d H:i:s'),
+				'status_online'	=> 'offline'
+			];
+			$this->guru->updateWhere($update_, $this->session->userdata('nip'));
+			$this->session->sess_destroy();
+		}
+
+		echo json_encode($reponse);
 	}
 }

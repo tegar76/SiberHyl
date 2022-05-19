@@ -12,7 +12,7 @@ class Faker extends CI_Controller
 
 	public function siswa()
 	{
-		$count = 4;
+		$count = 6;
 		$siswa = array();
 		for ($i = 0; $i < $count; $i++) {
 			$siswa[] = [
@@ -23,16 +23,13 @@ class Faker extends CI_Controller
 				'siswa_tanggallahir' => $this->faker->date(),
 				'siswa_kelamin' => $this->faker->randomElement(['laki-laki', 'perempuan']),
 				'siswa_telp' => $this->faker->phoneNumber(),
+				'siswa_email' => $this->faker->email(),
 				'siswa_alamat' => $this->faker->address(),
-				'create_time' => date('Y-m-d H:i:s'),
-				'update_time' => date('Y-m-d H:i:s'),
-				'kelas_id' => $this->faker->numberBetween(1, 2),
-				'jurusan_id' => $this->faker->randomElement([1, 5]),
+				'kelas_id' => $this->faker->numberBetween(1, 3),
 				'role_id' => 4
 			];
-			// $this->db->insert('siberhyl_siswa', $data);
 		}
-		$this->db->insert_batch('siberhyl_siswa', $siswa);
+		$this->db->insert_batch('siswa', $siswa);
 		var_dump($siswa);
 	}
 
