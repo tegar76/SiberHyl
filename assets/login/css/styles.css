@@ -8,11 +8,24 @@ body {
 	color: #121212;
 }
 
+
 .card {
 	background-color: rgb(246, 250, 250);
 	border-radius: 15px;
 	box-shadow: 1px 2px 1px 2px #c4d1d4;
 	border: none;
+}
+
+.logo h2 {
+	background: -webkit-linear-gradient(rgba(41, 137, 168, 1), rgba(236, 38, 143, 0.51));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+.btn-submit button {
+	margin-left: 80px;
+	margin-top: 20px;
 }
 
 form img {

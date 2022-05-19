@@ -4,6 +4,9 @@ class Dashboard extends CI_Controller
 {
 	public function index()
 	{
-		echo "dashboard admin";
+		$data = array(
+			'content' => 'admin/contents/dashboard/v_dashboard',
+		);
+		$this->load->view('admin/layout/wrapper', $data);
 	}
 }
