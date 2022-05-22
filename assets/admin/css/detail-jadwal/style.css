@@ -1,0 +1,43 @@
+.page-title {
+    color: #3b3b3b;
+}
+
+table {
+    color: #6b6b6b;
+    font-size: 14px;
+  }
+  
+    th{
+    color: #6b6b6b;
+    opacity: 0.8;
+  }
+  
+  table td{
+    opacity: 0.8;
+  }
+  
+  .line hr {
+    margin-left: 80px; margin-right: 80px
+  }
+  
+  .atribute {
+    color: #6b6b6b;
+  }
+  
+  .atribute p{
+    font-size: 14px;
+    opacity: 0.9;
+    margin-top: 10px;
+  }
+
+  .btn-primary {
+      background-color: #28748d;
+      border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #1a4a5a;
+    border: none;
+}
+  
+  

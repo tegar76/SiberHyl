@@ -2,7 +2,7 @@
 
 class GuruModel extends CI_Model
 {
-	protected $table = "siberhyl_guru";
+	protected $table = "guru";
 
 	public function getAll()
 	{

@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'form', 'security', 'file', 'download', 'string');
+$autoload['helper'] = array('url', 'form', 'security', 'file', 'download', 'string', 'siberhyl_helper');
 
 /*
 | -------------------------------------------------------------------

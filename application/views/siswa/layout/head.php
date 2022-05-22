@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
 
-            <!--====== Favicon Icon ======-->
-        <link rel="shortcut icon" href="<?= base_url('assets/') ?>logo/logo-sm.png" type="image/png">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!--=============== BOXICONS ===============-->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+	<!--====== Favicon Icon ======-->
+	<link rel="shortcut icon" href="<?= base_url('assets/') ?>logo/logo-sm.png" type="image/png">
 
-        <!-- Font awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!--=============== BOXICONS ===============-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
-        <!--=============== CSS ===============-->
-        <link rel="stylesheet" href="<?= base_url('assets/') ?>siswa/css/styles.css">
+	<!-- Font awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <!-- Bootstrap Css -->
-        <link rel="stylesheet" href="<?= base_url('assets/')?>bootstrap-4.6.1-dist/css/bootstrap.css">
+	<!--=============== CSS ===============-->
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>siswa/css/styles.css">
 
-        <title>Responsive bottom navigation</title>
-    </head>
-    <body>
+	<!-- Bootstrap Css -->
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/css/bootstrap.css">
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">
+	<title><?= $title ?></title>
+</head>
+
+<body>

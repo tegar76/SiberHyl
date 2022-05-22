@@ -2,7 +2,8 @@
 
 class SiswaModel extends CI_Model
 {
-	protected $table = "siberhyl_siswa";
+	protected $table = "siswa";
+	const SESSION_KEY = "nis";
 
 	public function getAll()
 	{
@@ -21,8 +22,8 @@ class SiswaModel extends CI_Model
 			return false;
 		}
 		$query	= $this->db->select('*')
-			->from('siberhyl_siswa as siswa')
-			->join('siberhyl_kelas as kelas', 'siswa.kelas_id=kelas.kelas_id')
+			->from('siswa as siswa')
+			->join('kelas as kelas', 'siswa.kelas_id=kelas.kelas_id', 'left')
 			->where($params)
 			->get();
 		$row = $query->num_rows();
@@ -33,7 +34,7 @@ class SiswaModel extends CI_Model
 		}
 	}
 
-	public function updateWhere(array $update = null, string $where = null)
+	public function updateWhere($update = null, string $where = null)
 	{
 		if ($update == null && $where == null) {
 			return false;
@@ -42,6 +43,16 @@ class SiswaModel extends CI_Model
 		$this->db->set($update)
 			->where('siswa_nis', $where)
 			->update($this->table);
-		return true;
+	}
+
+	public function current_user()
+	{
+		if (!$this->session->has_userdata(self::SESSION_KEY)) {
+			return null;
+		}
+
+		$user_id = $this->session->userdata(self::SESSION_KEY);
+		$query = $this->db->get_where($this->table, ['siswa_nis' => $user_id]);
+		return $query->row();
 	}
 }

@@ -14,6 +14,27 @@
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <script src="<?= base_url('assets/admin/templates/assets/')?>libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="<?= base_url('assets/admin/templates/assets/')?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- apps -->
+    <!-- apps -->
+    <script src="<?= base_url('assets/admin/templates/dist/')?>js/app-style-switcher.js"></script>
+    <script src="<?= base_url('assets/admin/templates/dist/')?>js/feather.min.js"></script>
+    <script src="<?= base_url('assets/admin/templates/assets/')?>libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="<?= base_url('assets/admin/templates/dist/')?>js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="<?= base_url('assets/admin/templates/dist/')?>js/custom.min.js"></script>
+    <!--This page JavaScript -->
+    <script src="<?= base_url('assets/admin/templates/assets/')?>extra-libs/c3/d3.min.js"></script>
+    <script src="<?= base_url('assets/admin/templates/assets/')?>extra-libs/c3/c3.min.js"></script>
+    <script src="<?= base_url('assets/admin/templates/assets/')?>libs/chartist/dist/chartist.min.js"></script>
+    <script src="<?= base_url('assets/admin/templates/assets/')?>libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="<?= base_url('assets/admin/templates/assets/')?>extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="<?= base_url('assets/admin/templates/assets/')?>extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="<?= base_url('assets/admin/templates/dist/')?>js/pages/dashboards/dashboard1.min.js"></script>
    
     <title>Admin Siberhyl</title>
     <!-- Custom CSS -->

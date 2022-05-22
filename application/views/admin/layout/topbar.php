@@ -47,7 +47,7 @@
                 <!-- End Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <h4 class="mb-3" style="margin-left: 855px;">Selamat Datang, <span style="color: #1C2D46;">Admin1</span></h4>
+                    <h4 class="mb-3" style="margin-left: 900px; font-size:16px; color: gray;">Selamat Datang, <span style="color: #1C2D46;">Admin1</span></h4>
                 </div>
             </nav>
         </header>

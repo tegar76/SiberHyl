@@ -4,7 +4,7 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <li class="sidebar-item selected"> <a class="sidebar-link sidebar-link" href="index.html"
+                <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="<?= base_url('Admin/Dashboard')?>"
                         aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                             class="hide-menu">Dashboard</span></a></li>
                 <li class="list-divider"></li>
@@ -39,7 +39,7 @@
                         aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span
                             class="hide-menu">Settings Jadwal </span></a>
                     <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                        <li class="sidebar-item"><a href="table-basic.html" class="sidebar-link"><span
+                        <li class="sidebar-item"><a href="<?= base_url('Admin/Jadwal')?>" class="sidebar-link"><span
                                     class="hide-menu"> Jadwal
                                 </span></a>
                         </li>
