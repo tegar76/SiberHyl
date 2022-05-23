@@ -73,8 +73,8 @@
                                         <td>01 - 05 - 2022 08 : 00 WIB</td>
                                         <td>-</td>
                                         <td>
-                                            <a href="<?= base_url('Admin/Jadwal/DetailJadwal')?>" class="btn btn-sm btn-primary"><i class="fa fa-search text-white"  data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-                                            <a href="" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                            <a href="<?= base_url('Admin/Jadwal/detailJadwal')?>" class="btn btn-sm btn-primary"><i class="fa fa-search text-white"  data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+                                            <a href="<?= base_url('Admin/Jadwal/editJadwal')?>" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
                                             <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="top" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
                                         </td>
                                     </tr>
@@ -87,7 +87,7 @@
         </div>
 
         <div class="floating-container">
-            <a href="">
+            <a href="<?= base_url('Admin/Jadwal/TambahJadwal')?>">
                 <div class="floating-button">+</div>
             </a>
         </div>

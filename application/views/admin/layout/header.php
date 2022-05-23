@@ -9,13 +9,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/admin/templates/assets/')?>images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/logo/logo-sm.png')?>">
 
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!-- Time Picker -->
+    <link rel="stylesheet" href="<?= base_url('assets/datetimepicker-master/build/')?>jquery.datetimepicker.min.css"/>
+    <script src="<?= base_url('assets/datetimepicker-master/build/')?>jquery.datetimepicker.full.js"></script>
 
     <script src="<?= base_url('assets/admin/templates/assets/')?>libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="<?= base_url('assets/admin/templates/assets/')?>libs/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -181,7 +181,9 @@
             <div class="col-12">
                 <div class="card">
                 <div class="card-body">
-                        <h6 class="card-title">Jurnal Materi Tahun Pelajaran 2021/2022 </h6>
+                        <h6 class="card-title">
+                            <a class="search-icon" href=""><i class="fa fa-magnifying-glass mr-2"></i></a>
+                            Jurnal Materi Tahun Pelajaran 2021/2022 </h6>
                         <div class="mt-4 activity">
                             <table id="jurnal" class="table-striped table-bordered" style="width:100%">
                             <!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->

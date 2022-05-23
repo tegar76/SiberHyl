@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/detail-jadwal/style.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/styless.css') ?>">
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -7,14 +7,15 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-7 align-self-center">
-                <h3 class="page-title">Dashboard</h3>
+                <h3 class="page-title">Detail Jadwal</h3>
             </div>
         </div>
         <div class="d-flex align-items-center">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb m-0 p-0">
-                    <li class="breadcrumb-item"><a class="text-muted">Setting Jadwal</a></li>
-                    <li class="breadcrumb-item text-muted active" aria-current="page">Jadwal</li>
+                    <li class="breadcrumb-item text-muted active">Setting Jadwal</li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Admin/Jadwal')?>" class="text-muted">Jadwal</a></li>
+                    <li class="breadcrumb-item text-muted active" aria-current="page">Detail Jadwal</li>
                 </ol>
             </nav>
         </div>
@@ -94,7 +95,7 @@
                                         </table>
                                         <hr class="mt-n3">
                                         <div class="button-action d-flex mb-3 mt-2">
-                                            <a href="<?= base_url('siswa/profile/editProfile') ?>" class="btn btn-sm btn-primary rounded ml-3 px-3">Kembali</a>
+                                            <a href="<?= base_url('Admin/Jadwal') ?>" class="btn btn-sm btn-primary rounded ml-3 px-3">Kembali</a>
                                         </div>
                                     </div>
                                 </div>
