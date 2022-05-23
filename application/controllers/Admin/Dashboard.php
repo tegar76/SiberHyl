@@ -66,7 +66,7 @@ class Dashboard extends CI_Controller
 				]
 			],
 			[
-				'field' => 'jam_masuk[]',
+				'field' => 'jam_mulai[]',
 				'label' => 'Jam Masuk',
 				'rules' => 'trim|required|xss_clean',
 				'errors' => [
@@ -83,14 +83,51 @@ class Dashboard extends CI_Controller
 					'xss_clean' => 'cek kembali pada {field}'
 				]
 			],
+			[
+				'field' => 'jumlah_jam[]',
+				'label' => 'Jumlah Jam Pelajaran',
+				'rules' => 'trim|required|xss_clean|numeric',
+				'errors' => [
+					'required' => '{field} harus diisi!',
+					'xss_clean' => 'cek kembali pada {field}',
+					'numeric' => 'masukan angka pada {field}'
+				]
+			]
 		]);
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('add_jadwal', $data);
 		} else {
-			var_dump($this->input->post());
-			die;
-			$this->insert_jadwal();
+			$jumlahForm = $_POST['jumlah_form'];
+			for ($i = 0; $i < $jumlahForm; $i++) {
+				$result[] = [
+					'hari' => $_POST['hari'][$i],
+					'jam_masuk' => $_POST['jam_mulai'][$i],
+					'jam_keluar' => $_POST['jam_selesai'][$i],
+					'mapel_id' => $_POST['mapel'][$i],
+					'kelas_id' => $_POST['kelas'][$i],
+					'guru_kode' => $_POST['guru'][$i],
+					'ruang_id' => $_POST['ruangan'][$i],
+					'jumlah_jam' => $_POST['jumlah_jam'][$i],
+				];
+			}
+
+			$this->db->insert_batch('jadwal', $result);
+			$this->session->set_flashdata('message', 'Data jadwal behasil diinput');
+			return redirect('Admin/Dashboard');
 		}
+	}
+
+	public function hapusJadwal()
+	{
+
+		$this->db->delete('jadwal', ['jadwal_id' => $this->input->post('jadwalID', true)]);
+		$reponse = [
+			'csrfName' => $this->security->get_csrf_token_name(),
+			'csrfHash' => $this->security->get_csrf_hash(),
+			'message' => 'Anda telah menghapus jadwal pelajaran',
+			'success' => true
+		];
+		echo json_encode($reponse);
 	}
 
 	public function insert_jadwal()
@@ -149,5 +186,52 @@ class Dashboard extends CI_Controller
 				}
 			}
 		}
+	}
+
+	public function get_data()
+	{
+		$typesend = $this->input->get('type');
+		if ($typesend == 'class') {
+			$classes = $this->db->get('kelas')->result();
+			foreach ($classes as $class) {
+				$result[] = [
+					'kelas_id' => $class->kelas_id,
+					'kelas'	   => $class->nama_kelas
+				];
+			}
+		} elseif ($typesend == 'days') {
+			$days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
+			foreach ($days as $day) {
+				$result[] = [
+					'day'	   => $day
+				];
+			}
+		} elseif ($typesend == 'lesson') {
+			$lessons = $this->db->get('mapel')->result();
+			foreach ($lessons as $lesson) {
+				$result[] = [
+					'mapel_id'	=> $lesson->mapel_id,
+					'mapel'		=> $lesson->nama_mapel
+				];
+			}
+		} elseif ($typesend == 'teacher') {
+			$teachers = $this->db->get('guru')->result();
+			foreach ($teachers as $teacher) {
+				$result[] = [
+					'guru_id'	=> $teacher->guru_id,
+					'kode_guru'		=> $teacher->guru_kode,
+					'nama_guru'		=> $teacher->guru_nama
+				];
+			}
+		} elseif ($typesend == 'room') {
+			$rooms = $this->db->get('ruangan')->result();
+			foreach ($rooms as $room) {
+				$result[] = [
+					'ruang_id'	=> $room->ruang_id,
+					'ruangan'		=> $room->nama_ruang,
+				];
+			}
+		}
+		echo json_encode($result);
 	}
 }
