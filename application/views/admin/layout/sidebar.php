@@ -26,15 +26,15 @@
                     </ul>
                 </li>
                 <li class="list-divider"></li>
-                <li class="sidebar-item <?= ($this->uri->segment(2) == "Jadwal") ? 'selected' : '' ?>"> <a class="sidebar-link has-arrow <?= ($this->uri->segment(2) == "Jadwal") ? 'active' : '' ?>" href="javascript:void(0)" aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span class="hide-menu">Settings Jadwal </span></a>
-                    <ul aria-expanded="false" class="collapse  first-level base-level-line <?= ($this->uri->segment(2) == "Jadwal") ? 'in' : '' ?>"><a href="<?= base_url('Admin/Jadwal') ?>">
-                        <li class="sidebar-item <?= ($this->uri->segment(2) == "Jadwal") ? 'active' : '' ?>"><a href="<?= base_url('Admin/Jadwal') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "Jadwal") ? 'active' : '' ?>"><span class="hide-menu"> Jadwal
+                <li class="sidebar-item <?= ($this->uri->segment(2) == "Jadwal") ? 'selected' : '' ?>"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span class="hide-menu">Settings Jadwal </span></a>
+                    <ul aria-expanded="false" class="collapse  first-level base-level-line"><a href="<?= base_url('Admin/Jadwal') ?>">
+                        <li class="sidebar-item <?= ($this->uri->segment(2) == "Jadwal") ? 'active' : '' ?>"><a href="<?= base_url('Admin/Jadwal') ?>" class="sidebar-link"><span class="hide-menu"> Jadwal
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"><a href="table-dark-basic.html" class="sidebar-link"><span class="hide-menu"> Pratinjau
+                        <li class="sidebar-item"><a href="<?= base_url('Admin/Jadwal/pratinjauJadwal')?>" class="sidebar-link"><span class="hide-menu"> Pratinjau
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"><a href="table-dark-basic.html" class="sidebar-link"><span class="hide-menu"> Materi
+                        <li class="sidebar-item"><a href="<?= base_url('Admin/Jadwal/materi')?>" class="sidebar-link"><span class="hide-menu"> Materi
                                 </span></a>
                         </li>
                     </ul>

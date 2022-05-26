@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/styless.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/stylesss.css') ?>">
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
