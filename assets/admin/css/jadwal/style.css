@@ -59,6 +59,28 @@ label {
   border-color: #d5e7ec;
 }
 
+.select2 {
+  font-size: 13px;
+  color: #6b6b6b;
+  opacity: 0.4;
+  border-color: #d5e7ec;
+}
+
+
+option {
+  font-size: 13px;
+  color: #6b6b6b;
+  opacity: 0.4;
+  border-color: #d5e7ec;
+}
+
+/* <select class="custom-select select2-hidden-accessible" id="kelas" data-select2-id="kelas" tabindex="-1" aria-hidden="true">
+    <option selected="" data-select2-id="2">Pilih Kelas</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+</select> */
+
 
 .input-group ::placeholder {
   font-size: 13px;
@@ -71,6 +93,10 @@ label {
   margin-top: -10px;
   margin-bottom: -20px;
 }
+
+
+
+
 
 .print .card {
   border: solid 1px;

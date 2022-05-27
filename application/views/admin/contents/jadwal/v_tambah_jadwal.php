@@ -1,4 +1,8 @@
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/stylesss.css') ?>">
+<!-- Select with search -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/styles.css') ?>">
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -67,7 +71,7 @@
                                 </div>
                                 <label for="kelas">Mata Pelajaran</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" id="kelas">
+                                    <select class="custom-select" id="mapel">
                                         <option selected>Pilih Mata Pelajaran</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
@@ -76,7 +80,7 @@
                                 </div>
                                 <label for="kelas">Kode Guru</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" id="kelas">
+                                    <select class="custom-select" id="kode_guru">
                                         <option selected>Pilih Kode Guru</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
@@ -131,3 +135,15 @@
         <div class="floating-button">+</div>
     </a>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#kelas').select2();
+    });
+    $(document).ready(function() {
+        $('#mapel').select2();
+    });
+    $(document).ready(function() {
+        $('#kode_guru').select2();
+    });
+</script>

@@ -8,13 +8,13 @@
                 <li class="list-divider"></li>
                 <li class="sidebar-item <?= ($this->uri->segment(2) == "MasterData") ? 'selected' : '' ?>""> <a class=" sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="layers" class="feather-icon"></i><span class="hide-menu">Master Data </span></a>
                     <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                        <li class="sidebar-item"><a href="form-inputs.html" class="sidebar-link"><span class="hide-menu"> Data Kelas
+                        <li class="sidebar-item"><a href="<?= base_url('Admin/Data/dataKelas')?>" class="sidebar-link"><span class="hide-menu"> Data Kelas
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"><a href="form-input-grid.html" class="sidebar-link"><span class="hide-menu"> Data Mapel
+                        <li class="sidebar-item"><a href="<?= base_url('Admin/Data/dataMapel')?>" class="sidebar-link"><span class="hide-menu"> Data Mapel
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span class="hide-menu"> Data Ruangan
+                        <li class="sidebar-item"><a href="<?= base_url('Admin/Data/dataRuangan')?>" class="sidebar-link"><span class="hide-menu"> Data Ruangan
                                 </span></a>
                         </li>
                         <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span class="hide-menu"> Data Siswa

@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="<?= base_url('assets/admin/css/data-table-custom/stylessss.css')?>">
 <!-- End Data Tables -->
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/dashboard/styless.css')?>">
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/dashboard/style.css')?>">
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -48,10 +48,10 @@
                                <thead>
                                     <tr>
                                         <th style="width:5%">No</th>
-                                        <th style="width:25%;">Kelas</th>
+                                        <th style="width:27%;">Kelas</th>
                                         <th style="width:25%;">Mapel</th>
                                         <th style="width:20%;">Dibuat</th>
-                                        <th style="width:15%;">Aksi</th>
+                                        <th style="width:12%;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,12 +61,10 @@
                                         <td>Panel Sasis Dan Pemindahan Tenaga KR</td>
                                         <td>01 - 05 - 2022 08 : 00 WIB</td>
                                         <td>
-                                            <a href="<?= base_url('Admin/Jadwal/detailMateri')?>" class="btn btn-sm btn-primary"><i class="fa fa-search text-white"  data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-                                            <a href="<?= base_url('Admin/Jadwal/editMateri')?>" class="btn btn-sm btn-success"><i class="fa-solid fa-pen-to-square text-white"  data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+                                            <a href="<?= base_url('Admin/Jadwal/detailMateri')?>" class="btn btn-sm btn-primary mr-1"><i class="fa fa-search text-white"  data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+                                            <a href="<?= base_url('Admin/Jadwal/editMateri')?>" class="btn btn-sm btn-success mr-1"><i class="fa-solid fa-pen-to-square text-white"  data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
                                             <a href="" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can text-white"  data-toggle="tooltip" data-placement="top" title="Hapus"></i></a>
-                                        </td>
-                                        
-                                        
+                                        </td>  
                                     </tr>
                                 </tbody>
                             </table>
