@@ -15,11 +15,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 	<!-- Jquery -->
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-	<!-- Time Picker -->
-	<link rel="stylesheet" href="<?= base_url('assets/datetimepicker-master/build/') ?>jquery.datetimepicker.min.css" />
-	<script src="<?= base_url('assets/datetimepicker-master/build/') ?>jquery.datetimepicker.full.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
 
 	<script src="<?= base_url('assets/admin/templates/assets/') ?>libs/popper.js/dist/umd/popper.min.js"></script>
 	<script src="<?= base_url('assets/admin/templates/assets/') ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -49,9 +45,6 @@
 	<!-- Custom CSS -->
 	<link href="<?= base_url('assets/admin/templates/dist/') ?>css/style.min.css" rel="stylesheet">
 
-	<!-- Selectpicker -->
-	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 	<!-- SweetAlert 2 -->
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">
 	<script src="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.all.min.js"></script>

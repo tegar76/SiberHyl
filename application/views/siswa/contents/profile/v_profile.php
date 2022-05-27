@@ -64,6 +64,9 @@
 							<th scope="row">Alamat</th>
 							<td><?= $siswa->siswa_alamat ?></td>
 							</tr>
+							<th scope="row">Status Kesiswaan</th>
+							<td>null</td>
+							</tr>
 						</tbody>
 					</table>
 					<hr class="mt-n3">

@@ -163,6 +163,7 @@ class Jadwal extends CI_Controller
 			$data['jadwalDetail'] = '';
 		}
 
+
 		$this->form_validation->set_rules([
 			[
 				'field' => 'kelas_edit',
@@ -333,5 +334,55 @@ class Jadwal extends CI_Controller
 			'success' => true
 		];
 		echo json_encode($reponse);
+	}
+
+	public function pratinjauJadwal()
+	{
+		$data = [
+			'title' => 'PratinjauJadwal',
+			'content' => 'admin/contents/jadwal/v_pratinjau_jadwal'
+		];
+
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function materi()
+	{
+		$data = [
+			'title' => 'Materi',
+			'content' => 'admin/contents/jadwal/v_materi'
+		];
+
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function detailMateri()
+	{
+		$data = [
+			'title' => 'Materi',
+			'content' => 'admin/contents/jadwal/v_detail_materi'
+		];
+
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function tambahMateri()
+	{
+		$data = [
+			'title' => 'Tambah Materi',
+			'content' => 'admin/contents/jadwal/v_tambah_materi'
+		];
+
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function editMateri()
+	{
+		$data = [
+			'title' => 'Edit Materi',
+			'content' => 'admin/contents/jadwal/v_edit_materi'
+		];
+
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 }

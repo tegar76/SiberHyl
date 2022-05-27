@@ -6,7 +6,11 @@
 <link rel="stylesheet" href="<?= base_url('assets/admin/css/data-table-custom/stylessss.css') ?>">
 <!-- End Data Tables -->
 
+<<<<<<< HEAD
 <link rel="stylesheet" href="<?= base_url('assets/admin/css/dashboard/styles.css') ?>">
+=======
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/dashboard/style.css')?>">
+>>>>>>> origin/master
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->

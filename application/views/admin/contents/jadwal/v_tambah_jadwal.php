@@ -1,4 +1,8 @@
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/styless.css') ?>">
+<!-- Select with search -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
