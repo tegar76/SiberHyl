@@ -6,21 +6,22 @@
 			<div class="col-md-4 text-center mb-3">
 				<div class="card shadow py-4">
 					<div class="img-photo justify-content-center">
-						<?php if ($siswa['siswa_foto'] == 'default_foto.png') : ?>
+						<?php if ($siswa->siswa_foto == 'default_foto.png') : ?>
 							<img class="mx-auto d-block rounded-circle" src="<?= base_url('assets/siswa/img/profile-default-siswa.png') ?>" width="150" alt="Foto prifile siswa">
 						<?php else : ?>
-							<img class="mx-auto d-block rounded-circle" src="<?= base_url('storage/siswa/profile/' . $siswa['siswa_foto']) ?>" width="150" alt="<?= $siswa['siswa_nama'] ?>">
+							<img class="mx-auto d-block rounded-circle" src="<?= base_url('storage/siswa/profile/' . $siswa->siswa_foto) ?>" width="150" alt="<?= $siswa->siswa_nama ?>">
 						<?php endif ?>
 					</div>
 					<div class="line">
 						<hr>
 					</div>
 					<div class="atribute">
-						<h6 class="text-uppercase"><?= $siswa['siswa_nama'] ?></h6>
-						<p class="mb-n1"><?= $siswa['nama_kelas'] ?></p>
+						<h6 class="text-uppercase"><?= $siswa->siswa_nama ?></h6>
+						<p class="mb-n1"><?= $siswa->nama_kelas ?></p>
 						<p>Smk Kesatrian Purwokerto</p>
 					</div>
 					<div class="button-logout">
+						<input type="hidden" id="crsf_name" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
 						<a href="#" id="logout" class="btn btn-sm btn-danger px-4 logout">Logout</a>
 					</div>
 				</div>
@@ -31,37 +32,37 @@
 						<tbody>
 							<tr class="table-borderless">
 								<th scope="row">NIS</th>
-								<td><?= $siswa['siswa_nis'] ?></td>
+								<td><?= $siswa->siswa_nis ?></td>
 							</tr>
 							<tr>
 								<th scope="row">NISN</th>
-								<td><?= $siswa['siswa_nisn'] ?></td>
+								<td><?= $siswa->siswa_nisn ?></td>
 							</tr>
 							<th scope="row">Tempat Tanggal Lahir</th>
 							<td>
-								<?= ($siswa['siswa_tempatlahir']) ? $siswa['siswa_tempatlahir'] . ", " : '-'  ?>
-								<?= (!empty($siswa['siswa_tanggallahir'])) ? date('d-m-Y', strtotime($siswa['siswa_tanggallahir'])) : '00-00-0000' ?>
+								<?= ($siswa->siswa_tempatlahir) ? $siswa->siswa_tempatlahir . ", " : '-'  ?>
+								<?= (!empty($siswa->siswa_tanggallahir)) ? date('d-m-Y', strtotime($siswa->siswa_tanggallahir)) : '00-00-0000' ?>
 							</td>
 							</tr>
 							</tr>
 							<th scope="row">Jenis Kelamin</th>
-							<td><?= $siswa['siswa_kelamin'] ?></td>
+							<td><?= $siswa->siswa_kelamin ?></td>
 							</tr>
 							</tr>
 							<th scope="row">Asal Kelas</th>
-							<td><?= (!empty($siswa['asal_kelas'])) ? $siswa['asal_kelas'] : ' - ' ?></td>
+							<td><?= (!empty($siswa->asal_kelas)) ? $siswa->asal_kelas : ' - ' ?></td>
 							</tr>
 							</tr>
 							<th scope="row">Email</th>
-							<td><?= $siswa['siswa_email'] ?></td>
+							<td><?= $siswa->siswa_email ?></td>
 							</tr>
 							</tr>
 							<th scope="row">No. Handphone</th>
-							<td><?= $siswa['siswa_telp'] ?></td>
+							<td><?= $siswa->siswa_telp ?></td>
 							</tr>
 							</tr>
 							<th scope="row">Alamat</th>
-							<td><?= $siswa['siswa_alamat'] ?></td>
+							<td><?= $siswa->siswa_alamat ?></td>
 							</tr>
 						</tbody>
 					</table>

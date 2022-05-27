@@ -76,3 +76,17 @@ $route['guru/dashboard'] = 'Guru/Dashboard/index';
 
 // routing wali kelas
 $route['wali-kelas/dashboard'] = 'WaliKelas/Dashboard/index';
+
+// routing admin
+$route['authadmin'] = 'Admin/Login';
+$route['authadmin/logout'] = 'Admin/Login/logout';
+
+$route['master/dashboard'] = 'Admin/Dashboard';
+$route['master/dashboard/(:any)'] = 'Admin/Dashboard/$1';
+$route['master/dashboard/(:any)/(:any)'] = 'Admin/Dashboard/$1/$2';
+$route['master/dashboard/(:any)/(:any)/(:any)'] = 'Admin/Dashboard/$1/$2/$3';
+
+$route['master/jadwal'] = 'Admin/Jadwal';
+$route['master/jadwal/(:any)'] = 'Admin/Jadwal/$1';
+$route['master/jadwal/(:any)/(:any)'] = 'Admin/Jadwal/$1/$2';
+$route['master/jadwal/(:any)/(:any)/(:any)'] = 'Admin/Jadwal/$1/$2/$3';

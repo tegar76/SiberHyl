@@ -15,9 +15,12 @@
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
-    <!-- style -->
-    <link rel="stylesheet" href="<?= base_url('assets/login/css/styles.css') ?>">
-    
+	<!-- style -->
+	<link rel="stylesheet" href="<?= base_url('assets/login/css/styles.css') ?>">
+
+	<!-- SweetAlert 2 -->
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">
+	<script src="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.all.min.js"></script>
 	<title>Login Admin</title>
 </head>
 
@@ -28,9 +31,10 @@
 			<div class="form-content">
 				<div class="logo d-flex justify-content-center mb-3">
 					<h2>Admin</h2>
-				</div> <hr class="mt-n3 w-50"> <br>
-                
-				<?= form_open('Admin/Dashboard') ?>
+				</div>
+				<hr class="mt-n3 w-50"> <br>
+
+				<?= form_open('authadmin') ?>
 				<div class="row justify-content-center">
 					<?php if ($this->session->flashdata('message')) : ?>
 						<div class="alert alert-warning" role="alert">
@@ -43,9 +47,9 @@
 								<img src="<?= base_url('assets/login/icons/user.png') ?>" alt="user" class="mr-3">
 							</label>
 							<input type="text" name="username" id="username" class="form-control <?= (form_error('username')) ? 'is-invalid' : '' ?>" value="<?= set_value('username', 'username') ?>" placeholder="Masukan Username">
-							
+
 						</div>
-						
+
 					</div>
 
 					<div id="usernameFeedback" class="invalid-feedback d-block mt-n4 mb-4" style="margin-left: 57px">
@@ -60,7 +64,7 @@
 							<input type="password" name="password" class="form-control mr-2 <?= (form_error('password')) ? 'is-invalid' : '' ?>" value="<?= set_value('password') ?>" placeholder="Masukan Password" autocomplete="current-password" id="id_password">
 							<i class="far fa-eye fa-xs ml-n4" id="togglePassword"></i>
 						</div>
-						
+
 					</div>
 				</div>
 
@@ -68,8 +72,8 @@
 					<?= form_error('password', '<div class="text-danger">', '</div>') ?>
 				</div>
 
-                <div class="btn-submit row mt-n3">	
-                    <button type="submit" class="btn btn-masuk px-4">Masuk</button>
+				<div class="btn-submit row mt-n3">
+					<button type="submit" class="btn btn-masuk px-4">Masuk</button>
 				</div>
 
 				</form>
@@ -93,6 +97,21 @@
 			password.setAttribute('type', type);
 			// toggle the eye slash icon
 			this.classList.toggle('fa-eye-slash');
+		});
+
+		$(function() {
+			var title = '<?= $this->session->flashdata("title") ?>';
+			var text = '<?= $this->session->flashdata("text") ?>';
+			var type = '<?= $this->session->flashdata("type") ?>';
+			if (title) {
+				swal.fire({
+					icon: type,
+					title: title,
+					text: text,
+					type: type,
+					button: true,
+				});
+			};
 		});
 	</script>
 

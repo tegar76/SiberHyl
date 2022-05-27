@@ -28,9 +28,9 @@ class SiswaModel extends CI_Model
 			->get();
 		$row = $query->num_rows();
 		if ($row > 1) {
-			return $query->result_array();
+			return $query->result();
 		} elseif ($row == 1) {
-			return $query->row_array();
+			return $query->row();
 		}
 	}
 

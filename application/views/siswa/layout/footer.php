@@ -26,6 +26,7 @@
 
 	$(document).ready(function() {
 		$(".logout").click(function(event) {
+			var crsf = $("#crsf_name").val();
 			event.preventDefault();
 			Swal.fire({
 				title: 'Anda Yakin Keluar?',
@@ -38,7 +39,7 @@
 			}).then((result) => {
 				if (result.value) {
 					$.ajax({
-						type: "POST",
+						type: "GET",
 						url: "<?= base_url('auth/logout'); ?>",
 						beforeSend: function() {
 							swal.fire({

@@ -140,7 +140,7 @@
 						$CI->load->model('JadwalModel', 'jadwal', true);
 						$studying = $CI->jadwal->getJadwalHariIni([
 							'hari' => $day,
-							'jadwal.kelas_id' => $siswa['kelas_id']
+							'jadwal.kelas_id' => $siswa->kelas_id
 						])->result();
 						?>
 						<?php foreach ($studying as $study) : ?>

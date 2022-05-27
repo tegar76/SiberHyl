@@ -40,4 +40,31 @@ class MasterModel extends CI_Model
 			return $query->result();
 		}
 	}
+
+	public function get_masterdata($table = null)
+	{
+		if ($table == 'kelas') {
+			$query	= $this->db->select('kelas_id, nama_kelas')
+				->from($table)->order_by('nama_kelas', 'ASC')->get();
+			$result = $query->result();
+			return $result;
+		} elseif ($table == 'mapel') {
+			$query = $this->db->select('mapel_id, nama_mapel')
+				->from($table)->order_by('nama_mapel', 'ASC')->get();
+			$result = $query->result();
+			return $result;
+		} elseif ($table == 'guru') {
+			$query = $this->db->select('guru_id, guru_kode, guru_nama')
+				->from($table)->order_by('guru_kode', 'ASC')->get();
+			$result = $query->result();
+			return $result;
+		} elseif ($table == 'ruangan') {
+			$query = $this->db->select('ruang_id, nama_ruang')
+				->from('ruangan')->order_by('nama_ruang', 'ASC')->get();
+			$result = $query->result();
+			return $result;
+		} else {
+			return false;
+		}
+	}
 }

@@ -36,3 +36,21 @@ function isSiswa()
 		return redirect('block');
 	}
 }
+
+function checkAdminLogin()
+{
+	$CI = &get_instance();
+	$CI->load->model('GuruModel', 'guru', true);
+	$admin = $CI->guru->getWhere(['guru_id' => $CI->session->userdata('adminId')]);
+	if (empty($admin)) {
+		return redirect('authadmin');
+	}
+}
+
+function isAdmin()
+{
+	$CI = &get_instance();
+	if ($CI->session->userdata('level') != 'admin') {
+		return redirect('block');
+	}
+}

@@ -15,7 +15,7 @@
 					<?= form_open('siswa/profile/editPassword') ?>
 					<div class="form-group">
 						<label for="">NIS</label>
-						<input type="text" class="form-control" value="<?= $siswa['siswa_nis'] ?>" readonly>
+						<input type="text" class="form-control" value="<?= $siswa->siswa_nis ?>" readonly>
 					</div>
 					<div class="form-group">
 						<label for="">Password lama</label>

@@ -23,9 +23,9 @@ class GuruModel extends CI_Model
 		$query	= $this->db->get_where($this->table, $params);
 		$row = $query->num_rows();
 		if ($row > 1) {
-			return $query->result_array();
+			return $query->result();
 		} elseif ($row == 1) {
-			return $query->row_array();
+			return $query->row();
 		}
 	}
 
