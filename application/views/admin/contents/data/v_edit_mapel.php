@@ -49,7 +49,7 @@
                                         <input type="text" name="" id="" placeholder="Masukan Mata Pelajaran" class="form-control">
                                     </div>
                                     <div class="btn-aksi">
-                                        <button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
+                                        <button type="submit" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
                                         <button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset</button>
                                     </div>
                                 </form>

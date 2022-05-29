@@ -10,10 +10,28 @@ table {
     color: #6b6b6b;
     font-size: 14px;
     font-weight: 300;
+    opacity: 0.9;
+  }
+
+  table td{
+    color: #6b6b6b;
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.9;
   }
 
   table th{
     font-weight: 400 !important;
+    color: #6b6b6b;
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+
+  table .table-title{
+    color: #6b6b6b;
+    font-size: 15px;
+
   }
   
   .line hr {
@@ -30,6 +48,16 @@ table {
     font-size: 14px;
     opacity: 0.9;
     margin-top: 10px;
+  }
+
+  .atribute .info p {
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .atribute .info span {
+    font-size: 13px;
+    font-weight: 300;
   }
 
   .btn-primary {
@@ -92,11 +120,14 @@ option {
   color: #e95d92;
   margin-top: -10px;
   margin-bottom: -20px;
+  opacity: 0.9;
 }
 
-
-
-
+.input-group .form-check label {
+  font-size: 13px;
+  color: #6b6b6b;
+  opacity: 0.8;
+}
 
 .print .card {
   border: solid 1px;

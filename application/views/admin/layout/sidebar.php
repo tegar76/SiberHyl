@@ -17,10 +17,10 @@
                         <li class="sidebar-item"><a href="<?= base_url('Admin/Data/dataRuangan')?>" class="sidebar-link"><span class="hide-menu"> Data Ruangan
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span class="hide-menu"> Data Siswa
+                        <li class="sidebar-item"><a href="<?= base_url('Admin/Data/dataSiswa')?>" class="sidebar-link"><span class="hide-menu"> Data Siswa
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span class="hide-menu"> Data Guru
+                        <li class="sidebar-item"><a href="<?= base_url('Admin/Data/dataGuru')?>" class="sidebar-link"><span class="hide-menu"> Data Guru
                                 </span></a>
                         </li>
                     </ul>
@@ -41,7 +41,7 @@
                 </li>
                 <li class="sidebar-item <?= ($this->uri->segment(2) == "SettingInfo") ? 'selected' : '' ?>"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span class="hide-menu">Settings Info </span></a>
                     <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                        <li class="sidebar-item"><a href="chart-morris.html" class="sidebar-link"><span class="hide-menu"> Informasi Akademik
+                        <li class="sidebar-item"><a href="<?= base_url('Admin/Info/infoAkademik')?>" class="sidebar-link"><span class="hide-menu"> Informasi Akademik
                                 </span></a>
                         </li>
                         <li class="sidebar-item"><a href="chart-chart-js.html" class="sidebar-link"><span class="hide-menu"> Tahun Pembelajaran
