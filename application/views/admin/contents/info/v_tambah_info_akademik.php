@@ -1,7 +1,6 @@
 <!-- multiple select -->
 <script src="<?= base_url('assets/MSelectDialogBox-master/dist/m-select-d-box.js')?>"></script>
-<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/')?>js/custom-appearr.js"></script>
-<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/')?>/js/example.js"></script>
+<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/')?>/js/examplee.js"></script>
 
 <link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
 
@@ -19,6 +18,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb m-0 p-0">
                     <li class="breadcrumb-item text-muted active">Setting Info</li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Admin/Info/infoAkademik')?>" class="text-muted">Info Akademik</a></li>
                     <li class="breadcrumb-item text-muted active" aria-current="page">Tambah Info Akademik</li>
                 </ol>
             </nav>
@@ -49,12 +49,12 @@
                                 <form action="">
                                     <label for="kelas">Kelas</label>
                                     <div class="input-group mb-3">
-                                        <input type="button" id="msdb-0" class="" style="width:100%;">
+                                        <input type="button" id="kelas" class="" style="width:100%;">
                                         <!-- value ada di ('assets/MSelectDialogBox-master/examples/')/js/example.js"> -->
                                     </div>
                                     <label for="kelas">Jurusan</label>
                                     <div class="input-group mb-3">
-                                        <input type="button" id="msdb-0" class="" style="width:100%;">
+                                        <input type="button" id="jurusan" class="" style="width:100%;">
                                         <!-- value ada di ('assets/MSelectDialogBox-master/examples/')/js/example.js"> -->
                                     </div>
                                     <label for="">Judul</label>
@@ -82,13 +82,3 @@
         <!-- End Top Leader Table -->
         <!-- *************************************************************** -->
     </div>
-
-    <!-- js multiple select -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#kelas').select2();
-        });
-        $(document).ready(function() {
-            $('#jurusan').select2();
-        });
-    </script>

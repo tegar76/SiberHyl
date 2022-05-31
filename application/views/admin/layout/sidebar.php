@@ -44,13 +44,13 @@
                         <li class="sidebar-item"><a href="<?= base_url('Admin/Info/infoAkademik')?>" class="sidebar-link"><span class="hide-menu"> Informasi Akademik
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"><a href="chart-chart-js.html" class="sidebar-link"><span class="hide-menu"> Tahun Pembelajaran
+                        <li class="sidebar-item"><a href="<?= base_url('Admin/Info/tahunPembelajaran')?>" class="sidebar-link"><span class="hide-menu"> Tahun Pembelajaran
                                 </span></a>
                         </li>
                     </ul>
                 </li>
                 <li class="list-divider"></li>
-                <li class="sidebar-item <?= ($this->uri->segment(2) == "JurnalMateri") ? 'selected' : '' ?>"> <a class="sidebar-link sidebar-link" href="../../docs/docs.html" aria-expanded="false"><i data-feather="book-open" class="feather-icon"></i><span class="hide-menu">Jurnal Materi</span></a></li>
+                <li class="sidebar-item <?= ($this->uri->segment(2) == "JurnalMateri") ? 'selected' : '' ?>"> <a class="sidebar-link sidebar-link" href="<?= base_url('Admin/JurnalMateri')?>" aria-expanded="false"><i data-feather="book-open" class="feather-icon"></i><span class="hide-menu">Jurnal Materi</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="authentication-login1.html" aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span class="hide-menu">Logout</span></a></li>
             </ul>
         </nav>

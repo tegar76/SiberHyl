@@ -1,12 +1,12 @@
 <!-- Data Tables -->
 <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/admin/js/data-table/mainnnn.js')?>"></script>
+<script src="<?= base_url('assets/admin/js/data-table/mainnnn.js') ?>"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/data-table-custom/stylessss.css')?>">
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/data-table-custom/stylessss.css') ?>">
 <!-- End Data Tables -->
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/dashboard/style.css')?>">
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/dashboard/style.css') ?>">
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -95,13 +95,13 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">
-                                <a class="search-icon" href=""><i class="fa fa-magnifying-glass mr-2"></i></a>
-                                Info Akademik Tahun Pelajaran 2021/2022 
-                            </h6>
+                            <a class="search-icon" href="<?= base_url('Admin/Info/infoAkademik') ?>"><i class="fa fa-magnifying-glass mr-2"></i></a>
+                            Info Akademik Tahun Pelajaran 2021/2022
+                        </h6>
                         <div class="mt-4 activity">
                             <table id="info" class="table-striped table-bordered" style="width:100%">
-                            <!-- pemanggilan tabel id info ada di assets/admin/js/data-table/main.js -->
-                               <thead>
+                                <!-- pemanggilan tabel id info ada di assets/admin/js/data-table/main.js -->
+                                <thead>
                                     <tr>
                                         <th style="width: 10%">No</th>
                                         <th style="width: 25%">Tanggal</th>
@@ -114,14 +114,14 @@
                                         <td>1</td>
                                         <td>06 - 05 -2022 13:25 WIB</td>
                                         <td>Lorem Ipsum is simply dummy text of the printing </td>
-                                        <td><a href=""><img src="<?= base_url('assets/admin/icons/pdf.png')?>" alt=""></a></td>
-                                    </tr>     
+                                        <td><a target="_blank" href="<?= base_url('Admin/Info/infoAkademikPdf') ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+                                    </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>06 - 05 -2022 13:25 WIB</td>
                                         <td>Lorem Ipsum is simply dummy text of the printing </td>
-                                        <td><a href=""><img src="<?= base_url('assets/admin/icons/pdf.png')?>" alt=""></a></td>
-                                    </tr>                         
+                                        <td><a target="_blank" href="<?= base_url('Admin/Info/infoAkademikPdf') ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -135,8 +135,8 @@
                         <div class="mt-4 activity">
                             <div class="table-responsive">
                                 <table id="pesan" class=" table-striped table-bordered" style="width: 100%;">
-                                <!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
-                                <thead>
+                                    <!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
+                                    <thead>
                                         <tr>
                                             <th style="width: 20px;">No</th>
                                             <th style="width: 70px;">Nama</th>
@@ -180,14 +180,15 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                <div class="card-body">
+                    <div class="card-body">
                         <h6 class="card-title">
-                            <a class="search-icon" href=""><i class="fa fa-magnifying-glass mr-2"></i></a>
-                            Jurnal Materi Tahun Pelajaran 2021/2022 </h6>
+                            <a class="search-icon" href="<?= base_url('Admin/JurnalMateri') ?>"><i class="fa fa-magnifying-glass mr-2"></i></a>
+                            Jurnal Materi Tahun Pelajaran 2021/2022
+                        </h6>
                         <div class="mt-4 activity">
                             <table id="jurnal" class="table-striped table-bordered" style="width:100%">
-                            <!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
-                               <thead>
+                                <!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
+                                <thead>
                                     <tr>
                                         <th style="width: 6%;">No</th>
                                         <th style="width: 10%;">Hari</th>
@@ -209,8 +210,8 @@
                                         <td>Bahasa Inggris</td>
                                         <td>XI TKRO 1</td>
                                         <td>1</td>
-                                        <td>now use Lorem Ipsum as their default   a search for 'lorem ipsum' will uncover  still in their infancy Various versions  </td>
-                                        <td><a id="id_bdt" href="" class="btn btn-sm btn-outline-danger btn-rounded-sm text-danger">Belum Dilihat</a></td>
+                                        <td>now use Lorem Ipsum as their default a search for 'lorem ipsum' will uncover still in their infancy Various versions </td>
+                                        <td><a id="id_bdt" href="<?= base_url('Admin/JurnalMateri/detailJurnalMateri')?>" class="btn btn-sm btn-outline-danger btn-rounded-sm text-danger">Belum Dilihat</a></td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -220,8 +221,8 @@
                                         <td>Panel Sasis Dan Pemindahan Tenaga KR</td>
                                         <td>XI TKRO 1</td>
                                         <td>1</td>
-                                        <td>now use Lorem Ipsum as their default   a search for 'lorem ipsum' will uncover  still in their infancy Various versions  </td>
-                                        <td><a id="id_sdt" href="" class="btn btn-sm btn-outline-success text-success">Sudah dilihat</a></td>
+                                        <td>now use Lorem Ipsum as their default a search for 'lorem ipsum' will uncover still in their infancy Various versions </td>
+                                        <td><a id="id_sdt" href="<?= base_url('Admin/JurnalMateri/detailJurnalMateri')?>" class="btn btn-sm btn-outline-success text-success">Sudah dilihat</a></td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -1,7 +1,11 @@
 <!-- multiple select -->
 <script src="<?= base_url('assets/MSelectDialogBox-master/dist/m-select-d-box.js')?>"></script>
-<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/')?>js/custom-appearr.js"></script>
-<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/')?>/js/example.js"></script>
+<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/')?>/js/examplee.js"></script>
+
+<!-- Select with search -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+
 
 <link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
 
@@ -51,12 +55,12 @@
                             <div class="container my-3"> 
                                 <label for="kelas">Kelas</label>
                                 <div class="input-group mb-3">
-                                    <input type="button" id="msdb-0" class="" style="width:100%;">
+                                    <input type="button" id="kelas" class="" style="width:100%;">
                                     <!-- value ada di ('assets/MSelectDialogBox-master/examples/')/js/example.js"> -->
                                 </div>
                                 <label for="kelas">Mata Pelajaran</label>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" id="kelas">
+                                    <select class="custom-select" id="mapel">
                                         <option selected>Pilih Mata Pelajaran</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
@@ -101,4 +105,12 @@
         <!-- End Top Leader Table -->
         <!-- *************************************************************** -->
     </div>
+
+  
+    <!-- Select Search -->
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#mapel').select2();
+});
+</script>
 

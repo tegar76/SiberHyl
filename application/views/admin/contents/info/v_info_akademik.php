@@ -61,7 +61,7 @@
                                         <td>1</td>
                                         <td>XI TKRO 1, XI MM 1</td>
                                         <td>The standard chunk of Lorem Ipsum used since the 1500s</td>
-                                        <td><a href=""><img src="<?= base_url('assets/admin/icons/pdf.png')?>" alt=""></a></td>
+                                        <td><a target="_blank" href="<?= base_url('Admin/Info/infoAkademikPdf')?>"><img src="<?= base_url('assets/admin/icons/pdf.png')?>" alt=""></a></td>
                                         <td>01 - 05 - 2022 08 : 00 WIB</td>
                                         <TD>-</TD>
                                         <td>
@@ -73,7 +73,7 @@
                                         <td>2</td>
                                         <td>Semua Kelas</td>
                                         <td>The standard chunk of Lorem Ipsum used since the 1500s</td>
-                                        <td><a href=""><img src="<?= base_url('assets/admin/icons/pdf.png')?>" alt=""></a></td>
+                                        <td><a target="_blank" href="<?= base_url('Admin/Info/infoAkademikPdf')?>"><img src="<?= base_url('assets/admin/icons/pdf.png')?>" alt=""></a></td>
                                         <td>01 - 05 - 2022 08 : 00 WIB</td>
                                         <TD>-</TD>
                                         <td>

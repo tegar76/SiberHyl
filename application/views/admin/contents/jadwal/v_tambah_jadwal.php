@@ -73,7 +73,7 @@
                                 <div class="input-group mb-3">
                                     <select class="custom-select" id="mapel">
                                         <option selected>Pilih Mata Pelajaran</option>
-                                        <option value="1">One</option>
+                                        <option value="1">Bahasa</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
                                     </select>
