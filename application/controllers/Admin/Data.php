@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Data extends CI_Controller
 {
@@ -7,19 +7,18 @@ class Data extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('JadwalModel', 'jadwal', true);
+		$this->load->model('MasterModel', 'master', true);
 	}
 
 	public function dataKelas()
 	{
-		$data = [
-			'title' => 'Data Kelas',
-			'content' => 'admin/contents/data/v_data_kelas'
-		];
-
+		$data['title'] = 'Data Kelas';
+		$data['content'] = 'admin/contents/data/v_data_kelas';
+		$data['classes'] = $this->master->getWaliKelas();
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-    public function tambahKelas()
+	public function tambahKelas()
 	{
 		$data = [
 			'title' => 'Tambah Kelas',
@@ -29,7 +28,7 @@ class Data extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-    public function editKelas()
+	public function editKelas($id)
 	{
 		$data = [
 			'title' => 'Edit Kelas',
@@ -49,7 +48,7 @@ class Data extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-    public function tambahMapel()
+	public function tambahMapel()
 	{
 		$data = [
 			'title' => 'Tambah Mapel',
@@ -59,7 +58,7 @@ class Data extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-    public function editMapel()
+	public function editMapel()
 	{
 		$data = [
 			'title' => 'Edit Mapel',
@@ -80,7 +79,7 @@ class Data extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-    public function tambahRuangan()
+	public function tambahRuangan()
 	{
 		$data = [
 			'title' => 'Tambah Mapel',
@@ -90,7 +89,7 @@ class Data extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-    public function editRuangan()
+	public function editRuangan()
 	{
 		$data = [
 			'title' => 'Edit Mapel',
@@ -99,7 +98,4 @@ class Data extends CI_Controller
 
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
-    
 }
-
-?>

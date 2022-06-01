@@ -77,7 +77,8 @@
 											<td>
 												<a href="<?= base_url('master/jadwal/detailJadwal/' . $value['kode_jadwal']) ?>" class="btn btn-sm btn-primary"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 												<a href="<?= base_url('master/jadwal/editJadwal/' . $value['kode_jadwal']) ?>" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-												<a href="#" id="delete-schedule" class="btn btn-sm btn-danger delete-schedule" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="fa-solid fa-trash-can text-white" jadwal-id="<?= $value['kode_jadwal'] ?>"></i></a>
+												<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
+												<a href="#" id="delete-schedule" class="btn btn-sm btn-danger delete-schedule" data-toggle="tooltip" data-placement="top" title="Hapus" kode-jadwal="<?= $value['kode_jadwal'] ?>"><i class="fa-solid fa-trash-can text-white"></i></a>
 											</td>
 										</tr>
 									<?php endforeach; ?>
@@ -92,68 +93,77 @@
 			<a href="<?= base_url('master/jadwal/TambahJadwal') ?>">
 				<div class="floating-button">+</div>
 			</a>
-
-
-			<!-- *************************************************************** -->
-			<!-- End Top Leader Table -->
-			<!-- *************************************************************** -->
 		</div>
 
-		<script>
-			$(document).ready(function() {
-				$('[data-toggle="tooltip"]').tooltip();
 
-				$("#data_jadwal").on('click', '.delete-schedule', function(e) {
-					e.preventDefault();
-					var kodeJadwal = $(e.currentTarget).attr('jadwal-id');
-					Swal.fire({
-						title: 'Hapus Jadwal Pelajaran',
-						text: "Anda yakin ingin menghapus jadwal pelajaran ini!",
-						icon: 'warning',
-						showCancelButton: true,
-						confirmButtonColor: '#3085d6',
-						cancelButtonColor: '#d33',
-						confirmButtonText: 'Ya, Hapus!'
-					}).then((result) => {
-						if (result.value) {
-							$.ajax({
-								type: "GET",
-								url: '<?= base_url('master/jadwal/hapusJadwal/'); ?>' + kodeJadwal,
-								beforeSend: function() {
+		<!-- *************************************************************** -->
+		<!-- End Top Leader Table -->
+		<!-- *************************************************************** -->
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			$('[data-toggle="tooltip"]').tooltip();
+
+			var csrfName = $(".csrf_token").attr('name');
+			var csrfHash = $(".csrf_token").val();
+			$("#data_jadwal").on('click', '.delete-schedule', function(e) {
+				e.preventDefault();
+				var kodeJadwal = $(e.currentTarget).attr('kode-jadwal');
+				var dataJson = {
+					[csrfName]: csrfHash,
+					kodeJadwal: kodeJadwal
+				}
+				console.log(dataJson);
+				Swal.fire({
+					title: 'Hapus Jadwal Pelajaran',
+					text: "Anda yakin ingin menghapus jadwal pelajaran ini!",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ya, Hapus!'
+				}).then((result) => {
+					if (result.value) {
+						$.ajax({
+							type: "POST",
+							url: '<?= base_url('master/jadwal/hapusJadwal'); ?>',
+							data: dataJson,
+							beforeSend: function() {
+								swal.fire({
+									imageUrl: "<?= base_url('assets/logo/rolling.png'); ?>",
+									title: "Menghapus Jadwal Pelajaran",
+									text: "Silahkan Tunggu",
+									showConfirmButton: false,
+									allowOutsideClick: false
+								});
+							},
+							success: function(data) {
+								if (data.success == false) {
 									swal.fire({
-										imageUrl: "<?= base_url('assets/logo/rolling.png'); ?>",
-										title: "Menghapus Jadwal Pelajaran",
-										text: "Silahkan Tunggu",
+										icon: 'error',
+										title: 'Menghapus Jadwal Pelajaran Gagal',
+										text: data.message,
 										showConfirmButton: false,
-										allowOutsideClick: false
+										timer: 1500
 									});
-								},
-								success: function(data) {
-									if (data.success == false) {
-										swal.fire({
-											icon: 'error',
-											title: 'Menghapus Jadwal Pelajaran Gagal',
-											text: data.message,
-											showConfirmButton: false,
-											timer: 1500
-										});
-									} else {
-										swal.fire({
-											icon: 'success',
-											title: 'Menghapus Jadwal Pelajaran Berhasil',
-											text: data.message,
-											showConfirmButton: false,
-											timer: 1500
-										});
-										// window.location = ";
-									}
-								},
-								error: function() {
-									swal.fire("Penghapusan Pesan Aduan Gagal", "Ada Kesalahan Saat menghapus jadwal!", "error");
+								} else {
+									swal.fire({
+										icon: 'success',
+										title: 'Menghapus Jadwal Pelajaran Berhasil',
+										text: data.message,
+										showConfirmButton: false,
+										timer: 1500
+									});
+									window.location = "<?= base_url('master/jadwal') ?>";
 								}
-							});
-						}
-					});
+							},
+							error: function() {
+								swal.fire("Penghapusan Pesan Aduan Gagal", "Ada Kesalahan Saat menghapus jadwal!", "error");
+							}
+						});
+					}
 				});
 			});
-		</script>
+		});
+	</script>

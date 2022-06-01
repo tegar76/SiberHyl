@@ -22,11 +22,6 @@ class Dashboard extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function detail_jadwal($id)
-	{
-		$this->load->view('detail_jadwal');
-	}
-
 	public function add_jadwal()
 	{
 		$data['kelas']	= $this->db->get_where('kelas')->result_array();
@@ -127,10 +122,10 @@ class Dashboard extends CI_Controller
 	public function hapusJadwal()
 	{
 
-		$this->db->delete('jadwal', ['jadwal_id' => $this->input->post('jadwalID', true)]);
+		$this->db->delete('jadwal', ['kode_jadwal' => $this->input->post('kodeJadwal', true)]);
 		$reponse = [
-			'csrfName' => $this->security->get_csrf_token_name(),
-			'csrfHash' => $this->security->get_csrf_hash(),
+			'csrfName' => $this->input->post('csrfName', true),
+			'csrfHash' => $this->input->post('csrfHash', true),
 			'message' => 'Anda telah menghapus jadwal pelajaran',
 			'success' => true
 		];
