@@ -51,13 +51,6 @@
 		</div>
 	</div>
 
-	<footer>
-		<center>
-			<p>&copy; 2022 Team Paradoks Technology</p>
-		</center>
-	</footer>
-</section>
-
 <script>
 	// Show Toggle Password Lama
 	const togglePasswordLama = document.querySelector('#toggle_id_password_lama');

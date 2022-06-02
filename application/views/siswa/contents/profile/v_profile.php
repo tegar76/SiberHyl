@@ -77,10 +77,3 @@
 			</div>
 		</div>
 	</div>
-
-	<footer>
-		<center>
-			<p>&copy; 2022 Team Paradoks Technology</p>
-		</center>
-	</footer>
-</section>

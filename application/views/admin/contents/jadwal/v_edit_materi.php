@@ -7,7 +7,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/styles.css') ?>">
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -92,9 +92,207 @@
                                 <div class="input-group mb-3">
                                    <input type="text" name="" id="" class="form-control" placeholder="Masukan Link Video">
                                 </div>
-                                <div class="btn-aksi">
-                                    <button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
-                                    <button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset Form</button>
+                                <div class="input-group mb-3">
+                                    <p>*Link bersumber dari youtube</p>
+                                </div>
+                                <div class="btn-aksi mb-3">
+                                    <button type="submit" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
+                                </div>
+                               <hr>
+                                <label class="mb-4" for="">Materi Pembelajaran</label>
+                                <div class="input-group mb-3">
+                                    <div class="item-pdf">
+                                        <div class="row">
+                                            <!-- looping item -->
+                                            <div class="pdf-file ml-3">
+                                                <div class="card d-flex flex-column card-pdf">
+                                                        <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>"><img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf"></a>
+                                                        <hr class="w-50 mx-auto">
+                                                        <h6 class="text-center mt-n1">Lorem ipsum dolor sit amet.</h6>
+                                                        <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                            <a href="<?= base_url('Admin/Jadwal/editMateriPdf')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                            <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                             <!-- looping item -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card d-flex flex-column card-pdf">
+                                                        <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>"><img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf"></a>
+                                                        <hr class="w-50 mx-auto">
+                                                        <h6 class="text-center mt-n1">Lorem ipsum dolor sit amet.</h6>
+                                                        <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                            <a href="<?= base_url('Admin/Jadwal/editMateriPdf')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                            <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                             <!-- looping item -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card d-flex flex-column card-pdf">
+                                                        <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>"><img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf"></a>
+                                                        <hr class="w-50 mx-auto">
+                                                        <h6 class="text-center mt-n1">Lorem ipsum dolor sit amet.</h6>
+                                                        <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                            <a href="<?= base_url('Admin/Jadwal/editMateriPdf')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                            <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                             <!-- looping item -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card d-flex flex-column card-pdf">
+                                                        <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>"><img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf"></a>
+                                                        <hr class="w-50 mx-auto">
+                                                        <h6 class="text-center mt-n1">Lorem ipsum dolor sit amet.</h6>
+                                                        <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                            <a href="<?= base_url('Admin/Jadwal/editMateriPdf')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                            <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                             <!-- looping item -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card d-flex flex-column card-pdf">
+                                                        <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>"><img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf"></a>
+                                                        <hr class="w-50 mx-auto">
+                                                        <h6 class="text-center mt-n1">Lorem ipsum dolor sit amet.</h6>
+                                                        <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                            <a href="<?= base_url('Admin/Jadwal/editMateriPdf')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                            <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                             <!-- looping item -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card d-flex flex-column card-pdf">
+                                                        <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>"><img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf"></a>
+                                                        <hr class="w-50 mx-auto">
+                                                        <h6 class="text-center mt-n1">Lorem ipsum dolor sit amet.</h6>
+                                                        <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                            <a href="<?= base_url('Admin/Jadwal/editMateriPdf')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                            <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                             <!-- looping item -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card d-flex flex-column card-pdf">
+                                                        <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>"><img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf"></a>
+                                                        <hr class="w-50 mx-auto">
+                                                        <h6 class="text-center mt-n1">Lorem ipsum dolor sit amet.</h6>
+                                                        <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                            <a href="<?= base_url('Admin/Jadwal/editMateriPdf')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                            <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                             <!-- looping item -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card d-flex flex-column card-pdf">
+                                                        <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>"><img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf"></a>
+                                                        <hr class="w-50 mx-auto">
+                                                        <h6 class="text-center mt-n1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, impedit!</h6>
+                                                        <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                            <a href="<?= base_url('Admin/Jadwal/editMateriPdf')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                            <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               <hr>
+                               <label class="mb-4" for="">Video Pembelajaran</label>
+                                <div class="input-group mb-3">
+                                    <div class="item-video">
+                                        <div class="row">
+                                            <!-- Looping Video -->
+                                            <div class="pdf-file ml-3">
+                                                <div class="card shadow-sm d-flex flex-column card-video">
+                                                    <iframe class="d-block mx-auto"  src="https://www.youtube.com/embed/rEjSkBl47OY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    <h6 class="mt-1 ml-3">2021-10-12</h6>
+                                                    <h6 class="mt-n1 ml-3">Ebook Pemeliharaan Kelistrikan Kendaraan Ringan</h6>
+                                                    <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                        <a href="<?= base_url('Admin/Jadwal/editMateriVideo')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                        <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <!-- Looping Video -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card shadow-sm d-flex flex-column card-video">
+                                                    <iframe class="d-block mx-auto"  src="https://www.youtube.com/embed/rEjSkBl47OY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    <h6 class="mt-1 ml-3">2021-10-12</h6>
+                                                    <h6 class="mt-n1 ml-3">Ebook Pemeliharaan Kelistrikan Kendaraan Ringan</h6>
+                                                    <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                        <a href="<?= base_url('Admin/Jadwal/editMateriVideo')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                        <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <!-- Looping Video -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card shadow-sm d-flex flex-column card-video">
+                                                    <iframe class="d-block mx-auto"  src="https://www.youtube.com/embed/rEjSkBl47OY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    <h6 class="mt-1 ml-3">2021-10-12</h6>
+                                                    <h6 class="mt-n1 ml-3">Ebook Pemeliharaan Kelistrikan Kendaraan Ringan</h6>
+                                                    <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                        <a href="<?= base_url('Admin/Jadwal/editMateriVideo')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                        <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <!-- Looping Video -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card shadow-sm d-flex flex-column card-video">
+                                                    <iframe class="d-block mx-auto"  src="https://www.youtube.com/embed/rEjSkBl47OY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    <h6 class="mt-1 ml-3">2021-10-12</h6>
+                                                    <h6 class="mt-n1 ml-3">Ebook Pemeliharaan Kelistrikan Kendaraan Ringan</h6>
+                                                    <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                        <a href="<?= base_url('Admin/Jadwal/editMateriVideo')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                        <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <!-- Looping Video -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card shadow-sm d-flex flex-column card-video">
+                                                    <iframe class="d-block mx-auto"  src="https://www.youtube.com/embed/rEjSkBl47OY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    <h6 class="mt-1 ml-3">2021-10-12</h6>
+                                                    <h6 class="mt-n1 ml-3">Ebook Pemeliharaan Kelistrikan Kendaraan Ringan</h6>
+                                                    <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                        <a href="<?= base_url('Admin/Jadwal/editMateriVideo')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                        <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <!-- Looping Video -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card shadow-sm d-flex flex-column card-video">
+                                                    <iframe class="d-block mx-auto"  src="https://www.youtube.com/embed/rEjSkBl47OY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    <h6 class="mt-1 ml-3">2021-10-12</h6>
+                                                    <h6 class="mt-n1 ml-3">Ebook Pemeliharaan Kelistrikan Kendaraan Ringan</h6>
+                                                    <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                        <a href="<?= base_url('Admin/Jadwal/editMateriVideo')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                        <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <!-- Looping Video -->
+                                             <div class="pdf-file ml-3">
+                                                <div class="card shadow-sm d-flex flex-column card-video">
+                                                    <iframe class="d-block mx-auto"  src="https://www.youtube.com/embed/rEjSkBl47OY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    <h6 class="mt-1 ml-3">2021-10-12</h6>
+                                                    <h6 class="mt-n1 ml-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, nihil?</h6>
+                                                    <div class="row d-flex justify-content-center mb-3 mt-auto">
+                                                        <a href="<?= base_url('Admin/Jadwal/editMateriVideo')?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                                                        <a href="" class="btn btn-sm btn-danger"  data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                     </form>

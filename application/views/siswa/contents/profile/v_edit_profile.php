@@ -86,13 +86,6 @@
 		<?= form_close() ?>
 	</div>
 
-	<footer>
-		<center>
-			<p>&copy; 2022 Team Paradoks Technology</p>
-		</center>
-	</footer>
-</section>
-
 <script>
 	// js upload file foto
 	const actualBtn = document.getElementById('actual-btn');
