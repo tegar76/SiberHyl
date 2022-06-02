@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/default.css">
 
     <!--====== Style css ======-->
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/styless.css">
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/style.css">
 
 
 </head>

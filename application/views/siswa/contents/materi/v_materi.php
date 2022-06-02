@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/materi/styles.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/siswa/css/materi/style.css') ?>">
 
 <section class="container section section__height">
 

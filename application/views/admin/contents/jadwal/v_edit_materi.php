@@ -7,7 +7,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/styles.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -68,7 +68,7 @@
                                     </select>
                                 </div>
                                <div class="input-group">
-                                    <button type="button" class="btn btn-success btn-sm btn-disabled mb-2 mt-2"><i class="fa fa-plus"></i> Materi</button>
+                                    <button type="button" class="btn btn-primary btn-sm btn-disabled mb-2 mt-2"><i class="fa fa-plus"></i> Materi</button>
                                </div>
                                 <label for="kelas">Judul Materi ke- 1</label>
                                 <div class="input-group mb-3">
@@ -82,7 +82,7 @@
                                     <p>*File max 2mb dengan format PDF</p>
                                 </div>
                                 <div class="input-group">
-                                    <button type="button" class="btn btn-success btn-sm btn-disabled mb-2 mt-2"><i class="fa fa-plus"></i> Video Pembelajaran</button>
+                                    <button type="button" class="btn btn-primary btn-sm btn-disabled mb-2 mt-2"><i class="fa fa-plus"></i> Video Pembelajaran</button>
                                </div>
                                 <label for="kelas">Judul Video Pembelajaran ke- 1</label>
                                 <div class="input-group mb-3">

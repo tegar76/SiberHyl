@@ -7,15 +7,15 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-7 align-self-center">
-                <h3 class="page-title">Detail Jadwal</h3>
+                <h3 class="page-title">Detail Materi</h3>
             </div>
         </div>
         <div class="d-flex align-items-center">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb m-0 p-0">
                     <li class="breadcrumb-item text-muted active">Setting Jadwal</li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Admin/Jadwal')?>" class="text-muted">Jadwal</a></li>
-                    <li class="breadcrumb-item text-muted active" aria-current="page">Detail Jadwal</li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Admin/Jadwal/materi')?>" class="text-muted">Materi</a></li>
+                    <li class="breadcrumb-item text-muted active" aria-current="page">Detail Materi</li>
                 </ol>
             </nav>
         </div>
@@ -70,7 +70,7 @@
                                                     <td class="item-pdf row">
                                                         <!-- looping item -->
                                                         <div class="pdf-file ml-3">
-                                                            <a href="">
+                                                            <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>">
                                                                 <div class="card card-pdf">
                                                                     <div class="container">
                                                                         <img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf">
@@ -82,7 +82,7 @@
                                                         </div>
                                                         <!-- looping item -->
                                                         <div class="pdf-file ml-3">
-                                                            <a href="">
+                                                            <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>">
                                                                 <div class="card card-pdf">
                                                                     <div class="container">
                                                                         <img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf">
@@ -93,7 +93,7 @@
                                                             </a>
                                                         </div>
                                                         <div class="pdf-file ml-3">
-                                                            <a href="">
+                                                            <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>">
                                                                 <div class="card card-pdf">
                                                                     <div class="container">
                                                                         <img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf">
@@ -104,7 +104,7 @@
                                                             </a>
                                                         </div>
                                                         <div class="pdf-file ml-3">
-                                                            <a href="">
+                                                            <a target="_blank" href="<?= base_url('Admin/Jadwal/materiPdf')?>">
                                                                 <div class="card card-pdf">
                                                                     <div class="container">
                                                                         <img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf">
