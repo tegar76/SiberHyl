@@ -163,7 +163,6 @@ class Jadwal extends CI_Controller
 			$data['jadwalDetail'] = '';
 		}
 
-
 		$this->form_validation->set_rules([
 			[
 				'field' => 'kelas_edit',
@@ -267,11 +266,7 @@ class Jadwal extends CI_Controller
 		$search = $this->input->get('search');
 		$typesend = $this->input->get('type');
 		if ($typesend == 'class') {
-			$classes = $this->db->select('kelas_id, nama_kelas')
-				->from('kelas')
-				->like('nama_kelas', $search)
-				->order_by('nama_kelas', 'ASC')->get()
-				->result();
+			$classes = $this->master->get_select2($typesend, $search);
 			foreach ($classes as $class) {
 				$result[] = [
 					'id' => $class->kelas_id,
@@ -282,51 +277,49 @@ class Jadwal extends CI_Controller
 			$days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
 			foreach ($days as $day) {
 				$result[] = [
-					'day'	   => $day
+					'id'	=> $day,
+					'text'	   => $day
 				];
 			}
 		} elseif ($typesend == 'lesson') {
-			$lessons = $this->db->select('mapel_id, nama_mapel')
-				->from('mapel')
-				->order_by('nama_mapel', 'ASC')->get()
-				->result();
+			$lessons = $this->master->get_select2($typesend, $search);
 			foreach ($lessons as $lesson) {
 				$result[] = [
-					'mapel_id'	=> $lesson->mapel_id,
-					'mapel'		=> $lesson->nama_mapel
+					'id'	=> $lesson->mapel_id,
+					'text'		=> $lesson->nama_mapel
 				];
 			}
 		} elseif ($typesend == 'teacher') {
-			$teachers = $this->db->select('guru_id, guru_kode, guru_nama')
-				->from('guru')
-				->order_by('guru_kode', 'ASC')->get()
-				->result();
+			$teachers = $this->master->get_select2($typesend, $search);
 			foreach ($teachers as $teacher) {
 				$result[] = [
-					'guru_id'	=> $teacher->guru_id,
-					'kode_guru'		=> $teacher->guru_kode,
-					'nama_guru'		=> $teacher->guru_nama
+					'id'		=> $teacher->guru_kode,
+					'text'		=> $teacher->guru_kode,
 				];
 			}
 		} elseif ($typesend == 'room') {
-			$rooms = $this->db->select('ruang_id, nama_ruang')
-				->from('ruangan')
-				->order_by('nama_ruang', 'ASC')->get()
-				->result();
+			$rooms = $this->master->get_select2($typesend, $search);
 			foreach ($rooms as $room) {
 				$result[] = [
-					'ruang_id'	=> $room->ruang_id,
-					'ruangan'	=> $room->nama_ruang,
+					'id'	=> $room->ruang_id,
+					'text'	=> $room->nama_ruang,
+				];
+			}
+		} elseif ($typesend == 'jurusan') {
+			$rooms = $this->master->get_select2($typesend, $search);
+			foreach ($rooms as $room) {
+				$result[] = [
+					'id'	=> $room->jurusan_id,
+					'text'	=> $room->nama_jurusan,
 				];
 			}
 		}
 		echo json_encode($result);
 	}
 
-	public function hapusJadwal($kodeJadwal)
+	public function hapusJadwal()
 	{
-		var_dump($kodeJadwal);
-		$this->db->delete('jadwal', ['kode_jadwal' => $kodeJadwal]);
+		$this->db->delete('jadwal', ['kode_jadwal' => $this->input->post('kodeJadwal', true)]);
 		$reponse = [
 			'csrfName' => $this->security->get_csrf_token_name(),
 			'csrfHash' => $this->security->get_csrf_hash(),
@@ -336,53 +329,13 @@ class Jadwal extends CI_Controller
 		echo json_encode($reponse);
 	}
 
-	public function pratinjauJadwal()
+	public function pratinjauJadwal($class = null)
 	{
-		$data = [
-			'title' => 'PratinjauJadwal',
-			'content' => 'admin/contents/jadwal/v_pratinjau_jadwal'
-		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
-	}
-
-	public function materi()
-	{
-		$data = [
-			'title' => 'Materi',
-			'content' => 'admin/contents/jadwal/v_materi'
-		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
-	}
-
-	public function detailMateri()
-	{
-		$data = [
-			'title' => 'Materi',
-			'content' => 'admin/contents/jadwal/v_detail_materi'
-		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
-	}
-
-	public function tambahMateri()
-	{
-		$data = [
-			'title' => 'Tambah Materi',
-			'content' => 'admin/contents/jadwal/v_tambah_materi'
-		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
-	}
-
-	public function editMateri()
-	{
-		$data = [
-			'title' => 'Edit Materi',
-			'content' => 'admin/contents/jadwal/v_edit_materi'
-		];
-
+		$data['days']  = ["Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
+		$data['title'] = 'Pratinjau Jadwal';
+		$data['class']	= $this->db->get_where('kelas', ['kode_kelas' => $class])->row();
+		$data['classes'] = $this->master->get_masterdata('kelas');
+		$data['content'] = 'admin/contents/jadwal/v_pratinjau_jadwal';
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 }

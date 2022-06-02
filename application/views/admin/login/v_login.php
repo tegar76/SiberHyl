@@ -25,7 +25,22 @@
 </head>
 
 <body>
-
+	<script>
+		$(function() {
+			var title = '<?= $this->session->flashdata("title") ?>';
+			var text = '<?= $this->session->flashdata("text") ?>';
+			var type = '<?= $this->session->flashdata("type") ?>';
+			if (title) {
+				swal.fire({
+					icon: type,
+					title: title,
+					text: text,
+					type: type,
+					button: true,
+				});
+			};
+		});
+	</script>
 	<div class="container d-flex justify-content-center">
 		<div class="card mt-5">
 			<div class="form-content">

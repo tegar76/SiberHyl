@@ -1,113 +1,220 @@
 <!-- multiple select -->
-<script src="<?= base_url('assets/MSelectDialogBox-master/dist/m-select-d-box.js')?>"></script>
-<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/')?>/js/examplee.js"></script>
+<<<<<<< HEAD <script src="<?= base_url('assets/MSelectDialogBox-master/dist/m-select-d-box.js') ?>">
+	</script>
+	<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/') ?>/js/examplee.js"></script>
+	=======
+	<script src="<?= base_url('assets/MSelectDialogBox-master/dist/m-select-d-box.js') ?>"></script>
+	<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/') ?>js/custom-appearr.js"></script>
+	<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/') ?>/js/example.js"></script>
+	>>>>>>> admin
 
-<!-- Select with search -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+	<!-- Select with search -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
 
-<div class="page-wrapper">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <div class="page-breadcrumb">
-        <div class="row">
-            <div class="col-7 align-self-center">
-                <h3 class="page-title">Tambah Materi</h3>
-            </div>
-        </div>
-        <div class="d-flex align-items-center">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb m-0 p-0">
-                    <li class="breadcrumb-item text-muted active">Setting Jadwal</li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Admin/Jadwal/materi')?>" class="text-muted">Materi</a></li>
-                    <li class="breadcrumb-item text-muted active" aria-current="page">Tambah Materi</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
-    <div class="container-fluid">
-        <!-- *************************************************************** -->
-        <!-- Start First Cards -->
-        <!-- *************************************************************** -->
-        <!-- *************************************************************** -->
-        <!-- End Location and Earnings Charts Section -->
-        <!-- *************************************************************** -->
-        <!-- *************************************************************** -->
-        <!-- Start Top Leader Table -->
-        <!-- *************************************************************** -->
+	<div class="page-wrapper">
+		<!-- ============================================================== -->
+		<!-- Bread crumb and right sidebar toggle -->
+		<!-- ============================================================== -->
+		<div class="page-breadcrumb">
+			<div class="row">
+				<div class="col-7 align-self-center">
+					<h3 class="page-title">Tambah Materi</h3>
+				</div>
+			</div>
+			<div class="d-flex align-items-center">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb m-0 p-0">
+						<li class="breadcrumb-item text-muted active">Setting Jadwal</li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi') ?>" class="text-muted">Materi</a></li>
+						<li class="breadcrumb-item text-muted active" aria-current="page">Tambah Materi</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+		<!-- ============================================================== -->
+		<!-- End Bread crumb and right sidebar toggle -->
+		<!-- ============================================================== -->
+		<!-- ============================================================== -->
+		<!-- Container fluid  -->
+		<!-- ============================================================== -->
+		<div class="container-fluid">
+			<!-- *************************************************************** -->
+			<!-- Start First Cards -->
+			<!-- *************************************************************** -->
+			<!-- *************************************************************** -->
+			<!-- End Location and Earnings Charts Section -->
+			<!-- *************************************************************** -->
+			<!-- *************************************************************** -->
+			<!-- Start Top Leader Table -->
+			<!-- *************************************************************** -->
 
-        <div class="row">
-            <div class="col-12">
-                <div class="activity">
-                    <form action="">
-                        <!-- looping card -->
-                        <div class="card shadow mb-4">
-                            <div class="container my-3"> 
-                                <label for="kelas">Kelas</label>
-                                <div class="input-group mb-3">
-                                    <input type="button" id="kelas" class="" style="width:100%;">
-                                    <!-- value ada di ('assets/MSelectDialogBox-master/examples/')/js/example.js"> -->
-                                </div>
-                                <label for="kelas">Mata Pelajaran</label>
-                                <div class="input-group mb-3">
-                                    <select class="custom-select" id="mapel">
-                                        <option selected>Pilih Mata Pelajaran</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                               <div class="input-group">
-                                    <button type="button" class="btn btn-success btn-sm btn-disabled mb-2 mt-2"><i class="fa fa-plus"></i> Materi</button>
-                               </div>
-                                <label for="kelas">Judul Materi ke- 1</label>
-                                <div class="input-group mb-3">
-                                   <input type="text" name="" id="" class="form-control" placeholder="Masukan Judul">
-                                </div>
-                                <label for="kelas">Unggah Materi Pembelajaran ke -1</label>
-                                <div class="input-group mb-3">
-                                    <input type="file" name="" id="" class="form-control">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <p>*File max 2mb dengan format PDF</p>
-                                </div>
-                                <div class="input-group">
-                                    <button type="button" class="btn btn-success btn-sm btn-disabled mb-2 mt-2"><i class="fa fa-plus"></i> Video Pembelajaran</button>
-                               </div>
-                                <label for="kelas">Judul Video Pembelajaran ke- 1</label>
-                                <div class="input-group mb-3">
-                                   <input type="text" name="" id="" class="form-control" placeholder="Masukan Judul Video">
-                                </div>
-                                <label for="kelas">Video Pembelajaran ke- 1</label>
-                                <div class="input-group mb-3">
-                                   <input type="text" name="" id="" class="form-control" placeholder="Masukan Link Video">
-                                </div>
-                                <div class="btn-aksi">
-                                    <button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
-                                    <button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset Form</button>
-                                </div>
-                            </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-     <!-- *************************************************************** -->
-        <!-- End Top Leader Table -->
-        <!-- *************************************************************** -->
-    </div>
+			<div class="row">
+				<div class="col-12">
+					<div class="activity">
+						<?= form_open_multipart('master/materi/tambahMateri') ?>
+						<!-- looping card -->
+						<div class="card shadow mb-4">
+							<div class="container my-3">
+								<label for="index_kelas">Kelas</label>
+								<div class="input-group mb-3">
+									<select class="custom-select <?= (form_error('index_kelas')) ? 'is-invalid' : '' ?>" id="index_kelas" name="index_kelas">
+										<option selected>Pilih Index Kelas</option>
+										<option value="10">Kelas 10 </option>
+										<option value="11">Kelas 11</option>
+										<option value="12">Kelas 12</option>
+									</select>
+									<div id="index_kelasFeedback" class="invalid-feedback">
+										<?= form_error('index_kelas', '<div class="text-danger">', '</div>') ?>
+									</div>
+								</div>
+								<label for="jurusan">Jurusan Kelas</label>
+								<div class="input-group mb-3">
+									<select class="custom-select <?= (form_error('jurusan')) ? 'is-invalid' : '' ?>" id="jurusan" name="jurusan">
+									</select>
+									<div id="jurusanFeedback" class="invalid-feedback">
+										<?= form_error('jurusan', '<div class="text-danger">', '</div>') ?>
+									</div>
+								</div>
+								<label for="mapel">Mata Pelajaran</label>
+								<div class="input-group mb-3">
+									<select class="custom-select <?= (form_error('mapel')) ? 'is-invalid' : '' ?>" name="mapel" id="mapel">
+									</select>
+									<div id="mapelFeedback" class="invalid-feedback">
+										<?= form_error('mapel', '<div class="text-danger">', '</div>') ?>
+									</div>
+								</div>
+								<div class="input-group">
+									<button type="button" class="btn btn-success btn-sm btn-disabled mb-2 mt-2" id="btn-tambah-materi"><i class="fa fa-plus"></i> Materi</button>
+								</div>
+								<label for="judul_materi">Judul Materi ke-1</label>
+								<div class="input-group mb-3">
+									<input type="text" name="judul_materi[]" id=judul_materi" class="form-control <?= (form_error('judul_materi[]')) ? 'is-invalid' : '' ?>" placeholder="Masukan Judul">
+									<div id="judul_materiFeedback" class="invalid-feedback">
+										<?= form_error('judul_materi[]', '<div class="text-danger">', '</div>') ?>
+									</div>
+								</div>
+								<label for="file_materi">Unggah Materi Pembelajaran ke-1</label>
+								<div class="input-group mb-3">
+									<input type="file" name="file_materi[]" id="file_materi" class="form-control <?= (form_error('file_materi[]')) ? 'is-invalid' : '' ?>">
+									<div id="file_materiFeedback" class="invalid-feedback">
+										<?= form_error('file_materi[]', '<div class="text-danger">', '</div>') ?>
+									</div>
+								</div>
+								<div class="input-group mb-3">
+									<p>*File max 2mb dengan format PDF</p>
+								</div>
+								<input type="hidden" name="jumlah-materi" id="jumlah-materi" value="1">
+								<div id="next-materi"></div>
+								<div class="input-group">
+									<button type="button" class="btn btn-success btn-sm btn-disabled mb-2 mt-2" id="btn-tambah-video"><i class="fa fa-plus"></i> Video Pembelajaran</button>
+								</div>
+								<label for="judul_video">Judul Video Pembelajaran ke-1</label>
+								<div class="input-group mb-3">
+									<input type="text" name="judul_video[]" id="judul_video" class="form-control <?= (form_error('judul_video[]')) ? 'is-invalid' : '' ?>" placeholder="Masukan Judul Video">
+									<div id="judul_videoFeedback" class="invalid-feedback">
+										<?= form_error('judul_video[]', '<div class="text-danger">', '</div>') ?>
+									</div>
+								</div>
+								<label for="link_video">Video Pembelajaran ke-1</label>
+								<div class="input-group mb-3">
+									<input type="text" name="link_video[]" id="link_video" class="form-control <?= (form_error('link_video[]')) ? 'is-invalid' : '' ?>" placeholder="Masukan Link Video">
+									<div id="link_videoFeedback" class="invalid-feedback">
+										<?= form_error('link_video[]', '<div class="text-danger">', '</div>') ?>
+									</div>
+								</div>
+								<input type="hidden" name="jumlah-video" id="jumlah-video" value="1">
+								<div id="next-video"></div>
+								<div class="btn-aksi">
+									<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
+									<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset Form</button>
+								</div>
+							</div>
+							<?= form_close() ?>
+						</div>
+					</div>
+				</div>
+				<!-- *************************************************************** -->
+				<!-- End Top Leader Table -->
+				<!-- *************************************************************** -->
+			</div>
 
-    <!-- Select Search -->
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#mapel').select2();
-});
-</script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$('#mapel').select2({
+						placeholder: 'Pilih Mata Pelajaran',
+						ajax: {
+							dataType: 'json',
+							url: '<?= base_url('master/jadwal/get_data?type=lesson') ?>',
+							delay: 800,
+							data: function(params) {
+								return {
+									search: params.term,
+								}
+							},
+							processResults: function(response) {
+								return {
+									results: response
+								};
+							},
+							cache: true
+						},
+					});
+
+					$('#jurusan').select2({
+						placeholder: 'Pilih Materi Jurusan',
+						ajax: {
+							dataType: 'json',
+							url: '<?= base_url('master/jadwal/get_data?type=jurusan') ?>',
+							delay: 800,
+							data: function(params) {
+								return {
+									search: params.term,
+								}
+							},
+							processResults: function(response) {
+								return {
+									results: response
+								};
+							},
+							cache: true
+						},
+					});
+
+					$("#btn-tambah-materi").click(function() {
+						var jumlah = parseInt($("#jumlah-materi").val());
+						var nextMateri = jumlah + 1;
+						$("#next-materi").append('<label for="judul_materi">Judul Materi ke- ' + nextMateri + '</label>' +
+							'<div class="input-group mb-3">' +
+							'<input type="text" name="judul_materi[]" id="judul_materi" class="form-control" placeholder="Masukan Judul">' +
+							'</div>' +
+							'<label for="file_materi">Unggah Materi Pembelajaran ke- ' + nextMateri + '</label>' +
+							'<div class="input-group mb-3">' +
+							'<input type="file" name="file_materi[]" id="file_materi" class="form-control">' +
+							'</div>' +
+							'<div class="input-group mb-3">' +
+							'<p>*File max 2mb dengan format PDF</p>' +
+							'</div>');
+						$('#jumlah-materi').val(nextMateri);
+					});
+
+					$("#btn-tambah-video").click(function() {
+						var jumlah = parseInt($("#jumlah-video").val());
+						var nextVideo = jumlah + 1;
+						$("#next-video").append(
+							'<label for = "judul_video" > Judul Video Pembelajaran ke - ' + nextVideo + ' </label>' +
+							'<div class="input-group mb-3">' +
+							'<input type="text" name="judul_video[]" id="judul_video" class="form-control" placeholder="Masukan Judul Video">' +
+							'</div>' +
+							'<label for="link_video">Video Pembelajaran ke- ' + nextVideo + '</label>' +
+							'<div class="input-group mb-3">' +
+							'<input type="text" name="link_video[]" id="link_video" class="form-control" placeholder="Masukan Link Video">' +
+							'</div>'
+						);
+						$('#jumlah-video').val(nextVideo);
+					});
+
+				});
+			</script>

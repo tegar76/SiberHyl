@@ -59,21 +59,21 @@
 							</div>
 							<div class="form-group">
 								<label for="hari">Hari</label>
-								<select class="form-control select2 select-day <?= (form_error('hari[]')) ? 'is-invalid' : '' ?>" id="select-day" name="hari[]" title="Pilih Hari">
+								<select class="form-control select-day <?= (form_error('hari[]')) ? 'is-invalid' : '' ?>" id="select-day" name="hari[]" title="Pilih Hari">
 									<option value="">Pilih Hari</option>
 								</select>
 								<div class="invalid-feedback" id="hariFeedback"><?= form_error('hari[]') ?></div>
 							</div>
 							<div class="form-group">
 								<label for="mapel">Mata Pelajaran</label>
-								<select class="form-control custom-select select-lesson <?= (form_error('mapel[]')) ? 'is-invalid' : '' ?>" id="select-lesson" name="mapel[]" title="Pilih Mata Pelajaran">
+								<select class="form-control select-lesson <?= (form_error('mapel[]')) ? 'is-invalid' : '' ?>" id="select-lesson" name="mapel[]" title="Pilih Mata Pelajaran">
 									<option value="">Pilih Mata Pelajaran</option>
 								</select>
 								<div class="invalid-feedback" id="mapelFeedback"><?= form_error('mapel[]') ?></div>
 							</div>
 							<div class="form-group">
 								<label for="guru">Guru Pengajar</label>
-								<select class="form-control custom-select select-teacher <?= (form_error('guru[]')) ? 'is-invalid' : '' ?>" id="select-teacher" name="guru[]" title="Pilih Kode Guru">
+								<select class="form-control select-teacher <?= (form_error('guru[]')) ? 'is-invalid' : '' ?>" id="select-teacher" name="guru[]" title="Pilih Kode Guru">
 									<option value="">Kode Guru</option>
 								</select>
 								<div class="invalid-feedback" id="guruFeedback"><?= form_error('guru[]') ?></div>
@@ -92,9 +92,8 @@
 							</div>
 							<div class="form-group">
 								<label for="ruangan">Ruangan</label>
-								<select class="form-control custom-select select-room <?= (form_error('ruangan[]')) ? 'is-invalid' : '' ?>" id="select-room" name="ruangan[]" title="Pilih Ruangan">
+								<select class="form-control select-room <?= (form_error('ruangan[]')) ? 'is-invalid' : '' ?>" id="select-room" name="ruangan[]" title="Pilih Ruangan">
 									<option value="">Pilih Ruangan</option>
-
 								</select>
 								<div class="invalid-feedback" id="jam_selesaiFeedback"><?= form_error('ruangan[]') ?></div>
 							</div>
@@ -128,120 +127,130 @@
 	</div>
 
 	<script>
-		$(function() {
-			$('.select-class').select2({
-				placeholder: 'Pilih Kelas',
-				ajax: {
-					dataType: 'json',
-					url: '<?= base_url('master/jadwal/get_data?type=class') ?>',
-					delay: 800,
-					data: function(params) {
-						return {
-							search: params.term,
-						}
+		function load_select(type = null) {
+			if (type == 'class') {
+				$('#select-class').select2({
+					placeholder: 'Pilih Kelas',
+					ajax: {
+						dataType: 'json',
+						url: '<?= base_url('master/jadwal/get_data?type=') ?>' + type,
+						delay: 800,
+						data: function(params) {
+							return {
+								search: params.term,
+							}
+						},
+						processResults: function(response) {
+							return {
+								results: response
+							};
+						},
+						cache: true
 					},
-					processResults: function(response) {
-						return {
-							results: response
-						};
-					},
-					cache: true
-				},
-			});
-
-			$('.select-lesson').select2({
-				placeholder: 'Pilih Kelas',
-				ajax: {
-					dataType: 'json',
-					url: '<?= base_url('master/jadwal/get_data?type=lesson') ?>',
-					delay: 800,
-					data: function(params) {
-						return {
-							search: params.term,
-						}
-					},
-					processResults: function(response) {
-						return {
-							results: response
-						};
-					},
-					cache: true
-				},
-			});
-
-		});
-
-		function load_select_data(type, nextForm = null) {
-			if (type === 'days') {
-				$.ajax({
-					url: "<?= base_url('master/jadwal/get_data?type=') ?>" + type,
-					method: "GET",
-					dataType: "json",
-					success: function(data) {
-						var html = '<option value="">Pilih Hari</option>';
-						for (var count = 0; count < data.length; count++) {
-							html += '<option value="' + data[count].day + '">' + data[count].day + '</option>'
-						}
-						if (nextForm == null) {
-							$('#select-day').html(html);
-							$('#select-day').select2();
-						} else {
-							const newClass = $("select#select-day").addClass("select-day" + nextForm);
-							newClass.html(html);
-							newClass.select2();
-						}
-					}
 				});
-			} else if (type === 'teacher') {
-				$.ajax({
-					url: "<?= base_url('master/jadwal/get_data?type=') ?>" + type,
-					method: "GET",
-					dataType: "json",
-					success: function(data) {
-						var html = '<option value="">Pilih Kode Guru</option>';
-						for (var count = 0; count < data.length; count++) {
-							html += '<option value="' + data[count].kode_guru + '">' + data[count].kode_guru + '</option>'
-						}
-						if (nextForm == null) {
-							$('#select-teacher').html(html);
-							$('#select-teacher').select2();
-						} else {
-							const newClass = $("select#select-teacher").addClass("select-teacher" + nextForm);
-							newClass.html(html);
-							newClass.select2();
-						}
-					}
+			} else if (type == 'lesson') {
+				$('#select-lesson').select2({
+					placeholder: 'Pilih Mata Pelajaran',
+					ajax: {
+						dataType: 'json',
+						url: '<?= base_url('master/jadwal/get_data?type=') ?>' + type,
+						delay: 800,
+						data: function(params) {
+							return {
+								search: params.term,
+							}
+						},
+						processResults: function(response) {
+							return {
+								results: response
+							};
+						},
+						cache: true
+					},
 				});
-			} else if (type === 'room') {
-				$.ajax({
-					url: "<?= base_url('master/jadwal/get_data?type=') ?>" + type,
-					method: "GET",
-					dataType: "json",
-					success: function(data) {
-						var html = '<option value="">Pilih Ruangan</option>';
-						for (var count = 0; count < data.length; count++) {
-							html += '<option value="' + data[count].ruang_id + '">' + data[count].ruangan + '</option>'
-						}
-						if (nextForm == null) {
-							$('#select-room').html(html);
-							$('#select-room').select2();
-						} else {
-							const newClass = $("select#select-room").addClass("select-room" + nextForm);
-							newClass.html(html);
-							newClass.select2();
-						}
-					}
+			} else if (type == 'days') {
+				$('#select-day').select2({
+					placeholder: 'Pilih Hari',
+					ajax: {
+						dataType: 'json',
+						url: '<?= base_url('master/jadwal/get_data?type=') ?>' + type,
+						delay: 800,
+						data: function(params) {
+							return {
+								search: params.term,
+							}
+						},
+						processResults: function(response) {
+							return {
+								results: response
+							};
+						},
+						cache: true
+					},
+				});
+			} else if (type == 'teacher') {
+				$('#select-teacher').select2({
+					placeholder: 'Pilih Kode Guru',
+					ajax: {
+						dataType: 'json',
+						url: '<?= base_url('master/jadwal/get_data?type=') ?>' + type,
+						delay: 800,
+						data: function(params) {
+							return {
+								search: params.term,
+							}
+						},
+						processResults: function(response) {
+							return {
+								results: response
+							};
+						},
+						cache: true
+					},
+				});
+			} else if (type == 'room') {
+				$('#select-room').select2({
+					placeholder: 'Pilih Ruangan',
+					ajax: {
+						dataType: 'json',
+						url: '<?= base_url('master/jadwal/get_data?type=') ?>' + type,
+						delay: 800,
+						data: function(params) {
+							return {
+								search: params.term,
+							}
+						},
+						processResults: function(response) {
+							return {
+								results: response
+							};
+						},
+						cache: true
+					},
 				});
 			}
 		}
 
-		$(document).ready(function() {
-			load_select_data('class');
-			load_select_data('days');
-			load_select_data('lesson');
-			load_select_data('teacher');
-			load_select_data('room');
+		function load_datetimepicker() {
+			jQuery.datetimepicker.setLocale('id')
+			$('.jam_mulai, .jam_selesai').datetimepicker({
+				timepicker: true,
+				datepicker: false,
+				format: 'H:i',
+				value: '00:00',
+				hours12: false,
+				step: 5,
+				lang: 'id',
+			});
+		}
 
+		$(document).ready(function() {
+			load_select('class');
+			load_select('days');
+			load_select('lesson');
+			load_select('teacher');
+			load_select('room');
+			load_datetimepicker();
 			$("#btn-tambah-form").click(function() {
 				var jumlah = parseInt($("#jumlah-form").val());
 				var nextform = jumlah + 1;
@@ -252,60 +261,167 @@
 					'</div>' +
 					'<div class="form-group">' +
 					'<label for="kelas">Pilih Kelas</label>' +
-					'<select class="form-control custom-select select-class <?= (form_error('kelas[]')) ? 'is-invalid' : '' ?>" id="select-class" name="kelas[]" title="Pilih Kelas"> ' +
+					'<select class="form-control select-class <?= (form_error('kelas[]')) ? 'is-invalid' : '' ?>" id="select-class-' + nextform + '" name="kelas[]" title="Pilih Kelas"> ' +
 					'</select>' +
 					'<div class="invalid-feedback" id="kelasFeedback"><?= form_error('kelas[]') ?></div>' +
 					'</div>' +
 					'<div class="form-group>"' +
 					'<label for="hari">Hari</label>' +
-					'<select class="form-control custom-select select-day <?= (form_error('hari[]')) ? 'is-invalid' : '' ?>" id="select-day" name="hari[]" title="Pilih Hari">' +
+					'<select class="form-control select-day <?= (form_error('hari[]')) ? 'is-invalid' : '' ?>" id="select-day-' + nextform + '" name="hari[]" title="Pilih Hari">' +
 					'</select>' +
 					'<div class="invalid-feedback" id="hariFeedback"><?= form_error('hari[]') ?></div>' +
 					'</div>' +
 					'<div class="form-group">' +
 					'<label for="mapel">Mata Pelajaran</label>' +
-					'<select class="form-control custom-select select-lesson <?= (form_error('mapel[]')) ? 'is-invalid' : '' ?>" id="select-lesson" name="mapel[]" title="Pilih Mata Pelajaran">' +
+					'<select class="form-control select-lesson <?= (form_error('mapel[]')) ? 'is-invalid' : '' ?>" id="select-lesson-' + nextform + '" name="mapel[]" title="Pilih Mata Pelajaran">' +
 					'</select>' +
 					'<div class="invalid-feedback" id="mapelFeedback"><?= form_error('mapel[]') ?></div>' +
 					'</div>' +
 					'<div class="form-group">' +
 					'<label for="guru">Guru Pengajar</label>' +
-					'<select class="form-control custom-select select-teacher <?= (form_error('guru[]')) ? 'is-invalid' : '' ?>" id="select-teacher" name="guru[]" title="Pilih Kode Guru">' +
+					'<select class="form-control select-teacher <?= (form_error('guru[]')) ? 'is-invalid' : '' ?>" id="select-teacher-' + nextform + '" name="guru[]" title="Pilih Kode Guru">' +
 					'</select>' +
 					'<div class="invalid-feedback" id="guruFeedback"><?= form_error('guru[]') ?></div>' +
 					'</div>' +
 					'<div class="form-row">' +
 					'<div class="form-group col-md-6">' +
 					'<label for="jam_mulai">Jam Masuk</label>' +
-					'<input type="text" class="form-control jam_mulai <?= (form_error('jam_mulai[]')) ? 'is-invalid' : '' ?>" id="jam_mulai" name="jam_mulai[]">' +
+					'<input type="text" class="form-control jam_mulai <?= (form_error('jam_mulai[]')) ? 'is-invalid' : '' ?>" id="jam_mulai-' + nextform + '" name="jam_mulai[]">' +
 					'<div class="invalid-feedback" id="jam_mulaiFeedback"><?= form_error('jam_mulai[]') ?></div>' +
 					'</div>' +
 					'<div class="form-group col-md-6">' +
 					'<label for="jam_selesai">Jam Selesai</label>' +
-					'<input type="text" class="form-control jam_selesai <?= (form_error('jam_selesai[]')) ? 'is-invalid' : '' ?>" id="jam_selesai" name="jam_selesai[]">' +
+					'<input type="text" class="form-control jam_selesai <?= (form_error('jam_selesai[]')) ? 'is-invalid' : '' ?>" id="jam_selesai-' + nextform + '" name="jam_selesai[]">' +
 					'<div class="invalid-feedback" id="jam_selesaiFeedback"><?= form_error('jam_selesai[]') ?></div>' +
 					'</div>' +
 					'</div>' +
 					'<div class="form-group">' +
 					'<label for="ruangan">Ruangan</label>' +
-					'<select class="form-control custom-select select-room <?= (form_error('ruangan[]')) ? 'is-invalid' : '' ?>" id="select-room" name="ruangan[]" title="Pilih Ruangan">' +
+					'<select class="form-control select-room <?= (form_error('ruangan[]')) ? 'is-invalid' : '' ?>" id="select-room-' + nextform + '" name="ruangan[]" title="Pilih Ruangan">' +
 					'</select>' +
 					'<div class="invalid-feedback" id="jam_selesaiFeedback"><?= form_error('ruangan[]') ?></div>' +
 					'</div>' +
 					'<div class="form-group">' +
 					'<label for="jumlah_jam">Jumlah Jam</label>' +
-					'<input type="text" class="form-control <?= (form_error('jumlah_jam[]')) ? 'is-invalid' : '' ?>" id="jumlah_jam" name="jumlah_jam[]">' +
+					'<input type="text" class="form-control <?= (form_error('jumlah_jam[]')) ? 'is-invalid' : '' ?>" id="jumlah_jam-' + nextform + '" name="jumlah_jam[]">' +
 					'<div class="invalid-feedback" id="jam_selesaiFeedback"><?= form_error('jumlah_jam[]') ?></div>' +
 					'</div>' +
 					'</div>' +
 					'</div>'
 				);
 				$('#jumlah-form').val(nextform);
-				load_select_data('class', nextform);
-				load_select_data('days', nextform);
-				load_select_data('lesson', nextform);
-				load_select_data('teacher', nextform);
-				load_select_data('room', nextform);
+
+				// select kelas
+				$("#select-class-" + nextform).select2({
+					placeholder: 'Pilih Kelas',
+					ajax: {
+						dataType: 'json',
+						url: '<?= base_url('master/jadwal/get_data?type=class') ?>',
+						delay: 800,
+						data: function(params) {
+							return {
+								search: params.term,
+							}
+						},
+						processResults: function(response) {
+							return {
+								results: response
+							};
+						},
+						cache: true
+					},
+				});
+				// select hari
+				$("#select-day-" + nextform).select2({
+					placeholder: 'Pilih Hari',
+					ajax: {
+						dataType: 'json',
+						url: '<?= base_url('master/jadwal/get_data?type=days') ?>',
+						delay: 800,
+						data: function(params) {
+							return {
+								search: params.term,
+							}
+						},
+						processResults: function(response) {
+							return {
+								results: response
+							};
+						},
+						cache: true
+					},
+				});
+				// select mata pelajaran
+				$("#select-lesson-" + nextform).select2({
+					placeholder: 'Pilih Mata Pelajaran',
+					ajax: {
+						dataType: 'json',
+						url: '<?= base_url('master/jadwal/get_data?type=lesson') ?>',
+						delay: 800,
+						data: function(params) {
+							return {
+								search: params.term,
+							}
+						},
+						processResults: function(response) {
+							return {
+								results: response
+							};
+						},
+						cache: true
+					},
+				});
+				// select guru pengajar
+				$("#select-teacher-" + nextform).select2({
+					placeholder: 'Pilih Kode Guru',
+					ajax: {
+						dataType: 'json',
+						url: '<?= base_url('master/jadwal/get_data?type=teacher') ?>',
+						delay: 800,
+						data: function(params) {
+							return {
+								search: params.term,
+							}
+						},
+						processResults: function(response) {
+							return {
+								results: response
+							};
+						},
+						cache: true
+					},
+				});
+				// select ruangan
+				$("#select-room-" + nextform).select2({
+					placeholder: 'Pilih Ruangan',
+					ajax: {
+						dataType: 'json',
+						url: '<?= base_url('master/jadwal/get_data?type=room') ?>',
+						delay: 800,
+						data: function(params) {
+							return {
+								search: params.term,
+							}
+						},
+						processResults: function(response) {
+							return {
+								results: response
+							};
+						},
+						cache: true
+					},
+				});
+
+				jQuery.datetimepicker.setLocale('id')
+				$('#jam_mulai-' + nextform + ', #jam_selesai-' + nextform).datetimepicker({
+					timepicker: true,
+					datepicker: false,
+					format: 'H:i',
+					value: '00:00',
+					hours12: false,
+					step: 5,
+					lang: 'id',
+				});
 			});
 
 			$("#btn-reset-form").click(function() {

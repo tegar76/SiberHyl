@@ -99,8 +99,12 @@ class Login extends CI_Controller
 	public function logout()
 	{
 		$this->auth->deleteToken($this->session->userdata('backToken'));
-		$this->session->unset_userdata('backToken');
-		$this->message('Logout berhasil!', 'Silahkan login kembali untuk melanjutkan :)', 'success');
-		redirect('authadmin');
+		$this->session->sess_destroy();
+		$reponse = [
+			'csrfName' => $this->security->get_csrf_token_name(),
+			'csrfHash' => $this->security->get_csrf_hash(),
+			'success' => true
+		];
+		echo json_encode($reponse);
 	}
 }
