@@ -107,13 +107,6 @@ class Materi extends CI_Controller
 		}
 	}
 
-	public function editMateri()
-	{
-		$data['title'] = 'Edit Materi';
-		$data['content'] = 'admin/contents/jadwal/v_edit_materi';
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
-	}
-
 	public function processMateri($infoMateriID)
 	{
 		$this->db->trans_start();
@@ -180,5 +173,225 @@ class Materi extends CI_Controller
 				$this->db->insert('materi_kbm', $dataVideo);
 			}
 		}
+	}
+
+	public function editMateri($idMateri)
+	{
+		$data['title'] = 'Edit Materi';
+		$data['content'] = 'admin/contents/jadwal/v_edit_materi';
+		$data['materi'] = $this->master->getDetailMateri($idMateri);
+		$this->form_validation->set_rules([
+			[
+				'field' => 'index_kelas_edit',
+				'label' => 'Kelas',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'required' => '{field} harus diisi'
+				]
+			],
+			[
+				'field' => 'jurusan_edit',
+				'label' => 'Jurusan',
+				'rules' => 'trim|xss_clean',
+				'errors' => []
+			],
+			[
+				'field' => 'mapel_edit',
+				'label' => 'Mata Pelajaran',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'required' => '{field} harus diisi'
+				]
+			],
+			[
+				'field' => 'judul_materi_edit[]',
+				'label' => 'Judul Materi Pembelajaran',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'required' => '{field} harus diisi'
+				]
+			],
+			[
+				'field' => 'judul_video_edit[]',
+				'label' => 'Judul Video',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'required' => '{field} harus diisi'
+				]
+			],
+			[
+				'field' => 'link_video_edit[]',
+				'label' => 'Link Video Pembelajaran',
+				'rules' => 'trim|xss_clean',
+				'errors' => []
+			]
+		]);
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+		}
+	}
+
+	public function hapusAllMateri()
+	{
+		$materiInfoID = $this->input->post('materi_info_id', true);
+		$materi = $this->master->getDetailMateri($materiInfoID);
+		$dirKelas = 'kelas-' . $materi->index_kelas;
+		$pathMateri = './storage/materi/';
+		if ($materi->jurusan_id == 0) {
+			$pathMateri = './storage/materi/' . $dirKelas . '/';
+		} else {
+			$pathMateri = './storage/materi/' . $dirKelas . '/' . $materi->kode_jurusan . '/';
+		}
+
+		// hapus file materi pembelajaran
+		$materiKBM = $this->master->getMateriKBM($materi->materi_info_id, 'file');
+		if (!empty($materiKBM)) {
+			foreach ($materiKBM as $row) {
+				@unlink(FCPATH . $pathMateri . $row->materi);
+				$this->db->where_in('materi_id', $row->materi_id);
+				$this->db->delete('materi_kbm');
+			}
+		}
+
+		// hapus video pembelajaran
+		$materiVideo = $this->master->getMateriKBM($materi->materi_info_id, 'link');
+		if (!empty($materiVideo)) {
+			foreach ($materiVideo as $row) {
+				$this->db->where_in('materi_id', $row->materi_id);
+				$this->db->delete('materi_kbm');
+			}
+		}
+		$this->db->where('materi_info_id', $materi->materi_info_id);
+		$this->db->delete('materi_info');
+
+		$reponse = [
+			'csrfName' => $this->security->get_csrf_token_name(),
+			'csrfHash' => $this->security->get_csrf_hash(),
+			'message' => 'Anda telah menghapus materi pembelajaran',
+			'success' => true
+		];
+		echo json_encode($reponse);
+	}
+
+	public function deleteMateri()
+	{
+		$materiID 		= $this->input->post('materi_id');
+		$materiInfoID	= $this->input->post('materi_info_id', true);
+		$materi		= $this->master->getDetailMateri($materiInfoID);
+		$dirKelas	= 'kelas-' . $materi->index_kelas;
+		$pathMateri	= './storage/materi/';
+		if ($materi->jurusan_id == 0) {
+			$pathMateri = './storage/materi/' . $dirKelas . '/';
+		} else {
+			$pathMateri = './storage/materi/' . $dirKelas . '/' . $materi->kode_jurusan . '/';
+		}
+
+		$fileMateri = $this->db->get_where('materi_kbm', ['materi_id' => $materiID])->row();
+		if (!empty($fileMateri)) {
+			@unlink(FCPATH . $pathMateri . $fileMateri->materi);
+			$this->db->where_in('materi_id', $fileMateri->materi_id);
+			$this->db->delete('materi_kbm');
+			$reponse = [
+				'csrfName' => $this->security->get_csrf_token_name(),
+				'csrfHash' => $this->security->get_csrf_hash(),
+				'message' => 'Anda telah menghapus materi pembelajaran',
+				'success' => true
+			];
+		} else {
+			$reponse = [
+				'csrfName' => $this->security->get_csrf_token_name(),
+				'csrfHash' => $this->security->get_csrf_hash(),
+				'message' => 'Gagal menghapus materi pembelajaran',
+				'success' => false
+			];
+		}
+		echo json_encode($reponse);
+	}
+
+	public function deleteVideoMateri()
+	{
+		$materiID	= $this->input->post('materi_id');
+		$fileMateri = $this->db->get_where('materi_kbm', ['materi_id' => $materiID])->row();
+		if (!empty($fileMateri)) {
+			$this->db->where_in('materi_id', $fileMateri->materi_id);
+			$this->db->delete('materi_kbm');
+			$reponse = [
+				'csrfName' => $this->security->get_csrf_token_name(),
+				'csrfHash' => $this->security->get_csrf_hash(),
+				'message' => 'Anda telah menghapus materi pembelajaran',
+				'success' => true
+			];
+		} else {
+			$reponse = [
+				'csrfName' => $this->security->get_csrf_token_name(),
+				'csrfHash' => $this->security->get_csrf_hash(),
+				'message' => 'Gagal menghapus materi pembelajaran',
+				'success' => false
+			];
+		}
+		echo json_encode($reponse);
+	}
+
+	public function updateFileMateri()
+	{
+		$materiID = $this->input->post('materi_id', true);
+		$materi = $this->master->getFileMateri(39);
+		$dirKelas	= 'kelas-' . $materi->index_kelas;
+		$pathMateri = './storage/materi/';
+		if ($materi->kode_jurusan == null) {
+			$pathMateri = './storage/materi/' . $dirKelas . '/';
+		} else {
+			$pathMateri = './storage/materi/' . $dirKelas . '/' . $materi->kode_jurusan . '/';
+		}
+
+		$updateMateri = $_FILES['file_materi']['name'];
+		if ($updateMateri) {
+			$config['allowed_types'] = 'pdf';
+			$config['max_size']	= '2048';
+			$config['encrypt_name'] = true;
+			$config['upload_path'] = $pathMateri;
+			// 
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+			// 
+			$_FILES['file']['name']		= $_FILES['file_materi']['name'];
+			$_FILES['file']['type'] 	= $_FILES['file_materi']['type'];
+			$_FILES['file']['tmp_name'] = $_FILES['file_materi']['tmp_name'];
+			$_FILES['file']['error'] 	= $_FILES['file_materi']['error'];
+			$_FILES['file']['size'] 	= $_FILES['file_materi']['size'];
+			if ($this->upload->do_upload('file')) {
+				$materiLama = $materi->materi;
+				$materiBaru = $this->upload->data();
+				if ($materiLama != 'default.pdf') {
+					@unlink(FCPATH . $pathMateri . $materiLama);
+				}
+				$updateMata = [
+					'materi' => $materiBaru['file_name'],
+					'tipe_file' => $materiBaru['file_ext'],
+					'ukuran_file' => $materiBaru['file_size'],
+				];
+				$this->db->set($updateMata);
+			}
+		}
+		$this->db->set('judul', $this->input->post('judul_edit', true));
+		$this->db->where('materi_id', $this->input->post('materi_id', true));
+		$this->db->update('materi_kbm');
+	}
+
+	public function updateVideoMateri()
+	{
+		$materiID = $this->input->post('materi_id', true);
+		$judul_video = $this->input->post('judul_video', true);
+		$url_video = $this->input->post('link_video', true);
+		if ($url_video) {
+			$youtube = preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $url_video, $url_match);
+			$embed_url = 'https://www.youtube.com/embed/' . $url_match[1];
+			$this->db->set('materi', $embed_url);
+		}
+		$this->db->set('judul', $judul_video);
+		$this->db->where('materi_id', $materiID);
+		$this->db->update('materi_kbm');
 	}
 }

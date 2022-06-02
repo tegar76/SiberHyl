@@ -81,10 +81,7 @@
 												<div class="jadwal mt-2">
 													<div class="mapel">
 														<div class="card shadow-sm p-2">
-															<div class="d-flex justify-content-lg-start">
-															</div>
-															<div class="ket-mapel mt-3">
-															</div>
+
 														</div>
 													</div>
 												</div>
@@ -93,9 +90,6 @@
 									<?php endforeach; ?>
 								</div>
 							<?php else : ?>
-								<div class="title-pratinjau mb-4 mt-3">
-									<h6>Dibuat : 01 - 05 - 2022 08 : 00 WIB, Diupdate : - </h6>
-								</div>
 								<div class="row">
 									<!-- Jadwal Harian Looping Disini -->
 									<?php foreach ($days as $day) : ?>
@@ -120,7 +114,7 @@
 														<div class="mapel">
 															<div class="card shadow-sm p-2">
 																<div class="d-flex justify-content-lg-start">
-																	<img role="button" src="<?= ($study->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/perfil.png') : base_url('storage/guru/profile/' . $study->guru_foto) ?>" alt="" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="<?= $study->guru_nama ?>">
+																	<img role="button" src="<?= ($study->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $study->guru_foto) ?>" alt="" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="<?= $study->guru_nama ?>">
 																	<div class="mapel w-100">
 																		<center>
 																			<p><?= $study->nama_mapel ?></p>
@@ -160,12 +154,3 @@
 	<!-- End Top Leader Table -->
 	<!-- *************************************************************** -->
 </div>
-
-<script>
-	$(document).ready(function() {
-		$('#id_kelas').change(function() {
-			var kelas = $('#id_kelas').val();
-			window.location = "<?= base_url('master/jadwal/pratinjauJadwal') ?>/" + kelas;
-		});
-	});
-</script>

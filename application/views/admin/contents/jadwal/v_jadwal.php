@@ -1,7 +1,7 @@
 <!-- Data Tables -->
 <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/admin/js/data-table/mainnnn.js') ?>"></script>
+<script src="<?= base_url('assets/admin/js/data-table/main.js') ?>"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/admin/css/data-table-custom/stylessss.css') ?>">
 <!-- End Data Tables -->
@@ -100,70 +100,3 @@
 		<!-- End Top Leader Table -->
 		<!-- *************************************************************** -->
 	</div>
-
-	<script>
-		$(document).ready(function() {
-			$('[data-toggle="tooltip"]').tooltip();
-
-			var csrfName = $(".csrf_token").attr('name');
-			var csrfHash = $(".csrf_token").val();
-			$("#data_jadwal").on('click', '.delete-schedule', function(e) {
-				e.preventDefault();
-				var kodeJadwal = $(e.currentTarget).attr('kode-jadwal');
-				var dataJson = {
-					[csrfName]: csrfHash,
-					kodeJadwal: kodeJadwal
-				}
-				console.log(dataJson);
-				Swal.fire({
-					title: 'Hapus Jadwal Pelajaran',
-					text: "Anda yakin ingin menghapus jadwal pelajaran ini!",
-					icon: 'warning',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Ya, Hapus!'
-				}).then((result) => {
-					if (result.value) {
-						$.ajax({
-							type: "POST",
-							url: '<?= base_url('master/jadwal/hapusJadwal'); ?>',
-							data: dataJson,
-							beforeSend: function() {
-								swal.fire({
-									imageUrl: "<?= base_url('assets/logo/rolling.png'); ?>",
-									title: "Menghapus Jadwal Pelajaran",
-									text: "Silahkan Tunggu",
-									showConfirmButton: false,
-									allowOutsideClick: false
-								});
-							},
-							success: function(data) {
-								if (data.success == false) {
-									swal.fire({
-										icon: 'error',
-										title: 'Menghapus Jadwal Pelajaran Gagal',
-										text: data.message,
-										showConfirmButton: false,
-										timer: 1500
-									});
-								} else {
-									swal.fire({
-										icon: 'success',
-										title: 'Menghapus Jadwal Pelajaran Berhasil',
-										text: data.message,
-										showConfirmButton: false,
-										timer: 1500
-									});
-									window.location = "<?= base_url('master/jadwal') ?>";
-								}
-							},
-							error: function() {
-								swal.fire("Penghapusan Pesan Aduan Gagal", "Ada Kesalahan Saat menghapus jadwal!", "error");
-							}
-						});
-					}
-				});
-			});
-		});
-	</script>

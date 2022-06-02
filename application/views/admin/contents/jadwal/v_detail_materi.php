@@ -14,7 +14,7 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Setting Jadwal</li>
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Admin/Jadwal') ?>" class="text-muted">Jadwal</a></li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi') ?>" class="text-muted">Jadwal</a></li>
 					<li class="breadcrumb-item text-muted active" aria-current="page">Detail Jadwal</li>
 				</ol>
 			</nav>

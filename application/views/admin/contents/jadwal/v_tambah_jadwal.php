@@ -94,7 +94,6 @@
 								<label for="ruangan">Ruangan</label>
 								<select class="form-control select-room <?= (form_error('ruangan[]')) ? 'is-invalid' : '' ?>" id="select-room" name="ruangan[]" title="Pilih Ruangan">
 									<option value="">Pilih Ruangan</option>
-
 								</select>
 								<div class="invalid-feedback" id="jam_selesaiFeedback"><?= form_error('ruangan[]') ?></div>
 							</div>
@@ -232,6 +231,18 @@
 			}
 		}
 
+		function load_datetimepicker() {
+			jQuery.datetimepicker.setLocale('id')
+			$('.jam_mulai, .jam_selesai').datetimepicker({
+				timepicker: true,
+				datepicker: false,
+				format: 'H:i',
+				value: '00:00',
+				hours12: false,
+				step: 5,
+				lang: 'id',
+			});
+		}
 
 		$(document).ready(function() {
 			load_select('class');
@@ -239,6 +250,7 @@
 			load_select('lesson');
 			load_select('teacher');
 			load_select('room');
+			load_datetimepicker();
 			$("#btn-tambah-form").click(function() {
 				var jumlah = parseInt($("#jumlah-form").val());
 				var nextform = jumlah + 1;
@@ -398,6 +410,17 @@
 						},
 						cache: true
 					},
+				});
+
+				jQuery.datetimepicker.setLocale('id')
+				$('#jam_mulai-' + nextform + ', #jam_selesai-' + nextform).datetimepicker({
+					timepicker: true,
+					datepicker: false,
+					format: 'H:i',
+					value: '00:00',
+					hours12: false,
+					step: 5,
+					lang: 'id',
 				});
 			});
 

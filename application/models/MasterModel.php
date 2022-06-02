@@ -163,4 +163,25 @@ class MasterModel extends CI_Model
 		$result = $query->result();
 		return $result;
 	}
+
+	public function getMateriKBM($materiID, $jenis)
+	{
+		$query	= $this->db->get_where('materi_kbm', [
+			'materi_info_id' => $materiID,
+			'jenis' => $jenis
+		]);
+		$result = $query->result();
+		return $result;
+	}
+
+	public function getFileMateri($materiID)
+	{
+		$query	= $this->db->select("*")
+			->from('materi_kbm')
+			->join('materi_info', 'materi_info.materi_info_id=materi_kbm.materi_info_id', 'left')
+			->join('jurusan', 'jurusan.jurusan_id=materi_info.jurusan_id', 'left')
+			->where('materi_id', $materiID)
+			->get();
+		return $query->row();
+	}
 }

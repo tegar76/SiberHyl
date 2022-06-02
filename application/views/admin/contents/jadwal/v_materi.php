@@ -1,7 +1,7 @@
 <!-- Data Tables -->
 <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/admin/js/data-table/mainnnn.js') ?>"></script>
+<script src="<?= base_url('assets/admin/js/data-table/main.js') ?>"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/admin/css/data-table-custom/stylessss.css') ?>">
 <!-- End Data Tables -->
@@ -43,7 +43,7 @@
 					<div class="card-body">
 						<h6 class="card-title">Data Materi Semester Gasal Tahun Pelajaran 2021/2022 </h6>
 						<div class="mt-4 activity">
-							<table id="data_jadwal" class="table-responsive table-striped table-bordered" style="width:100%">
+							<table id="data_materi" class="table-responsive table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
 								<thead>
 									<tr>
@@ -51,8 +51,8 @@
 										<th style="width:10%;">Kelas</th>
 										<th style="width:15%;">Jurusan</th>
 										<th style="width:25%;">Mapel</th>
-										<th style="width:20%;">Dibuat</th>
-										<th style="width:10%;">Aksi</th>
+										<th style="width:18%;">Dibuat</th>
+										<th style="width:14%;">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -67,7 +67,8 @@
 											<td>
 												<a href="<?= base_url('master/materi/detailMateri/' . $value->materi_info_id) ?>" class="btn btn-sm btn-primary mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 												<a href="<?= base_url('master/materi/editMateri') ?>" class="btn btn-sm btn-success mr-1"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-												<a href="" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can text-white" data-toggle="tooltip" data-placement="top" title="Hapus"></i></a>
+												<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
+												<a href="" class="btn btn-sm btn-danger delete-materi" materi-id="<?= $value->materi_info_id ?>"><i class="fa-solid fa-trash-can text-white" data-toggle="tooltip" data-placement="top" title="Hapus"></i></a>
 											</td>
 										</tr>
 									<?php endforeach ?>
