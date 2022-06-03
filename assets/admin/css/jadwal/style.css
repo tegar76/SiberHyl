@@ -230,7 +230,7 @@ background-color: #8bbcce;
 
 .card-pdf {
   width: 150px;
-  height: fit-content;
+  height: 250px;
   border: solid 1px;
   border-color: rgb(217, 231, 235);
   font-size: 14px;
@@ -260,8 +260,8 @@ background-color: #8bbcce;
 /* card pdf end */
 
 .card-video {
-  width: 233px;
-  height: fit-content;
+  width: 230px;
+  height: 325px;
   border: solid 1px;
   border-color: rgb(217, 231, 235);
   font-size: 14px;
@@ -280,7 +280,7 @@ background-color: #8bbcce;
 }
 
 .card-video iframe {
-  width: 200px;
+  width: 215px;
   margin-top: 10px;
 }
 

@@ -1,7 +1,7 @@
 <!-- Font awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/stylesss.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/style.css') ?>">
 
 <section class="container section section__height mt-n3" id="about">
 	<div class="edit-profile">
@@ -50,13 +50,6 @@
 			</div>
 		</div>
 	</div>
-
-	<footer>
-		<center>
-			<p>&copy; 2022 Team Paradoks Technology</p>
-		</center>
-	</footer>
-</section>
 
 <script>
 	// Show Toggle Password Lama

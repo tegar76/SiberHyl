@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/jadwal/styless.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/siswa/css/jadwal/style.css') ?>">
 
 <!-- Jquery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
@@ -9,7 +9,7 @@
 </section> -->
 
 <!--=============== SKILLS ===============-->
-<section class="container section section__height id=" skills">
+<section class="container section section__height">
 
 	<div class="search-box d-flex justify-content-end">
 		<input type="text" class="search-click" name="" placeholder="&#xf002 Cari ..." style="font-family: FontAwesome;" />
@@ -62,7 +62,7 @@
 								<div class="card px-3 pt-3">
 									<div class="row">
 										<div class="section-menu col">
-											<a href="">
+											<a href="<?= base_url('Siswa/Materi')?>">
 												<div class="menu">
 													<div class="card  py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/materi-pem.png') ?>" alt="">
@@ -112,8 +112,8 @@
 		<?php else : ?>
 			<div class="row">
 				<div class="col-md-4 mb-3">
-					<div class="alert alert-primary" role="alert">
-						Tidak ada pembelajaran yang sedang berlansung
+					<div class="alert-pembelajaran alert border-blue-black" role="alert">
+						Tidak ada pembelajaran yang sedang berlangsung !!
 					</div>
 				</div>
 			</div>
@@ -194,7 +194,7 @@
 									<div class="card px-3 pt-3">
 										<div class="row">
 											<div class="section-menu col">
-												<a href="">
+												<a href="<?= base_url('Siswa/Materi')?>">
 													<div class="menu">
 														<div class="card  py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/materi-pem.png') ?>" alt="">
@@ -244,14 +244,6 @@
 			<?php endforeach ?>
 		</div>
 	</div>
-
-	<footer>
-		<center>
-			<p>&copy; 2022 Team Paradoks Technology</p>
-		</center>
-	</footer>
-
-</section>
 
 <!--=============== PORTFOLIO ===============-->
 <!-- <section class="container section section__height" id="portfolio">

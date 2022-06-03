@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/stylesss.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/style.css') ?>">
 
 <section class="container section section__height mt-n3" id="about">
 	<div class="profile">
@@ -78,10 +78,3 @@
 			</div>
 		</div>
 	</div>
-
-	<footer>
-		<center>
-			<p>&copy; 2022 Team Paradoks Technology</p>
-		</center>
-	</footer>
-</section>

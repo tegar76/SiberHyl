@@ -1,3 +1,9 @@
+<footer>
+		<p>&copy; 2022 Team Paradoks Technology</p>
+</footer>
+
+</section>
+
 </main>
 <!--=============== MAIN JS ===============-->
 <script src="<?= base_url('assets/') ?>siswa/js/main.js"></script>

@@ -128,24 +128,33 @@
 }
 
 .menu .card:hover {
-  background-color: #8bbcce;
+  background-color: #c7ddfa;
+}
+
+.border-blue-black {
+  border: solid 1px#e9f7fa;
+}
+
+.alert-pembelajaran {
+  font-size: 13px;
+  color: #6b6b6b;
 }
 
   @media screen and (max-width: 767px) {
     .search-box {
-        margin-top: -40px;
+        margin-top: -20px;
     }
   }
 
   @media screen and (max-width: 320px) {
     .search-box {
-        margin-top: -40px;
+        margin-top: -20px;
     }
   }
 
   @media screen and (min-width: 576px) {
     .search-box {
-        margin-top: -40px;
+        margin-top: -20px;
     }
   }
 

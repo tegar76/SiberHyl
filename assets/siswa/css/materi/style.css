@@ -1,0 +1,120 @@
+.nav-pills .nav-item a {
+    color: #6b6b6b;
+}
+
+.nav-pills .nav-item a[aria-selected="true"]{
+    background-color: #ffffff;
+    color: #2989A8;
+    border-bottom: 2px solid #58b3d1;
+    border-start-start-radius: 0px;
+    display: inline-block;
+    line-height: 1;
+    text-shadow:
+    2px 2px white,
+    2px 2px white,
+    2px 2px white,
+    2px 2px white;
+  }
+
+  .section__height a {
+    text-decoration: none;
+}
+    
+  /* materi pdf */
+    .card-pdf {
+      width: 150px;
+      height: 220px;
+      border: solid 1px;
+      border-color: rgb(217, 231, 235);
+    }
+    
+    .card-pdf:hover {
+      background-color: #f3fcff;
+    }
+    
+    .card-pdf h6 {
+      color: #6b6b6b;
+      font-weight: 300;
+      line-height: 25px;
+      font-size: 13px;
+    }
+    
+    .card-pdf img {
+      width: 40px;
+      margin-top: 10px;
+    }
+
+    /* video */
+    .card-video {
+        width: 250px;
+        height: 250px;
+        border: solid 1px;
+        border-color: rgb(217, 231, 235);
+      }
+      
+      .card-video:hover {
+        background-color: #f3fcff;
+      }
+      
+      .card-video h6 {
+        color: #6b6b6b;
+        font-weight: 300;
+        line-height: 25px;
+        font-size: 13px;
+      }
+      
+      .card-video iframe {
+        width: 220px;
+        height: 120px;
+        margin-top: 10px;
+      }
+
+    footer {
+        text-align: center;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    @media screen and (max-width: 767px) {
+        .card-pdf {
+            width: 120px;
+             height: 200px;
+        }
+        .card-pdf h6 {
+            font-size: 12px;
+        }
+        .card-pdf img {
+            width: 20px;
+        }
+
+        footer {
+            opacity: 0;
+        }
+    }
+
+    @media screen and (max-width: 320px) {
+        .card-pdf {
+            width: 120px;
+             height: 200px;
+        }
+        .card-pdf h6 {
+            font-size: 12px;
+        }
+        .card-pdf img {
+            width: 20px;
+        }
+
+        footer {
+            opacity: 0;
+        }
+    }
+
+    @media screen and (min-width: 767px) {
+
+    }
+
+    @media screen and (min-width: 1024px) {
+
+    }
+    

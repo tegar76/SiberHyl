@@ -338,4 +338,49 @@ class Jadwal extends CI_Controller
 		$data['content'] = 'admin/contents/jadwal/v_pratinjau_jadwal';
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
+
+	public function tambahMateri()
+	{
+		$data = [
+			'title' => 'Tambah Materi',
+			'content' => 'admin/contents/jadwal/v_tambah_materi'
+		];
+
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function editMateri()
+	{
+		$data = [
+			'title' => 'Edit Materi',
+			'content' => 'admin/contents/jadwal/v_edit_materi'
+		];
+
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function materiPdf()
+	{
+		$this->load->view('admin/contents/jadwal/materi_pdf/v_materi_pdf');
+	}
+
+	public function editMateriPdf()
+	{
+		$data = [
+			'title' => 'Edit Materi Pembelajaran',
+			'content' => 'admin/contents/jadwal/materi_pdf/v_edit_materi_pdf'
+		];
+
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function editMateriVideo()
+	{
+		$data = [
+			'title' => 'Edit Video Pembelajaran',
+			'content' => 'admin/contents/jadwal/v_edit_materi_video'
+		];
+
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
 }
