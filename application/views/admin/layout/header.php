@@ -53,7 +53,7 @@
 	<link rel="stylesheet" href="<?= base_url('assets/plugin/datetimepicker/jquery.datetimepicker.min.css') ?>">
 	<script src="<?= base_url('assets/plugin/datetimepicker/jquery.datetimepicker.full.js') ?>"></script>
 
-	<script src="<?= base_url('assets/admin/js/my_script.js') ?>"></script>
+	<script src="<?= base_url('assets/admin/js/my-script.js') ?>"></script>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>

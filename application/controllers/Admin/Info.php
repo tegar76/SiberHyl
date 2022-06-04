@@ -7,6 +7,7 @@ class Info extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('JadwalModel', 'jadwal', true);
+		checkAdminLogin();
 	}
 
 	public function infoAkademik()
@@ -72,5 +73,3 @@ class Info extends CI_Controller
 	
 	
 }
-
-?>

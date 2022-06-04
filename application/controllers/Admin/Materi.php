@@ -6,6 +6,7 @@ class Materi extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('MasterModel', 'master', true);
+		checkAdminLogin();
 	}
 
 	public function message($title = NULL, $text = NULL, $type = NULL)
@@ -29,6 +30,7 @@ class Materi extends CI_Controller
 
 	public function detailMateri($idMateri)
 	{
+		$idMateri = $this->secure->decrypt_url($idMateri);
 		$data['title'] = 'Detail Materi';
 		$data['content'] = 'admin/contents/jadwal/v_detail_materi';
 		$data['detailMateri'] = $this->master->getDetailMateri($idMateri);
@@ -177,65 +179,51 @@ class Materi extends CI_Controller
 
 	public function editMateri($idMateri)
 	{
+		$idMateri = $this->secure->decrypt_url($idMateri);
 		$data['title'] = 'Edit Materi';
 		$data['content'] = 'admin/contents/jadwal/v_edit_materi';
 		$data['materi'] = $this->master->getDetailMateri($idMateri);
+		$data['bahanMateri'] = $this->db->get_where('materi_kbm', ['materi_info_id' => $idMateri, 'jenis' => 'file'])->result();
+		$data['videoMateri'] = $this->db->get_where('materi_kbm', ['materi_info_id' => $idMateri, 'jenis' => 'link'])->result();
+
 		$this->form_validation->set_rules([
 			[
-				'field' => 'index_kelas_edit',
-				'label' => 'Kelas',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi'
-				]
-			],
-			[
-				'field' => 'jurusan_edit',
-				'label' => 'Jurusan',
-				'rules' => 'trim|xss_clean',
-				'errors' => []
-			],
-			[
-				'field' => 'mapel_edit',
-				'label' => 'Mata Pelajaran',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi'
-				]
-			],
-			[
-				'field' => 'judul_materi_edit[]',
+				'field' => 'judul_materi[]',
 				'label' => 'Judul Materi Pembelajaran',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi'
-				]
-			],
-			[
-				'field' => 'judul_video_edit[]',
-				'label' => 'Judul Video',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi'
-				]
-			],
-			[
-				'field' => 'link_video_edit[]',
-				'label' => 'Link Video Pembelajaran',
 				'rules' => 'trim|xss_clean',
 				'errors' => []
+			],
+			[
+				'field' => 'judul_video[]',
+				'label' => 'Judul Video',
+				'rules' => 'trim|xss_clean',
+				'errors' => []
+			],
+			[
+				'field' => 'link_video[]',
+				'label' => 'Link Video Materi Pembelajaran',
+				'rules' => 'trim|required|xss_clean|valid_url',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'valid_url' => '{field} harus valid!'
+				]
 			]
 		]);
 
 		if ($this->form_validation->run() == false) {
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		} else {
+			$infoMateriID = $this->input->post('materi_info_id', true);
+			$this->processMateri($infoMateriID);
+			$this->processLinkVideo($infoMateriID);
+			$this->message('Berhasil', 'Data Materi Berhasil Diupdate', 'success');
+			return redirect('master/materi/editMateri/' . $this->secure->encrypt_url($infoMateriID));
 		}
 	}
 
 	public function hapusAllMateri()
 	{
-		$materiInfoID = $this->input->post('materi_info_id', true);
+		$materiInfoID	= $this->input->post('materi_info_id', true);
 		$materi = $this->master->getDetailMateri($materiInfoID);
 		$dirKelas = 'kelas-' . $materi->index_kelas;
 		$pathMateri = './storage/materi/';
@@ -277,8 +265,10 @@ class Materi extends CI_Controller
 
 	public function deleteMateri()
 	{
-		$materiID 		= $this->input->post('materi_id');
+		$materiID 		= $this->input->post('materi_id', true);
 		$materiInfoID	= $this->input->post('materi_info_id', true);
+		$materiID		= $this->secure->decrypt_url($materiID);
+		$materiInfoID	= $this->secure->decrypt_url($materiInfoID);
 		$materi		= $this->master->getDetailMateri($materiInfoID);
 		$dirKelas	= 'kelas-' . $materi->index_kelas;
 		$pathMateri	= './storage/materi/';
@@ -313,6 +303,7 @@ class Materi extends CI_Controller
 	public function deleteVideoMateri()
 	{
 		$materiID	= $this->input->post('materi_id');
+		$materiID	= $this->secure->decrypt_url($materiID);
 		$fileMateri = $this->db->get_where('materi_kbm', ['materi_id' => $materiID])->row();
 		if (!empty($fileMateri)) {
 			$this->db->where_in('materi_id', $fileMateri->materi_id);
@@ -334,10 +325,38 @@ class Materi extends CI_Controller
 		echo json_encode($reponse);
 	}
 
-	public function updateFileMateri()
+
+	public function updateFileMateri($materiID)
+	{
+		$materiID = $this->secure->decrypt_url($materiID);
+		$data['title'] = 'Edit Materi Pembelajaran';
+		$data['content'] = 'admin/contents/jadwal/materi_pdf/v_edit_materi_pdf';
+		$data['materi']	= $this->db->get_where('materi_kbm', ['materi_id' => $materiID])->row();
+		$this->form_validation->set_rules([
+			[
+				'field' => 'judul_materi_update',
+				'label' => 'Judul Materi Pembelajaran',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'required' => '{field} harus diisi'
+				]
+			],
+		]);
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$this->process_update_file();
+			$this->message('Berhasil', 'Data Materi Berhasil Diupdate', 'success');
+			$materiInfoID	= $data['materi']->materi_info_id;
+			return redirect('master/materi/editMateri/' . $this->secure->encrypt_url($materiInfoID));
+		}
+	}
+
+
+	public function process_update_file()
 	{
 		$materiID = $this->input->post('materi_id', true);
-		$materi = $this->master->getFileMateri(39);
+		$materi = $this->master->getFileMateri($materiID);
 		$dirKelas	= 'kelas-' . $materi->index_kelas;
 		$pathMateri = './storage/materi/';
 		if ($materi->kode_jurusan == null) {
@@ -346,7 +365,7 @@ class Materi extends CI_Controller
 			$pathMateri = './storage/materi/' . $dirKelas . '/' . $materi->kode_jurusan . '/';
 		}
 
-		$updateMateri = $_FILES['file_materi']['name'];
+		$updateMateri = $_FILES['file_materi_update']['name'];
 		if ($updateMateri) {
 			$config['allowed_types'] = 'pdf';
 			$config['max_size']	= '2048';
@@ -356,11 +375,11 @@ class Materi extends CI_Controller
 			$this->load->library('upload', $config);
 			$this->upload->initialize($config);
 			// 
-			$_FILES['file']['name']		= $_FILES['file_materi']['name'];
-			$_FILES['file']['type'] 	= $_FILES['file_materi']['type'];
-			$_FILES['file']['tmp_name'] = $_FILES['file_materi']['tmp_name'];
-			$_FILES['file']['error'] 	= $_FILES['file_materi']['error'];
-			$_FILES['file']['size'] 	= $_FILES['file_materi']['size'];
+			$_FILES['file']['name']		= $_FILES['file_materi_update']['name'];
+			$_FILES['file']['type'] 	= $_FILES['file_materi_update']['type'];
+			$_FILES['file']['tmp_name'] = $_FILES['file_materi_update']['tmp_name'];
+			$_FILES['file']['error'] 	= $_FILES['file_materi_update']['error'];
+			$_FILES['file']['size'] 	= $_FILES['file_materi_update']['size'];
 			if ($this->upload->do_upload('file')) {
 				$materiLama = $materi->materi;
 				$materiBaru = $this->upload->data();
@@ -375,17 +394,57 @@ class Materi extends CI_Controller
 				$this->db->set($updateMata);
 			}
 		}
-		$this->db->set('judul', $this->input->post('judul_edit', true));
+		$this->db->set('judul', $this->input->post('judul_materi_update', true));
 		$this->db->where('materi_id', $this->input->post('materi_id', true));
 		$this->db->update('materi_kbm');
 	}
 
-	public function updateVideoMateri()
+
+	public function editMateriVideo($materiID)
+	{
+		$materiID = $this->secure->decrypt_url($materiID);
+		$data['title'] = 'Edit Video Pembelajaran';
+		$data['content'] = 'admin/contents/jadwal/v_edit_materi_video';
+		$data['materi']	= $this->db->get_where('materi_kbm', ['materi_id' => $materiID])->row();
+		$this->form_validation->set_rules([
+			[
+				'field' => 'judul_video_update',
+				'label' => 'Judul Materi Pembelajaran',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'required' => '{field} harus diisi'
+				]
+			],
+			[
+				'field' => 'link_video_update',
+				'label' => 'Link Video Materi Pembelajaran',
+				'rules' => 'trim|required|xss_clean|valid_url',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'valid_url' => '{field} harus Valid!'
+				]
+			]
+		]);
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$this->process_upadte_video();
+			$this->message('Berhasil', 'Data Materi Berhasil Diupdate', 'success');
+			$materiInfoID	= $data['materi']->materi_info_id;
+			return redirect('master/materi/editMateri/' . $this->secure->encrypt_url($materiInfoID));
+		}
+	}
+
+	public function process_upadte_video()
 	{
 		$materiID = $this->input->post('materi_id', true);
-		$judul_video = $this->input->post('judul_video', true);
-		$url_video = $this->input->post('link_video', true);
-		if ($url_video) {
+		$materi = $this->db->get_where('materi_kbm', ['materi_id' => $materiID])->row();
+		$judul_video = $this->input->post('judul_video_update', true);
+		$url_video = $this->input->post('link_video_update', true);
+		if ($materi->materi == $url_video) {
+			$this->db->set('materi', $url_video);
+		} else {
 			$youtube = preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $url_video, $url_match);
 			$embed_url = 'https://www.youtube.com/embed/' . $url_match[1];
 			$this->db->set('materi', $embed_url);
@@ -393,5 +452,22 @@ class Materi extends CI_Controller
 		$this->db->set('judul', $judul_video);
 		$this->db->where('materi_id', $materiID);
 		$this->db->update('materi_kbm');
+	}
+
+	public function view_materi_pdf($materiID)
+	{
+		$materiID = $this->secure->decrypt_url($materiID);
+		$materiPDF = $this->db->get_where('materi_kbm', ['materi_id' => $materiID])->row();
+		$infoMateri = $this->master->getDetailMateri($materiPDF->materi_info_id);
+		$dirKelas	= 'kelas-' . $infoMateri->index_kelas;
+		$path_pdf = '/storage/materi/';
+		if ($infoMateri->kode_jurusan == null) {
+			$path_pdf = '/storage/materi/' . $dirKelas . '/';
+		} else {
+			$path_pdf = '/storage/materi/' . $dirKelas . '/' . $infoMateri->kode_jurusan . '/';
+		}
+		$data['materi_pdf'] = $materiPDF;
+		$data['path_pdf']	= $path_pdf;
+		$this->load->view('admin/contents/jadwal/materi_pdf/v_materi_pdf', $data);
 	}
 }

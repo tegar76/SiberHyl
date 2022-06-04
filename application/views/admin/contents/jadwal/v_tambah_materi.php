@@ -91,7 +91,7 @@
 								</div>
 								<label for="judul_materi">Judul Materi ke-1</label>
 								<div class="input-group mb-3">
-									<input type="text" name="judul_materi[]" id=judul_materi" class="form-control <?= (form_error('judul_materi[]')) ? 'is-invalid' : '' ?>" placeholder="Masukan Judul">
+									<input type="text" name="judul_materi[]" id="judul_materi" class="form-control <?= (form_error('judul_materi[]')) ? 'is-invalid' : '' ?>" placeholder="Masukan Judul">
 									<div id="judul_materiFeedback" class="invalid-feedback">
 										<?= form_error('judul_materi[]', '<div class="text-danger">', '</div>') ?>
 									</div>

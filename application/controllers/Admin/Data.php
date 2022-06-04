@@ -8,6 +8,7 @@ class Data extends CI_Controller
 		parent::__construct();
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->load->model('MasterModel', 'master', true);
+		checkAdminLogin();
 	}
 
 	public function dataKelas()

@@ -7,6 +7,7 @@ class JurnalMateri extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('JadwalModel', 'jadwal', true);
+		checkAdminLogin();
 	}
 
 	public function index()
@@ -32,5 +33,3 @@ class JurnalMateri extends CI_Controller
 	
 	
 }
-
-?>

@@ -145,3 +145,14 @@
 		<!-- End Top Leader Table -->
 		<!-- *************************************************************** -->
 	</div>
+	<script>
+		jQuery.datetimepicker.setLocale("id");
+		$("#jam_masuk_edit, #jam_keluar_edit").datetimepicker({
+			timepicker: true,
+			datepicker: false,
+			format: "H:i",
+			hours12: false,
+			step: 5,
+			lang: "id",
+		});
+	</script>

@@ -75,7 +75,7 @@
 													<?php foreach ($bahanMateri as $materi) : ?>
 														<!-- looping item -->
 														<div class="pdf-file ml-3">
-															<a href="">
+															<a href="<?= base_url('master/materi/view_materi_pdf/' . $this->secure->encrypt_url($materi->materi_id)) ?>">
 																<div class="card card-pdf">
 																	<div class="container">
 																		<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf">
@@ -113,7 +113,7 @@
 									</table>
 									<hr class="mt-n3">
 									<div class="button-action d-flex mb-3 mt-2">
-										<a href="<?= base_url('Admin/Jadwal/Materi') ?>" class="btn btn-sm btn-primary rounded ml-3 px-3">Kembali</a>
+										<a href="<?= base_url('master/materi') ?>" class="btn btn-sm btn-primary rounded ml-3 px-3">Kembali</a>
 									</div>
 								</div>
 							</div>

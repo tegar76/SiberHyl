@@ -45,7 +45,7 @@
 					<div class="row">
 						<div class="form-group col-md-4">
 							<div class="input-group mb-2">
-								<select id="id_kelas" class="form-control">
+								<select id="pratinjau-kelas-id" class="form-control">
 									<option selected value="">Pilih Kelas</option>
 									<?php foreach ($classes as $cls) : ?>
 										<option value="<?= $cls->kode_kelas ?>" <?= ($cls->kode_kelas == $this->uri->segment(4)) ? 'selected' : '' ?>><?= $cls->nama_kelas ?></option>

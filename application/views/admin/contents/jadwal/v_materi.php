@@ -65,8 +65,8 @@
 											<td><?= $value->nama_mapel ?></td>
 											<td><?= date('d-m-Y H:i', strtotime($value->create_time)) . " WIB" ?></td>
 											<td>
-												<a href="<?= base_url('master/materi/detailMateri/' . $value->materi_info_id) ?>" class="btn btn-sm btn-primary mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-												<a href="<?= base_url('master/materi/editMateri') ?>" class="btn btn-sm btn-success mr-1"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+												<a href="<?= base_url('master/materi/detailMateri/' . $this->secure->encrypt_url($value->materi_info_id)) ?>" class="btn btn-sm btn-primary mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+												<a href="<?= base_url('master/materi/editMateri/' . $this->secure->encrypt_url($value->materi_info_id)) ?>" class="btn btn-sm btn-success mr-1"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 												<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
 												<a href="" class="btn btn-sm btn-danger delete-materi" materi-id="<?= $value->materi_info_id ?>"><i class="fa-solid fa-trash-can text-white" data-toggle="tooltip" data-placement="top" title="Hapus"></i></a>
 											</td>
@@ -81,7 +81,7 @@
 		</div>
 
 		<div class="floating-container">
-			<a href="<?= base_url('master/materi/TambahMateri') ?>">
+			<a href="<?= base_url('master/materi/tambahMateri') ?>">
 				<div class="floating-button">+</div>
 			</a>
 		</div>
