@@ -30,6 +30,6 @@
     </div>
     <div class="ketentuan pb-4">
         <h6>Ketentuan :</h6>
-        <p>Tugas dikumpulkan bisa dalam bentuk PDF, PNG, JPG, JPEG. Jika penulisan  tugas dengan metode tulis tangan dan jawabannya lebih 1 (satu) lembar. Maka untuk pengumpulan tugas di <span class="app-name">SiberHyl</span> dianjurkan untuk menggabungkan jawaban-jawaban  tersebut menajadi 1 (satu) file terlebih dahulu. <span class="panduan"><a href="">Berikut Panduannya</a></span></p>
+        <p>Tugas dikumpulkan bisa dalam bentuk PDF, PNG, JPG, JPEG. Jika penulisan  tugas dengan metode tulis tangan dan jawabannya lebih 1 (satu) lembar. Maka untuk pengumpulan tugas di <span class="app-name">SiberHyl</span> dianjurkan untuk menggabungkan jawaban-jawaban  tersebut menajadi 1 (satu) file terlebih dahulu. <span class="panduan"><a target="_blank" href="<?= base_url('Siswa/Tugas/panduanPengumpulanTugas')?>">Berikut Panduannya</a></span></p>
     </div>
 </form>

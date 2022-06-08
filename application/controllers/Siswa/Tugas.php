@@ -60,6 +60,15 @@ class Tugas extends CI_Controller
 		$this->load->view('siswa/layout/wrapper', $data, FALSE);
 	}
 
+	public function panduanPengumpulanTugas()
+	{
+		$data = [
+			'title' => 'Panduan Pengumpulan Tugas',
+		];
+
+		$this->load->view('siswa/contents/tugas/panduan_pengumpulan_tugas/v_panduan', $data, FALSE);
+	}
+
 }
 
 ?>
