@@ -4,7 +4,7 @@
 
 <form action="">
     <div class="title-form mb-1">
-        Form Pengumpulan Tugas (Online)
+        Form Edit Tugas (Online)
     </div>
     <div class="sub-title-form mb-3">
         Panel Sasis Dan Pemindahan Tenaga KR - Tugas 4 (Empat)
@@ -25,7 +25,7 @@
         <p>* Upload Tugas   dengan ukuran File max 2mb</p>
     </div>
     <div class="btn-aksi mb-4">
-        <button type="submit" class="btn btn-sm btn-info rounded px-4 py-1 mr-3">Kirim</button>
+        <button type="submit" class="btn btn-sm btn-success rounded px-4 py-1 mr-3">Update</button>
         <button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-1">Reset</button>
     </div>
     <div class="ketentuan pb-4">

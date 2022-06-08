@@ -193,7 +193,7 @@
 										</tr>
 										<tr>
 											<td>2</td>
-											<td><a href="<?= base_url('Admin/JurnalMateri/detailJurnalMateri')?>" class="btn btn-sm btn-success text-white px-4 py-1">Edit</a></td>
+											<td><a href="<?= base_url('Siswa/Tugas/editTugas')?>" class="btn btn-sm btn-success text-white px-4 py-1">Edit</a></td>
 											<td>Panel Sasis Dan Pemindahan Tenaga KR</td>
 											<td>4</td>
 											<td>Tugas 4 (Empat)</td>
