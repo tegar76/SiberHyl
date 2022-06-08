@@ -1,19 +1,24 @@
+.nav-pills .nav-item a{
+    font-size: 14px;
+    border-bottom: 2px solid #dff2ff;
+    top: 70;
+    position: relative;
+    z-index: 1;
+    display: inline-block;;
+}
+
 .nav-pills .nav-item a {
-    color: #6b6b6b;
+  padding: 14px 35px;
+  color: #4b4b4b;
 }
 
 .nav-pills .nav-item a[aria-selected="true"]{
     background-color: #ffffff;
     color: #2989A8;
-    border-bottom: 2px solid #58b3d1;
+    border-bottom: 2px solid #2989A8;
     border-start-start-radius: 0px;
     display: inline-block;
-    line-height: 1;
-    text-shadow:
-    2px 2px white,
-    2px 2px white,
-    2px 2px white,
-    2px 2px white;
+    border-radius: 0;
   }
 
   .section__height a {

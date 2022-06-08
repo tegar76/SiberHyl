@@ -72,7 +72,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="">
+											<a href="<?= base_url('Siswa/tugas')?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
@@ -204,7 +204,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="">
+												<a href="<?= base_url('Siswa/tugas')?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
