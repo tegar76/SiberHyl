@@ -41,6 +41,15 @@ class Tugas extends CI_Controller
 		$this->load->view('siswa/contents/tugas/jawaban_tugas_pdf/v_jawaban_tugas_pdf', $data, FALSE);
 	}
 
+	public function jawabanTugasImg()
+	{
+		$data = [
+			'title' => 'Jawaban Tugas Img',
+		];
+
+		$this->load->view('siswa/contents/tugas/v_jawaban_tugas_img', $data, FALSE);
+	}
+
 	public function editTugas()
 	{
 		$data = [
