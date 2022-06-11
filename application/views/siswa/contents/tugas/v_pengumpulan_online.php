@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/tugas/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
 
 <section class="container section section__height"> 
 

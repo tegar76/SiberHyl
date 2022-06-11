@@ -1,12 +1,8 @@
-<!-- Data Tables -->
-<script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/admin/js/data-table/main.js') ?>"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/data-table-custom/style.css') ?>">
-<!-- End Data Tables -->
+<!-- import data tables -->
+<?php include APPPATH.'../assets/DataTables/import/import.php';?>
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/dashboard/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -99,8 +95,9 @@
                             Info Akademik Tahun Pelajaran 2021/2022
                         </h6>
                         <div class="mt-4 activity">
-                            <table id="info" class="table-striped table-bordered" style="width:100%">
-                                <!-- pemanggilan tabel id info ada di assets/admin/js/data-table/main.js -->
+                           <div class="table-responsive">
+                           <table id="info" class="table-striped table-bordered">
+                            <!-- pemanggilan tabel id ada di assets/DataTables/table_id_js/ (jika tidak ada perubahan rename file .jsnya lalu import kembali di /assets/DataTables/import/import.php) -->
                                 <thead>
                                     <tr>
                                         <th style="width: 10%">No</th>
@@ -124,6 +121,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -134,8 +132,8 @@
                         <h6 class="card-title">Pesan Aduan</h6>
                         <div class="mt-4 activity">
                             <div class="table-responsive">
-                                <table id="pesan" class=" table-striped table-bordered" style="width: 100%;">
-                                    <!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
+                                <table id="pesan" class=" table-striped table-bordered">
+                                     <!-- pemanggilan tabel id ada di assets/DataTables/table_id_js/ (jika tidak ada perubahan rename file .jsnya lalu import kembali di /assets/DataTables/import/import.php) -->
                                     <thead>
                                         <tr>
                                             <th style="width: 20px;">No</th>
@@ -186,8 +184,9 @@
                             Jurnal Materi Tahun Pelajaran 2021/2022
                         </h6>
                         <div class="mt-4 activity">
-                            <table id="jurnal" class="table-striped table-bordered" style="width:100%">
-                                <!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
+                          <div class="table-responsive">
+                          <table id="jurnal" class="table-striped table-bordered">
+                                <!-- pemanggilan tabel id ada di assets/DataTables/table_id_js/ (jika tidak ada perubahan rename file .jsnya lalu import kembali di /assets/DataTables/import/import.php) -->
                                 <thead>
                                     <tr>
                                         <th style="width: 6%;">No</th>
@@ -226,6 +225,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+                          </div>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,275 @@
+ @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+body {
+    height: 100vh;
+	background: linear-gradient(to left, rgba(227, 234, 245, 1), rgba(234, 239, 247, 1), rgba(255, 255, 255, 1));
+	font-family: "Poppins", sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	color: #121212;
+}
+
+.container {
+    margin: 50px auto
+}
+
+
+
+#forgot {
+    min-width: 100px;
+    margin-left: auto;
+    text-decoration: none
+}
+
+a:hover {
+    text-decoration: none
+}
+
+.form-inline label {
+    padding-left: 10px;
+    margin: 0;
+    cursor: pointer
+}
+
+.btn.btn-primary {
+    margin-top: 20px;
+    border-radius: 15px
+}
+
+.panel {
+    min-height: 380px;
+    box-shadow: 20px 20px 80px rgb(218, 218, 218);
+    border-radius: 12px
+}
+
+.input-field {
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    color: #4343ff
+}
+
+input[type='text'],
+input[type='password'] {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%
+}
+
+.fa-eye-slash.btn {
+    border: none;
+    outline: none;
+    box-shadow: none
+}
+
+
+
+a[target='_blank'] {
+    position: relative;
+    transition: all 0.1s ease-in-out
+}
+
+.bordert {
+    border-top: 1px solid #aaa;
+    position: relative
+}
+
+.bordert:after {
+    content: "or connect with";
+    position: absolute;
+    top: -13px;
+    left: 33%;
+    background-color: #fff;
+    padding: 0px 8px
+}
+
+.btn-masuk {
+	background-color: #2989A8;
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	border-radius: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.btn-masuk:hover {
+	background-color: #27677c;
+	color: white;
+}
+
+.btn-submit {
+	margin-left: 80px;
+	margin-right: 80px;
+}
+
+.title-form {
+	font-size: 17px;
+	color: #333333;
+	opacity: 0.9;
+  }
+  .sub-title-form {
+	font-size: 14px;
+	color: #333333;
+	opacity: 0.8;
+  }
+  
+  label {
+	font-size: 15px;
+	color: #6b6b6b;
+	opacity: 0.9;
+  }
+  
+  .custom-select, .form-control {
+	font-size: 13px;
+	color: #6b6b6b;
+	opacity: 0.8;
+	border-color: #d5e7ec;
+  }
+  
+  option {
+	font-size: 13px;
+	color: #6b6b6b;
+	opacity: 0.9;
+	border-color: #d5e7ec;
+  }
+  
+  .input-field ::placeholder {
+	font-size: 13px;
+	color: #6b6b6b;
+  }
+
+  .input-field {
+	font-size: 13px;
+	color: #6b6b6b;
+	opacity: 0.8;
+  }
+  
+  .input-group p {
+	font-size: 12px !important;
+	color: #e95d92;
+	margin-top: -10px;
+	margin-bottom: -20px;
+	opacity: 0.9;
+  }
+  
+  .input-group .form-check label {
+	font-size: 13px;
+	color: #6b6b6b;
+	opacity: 0.9;
+  }
+
+  .form-group a {
+	font-size: 13px ;
+	color: #6b6b6b;
+	opacity: 0.9;
+  }
+
+  .form-group a:hover {
+	color: #2b8797;
+  }
+
+  .title {
+	color: rgb(24, 52, 65);
+	opacity: 0.7;
+	line-height: 20px;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.bg-cyan {
+	color: #2989A8;
+}
+
+.bg-eye {
+	color: #6b6b6b;
+}
+
+.catatan h6 {
+	font-size: 14px;
+	color: #333333;
+	font-weight: 400;
+}
+
+.catatan p {
+	font-size: 13px;
+	color: #6b6b6b;
+	font-weight: 300;
+}
+
+.catatan p span {
+	color: #333333;
+}
+
+.alert-login {
+	font-size: 14px !important;
+}
+
+footer {
+	margin-top: 25px;
+	font-size: 12px;
+	color: rgb(90, 90, 90);
+}
+  
+
+@media(max-width: 360px) {
+    #forgot {
+        margin-left: 0;
+        padding-top: 10px
+    }
+
+    body {
+        height: 100%
+    }
+
+    .container {
+        margin: 30px 0
+    }
+
+    .bordert:after {
+        left: 25%
+    }
+
+	.btn-masuk {
+		padding-left: 13px;
+		padding-right: 13px;
+		padding-bottom: 10px;
+		padding-bottom: 10px;
+		margin-right: 10px;
+	}
+
+	.btn-submit {
+	margin-left: 60px;
+	margin-right: 60px;
+}
+}
+
+@media(max-width: 720px) {
+	.btn-masuk {
+		padding-left: 13px;
+		padding-right: 13px;
+		padding-bottom: 10px;
+		padding-bottom: 10px;
+		margin-right: 10px;
+	}
+
+	.btn-submit {
+	margin-left: 60px;
+	margin-right: 60px;
+	}
+}
+

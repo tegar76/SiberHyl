@@ -65,6 +65,16 @@ img {
   height: auto;
 }
 
+.badge-info-ak {
+  margin-left: 20px;
+  margin-bottom: -8px;
+}
+
+.badge-konsul{
+  margin-left: 70px;
+  margin-bottom: -8px;
+}
+
 /*=============== REUSABLE CSS CLASSES ===============*/
 .section {
   padding: 4.5rem 0 2rem;
@@ -137,6 +147,17 @@ img {
     border-radius: 1.25rem 1.25rem 0 0;
     transition: .4s;
   }
+
+.badge-info-ak {
+  margin-left: 30px;
+  margin-bottom: -10px
+}
+
+.badge-konsul{
+  margin-left: 30px;
+  margin-bottom: -10px;
+}
+
 }
 
 .nav__list, 
@@ -199,6 +220,17 @@ img {
   .nav__name {
     display: none;
   }
+
+.badge-info-ak {
+  margin-left: 30px;
+  margin-bottom: -10px
+}
+
+.badge-konsul{
+  margin-left: 30px;
+  margin-bottom: -10px;
+}
+
 }
 
 /* For medium devices */

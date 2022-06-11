@@ -1,7 +1,8 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
 
 <section class="container section section__height mt-n3" id="about">
-	<div class="edit-profile">
+	<div class="edit-profile pb-5">
 		<?= form_open_multipart('siswa/profile/editProfile') ?>
 		<div class="row">
 			<div class="col-md-4 text-center mb-3">
@@ -64,20 +65,20 @@
 					<div class="form-group">
 						<label for="email">Email</label>
 						<input type="text" id="email" class="form-control <?= (form_error('email')) ? 'is-invalid' : '' ?>" name="email" value="<?= $siswa['siswa_email'] ?>">
-						<?= form_error('email', '<div class="text-danger">', '</div>') ?>
+						<?= form_error('email', '<div class="form-validation text-danger">', '</div>') ?>
 					</div>
 					<div class="form-group">
 						<label for="telepon">No Handphone</label>
 						<input type="text" id="telepon" class="form-control <?= (form_error('telepon')) ? 'is-invalid' : '' ?>" name="telepon" value="<?= $siswa['siswa_telp'] ?>">
-						<?= form_error('telepon', '<div class="text-danger">', '</div>') ?>
+						<?= form_error('telepon', '<div class="form-validation form-validation text-danger">', '</div>') ?>
 					</div>
 					<div class="form-group">
 						<label for="alamat">Alamat</label>
 						<input type="text" id="alamat" class="form-control <?= (form_error('alamat')) ? 'is-invalid' : '' ?>" name="alamat" value="<?= $siswa['siswa_alamat'] ?>">
-						<?= form_error('alamat', '<div class="text-danger">', '</div>') ?>
+						<?= form_error('alamat', '<div class="form-validation text-danger">', '</div>') ?>
 					</div>
 					<div class="button-action d-flex mb-3 mt-2">
-						<button type="submit" class="btn btn-sm btn-primary mr-2 px-4" type="submit">Simpan</button>
+						<button type="submit" class="btn btn-sm btn-success mr-2 px-4" type="submit">Update</button>
 						<button type="reset" class="btn btn-sm btn-secondary px-4" type="submit">Reset</button>
 					</div>
 				</div>

@@ -7,7 +7,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 <div class="page-wrapper">
     <!-- ============================================================== -->

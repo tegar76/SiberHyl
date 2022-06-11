@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -87,7 +88,7 @@
                                                                     <div class="container">
                                                                         <img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png')?>" alt="file pdf">
                                                                         <hr class="w-50 mx-auto">
-                                                                        <h6 class="text-center mt-n1">Ebook Pemeliharaan Kelistrikan Kendaraan Ringan</h6>
+                                                                        <h6 class="text-center mt-n1">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus, mollitia!</h6>
                                                                     </div>
                                                                 </div>
                                                             </a>
@@ -128,7 +129,7 @@
                                                                 <div class="container">
                                                                     <iframe class="d-block mx-auto"  src="https://www.youtube.com/embed/rEjSkBl47OY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                                     <h6 class="mt-1">2021-10-12</h6>
-                                                                    <h6 class="mt-n1">Ebook Pemeliharaan Kelistrikan Kendaraan Ringan</h6>
+                                                                    <h6 class="mt-n1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur, similique.</h6>
                                                                 </div>
                                                             </div>
                                                         </div>

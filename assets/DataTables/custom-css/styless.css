@@ -1,0 +1,57 @@
+table {
+	font-size: 13px;
+	table-layout: fixed;
+}
+
+th,
+td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-weight: 300;
+}
+
+th {
+	color: #3b3b3b;
+	font-weight: 400;
+}
+
+td {
+	color: #4b4b4b;
+}
+
+td a,
+.btn {
+	font-size: 13px;
+	opacity: 0.8;
+}
+
+.dataTables_wrapper {
+	font-size: 13px;
+	color: #7b7b7b;
+}
+
+.dataTables_wrapper .btn {
+	font-size: 13px;
+	color: #7b7b7b;
+}
+
+#info_previous,
+#info_next,
+.page-link {
+	padding-left: 3px;
+	padding-right: 3px;
+	font-size: 12px;
+}
+
+.page-link {
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+@media (min-width: 992px) {
+    table {
+      width: 100%;
+    }
+  }

@@ -1,9 +1,9 @@
-
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/materi/styles.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
 
 <section class="container section section__height">
 
-        <ul class="nav nav-pills mb-3 mt-n3 d-flex justify-content-center ml-3" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills mb-n3 mt-n3 d-flex justify-content-center ml-3" id="pills-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="pills-materi-tab" data-toggle="pill" href="#pills-materi" role="tab" aria-controls="pills-materi" aria-selected="true">Materi</a>
             </li>
@@ -11,7 +11,7 @@
                 <a class="nav-link" id="pills-video-pembelajaran-tab" data-toggle="pill" href="#pills-video-pembelajaran" role="tab" aria-controls="pills-video-pembelajaran" aria-selected="false">Video Pembelajaran</a>
             </li>
         </ul>
-        <div class="tab-content ml-4 pt-3" id="pills-tabContent">
+        <div class="tab-content ml-4 mt-5 pb-5" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-materi" role="tabpanel" aria-labelledby="pills-materi-tab">
                 <div class="materi ml-5 d-flex align-content-end">
                    <div class="row">

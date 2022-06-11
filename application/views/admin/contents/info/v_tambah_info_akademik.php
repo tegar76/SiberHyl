@@ -1,8 +1,8 @@
-<!-- multiple select -->
-<script src="<?= base_url('assets/MSelectDialogBox-master/dist/m-select-d-box.js')?>"></script>
-<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/')?>/js/examplee.js"></script>
+<!-- Import multiple select -->
+<?php include APPPATH.'../assets/MSelectDialogBox-master/import_multiple_select.php';?>
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 <div class="page-wrapper">
     <!-- ============================================================== -->

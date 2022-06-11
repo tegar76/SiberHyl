@@ -1,18 +1,12 @@
-<!-- Data Tables -->
-<script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/siswa/js/data-table/main.js')?>"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/data-table-custom/style.css')?>">
-<!-- End Data Tables -->
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/tugas/style.css') ?>">
+<!-- import data tables -->
+<?php include APPPATH.'../assets/DataTables/import/import.php';?>
 
-<!--=============== MAIN JS ===============-->
-<script src="<?= base_url('assets/') ?>siswa/js/main.js"></script>
+<!-- import style -->
+<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
 
 <section class="container section section__height px-0">
 
-<div class="tr-job-posted section-padding">
+<div class="tr-job-posted section-padding pb-3">
 	<div class="job-tab text-center">
 		<ul class="nav nav-tabs justify-content-center" role="tablist">
 			<li role="presentation" class="active">
@@ -139,7 +133,7 @@
 																</h5>
 															</div>
 															<div class="d-flex justify-content-center m-3">
-																	<a target="_blank" href="<?= base_url('Siswa/Tugas/soalTugaspdf')?>" class="btn btn-primary btn-sm mr-3 "><i class="fa-solid fa-magnifying-glass text-white mr-1"></i> Lihat Tugas </a>
+																	<a target="_blank" href="<?= base_url('Siswa/Tugas/soalTugaspdf')?>" class="btn btn-primary bg-sea btn-sm mr-3 "><i class="fa-solid fa-magnifying-glass text-white mr-1"></i> Lihat Tugas </a>
 																	<a role="button" class="btn btn-success btn-sm"data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-upload text-white mr-1"></i> Kumpulkan </a>
 															</div>
 														</div>
@@ -293,11 +287,11 @@
 	};
 
 	modalConfirm(function(confirm){
-	if(confirm){
-		$("#result").html('<div class="alert alert-success alert-dismissible h6"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Berhasil</strong> Silahkan cek pada tab <strong>nilai tugas !</strong></div>');
-	}else{
-		$("#result").html('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Dibatalkan </strong> Mohon serahkan pengerjaan tugas dahulu ke guru pengajar</div>');
-	}
+		if(confirm){
+			$("#result").html('<div class="alert alert-success alert-dismissible h6"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Berhasil,</strong> Silahkan cek pada tab <strong>nilai tugas !</strong></div>');
+		}else{
+			$("#result").html('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Dibatalkan,</strong> Mohon serahkan pengerjaan tugas dahulu ke guru pengajar</div>');
+		}
 	});
 </script>
 

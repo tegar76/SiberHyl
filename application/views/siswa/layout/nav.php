@@ -7,6 +7,7 @@
 			<ul class="nav__list">
 				<li class="nav__item">
 					<a href="" class="nav__link">
+						<span class="badge bg-danger rounded-circle badge-info-ak"> </span>
 						<i class='bx bx-info-square nav__icon'></i>
 						<span class="nav__name">Info</span>
 					</a>
@@ -28,6 +29,7 @@
 
 				<li class="nav__item">
 					<a href="" class="nav__link">
+						<span class="badge bg-danger rounded-circle badge-konsul"> </span>
 						<i class='bx bx-message-rounded-detail nav__icon'></i>
 						<span class="nav__name">Konsultasi</span>
 					</a>

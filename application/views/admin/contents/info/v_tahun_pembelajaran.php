@@ -1,12 +1,8 @@
-<!-- Data Tables -->
-<script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/admin/js/data-table/main.js')?>"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/data-table-custom/style.css')?>">
-<!-- End Data Tables -->
+<!-- import data tables -->
+<?php include APPPATH.'../assets/DataTables/import/import.php';?>
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/dashboard/style.css')?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -44,7 +40,8 @@
                         <h6 class="card-title">Data Mata Pelajaran Semester Gasal Tahun Pelajaran 2021/2022</h6>
                         <div class="mt-4 activity">
                             <table id="data_jadwal" class="table-responsive table-striped table-bordered" style="width:100%">
-                               <thead>
+                            <!-- pemanggilan tabel id ada di assets/DataTables/table_id_js/ (jika tidak ada perubahan rename file .jsnya lalu import kembali di /assets/DataTables/import/import.php) -->
+                                <thead>
                                     <tr>
                                         <th style="width:4%">No</th>
                                         <th style="width:20%;">Tahun Pembelajaran</th>

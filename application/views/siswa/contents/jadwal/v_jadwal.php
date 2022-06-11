@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/jadwal/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/siswa/css/import_style_jadwal.php';?>
 
 <!-- Jquery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
@@ -82,7 +83,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="">
+											<a href="<?= base_url('Siswa/Evaluasi')?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -214,7 +215,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="">
+												<a href="<?= base_url('Siswa/Evaluasi')?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">

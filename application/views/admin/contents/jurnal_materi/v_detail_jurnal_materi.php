@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -44,7 +45,7 @@
                         <table class="table">
                             <tbody>
                                 <tr class="table-borderless">
-                                    <th scope="row">Tanggal</th>
+                                    <th scope="row" class="col-md-4">Tanggal</th>
                                     <td>Senin, 05 -05 -2022 12 : 50 WIB</td>
                                 </tr>
                                 <tr>
