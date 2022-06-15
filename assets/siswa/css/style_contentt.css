@@ -1149,7 +1149,7 @@ background-color:#2989A8;
     
     /* style form */
     .title-form {
-      font-size: 17px;
+      font-size: 18px;
       color: #333333;
       opacity: 0.9;
     }
@@ -1244,6 +1244,181 @@ background-color:#2989A8;
       font-size: 14px;
       font-weight: 400;
       color: #3b3b3b;
+    }
+
+    /* diskusi */
+    .title {
+      font-size: 18px;
+      color: #333333;
+  }
+  .sub-title{
+      font-size: 14px;
+      color: #5b5b5b;
+  }
+  
+  .subjek {
+      font-size: 16px;
+      color: #333333;
+  }
+  .pesan {
+      font-size: 14px;
+      color: #5b5b5b;
+  }
+  
+  .comment:hover {
+      background-color: rgb(237, 250, 255);
+  }
+  
+  .card a {
+      font-size: 14px;
+      color: #4b4b4b;
+  }
+  
+  .card a:hover {
+      text-decoration: none;
+      color: #2e5b6a;
+  }
+  
+  .card button {
+      background-color: #2989A8;
+      color: #ffffff;
+      font-size: 12px;
+  }
+  
+  .border-custom-blue {
+      border-color: #a8c9d5 !important;
+  }
+  
+  .nama, .tanggal {
+      color: #7b7b7b;
+      font-size: 13px;
+  }
+
+  .nama-big {
+    color: #7b7b7b;
+    font-size: 14px;
+  }
+
+  .jml-komen {
+    font-size: 15px;
+    color: #333333;
+  }
+
+  .jml-komen span {
+    font-size: 15px;
+    color: #7b7b7b;
+  }
+
+  .nama-small {
+    font-size: 14px;
+    color: #4b4b4b;
+  }
+
+  .post-on {
+    font-size: 11px;
+    color: #7b7b7b;
+  }
+
+  .komen {
+    font-size: 13px;
+    color: #646464;
+  }
+
+  .balas a {
+    font-size: 13px;
+    color: #2989A8;
+  }
+
+  .balas a:hover {
+    color: #467585;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* FLoating button add */
+  .floating-container {
+      position: fixed;
+      width: 100px;
+      height: 100px;
+      bottom: 0;
+      right: 0;
+      margin: 75px 55px;
+    }
+    .floating-container:hover {
+      height: 300px;
+    }
+    .floating-container:hover .floating-button {
+      box-shadow: 0 10px 25px rgba(44, 179, 240, 0.6);
+      -webkit-transform: translatey(5px);
+              transform: translatey(5px);
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    .floating-container:hover .element-container .float-element:nth-child(1) {
+      -webkit-animation: come-in 0.4s forwards 0.2s;
+              animation: come-in 0.4s forwards 0.2s;
+    }
+    .floating-container:hover .element-container .float-element:nth-child(2) {
+      -webkit-animation: come-in 0.4s forwards 0.4s;
+              animation: come-in 0.4s forwards 0.4s;
+    }
+    .floating-container:hover .element-container .float-element:nth-child(3) {
+      -webkit-animation: come-in 0.4s forwards 0.6s;
+              animation: come-in 0.4s forwards 0.6s;
+    }
+    .floating-container .floating-button {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: #2989A8;
+      bottom: 0;
+      border-radius: 50%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      color: white;
+      line-height: 50px;
+      text-align: center;
+      font-size: 23px;
+      z-index: 100;
+      box-shadow: 0 10px 25px -5px rgba(44, 179, 240, 0.6);
+      cursor: pointer;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+  
+    @media screen and (max-width: 320px) {
+      .nama, .tanggal {
+          font-size: 10px;
+      }
+      .floating-container {
+          margin: 95px 15px;
+      }
+  
+      .floating-container .floating-button {
+          width: 40px;
+          height: 40px;
+          line-height: 43px;
+          font-size: 20px;
+      }
+    }
+  
+    @media screen and (max-width: 767px) {
+      .nama, .tanggal {
+          font-size: 10px;
+      }
+      .floating-container {
+          margin: 95px 15px;
+      }
+  
+      .floating-container .floating-button {
+          width: 40px;
+          height: 40px;
+          line-height: 43px;
+          font-size: 20px;
+      }
     }
 
     

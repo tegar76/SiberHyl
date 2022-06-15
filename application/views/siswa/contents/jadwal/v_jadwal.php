@@ -4,16 +4,10 @@
 <!-- Jquery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 
-<!--=============== HOME ===============-->
-<!-- <section class="container section section__height" id="home">
-    <h2 class="section__title">Home</h2>
-</section> -->
-
-<!--=============== SKILLS ===============-->
 <section class="container section section__height">
 
 	<div class="search-box d-flex justify-content-end">
-		<input type="text" class="search-click" name="" placeholder="&#xf002 Cari ..." style="font-family: FontAwesome;" />
+		<input type="text" class="search-click" name="" placeholder="🔍 Cari ..." />
 	</div>
 
 	<div class="now-studying">
@@ -93,7 +87,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="">
+											<a href="<?= base_url('Siswa/Diskusi')?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/diskusi.png') ?>" alt="">
@@ -225,7 +219,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="">
+												<a href="<?= base_url('Siswa/Diskusi')?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/diskusi.png') ?>" alt="">
