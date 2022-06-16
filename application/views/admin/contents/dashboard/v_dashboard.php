@@ -95,11 +95,11 @@
 				<div class="card">
 					<div class="card-body">
 						<h6 class="card-title">
-							<a class="search-icon" href="<?= base_url('Admin/Info/infoAkademik') ?>"><i class="fa fa-magnifying-glass mr-2"></i></a>
-							Info Akademik Tahun Pelajaran 2021/2022
+							<a class="search-icon" href="<?= base_url('master/info/info-akademik') ?>"><i class="fa fa-magnifying-glass mr-2"></i></a>
+							Info Akademik Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?>
 						</h6>
 						<div class="mt-4 activity">
-							<table id="info" class="table-striped table-bordered" style="width:100%">
+							<table id="table-info-akademik" class="table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id info ada di assets/admin/js/data-table/main.js -->
 								<thead>
 									<tr>
@@ -110,18 +110,15 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>06 - 05 -2022 13:25 WIB</td>
-										<td>Lorem Ipsum is simply dummy text of the printing </td>
-										<td><a target="_blank" href="<?= base_url('Admin/Info/infoAkademikPdf') ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>06 - 05 -2022 13:25 WIB</td>
-										<td>Lorem Ipsum is simply dummy text of the printing </td>
-										<td><a target="_blank" href="<?= base_url('Admin/Info/infoAkademikPdf') ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
-									</tr>
+									<?php $no = 1; ?>
+									<?php foreach ($info_akademik as $info ) : ?>
+										<tr>
+											<td><?= $no++ ?></td>
+											<td><?= date('d-m-Y H:i', strtotime($info->create_time)) ?></td>
+											<td><?= $info->judul_info ?></td>
+											<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik/' . $info->file_info) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+										</tr>
+									<?php endforeach ?>
 								</tbody>
 							</table>
 						</div>
@@ -134,7 +131,7 @@
 						<h6 class="card-title">Pesan Aduan</h6>
 						<div class="mt-4 activity">
 							<div class="table-responsive">
-								<table id="pesan" class=" table-striped table-bordered" style="width: 100%;">
+								<table id="table-pesan-aduan" class=" table-striped table-bordered" style="width: 100%;">
 									<!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
 									<thead>
 										<tr>
@@ -147,22 +144,16 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>1</td>
-											<td>Jason</td>
-											<td>lorem20</td>
-											<td>jason@gmail.com</td>
-											<td>082456726256</td>
-											<td>pariatur veritatis cum sunt excepturi nam?</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Amir</td>
-											<td>Saran</td>
-											<td>mir32@gmail.com</td>
-											<td>082456726256</td>
-											<td>pariatur veritatis cum sunt excepturi nam?</td>
-										</tr>
+										<?php foreach ($pesan as $row => $value) : ?>
+											<tr>
+												<td><?= $no++ ?></td>
+												<td><?= $value->full_name ?></td>
+												<td><?= $value->subject ?></td>
+												<td><?= $value->email ?></td>
+												<td><?= $value->phone ?></td>
+												<td><?= $value->message ?></td>
+											</tr>
+										<?php endforeach ?>
 									</tbody>
 								</table>
 							</div>
@@ -182,11 +173,11 @@
 				<div class="card">
 					<div class="card-body">
 						<h6 class="card-title">
-							<a class="search-icon" href="<?= base_url('Admin/JurnalMateri') ?>"><i class="fa fa-magnifying-glass mr-2"></i></a>
-							Jurnal Materi Tahun Pelajaran 2021/2022
+							<a class="search-icon" href="<?= base_url('master/jurnal') ?>"><i class="fa fa-magnifying-glass mr-2"></i></a>
+							Jurnal Materi Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?>
 						</h6>
 						<div class="mt-4 activity">
-							<table id="jurnal" class="table-striped table-bordered" style="width:100%">
+							<table id="table-jurnal" class="table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
 								<thead>
 									<tr>
@@ -202,28 +193,21 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Senin</td>
-										<td>10 - 05 - 2022 08 : 50 WIB</td>
-										<td>AB</td>
-										<td>Bahasa Inggris</td>
-										<td>XI TKRO 1</td>
-										<td>1</td>
-										<td>now use Lorem Ipsum as their default a search for 'lorem ipsum' will uncover still in their infancy Various versions </td>
-										<td><a id="id_bdt" href="<?= base_url('Admin/JurnalMateri/detailJurnalMateri') ?>" class="btn btn-sm btn-outline-danger btn-rounded-sm text-danger">Belum Dilihat</a></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Selasa</td>
-										<td>09 - 05 - 2022 12 : 50 WIB </td>
-										<td>AZ</td>
-										<td>Panel Sasis Dan Pemindahan Tenaga KR</td>
-										<td>XI TKRO 1</td>
-										<td>1</td>
-										<td>now use Lorem Ipsum as their default a search for 'lorem ipsum' will uncover still in their infancy Various versions </td>
-										<td><a id="id_sdt" href="<?= base_url('Admin/JurnalMateri/detailJurnalMateri') ?>" class="btn btn-sm btn-outline-success text-success">Sudah dilihat</a></td>
-									</tr>
+									<?php $no = 1;
+									foreach ($jurnal as $row => $value) : ?>
+										<tr>
+											<td><?= $no++ ?></td>
+											<td><?= $value->hari ?></td>
+											<td><?= date('d - m - Y', strtotime($value->tanggal)) ?></td>
+											<td><?= $value->guru_kode ?></td>
+											<td><?= $value->nama_mapel ?></td>
+											<td><?= $value->nama_kelas ?></td>
+											<td><?= $value->pert_ke ?></td>
+											<td><?= $value->pembahasan ?></td>
+											<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
+											<td><a id="id_bdt" href="#" class="btn btn-sm detail-jurnal <?= ($value->status == 0) ? 'btn-outline-danger text-danger' : 'btn-outline-success text-success' ?>   btn-rounded-sm " jurnal-id="<?= $this->secure->encrypt_url($value->jurnal_id) ?>" status="<?= $value->status ?>"><?= ($value->status == 0) ? 'Belum Dilihat' : 'Sudah Dilihat' ?></a></td>
+										</tr>
+									<?php endforeach ?>
 								</tbody>
 							</table>
 						</div>
@@ -235,3 +219,4 @@
 		<!-- End Top Leader Table -->
 		<!-- *************************************************************** -->
 	</div>
+

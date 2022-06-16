@@ -39,18 +39,18 @@
 							</li>
 					</ul>
 				</li>
-				<li class="sidebar-item <?= ($this->uri->segment(2) == "SettingInfo") ? 'selected' : '' ?>"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span class="hide-menu">Settings Info </span></a>
+				<li class="sidebar-item <?= ($this->uri->segment(2) == "info") ? 'selected' : '' ?>"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span class="hide-menu">Settings Info </span></a>
 					<ul aria-expanded="false" class="collapse  first-level base-level-line">
 						<li class="sidebar-item">
-							<a href="chart-morris.html" class="sidebar-link"><span class="hide-menu"> Informasi Akademik</span></a>
+							<a href="<?= base_url('master/info/info-akademik') ?>" class="sidebar-link"><span class="hide-menu"> Informasi Akademik</span></a>
 						</li>
 						<li class="sidebar-item">
-							<a href="chart-chart-js.html" class="sidebar-link"><span class="hide-menu"> Tahun Pembelajaran</span></a>
+							<a href="<?= base_url('master/info/tahun-ajar') ?>" class="sidebar-link"><span class="hide-menu"> Tahun Pembelajaran</span></a>
 						</li>
 					</ul>
 				</li>
 				<li class="list-divider"></li>
-				<li class="sidebar-item <?= ($this->uri->segment(2) == "JurnalMateri") ? 'selected' : '' ?>"> <a class="sidebar-link sidebar-link" href="../../docs/docs.html" aria-expanded="false"><i data-feather="book-open" class="feather-icon"></i><span class="hide-menu">Jurnal Materi</span></a></li>
+				<li class="sidebar-item <?= ($this->uri->segment(2) == "jurnal") ? 'selected' : '' ?>"> <a class="sidebar-link sidebar-link" href="<?= base_url('master/jurnal') ?>" aria-expanded="false"><i data-feather="book-open" class="feather-icon"></i><span class="hide-menu">Jurnal Materi</span></a></li>
 				<li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#" id="logout" aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span class="hide-menu">Logout</span></a></li>
 			</ul>
 		</nav>

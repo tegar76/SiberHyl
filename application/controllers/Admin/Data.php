@@ -8,7 +8,27 @@ class Data extends CI_Controller
 		parent::__construct();
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->load->model('MasterModel', 'master', true);
+		$this->load->model('GuruModel', 'guru', true);
+		$this->load->model('SiswaModel', 'siswa', true);
+		$tahun_ajar = $this->jadwal->get_activate_tahunajar();
+		if ($tahun_ajar == null) {
+			$this->tahun_ajar = [
+				'semester' => 0,
+				'tahun' => ''
+			];
+		} else {
+			$this->tahun_ajar = $tahun_ajar;
+		}
 		checkAdminLogin();
+	}
+	// message sweetalert 2 flashdata
+	public function message($title = NULL, $text = NULL, $type = NULL)
+	{
+		return $this->session->set_flashdata([
+			'title' => $title,
+			'text' => $text,
+			'type' => $type,
+		]);
 	}
 
 	public function dataKelas()
@@ -16,167 +36,1084 @@ class Data extends CI_Controller
 		$data['title'] = 'Data Kelas';
 		$data['content'] = 'admin/contents/data/v_data_kelas';
 		$data['classes'] = $this->master->getWaliKelas();
+		$data['tahun_ajar'] = $this->tahun_ajar;
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function tambahKelas()
+	public function tambah_kelas()
 	{
-		$data = [
-			'title' => 'Tambah Kelas',
-			'content' => 'admin/contents/data/v_tambah_kelas'
-		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['title'] = 'Admin Siberhyl - Tambah Kelas';
+		$data['content'] = 'admin/contents/data/v_tambah_kelas';
+		$data['jurusan'] = $this->master->get_tablewhere('jurusan');
+		$data['guru'] = $this->master->get_masterdata('guru');
+		$this->form_validation->set_rules([
+			[
+				'field' => 'index_kelas',
+				'label' => 'Index Kelas',
+				'rules' => 'trim|required|xss_clean|in_list[X,XI,XII]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'in_list' => '{field} harus sesuai pada daftar'
+				]
+			],
+			[
+				'field' => 'kode_jurusan',
+				'label' => 'Jurusan',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'required' => '{field} harus diisi',
+				]
+			],
+			[
+				'field' => 'kelas_ke',
+				'label' => 'Kelas',
+				'rules' => 'trim|required|xss_clean|numeric',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'numeric' => '{field} harus berupa angka'
+				]
+			],
+		]);
+		$this->form_validation->set_rules('kode_guru', 'Wali Kelas', 'required|callback_walikelas_check');
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$indexKelas	= $this->input->post('index_kelas', true);
+			$kodeJurusan = $this->input->post('kode_jurusan', true);
+			$waliKelas	= $this->input->post('kode_guru', true);
+			$kelasKe	= $this->input->post('kelas_ke', true);
+			$namaKelas = $indexKelas . ' ' . $kodeJurusan . ' ' . $kelasKe;
+			$kodeKelas = url_title($namaKelas, 'dash',  true);
+			if ($this->master->check_kodekelas($kodeKelas) == false) {
+				$this->session->set_flashdata('kode_kelas', 'kelas sudah tersedia');
+				$this->load->view('admin/layout/wrapper', $data, FALSE);
+			} else {
+				$insertKelas = array(
+					'kode_kelas'	=> $kodeKelas,
+					'index_kelas'	=> $indexKelas,
+					'nama_kelas'	=> $namaKelas,
+					'guru_kode'		=> $waliKelas,
+					'kode_jurusan'	=> $kodeJurusan
+				);
+				$this->db->insert('kelas', $insertKelas);
+				$this->message('Berhasil', 'Anda telah menambah kelas baru', 'success');
+				return redirect('master/data/kelas');
+			}
+		}
 	}
 
-	public function editKelas($id)
+	public function walikelas_check($str)
 	{
-		$data = [
-			'title' => 'Edit Kelas',
-			'content' => 'admin/contents/data/v_edit_kelas'
-		];
+		$check_wali = $this->master->check_walikelas($str);
 
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		if ($check_wali == false) {
+			$this->form_validation->set_message('walikelas_check', '{field} tersebut sudah menjadi wali kelas dikelas lain, silangkan pilih kembali');
+			return false;
+		}
+		return true;
+	}
+
+	public function update_kelas($kode_kelas = null)
+	{
+		if ($kode_kelas == null) {
+			return false;
+		}
+		$data['title']	= 'Edit Kelas';
+		$data['content'] = 'admin/contents/data/v_edit_kelas';
+		$data['kelas'] = $this->master->getDetailKelas($kode_kelas);
+		$data['jurusan'] = $this->master->get_tablewhere('jurusan');
+		$data['guru'] = $this->master->get_masterdata('guru');
+		$this->form_validation->set_rules('wali_kelas_edit', 'Wali Kelas', 'required');
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$kodeGuru	= $this->input->post('wali_kelas_edit', true);
+			$check_wali = $this->db->get_where('kelas', ['guru_kode' => $kodeGuru])->row();
+			if (!empty($check_wali)) {
+				if ($data['kelas']->guru_kode == $check_wali->guru_kode) {
+					$this->db->set('update_time',  date('Y-m-d H:i:s'));
+					$this->db->where('kode_kelas', $data['kelas']->kode_kelas);
+					$this->db->update('kelas');
+					$this->message('Berhasil', 'Anda telah mengupdate kelas', 'success');
+					return redirect('master/data/kelas');
+				} else {
+					$this->session->set_flashdata('wali_kelas', 'Wali Kelas sudah sudah tersedia');
+					$this->load->view('admin/layout/wrapper', $data, FALSE);
+				}
+			} else {
+				$this->db->set('guru_kode', $kodeGuru);
+				$this->db->set('update_time',  date('Y-m-d H:i:s'));
+				$this->db->where('kode_kelas', $data['kelas']->kode_kelas);
+				$this->db->update('kelas');
+				$this->message('Berhasil', 'Anda telah mengupdate kelas', 'success');
+				return redirect('master/data/kelas');
+			}
+		}
+	}
+
+	public function delete_kelas()
+	{
+		$kodeKelas = $this->input->post('kode_kelas', true);
+		$this->db->delete('kelas', ['kode_kelas' => $kodeKelas]);
+		$reponse = [
+			'csrfName' => $this->security->get_csrf_token_name(),
+			'csrfHash' => $this->security->get_csrf_hash(),
+			'message' => 'Anda telah menghapus kelas ini',
+			'success' => true
+		];
+		echo json_encode($reponse);
 	}
 
 	public function dataMapel()
 	{
-		$data = [
-			'title' => 'Data Ruangan',
-			'content' => 'admin/contents/data/v_data_mapel'
-		];
-
+		$data['title'] = 'Data Mata Pelajaran';
+		$data['content'] = 'admin/contents/data/v_data_mapel';
+		$data['mapel'] = $this->master->get_datatable('mapel');
+		$data['tahun_ajar'] = $this->tahun_ajar;
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function tambahMapel()
+	public function tambah_mapel()
 	{
-		$data = [
-			'title' => 'Tambah Ruangan',
-			'content' => 'admin/contents/data/v_tambah_mapel'
-		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['title'] = 'Tambah Mata Pelajaran';
+		$data['content'] = 'admin/contents/data/v_tambah_mapel';
+		$this->form_validation->set_rules([
+			[
+				'field' => 'nama_mapel',
+				'label' => 'Mata Pelajaran',
+				'rules' => 'trim|required|xss_clean|min_length[4]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'min_length' => '{field} terlalu pendek'
+				]
+			]
+		]);
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$mapel = $this->input->post('nama_mapel', true);
+			$slug  = url_title($mapel, 'dash', true);
+			$check_mapel = $this->db->get_where('mapel', ['slug_mapel' => $slug])->num_rows();
+			if ($check_mapel == 1) {
+				$this->session->set_flashdata('check_mapel', 'Mata Pelajaran sudah sudah tersedia');
+				$this->load->view('admin/layout/wrapper', $data, FALSE);
+			} else {
+				$data = array(
+					'slug_mapel' => $slug,
+					'nama_mapel' => $mapel
+				);
+				$this->db->insert('mapel', $data);
+				$this->message('Berhasil', 'Anda telah menambahkan mata pelajaran', 'success');
+				return redirect('master/data/mata-pelajaran');
+			}
+		}
 	}
 
-	public function editMapel()
+	public function update_mapel($slug = null)
 	{
-		$data = [
-			'title' => 'Edit Ruangan',
-			'content' => 'admin/contents/data/v_edit_mapel'
-		];
+		if ($slug == null) {
+			return false;
+		}
+		$data['title'] = 'Data Ruangan';
+		$data['content'] = 'admin/contents/data/v_edit_mapel';
+		$data['mapel'] = $this->db->get_where('mapel', ['slug_mapel' => $slug])->row();
+		$this->form_validation->set_rules([
+			[
+				'field' => 'nama_mapel_edit',
+				'label' => 'Mata Pelajaran',
+				'rules' => 'trim|required|xss_clean|min_length[4]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'min_length' => '{field} terlalu pendek'
+				]
+			]
+		]);
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$mapel = $this->input->post('nama_mapel_edit', true);
+			$slug  = url_title($mapel, 'dash', true);
+			$check_mapel = $this->db->get_where('mapel', ['slug_mapel' => $slug])->row();
+			if (!empty($check_mapel)) {
+				if ($slug === $check_mapel->slug_mapel) {
+					$this->db->set('update_time',  date('Y-m-d H:i:s'));
+					$this->db->where('mapel_id', $this->input->post('mapel_id', true));
+					$this->db->update('mapel');
+					$this->message('Berhasil', 'Anda telah menambahkan mata pelajaran', 'success');
+					return redirect('master/data/mata-pelajaran');
+				} else {
+					$this->session->set_flashdata('check_mapel', 'Mata Pelajaran sudah sudah tersedia');
+					$this->load->view('admin/layout/wrapper', $data, FALSE);
+				}
+			} else {
+				$data = array(
+					'slug_mapel' => $slug,
+					'nama_mapel' => $mapel,
+					'update_time' => date('Y-m-d H:i:s')
+				);
+				$this->db->set($data);
+				$this->db->where('mapel_id', $this->input->post('mapel_id', true));
+				$this->db->update('mapel');
+				$this->message('Berhasil', 'Anda telah menambahkan mata pelajaran', 'success');
+				return redirect('master/data/mata-pelajaran');
+			}
+		}
+	}
 
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	public function delete_mapel()
+	{
+		$mapel_id = $this->input->post('mapel_id', true);
+		$this->db->delete('mapel', ['mapel_id' => $mapel_id]);
+		$reponse = [
+			'csrfName' => $this->security->get_csrf_token_name(),
+			'csrfHash' => $this->security->get_csrf_hash(),
+			'message' => 'Anda telah menghapus mata pelajaran ini',
+			'success' => true
+		];
+		echo json_encode($reponse);
 	}
 
 
 	public function dataRuangan()
 	{
-		$data = [
-			'title' => 'Data Ruangan',
-			'content' => 'admin/contents/data/v_data_ruangan'
-		];
-
+		$data['title'] = 'Data Ruangan';
+		$data['content'] = 'admin/contents/data/v_data_ruangan';
+		$data['ruangan'] = $this->master->get_datatable('ruangan');
+		$data['tahun_ajar'] = $this->tahun_ajar;
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function tambahRuangan()
+	public function tambah_ruangan()
 	{
-		$data = [
-			'title' => 'Tambah Ruangan',
-			'content' => 'admin/contents/data/v_tambah_ruangan'
-		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['title'] = 'Tambah Data Ruangan';
+		$data['content'] = 'admin/contents/data/v_tambah_ruangan';
+		$this->form_validation->set_rules([
+			[
+				'field' => 'kode_ruangan',
+				'label' => 'Kode Ruangan',
+				'rules' => 'trim|required|xss_clean|max_length[8]|is_unique[ruangan.kode_ruang]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'is_unique' => '{field} sudah tersedia',
+					'max_length' => '{field} terlalu panjang (maksimal 8 karakter)'
+				]
+			],
+			// [
+			// 	'field' => 'nama_ruangan',
+			// 	'label' => 'Ruangan',
+			// 	'rules' => 'trim|required|xss_clean',
+			// 	'errors' => [
+			// 		'required' => '{field} harus diisi',
+			// 	]
+			// ],
+			[
+				'field' => 'keterangan',
+				'label' => 'Keterangan Ruangan',
+				'rules' => 'trim|xss_clean',
+				'errors' => []
+			]
+		]);
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$data = array(
+				'kode_ruang' => htmlspecialchars($this->input->post('kode_ruangan', true)),
+				// 'nama_ruang' => htmlspecialchars($this->input->post('nama_ruangan', true)),
+				'keterangan' => htmlspecialchars($this->input->post('keterangan', true)),
+			);
+			$this->db->insert('ruangan', $data);
+			$this->message('Berhasil', 'Anda telah menambahkan ruangan', 'success');
+			return redirect('master/data/ruangan');
+		}
 	}
 
-	public function editRuangan()
+	public function update_ruangan($kode = null)
 	{
-		$data = [
-			'title' => 'Edit Ruangan',
-			'content' => 'admin/contents/data/v_edit_ruangan'
-		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		if ($kode == null) {
+			return false;
+		}
+		$data['title'] = 'Data Ruangan';
+		$data['content'] = 'admin/contents/data/v_edit_ruangan';
+		$data['ruangan'] = $this->db->get_where('ruangan', ['kode_ruang' => $kode])->row();
+		$kode_ruang = $this->input->post('kode_ruang_edit', true);
+		if ($data['ruangan']->kode_ruang == $kode_ruang) {
+			$this->form_validation->set_rules('kode_ruang_edit', 'Kode Ruangan', 'trim|required|xss_clean', [
+				'required' => '{field} harus diisi'
+			]);
+		} else {
+			$this->form_validation->set_rules('kode_ruang_edit', 'Kode Ruangan', 'trim|required|xss_clean|is_unique[ruangan.kode_ruang]', [
+				'required' => '{field} harus diisi',
+				'is_unique' => '{field} sudah tersedia'
+			]);
+		}
+		$this->form_validation->set_rules([
+			// [
+			// 	'field' => 'nama_ruang_edit',
+			// 	'label' => 'Ruangan',
+			// 	'rules' => 'trim|required|xss_clean',
+			// 	'errors' => [
+			// 		'required' => '{field} harus diisi',
+			// 	]
+			// ],
+			[
+				'field' => 'keterangan_edit',
+				'label' => 'Keterangan Ruangan',
+				'rules' => 'trim|xss_clean',
+				'errors' => []
+			]
+		]);
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$data = array(
+				'kode_ruang' => htmlspecialchars($this->input->post('kode_ruang_edit', true)),
+				// 'nama_ruang' => htmlspecialchars($this->input->post('nama_ruang_edit', true)),
+				'keterangan' => htmlspecialchars($this->input->post('keterangan_edit', true)),
+				'update_time' => date('Y-m-d H:i:s')
+			);
+			$this->db->set($data);
+			$this->db->where('ruang_id', $this->input->post('ruang_id', true));
+			$this->db->update('ruangan');
+			$this->message('Berhasil', 'Anda telah menambahkan ruangan', 'success');
+			return redirect('master/data/ruangan');
+		}
 	}
 
-	public function dataSiswa()
+	public function delete_ruangan()
 	{
-		$data = [
-			'title' => 'Data Siswa',
-			'content' => 'admin/contents/data/v_data_siswa'
+		$ruang_id = $this->input->post('ruang_id', true);
+		$this->db->delete('ruangan', ['ruang_id' => $ruang_id]);
+		$reponse = [
+			'csrfName' => $this->security->get_csrf_token_name(),
+			'csrfHash' => $this->security->get_csrf_hash(),
+			'message' => 'Anda telah menghapus mata pelajaran ini',
+			'success' => true
 		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		echo json_encode($reponse);
 	}
 
-	public function detailSiswa()
+	public function dataSiswa($kode = false)
 	{
-		$data = [
-			'title' => 'Data Siswa',
-			'content' => 'admin/contents/data/v_detail_siswa'
-		];
-
+		$kelas = $this->db->order_by('kode_kelas', 'RANDOM')->limit(1)->get('kelas')->row();
+		if(empty($kelas)) {
+			$kode = null;
+		} else {
+			if ($kode == false) {
+				$kode = $kelas->kode_kelas;
+			}
+		}
+		$data['students'] = $this->siswa->getWhere(['kode_kelas' => $kode]);
+		$data['classes'] = $this->master->get_masterdata('kelas');
+		$data['walikelas'] = $this->master->getDetailKelas($kode);
+		$data['tahun_ajar'] = $this->tahun_ajar;
+		$data['title'] = 'Data Siswa';
+		$data['content'] = 'admin/contents/data/v_data_siswa';
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function tambahSiswa()
+	public function select_kelas_siswa()
 	{
-		$data = [
-			'title' => 'Tambah Siswa',
-			'content' => 'admin/contents/data/v_tambah_siswa'
-		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$search = $this->input->get('search');
+		$typesend = $this->input->get('type');
+		if ($typesend == 'class') {
+			$classes = $this->master->get_select2($typesend, $search);
+			foreach ($classes as $class) {
+				$result[] = [
+					'id' => $class->kode_kelas,
+					'text'	   => $class->nama_kelas
+				];
+			}
+		}
+		echo json_encode($result);
 	}
 
-	public function editSiswa()
+	public function detail_siswa($siswa_id = false)
 	{
-		$data = [
-			'title' => 'Edit Siswa',
-			'content' => 'admin/contents/data/v_edit_siswa'
-		];
-
+		$siswa_id = $this->secure->decrypt_url($siswa_id);
+		$data['student'] = $this->siswa->getWhere(['siswa_id' => $siswa_id]);
+		$data['title'] = 'Data Siswa';
+		$data['content'] = 'admin/contents/data/v_detail_siswa';
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
+
+	public function tambah_siswa()
+	{
+		$data['title'] = 'Tambah Siswa';
+		$data['content'] = 'admin/contents/data/v_tambah_siswa';
+
+		$this->form_validation->set_rules([
+			[
+				'field' => 'nis',
+				'label' => 'Nomor Induk Siswa',
+				'rules' => 'trim|required|xss_clean|numeric|max_length[12]|is_unique[siswa.siswa_nis]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}',
+					'numeric' => '{field} harus angka',
+					'max_length' => '{field} terlalu panjang'
+				]
+			],
+			[
+				'field' => 'nisn',
+				'label' => 'Nomor Induk Siswa Nasional',
+				'rules' => 'trim|required|xss_clean|numeric|min_length[4]|is_unique[siswa.siswa_nisn]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}',
+					'numeric' => '{field} harus angka',
+					'min_length' => '{field} terlalu pendek'
+				]
+			],
+			[
+				'field' => 'nama_siswa',
+				'label' => 'Nama Siswa',
+				'rules' => 'trim|required|xss_clean|min_length[4]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}',
+					'min_length' => '{field} terlalu pendek'
+				]
+			],
+			[
+				'field' => 'tempat_lahir',
+				'label' => 'Tempat Lahir',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+				]
+			],
+			[
+				'field' => 'tanggal_lahir',
+				'label' => 'Tanggal Lahir',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+				]
+			],
+			[
+				'field' => 'jenis_kelamin',
+				'label' => 'Jenis Kelamin',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}'
+				]
+			],
+			[
+				'field' => 'email',
+				'label' => 'Email',
+				'rules' => 'trim|xss_clean|valid_email',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+					'valid_email' => '{field} harus valid'
+				]
+			],
+			[
+				'field' => 'no_telp',
+				'label'	=> 'Nomor Telepon',
+				'rules' => 'trim|xss_clean|numeric|min_length[6]|max_length[15]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'numeric' => '{field} harus angka',
+					'min_length' => '{field} terlalu pendek',
+					'max_length' => '{field} terlalu panjang'
+				]
+			],
+			[
+				'field' => 'alamat',
+				'label' => 'Alamat',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}'
+				]
+			],
+			[
+				'field' => 'jurusan',
+				'label' => 'Jurusan',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+					'required' => '{field} harus diisi'
+				]
+			],
+			[
+				'field' => 'kelas',
+				'label' => 'Kelas',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+					'required' => '{field} harus diisi'
+				]
+			],
+			[
+				'field' => 'asal_kelas',
+				'label' => 'Asal Kelas',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+				]
+			]
+		]);
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$data_siswa = array(
+				'siswa_nis' => htmlspecialchars($this->input->post('nis', true)),
+				'siswa_nisn' => htmlspecialchars($this->input->post('nisn', true)),
+				'siswa_nama' => htmlspecialchars($this->input->post('nama_siswa', true)),
+				'siswa_tempatlahir' => htmlspecialchars($this->input->post('tempat_lahir', true)),
+				'siswa_tanggallahir' => htmlspecialchars($this->input->post('tanggal_lahir', true)),
+				'siswa_kelamin' => htmlspecialchars($this->input->post('jenis_kelamin', true)),
+				'siswa_alamat' => htmlspecialchars($this->input->post('alamat', true)),
+				'siswa_telp' => htmlspecialchars($this->input->post('no_telp', true)),
+				'siswa_email' => htmlspecialchars($this->input->post('email', true)),
+				'asal_kelas' => htmlspecialchars($this->input->post('asal_kelas', true)),
+				'role_id' => 4,
+				'kelas_id' => htmlspecialchars($this->input->post('kelas', true))
+			);
+			$kelas = $this->db->get_where('kelas', ['kelas_id' => $this->input->post('kelas', true)])->row();
+			$this->db->insert('siswa', $data_siswa);
+			$this->message('Berhasil', 'Anda telah menambahkan Data Siswa', 'success');
+			return redirect('master/data/siswa/kelas/' . $kelas->kode_kelas);
+		}
+	}
+
+	public function update_siswa($siswa_id = false)
+	{
+		$siswa_id = $this->secure->decrypt_url($siswa_id);
+		$data['student'] = $this->siswa->getWhere(['siswa_id' => $siswa_id]);
+		$data['title'] = 'Edit Siswa';
+		$data['content'] = 'admin/contents/data/v_edit_siswa';
+
+		if ($data['student']->siswa_nis != $this->input->post('nis_edit', true)) {
+			$rules = 'trim|required|xss_clean|numeric|max_length[12]|is_unique[siswa.siswa_nis]';
+			$errors = ['is_unique' => '{field} sudah tersedia'];
+		} else {
+			$rules = 'trim|required|xss_clean|numeric|max_length[12]';
+			$errors = [];
+		}
+
+		if ($data['student']->siswa_nisn != $this->input->post('nisn_edit', true)) {
+			$rules = 'trim|required|xss_clean|numeric|max_length[12]|is_unique[siswa.siswa_nisn]';
+			$errors = ['is_unique' => '{field} sudah tersedia'];
+		} else {
+			$rules = 'trim|required|xss_clean|numeric|max_length[12]';
+			$errors = [];
+		}
+
+
+		$this->form_validation->set_rules([
+			[
+				'field' => 'nis_edit',
+				'label' => 'Nomor Induk Siswa',
+				'rules' => $rules,
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}',
+					'numeric' => '{field} harus angka',
+					'max_length' => '{field} terlalu panjang',
+					$errors
+				]
+			],
+			[
+				'field' => 'nisn_edit',
+				'label' => 'Nomor Induk Siswa Nasional',
+				'rules' => $rules,
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}',
+					'numeric' => '{field} harus angka',
+					'min_length' => '{field} terlalu pendek',
+					$errors
+				]
+			],
+			[
+				'field' => 'nama_siswa_edit',
+				'label' => 'Nama Siswa',
+				'rules' => 'trim|required|xss_clean|min_length[4]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}',
+					'min_length' => '{field} terlalu pendek'
+				]
+			],
+			[
+				'field' => 'tempat_lahir_edit',
+				'label' => 'Tempat Lahir',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+				]
+			],
+			[
+				'field' => 'tanggal_lahir_edit',
+				'label' => 'Tanggal Lahir',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+				]
+			],
+			[
+				'field' => 'jenis_kelamin_edit',
+				'label' => 'Jenis Kelamin',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}'
+				]
+			],
+			[
+				'field' => 'email_edit',
+				'label' => 'Email',
+				'rules' => 'trim|xss_clean|valid_email',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+					'valid_email' => '{field} harus valid'
+				]
+			],
+			[
+				'field' => 'no_telp_edit',
+				'label'	=> 'Nomor Telepon',
+				'rules' => 'trim|xss_clean|numeric|min_length[6]|max_length[15]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'numeric' => '{field} harus angka',
+					'min_length' => '{field} terlalu pendek',
+					'max_length' => '{field} terlalu panjang'
+				]
+			],
+			[
+				'field' => 'alamat_edit',
+				'label' => 'Alamat',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}'
+				]
+			],
+			[
+				'field' => 'jurusan_edit',
+				'label' => 'Jurusan',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+				]
+			],
+			[
+				'field' => 'kelas_edit',
+				'label' => 'Kelas',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+				]
+			],
+			[
+				'field' => 'asal_kelas_edit',
+				'label' => 'Asal Kelas',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+				]
+			],
+			[
+				'field' => 'status_siswa',
+				'label' => 'Status Siswa',
+				'rules' => 'trim|xss_clean',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+				]
+			]
+		]);
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$this->process_update_siswa();
+			$kelas_edit	= $this->input->post('kelas_edit', true);
+			$kelas_id	= $this->input->post('kelas_id', true);
+			if (isset($kelas_edit)) {
+				$kelas_id = $kelas_edit;
+			}
+			$kelas = $this->db->get_where('kelas', ['kelas_id' => $kelas_id])->row();
+			$this->message('Berhasil', 'Anda telah Update Data Siswa', 'success');
+			return redirect('master/data/siswa/kelas/' . $kelas->kode_kelas);
+		}
+	}
+
+	public function process_update_siswa()
+	{
+		$kelas_edit	= $this->input->post('kelas_edit', true);
+		$kelas_id	= $this->input->post('kelas_id', true);
+		if (isset($kelas_edit)) {
+			$kelas_id = $kelas_edit;
+		}
+
+		$updateSiswa = array(
+			'siswa_nis' => htmlspecialchars($this->input->post('nis_edit', true)),
+			'siswa_nisn' => htmlspecialchars($this->input->post('nisn_edit', true)),
+			'siswa_nama' => htmlspecialchars($this->input->post('nama_siswa_edit', true)),
+			'siswa_tempatlahir' => htmlspecialchars($this->input->post('tempat_lahir_edit', true)),
+			'siswa_tanggallahir' => htmlspecialchars($this->input->post('tanggal_lahir_edit', true)),
+			'siswa_kelamin' => htmlspecialchars($this->input->post('jenis_kelamin_edit', true)),
+			'siswa_alamat' => htmlspecialchars($this->input->post('alamat_edit', true)),
+			'siswa_telp' => htmlspecialchars($this->input->post('no_telp_edit', true)),
+			'siswa_email' => htmlspecialchars($this->input->post('email_edit', true)),
+			'asal_kelas' => htmlspecialchars($this->input->post('asal_kelas_edit', true)),
+			'kelas_id' => $kelas_id,
+			'status' => htmlspecialchars($this->input->post('status_siswa', true)),
+			'update_time' => date('Y-m-d H:i:s')
+		);
+		$this->db->set($updateSiswa);
+		$this->db->where('siswa_id', $this->input->post('siswa_id', true));
+		$this->db->update('siswa');
+	}
+	public function delete_siswa()
+	{
+		$siswa_id = $this->input->post('siswa_id', true);
+		$siswa_id = $this->secure->decrypt_url($siswa_id);
+		$this->db->delete('siswa', ['siswa_id' => $siswa_id]);
+		$reponse = [
+			'csrfName' => $this->security->get_csrf_token_name(),
+			'csrfHash' => $this->security->get_csrf_hash(),
+			'message' => 'Anda telah menghapus data siswa',
+			'success' => true
+		];
+		echo json_encode($reponse);
+	}
+
 
 	public function dataGuru()
 	{
-		$data = [
-			'title' => 'Data Guru',
-			'content' => 'admin/contents/data/v_data_guru'
-		];
-
+		$data['title'] = 'Admin Siberyl - Data Guru';
+		$data['content'] = 'admin/contents/data/v_data_guru';
+		$data['guru'] = $this->master->get_tablewhere('guru', ['guru_kode !=' => 'ADM']);
+		$data['tahun_ajar'] = $this->tahun_ajar;
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function detailGuru()
+	public function detail_guru($guru_id = null)
 	{
-		$data = [
-			'title' => 'Data Guru',
-			'content' => 'admin/contents/data/v_detail_guru'
-		];
-
+		if ($guru_id == null) {
+			show_404();
+		}
+		$guru_id = $this->secure->decrypt_url($guru_id);
+		$guru = $this->db->query("SELECT guru_kode FROM guru WHERE guru_id = $guru_id")->row();
+		$jadwal_guru = $this->jadwal->getJadwalGuru($guru->guru_kode);
+		$no = 1;
+		foreach ($jadwal_guru as $row => $value) {
+			$sum = 0;
+			$kompetensi = $this->jadwal->getKelasJadwal($value->mapel_id);
+			foreach ($kompetensi as $row => $komp) {
+				$mapel = $komp->mapel_id;
+				$sum += $komp->jumlah_jam;
+			}
+			$result['nomor'] = $no++;
+			$result['mapel'] = $value->nama_mapel;
+			$result['mapel_id'] = $mapel;
+			$result['jumlah_rombel'] = count($kompetensi);
+			$result['jumlah_jam'] = $sum;
+			$result['total_jam'] = count($kompetensi) + $sum;
+			$jadwalGuru[]	= $result;
+		}
+		if (empty($jadwalGuru)) {
+			$data['jadwal'] = null;
+		} else {
+			$data['jadwal'] = $jadwalGuru;
+		}
+		$data['tahun_ajar'] = $this->tahun_ajar;
+		$data['guru'] = $this->guru->getWhere(['guru_id' => $guru_id]);
+		$data['title'] = 'Detail Guru';
+		$data['content'] = 'admin/contents/data/v_detail_guru';
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function tambahGuru()
+	public function tambah_guru()
 	{
-		$data = [
-			'title' => 'Tambah Guru',
-			'content' => 'admin/contents/data/v_tambah_guru'
-		];
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['title'] = 'Tambah Guru';
+		$data['content'] = 'admin/contents/data/v_tambah_guru';
+		$this->form_validation->set_rules([
+			[
+				'field' => 'kode_guru',
+				'label' => 'Kode Guru',
+				'rules' => 'trim|required|xss_clean|max_length[6]|is_unique[guru.guru_kode]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}',
+					'max_length' => '{field} terlalu panjang',
+					'is_unique' => '{field} sudah tersedia'
+				]
+			],
+			[
+				'field' => 'guru_nip',
+				'label' => 'NIP',
+				'rules' => 'trim|required|xss_clean|numeric|min_length[8]|max_length[20]|is_unique[guru.guru_nip]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}',
+					'numeric' => '{field} harus angka',
+					'min_length' => '{field} terlalu pendek',
+					'max_length' => '{field} terlalu panjang',
+					'is_unique' => '{field} sudah tersedia'
+				]
+			],
+			[
+				'field' => 'nama_guru',
+				'label' => 'Nama Guru',
+				'rules' => 'trim|required|xss_clean|min_length[4]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}',
+					'min_length' => '{field} terlalu pendek'
+				]
+			],
+			// [
+			// 	'field' => 'password',
+			// 	'label' => 'Password',
+			// 	'rules' => 'trim|required|xss_clean|min_length[8]',
+			// 	'errors' => [
+			// 		'required' => '{field} harus diisi',
+			// 		'xss_clean' => 'cek kembali pada {field}',
+			// 		'min_length' => '{field} terlalu pendek'
+			// 	]
+			// ],
+			// [
+			// 	'field' => 'conf_pass',
+			// 	'label' => 'Konfirmasi Password',
+			// 	'rules' => 'trim|required|xss_clean|min_length[8]|matches[password]',
+			// 	'errors' => [
+			// 		'required' => '{field} harus diisi',
+			// 		'xss_clean' => 'cek kembali pada {field}',
+			// 		'min_length' => '{field} terlalu pendek',
+			// 		'matches' => '{field} tidak sesuai'
+			// 	]
+			// ]
+		]);
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$kode	= htmlspecialchars($this->input->post('kode_guru', true));
+			$nip	= htmlspecialchars($this->input->post('guru_nip', true));
+			$nama	= htmlspecialchars($this->input->post('nama_guru', true));
+			// $pass	= htmlspecialchars($this->input->post('conf_pass', true));
+			// $newpass = password_hash($pass, PASSWORD_DEFAULT);
+			$username = $kode . "-" . substr($nip, 0, 4);
+			$data_guru = array(
+				'guru_nip' => $nip,
+				'guru_kode' => $kode,
+				'guru_nama'	=> $nama,
+				'guru_username' => $username,
+				// 'guru_pass' => $newpass,
+				'role_id' => 2
+			);
+			$this->guru->insert_guru($data_guru);
+			$this->message('Berhasil', 'Anda telah menambahkan Guru Pengajar', 'success');
+			return redirect('master/data/guru');
+		}
 	}
 
-	public function editGuru()
+	public function update_guru($guru_id)
 	{
-		$data = [
-			'title' => 'Edit Guru',
-			'content' => 'admin/contents/data/v_edit_guru'
-		];
+		$guru_id = $this->secure->decrypt_url($guru_id);
+		$data['guru'] = $this->guru->getWhere(['guru_id' => $guru_id]);
+		$data['title'] = 'Tambah Guru';
+		$data['content'] = 'admin/contents/data/v_edit_guru';
+		if ($data['guru']->guru_nip != $this->input->post('guru_nip_edit')) {
+			$this->form_validation->set_rules([
+				[
+					'field' => 'guru_nip_edit',
+					'label' => 'NIP',
+					'rules' => 'trim|required|xss_clean|numeric|min_length[8]|max_length[20]|is_unique[guru.guru_nip]',
+					'errors' => [
+						'required' => '{field} harus diisi',
+						'xss_clean' => 'cek kembali pada {field}',
+						'numeric' => '{field} harus angka',
+						'min_length' => '{field} terlalu pendek',
+						'max_length' => '{field} terlalu panjang',
+						'is_unique' => '{field} sudah tersedia'
+					]
+				],
+			]);
+		} else {
+			$this->form_validation->set_rules([
+				[
+					'field' => 'guru_nip_edit',
+					'label' => 'NIP',
+					'rules' => 'trim|required|xss_clean|numeric|min_length[8]',
+					'errors' => [
+						'required' => '{field} harus diisi',
+						'xss_clean' => 'cek kembali pada {field}',
+						'numeric' => '{field} harus angka',
+						'min_length' => '{field} terlalu pendek',
+						'max_length' => '{field} terlalu panjang'
+					]
+				],
+			]);
+		}
+		$this->form_validation->set_rules([
+			[
+				'field' => 'nama_guru_edit',
+				'label' => 'Nama Guru',
+				'rules' => 'trim|required|xss_clean|min_length[4]',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}',
+					'min_length' => '{field} terlalu pendek'
+				]
+			],
+			[
+				'field' => 'password',
+				'label' => 'Password',
+				'rules' => 'trim|xss_clean|min_length[8]',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+					'min_length' => '{field} terlalu pendek'
+				]
+			],
+			[
+				'field' => 'conf_pass',
+				'label' => 'Konfirmasi Password',
+				'rules' => 'trim|xss_clean|min_length[8]|matches[password]',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+					'min_length' => '{field} terlalu pendek',
+					'matches' => '{field} tidak sesuai'
+				]
+			]
+		]);
+		if ($this->input->post('kode_guru_edit') === $data['guru']->guru_kode) {
+			$this->form_validation->set_rules([
+				[
+					'field' => 'kode_guru_edit',
+					'label' => 'Kode Guru',
+					'rules' => 'trim|required|xss_clean|max_length[6]',
+					'errors' => [
+						'required' => '{field} harus diisi',
+						'xss_clean' => 'cek kembali pada {field}',
+						'max_length' => '{field} terlalu panjang',
+					]
+				],
+			]);
+		} else {
+			$this->form_validation->set_rules([
+				[
+					'field' => 'kode_guru_edit',
+					'label' => 'Kode Guru',
+					'rules' => 'trim|required|xss_clean|max_length[6]|is_unique[guru.guru_kode]',
+					'errors' => [
+						'required' => '{field} harus diisi',
+						'xss_clean' => 'cek kembali pada {field}',
+						'max_length' => '{field} terlalu panjang',
+						'is_unique' => '{field} sudah tersedia'
+					]
+				],
+			]);
+		}
+		if ($this->form_validation->run() == false) {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} else {
+			$kode	= htmlspecialchars($this->input->post('kode_guru_edit', true));
+			$nip	= htmlspecialchars($this->input->post('guru_nip_edit', true));
+			$nama	= htmlspecialchars($this->input->post('nama_guru_edit', true));
+			$pass	= htmlspecialchars($this->input->post('conf_pass', true));
+			$newpass = password_hash($pass, PASSWORD_DEFAULT);
+			if ($data['guru']->guru_pass != $newpass) {
+				$this->db->set('guru_pass', $newpass);
+			}
+			if ($data['guru']->guru_kode != $kode) {
+				$username = $kode . "-" . substr($nip, 0, 4);
+				$this->db->set('guru_username', $username);
+			}
+			$update_guru = [
+				'guru_nip' => $nip,
+				'guru_kode' => $kode,
+				'guru_nama'	=> $nama,
+				'update_time' => date('Y-m-d H:i:s')
+			];
+			$this->db->set($update_guru);
+			$this->db->where('guru_id', $this->input->post('guru_id', true));
+			$this->db->update('guru');
+			$this->message('Berhasil', 'Anda telah mengupdate Guru Pengajar', 'success');
+			return redirect('master/data/guru');
+		}
+	}
 
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	public function delete_guru()
+	{
+		$guru_nip = $this->input->post('guru_nip', true);
+		$this->db->delete('guru', ['guru_nip' => $guru_nip]);
+		$reponse = [
+			'csrfName' => $this->security->get_csrf_token_name(),
+			'csrfHash' => $this->security->get_csrf_hash(),
+			'message' => 'Anda telah menghapus mata pelajaran ini',
+			'success' => true
+		];
+		echo json_encode($reponse);
+	}
+
+
+	public function select_data()
+	{
+		$type = $this->input->get('type');
+		$jurusan = $this->input->get('jurusan');
+		if ($type == 'jurusan') {
+			$query = $this->db->select("kode_jurusan, nama_jurusan")
+				->from('jurusan')->order_by('nama_jurusan', 'ASC')->get();
+			$results = $query->result();
+			foreach ($results as $row) {
+				$result[] = [
+					'id' => $row->kode_jurusan,
+					'text' => $row->kode_jurusan
+				];
+			}
+		} elseif ($type == 'kelas') {
+			$this->db->select("kelas_id, nama_kelas, kode_jurusan");
+			$this->db->from('kelas');
+			$query = $this->db->where('kode_jurusan', $jurusan)->get();
+			$results = $query->result();
+			foreach ($results as $row) {
+				$result[] = [
+					'id' => $row->kelas_id,
+					'text' => $row->nama_kelas
+				];
+			}
+		}
+		echo json_encode($result);
+	}
+
+	public function select_asal_kelas()
+	{
+		$id_kelas = $this->input->get('id_kelas');
+		$kelas	= $this->db->get_where('kelas', ['kelas_id' => $id_kelas])->row();
+		var_dump($kelas);
+		$roman  = $kelas->index_kelas;
+		$romans = array(
+			'M' => 1000,
+			'CM' => 900,
+			'D' => 500,
+			'CD' => 400,
+			'C' => 100,
+			'XC' => 90,
+			'L' => 50,
+			'XL' => 40,
+			'X' => 10,
+			'IX' => 9,
+			'V' => 5,
+			'IV' => 4,
+			'I' => 1,
+		);
+
+		$roman = $roman;
+		$result = 0;
+
+		foreach ($romans as $key => $value) {
+			while (strpos($roman, $key) === 0) {
+				$result += $value;
+				$roman = substr($roman, strlen($key));
+			}
+		}
+
+		if ($result > 10) {
+			$this->db->select('kode_kelas', 'nama_kelas');
+			$this->db->from('kelas');
+		}
+		echo $result;
 	}
 }

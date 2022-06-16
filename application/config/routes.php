@@ -97,22 +97,35 @@ $route['master/data/kelas/(:any)'] = 'Admin/Data/$1';
 $route['master/data/kelas/(:any)/(:any)'] = 'Admin/Data/$1/$2';
 
 $route['master/data/mata-pelajaran'] = 'Admin/Data/dataMapel';
-$route['master/data/mata-pelajaran/(:any)'] = 'Admin/Data/dataMapel/$1';
-$route['master/data/mata-pelajaran/(:any)/(:any)'] = 'Admin/Data/dataMapel/$1/$2';
+$route['master/data/mata-pelajaran/(:any)'] = 'Admin/Data/$1';
+$route['master/data/mata-pelajaran/(:any)/(:any)'] = 'Admin/Data/$1/$2';
 
 $route['master/data/ruangan'] = 'Admin/Data/dataRuangan';
-$route['master/data/ruangan/(:any)'] = 'Admin/Data/dataRuangan/$1';
-$route['master/data/ruangan/(:any)/(:any)'] = 'Admin/Data/dataRuangan/$1/$2';
+$route['master/data/ruangan/(:any)'] = 'Admin/Data/$1';
+$route['master/data/ruangan/(:any)/(:any)'] = 'Admin/Data/$1/$2';
 
 $route['master/data/siswa'] = 'Admin/Data/dataSiswa';
-$route['master/data/siswa/(:any)'] = 'Admin/Data/dataSiswa/$1';
-$route['master/data/siswa/(:any)/(:any)'] = 'Admin/Data/dataSiswa/$1/$2';
+$route['master/data/siswa/kelas/(:any)'] = 'Admin/Data/dataSiswa/$1';
+$route['master/data/siswa/(:any)'] = 'Admin/Data/$1';
+$route['master/data/siswa/(:any)/(:any)'] = 'Admin/Data/$1/$2';
+$route['master/data/siswa/(:any)/(:any)/(:any)'] = 'Admin/Data/$1/$2/$3';
 
 $route['master/data/guru'] = 'Admin/Data/dataGuru';
-$route['master/data/guru/(:any)'] = 'Admin/Data/dataGuru/$1';
-$route['master/data/guru/(:any)/(:any)'] = 'Admin/Data/dataGuru/$1/$2';
+$route['master/data/guru/(:any)'] = 'Admin/Data/$1';
+$route['master/data/guru/(:any)/(:any)'] = 'Admin/Data/$1/$2';
 
 $route['master/materi'] = 'Admin/Materi';
 $route['master/materi/(:any)'] = 'Admin/Materi/$1';
 $route['master/materi/(:any)/(:any)'] = 'Admin/Materi/$1/$2';
 $route['master/materi/(:any)/(:any)/'] = 'Admin/Materi/$1/$2';
+
+$route['master/jurnal'] = 'Admin/JurnalMateri';
+$route['master/jurnal/(:any)'] = 'Admin/JurnalMateri/$1';
+$route['master/jurnal/(:any)/(:any)'] = 'Admin/JurnalMateri/$1/$2';
+$route['master/jurnal/(:any)/(:any)/(:any)'] = 'Admin/JurnalMateri/$1/$2/$3';
+
+$route['master/info/info-akademik'] = 'Admin/Info/infoAkademik';
+$route['master/info/tahun-ajar'] = 'Admin/Info/tahunPembelajaran';
+$route['master/info/(:any)'] = 'Admin/Info/$1';
+$route['master/info/(:any)/(:any)'] = 'Admin/Info/$1/$2';
+$route['master/info/(:any)/(:any)/(:any)'] = 'Admin/Info/$1/$2/$3';

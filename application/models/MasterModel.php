@@ -29,7 +29,13 @@ class MasterModel extends CI_Model
 		if ($table == null) {
 			return false;
 		}
-		$query	= $this->db->get($table);
+		$query	= $this->db->order_by('create_time', 'DESC')->get($table);
+		return $query->result();
+	}
+
+	public function get_pesan()
+	{
+		$query	= $this->db->order_by('create_time', 'DESC')->get('pesan_aduan', 3);
 		return $query->result();
 	}
 
@@ -38,6 +44,8 @@ class MasterModel extends CI_Model
 		$query	= $this->db->get_where($table, $where);
 		if ($query->num_rows() > 1) {
 			return $query->result();
+		} else {
+			return $query->row();
 		}
 	}
 
@@ -71,7 +79,7 @@ class MasterModel extends CI_Model
 	public function get_select2($type, $search)
 	{
 		if ($type == 'class') {
-			$this->db->select('kelas_id, nama_kelas');
+			$this->db->select('kelas_id, kode_kelas, nama_kelas');
 			$this->db->from('kelas');
 			$this->db->like('nama_kelas', $search);
 			$this->db->order_by('nama_kelas', 'ASC');
@@ -113,7 +121,7 @@ class MasterModel extends CI_Model
 			}
 			return $query->result();
 		} else if ($type == 'jurusan') {
-			$this->db->select('jurusan_id, nama_jurusan');
+			$this->db->select('jurusan_id, kode_jurusan, nama_jurusan');
 			$this->db->from('jurusan');
 			$this->db->like('nama_jurusan', $search);
 			$this->db->order_by('nama_jurusan', 'ASC');
@@ -133,7 +141,7 @@ class MasterModel extends CI_Model
 		$this->db->from('materi_info');
 		$this->db->join('mapel', 'mapel.mapel_id=materi_info.mapel_id', 'left');
 		$this->db->join('jurusan', 'jurusan.jurusan_id=materi_info.jurusan_id', 'left');
-		$this->db->order_by('create_time', 'DESC');
+		$this->db->order_by('materi_info.create_time', 'DESC');
 		return $this->db->get();
 	}
 
@@ -154,13 +162,27 @@ class MasterModel extends CI_Model
 
 	public function getWaliKelas()
 	{
-		$query	= $this->db->select("*")
+		$select = "kelas.kode_kelas, kelas.nama_kelas, kelas.create_time, kelas.update_time, guru.guru_nama, jurusan.kode_jurusan";
+		$query	= $this->db->select($select)
 			->from('kelas')
 			->join('guru', 'guru.guru_kode=kelas.guru_kode', 'left')
-			->join('jurusan', 'jurusan.jurusan_id=kelas.jurusan_id', 'left')
-			->order_by('nama_kelas', 'ASC')
+			->join('jurusan', 'jurusan.kode_jurusan=kelas.kode_jurusan', 'left')
+			->order_by('create_time', 'DESC')
 			->get();
 		$result = $query->result();
+		return $result;
+	}
+
+	public function getDetailKelas($kodeKelas)
+	{
+		$select = "kelas.kode_kelas, kelas.nama_kelas, kelas.create_time, kelas.update_time, guru.guru_nama, guru.guru_kode, jurusan.kode_jurusan";
+		$query	= $this->db->select($select)
+			->from('kelas')
+			->join('guru', 'guru.guru_kode=kelas.guru_kode', 'left')
+			->join('jurusan', 'jurusan.kode_jurusan=kelas.kode_jurusan', 'left')
+			->where('kode_kelas', $kodeKelas)
+			->get();
+		$result = $query->row();
 		return $result;
 	}
 
@@ -183,5 +205,57 @@ class MasterModel extends CI_Model
 			->where('materi_id', $materiID)
 			->get();
 		return $query->row();
+	}
+
+	public function check_kelas($kode_kelas, $guru_kode)
+	{
+		$this->db->where('kode_kelas', $kode_kelas)
+			->like('guru_kode', $guru_kode)
+			->limit(1);
+		$query = $this->db->get('kelas');
+		$result = $query->num_rows();
+		if ($result == 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function check_walikelas($waliKelas)
+	{
+		$query	= $this->db->get_where('kelas', ['guru_kode' => $waliKelas], 1);
+		$result = $query->num_rows();
+		if ($result == 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function check_kodekelas($kode)
+	{
+		$query	= $this->db->select('kode_kelas')
+			->from('kelas')->where('kode_kelas', $kode)->limit(1)->get();
+		$result = $query->num_rows();
+		if ($result == 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function update_kelas()
+	{
+		$waliKelas = $this->input->post('wali_kelas_edit', true);
+		$kelas = $this->db->get_where('kelas', ['kode_kelas' => $this->input->post('kode_kelas', true)])->row();
+		if ($waliKelas == $kelas->kode_kelas) {
+			$this->db->set('update_time',  date('Y-m-d H:i:s'));
+		} else {
+			$this->db->set('guru_kode', $waliKelas);
+			$this->db->set('update_time',  date('Y-m-d H:i:s'));
+			$this->db->update('kelas');
+			$this->db->where('kode_kelas', $this->input->post('kode_kelas', true));
+		}
+		return true;
 	}
 }

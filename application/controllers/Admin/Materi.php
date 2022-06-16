@@ -6,6 +6,16 @@ class Materi extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('MasterModel', 'master', true);
+		$this->load->model('JadwalModel', 'jadwal', true);
+		$tahun_ajar = $this->jadwal->get_activate_tahunajar();
+		if ($tahun_ajar == null) {
+			$this->tahun_ajar = [
+				'semester' => 0,
+				'tahun' => ''
+			];
+		} else {
+			$this->tahun_ajar = $tahun_ajar;
+		}
 		checkAdminLogin();
 	}
 
@@ -23,8 +33,7 @@ class Materi extends CI_Controller
 		$data['title'] = 'Materi';
 		$data['content'] = 'admin/contents/jadwal/v_materi';
 		$data['materi'] = $this->master->get_materi()->result();
-		// var_dump($data['materi']);
-		// die;
+		$data['tahun_ajar'] = $this->tahun_ajar;
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
@@ -114,6 +123,7 @@ class Materi extends CI_Controller
 		$this->db->trans_start();
 		$kelas	= $this->input->post('index_kelas', true);
 		$jurusan = $this->input->post('jurusan', true);
+		$kelas = strtolower($kelas);
 		$dirKelas = 'kelas-' . $kelas;
 		$pathUpload = './storage/materi/';
 		if (!empty($jurusan)) {
@@ -193,29 +203,36 @@ class Materi extends CI_Controller
 				'rules' => 'trim|xss_clean',
 				'errors' => []
 			],
-			[
-				'field' => 'judul_video[]',
-				'label' => 'Judul Video',
-				'rules' => 'trim|xss_clean',
-				'errors' => []
-			],
-			[
-				'field' => 'link_video[]',
-				'label' => 'Link Video Materi Pembelajaran',
-				'rules' => 'trim|required|xss_clean|valid_url',
-				'errors' => [
-					'required' => '{field} harus diisi',
-					'valid_url' => '{field} harus valid!'
-				]
-			]
 		]);
+
+		if (isset($_POST['link_video[]']) || isset($_POST['judul_video[]'])) {
+			$this->form_validation->set_rules([
+				[
+					'field' => 'judul_video[]',
+					'label' => 'Judul Video',
+					'rules' => 'trim|xss_clean',
+					'errors' => []
+				],
+				[
+					'field' => 'link_video[]',
+					'label' => 'Link Video Materi Pembelajaran',
+					'rules' => 'trim|required|xss_clean|valid_url',
+					'errors' => [
+						'required' => '{field} harus diisi',
+						'valid_url' => '{field} harus valid!'
+					]
+				]
+			]);
+		}
 
 		if ($this->form_validation->run() == false) {
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		} else {
 			$infoMateriID = $this->input->post('materi_info_id', true);
 			$this->processMateri($infoMateriID);
-			$this->processLinkVideo($infoMateriID);
+			if ($_POST['link_video']) {
+				$this->processLinkVideo($infoMateriID);
+			}
 			$this->message('Berhasil', 'Data Materi Berhasil Diupdate', 'success');
 			return redirect('master/materi/editMateri/' . $this->secure->encrypt_url($infoMateriID));
 		}
@@ -225,7 +242,8 @@ class Materi extends CI_Controller
 	{
 		$materiInfoID	= $this->input->post('materi_info_id', true);
 		$materi = $this->master->getDetailMateri($materiInfoID);
-		$dirKelas = 'kelas-' . $materi->index_kelas;
+		$kelas = strtolower($materi->index_kelas);
+		$dirKelas = 'kelas-' . $kelas;
 		$pathMateri = './storage/materi/';
 		if ($materi->jurusan_id == 0) {
 			$pathMateri = './storage/materi/' . $dirKelas . '/';
@@ -270,7 +288,8 @@ class Materi extends CI_Controller
 		$materiID		= $this->secure->decrypt_url($materiID);
 		$materiInfoID	= $this->secure->decrypt_url($materiInfoID);
 		$materi		= $this->master->getDetailMateri($materiInfoID);
-		$dirKelas	= 'kelas-' . $materi->index_kelas;
+		$kelas	= strtolower($materi->index_kelas);
+		$dirKelas = 'kelas-' . $kelas;
 		$pathMateri	= './storage/materi/';
 		if ($materi->jurusan_id == 0) {
 			$pathMateri = './storage/materi/' . $dirKelas . '/';
@@ -357,7 +376,8 @@ class Materi extends CI_Controller
 	{
 		$materiID = $this->input->post('materi_id', true);
 		$materi = $this->master->getFileMateri($materiID);
-		$dirKelas	= 'kelas-' . $materi->index_kelas;
+		$kelas = strtolower($materi->index_kelas);
+		$dirKelas	= 'kelas-' . $kelas;
 		$pathMateri = './storage/materi/';
 		if ($materi->kode_jurusan == null) {
 			$pathMateri = './storage/materi/' . $dirKelas . '/';
@@ -459,15 +479,15 @@ class Materi extends CI_Controller
 		$materiID = $this->secure->decrypt_url($materiID);
 		$materiPDF = $this->db->get_where('materi_kbm', ['materi_id' => $materiID])->row();
 		$infoMateri = $this->master->getDetailMateri($materiPDF->materi_info_id);
-		$dirKelas	= 'kelas-' . $infoMateri->index_kelas;
+		$kelas = strtolower($infoMateri->index_kelas);
+		$dirKelas = 'kelas-' . $kelas;
 		$path_pdf = '/storage/materi/';
 		if ($infoMateri->kode_jurusan == null) {
 			$path_pdf = '/storage/materi/' . $dirKelas . '/';
 		} else {
 			$path_pdf = '/storage/materi/' . $dirKelas . '/' . $infoMateri->kode_jurusan . '/';
 		}
-		$data['materi_pdf'] = $materiPDF;
-		$data['path_pdf']	= $path_pdf;
+		$data['file_materi'] = base_url($path_pdf . $materiPDF->materi);
 		$this->load->view('admin/contents/jadwal/materi_pdf/v_materi_pdf', $data);
 	}
 }

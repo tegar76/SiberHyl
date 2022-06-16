@@ -39,4 +39,10 @@ class GuruModel extends CI_Model
 			->where('guru_nip', $where)
 			->update($this->table);
 	}
+
+	public function insert_guru(array $data)
+	{
+		$this->db->insert($this->table, $data);
+		return true;
+	}
 }

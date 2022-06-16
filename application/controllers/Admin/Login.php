@@ -83,15 +83,18 @@ class Login extends CI_Controller
 					redirect('master/dashboard');
 				} else {
 					$this->session->set_flashdata('message', 'Hak akses Anda tidak tersedia untuk masuk kedalam sistem Admin!');
-					redirect('authadmin');
+					$data['title'] = 'Masuk Sebagai Ad Admin';
+					$this->load->view('admin/login/v_login');
 				}
 			} else {
 				$this->session->set_flashdata('message', 'password salah');
-				redirect('authadmin');
+				$data['title'] = 'Masuk Sebagai Ad Admin';
+				$this->load->view('admin/login/v_login');
 			}
 		} else {
 			$this->session->set_flashdata('message', 'username & password tidak tersedia');
-			redirect('authadmin');
+			$data['title'] = 'Masuk Sebagai Ad Admin';
+			$this->load->view('admin/login/v_login');
 		}
 	}
 

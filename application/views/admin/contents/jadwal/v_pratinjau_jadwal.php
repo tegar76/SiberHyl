@@ -132,7 +132,7 @@
 																	</div>
 																	<div class="d-flex justify-content-start">
 																		<img src="<?= base_url('assets/siswa/icons/r-kelas.png') ?>" alt="">
-																		<p><?= $study->nama_ruang ?></p>
+																		<p><?= $study->kode_ruang ?></p>
 																	</div>
 																</div>
 															</div>

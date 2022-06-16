@@ -52,6 +52,9 @@
 	<!-- Datetimepicker -->
 	<link rel="stylesheet" href="<?= base_url('assets/plugin/datetimepicker/jquery.datetimepicker.min.css') ?>">
 	<script src="<?= base_url('assets/plugin/datetimepicker/jquery.datetimepicker.full.js') ?>"></script>
+	<!-- Select 2 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 
 	<script src="<?= base_url('assets/admin/js/my-script.js') ?>"></script>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

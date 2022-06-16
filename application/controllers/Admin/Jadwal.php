@@ -8,6 +8,15 @@ class Jadwal extends CI_Controller
 		parent::__construct();
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->load->model('MasterModel', 'master', true);
+		$tahun_ajar = $this->jadwal->get_activate_tahunajar();
+		if ($tahun_ajar == null) {
+			$this->tahun_ajar = [
+				'semester' => 0,
+				'tahun' => ''
+			];
+		} else {
+			$this->tahun_ajar = $tahun_ajar;
+		}
 		checkAdminLogin();
 	}
 
@@ -23,6 +32,7 @@ class Jadwal extends CI_Controller
 	public function index()
 	{
 		$data['title'] = 'Jadwal Pelajaran';
+		$data['tahun_ajar'] = $this->tahun_ajar;
 		$data['jadwal'] = $this->jadwal->getJadwal()->result_array();
 		$data['kode'] = $this->jadwal->generateKodeJadwal();
 		$data['content'] = 'admin/contents/jadwal/v_jadwal';
@@ -310,7 +320,7 @@ class Jadwal extends CI_Controller
 			foreach ($rooms as $room) {
 				$result[] = [
 					'id'	=> $room->jurusan_id,
-					'text'	=> $room->nama_jurusan,
+					'text'	=> $room->kode_jurusan,
 				];
 			}
 		}
@@ -333,7 +343,7 @@ class Jadwal extends CI_Controller
 	{
 		$data['days']  = ["Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
 		$data['title'] = 'Pratinjau Jadwal';
-		$data['class']	= $this->db->get_where('kelas', ['kode_kelas' => $class])->row();
+		$data['class']	= $this->db->order_by('kode_jurusan', 'ASC')->get_where('kelas', ['kode_kelas' => $class])->row();
 		$data['classes'] = $this->master->get_masterdata('kelas');
 		$data['content'] = 'admin/contents/jadwal/v_pratinjau_jadwal';
 		$this->load->view('admin/layout/wrapper', $data, FALSE);

@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<!--====== Title ======-->
-	<title>Start | Landing Page for Startup and SaaS Business</title>
+	<title><?= $title ?></title>
 
 	<!--====== Favicon Icon ======-->
 	<link rel="shortcut icon" href="<?= base_url('assets/') ?>logo/logo-sm.png" type="image/png">
@@ -30,401 +30,426 @@
 	<!--====== Default css ======-->
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/default.css">
 
-    <!--====== Style css ======-->
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/style.css">
+	<!--====== Style css ======-->
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/style.css">
 
+	<!-- SweetAlert 2 -->
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">
+	<script src="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.all.min.js"></script>
 
 </head>
 
 <body>
+	<!--====== HEADER PART START ======-->
 
-    <!--====== HEADER PART START ======-->
+	<header class="header-area">
+		<div class="navgition navgition-transparent">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<nav class="navbar navbar-expand-lg">
+							<a class="navbar-brand" href="#">
+								<img src="<?= base_url('assets/') ?>logo/logo-big.png" alt="Logo" class="w-75">
+							</a>
 
-    <header class="header-area">
-        <div class="navgition navgition-transparent">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="#">
-                                <img src="<?= base_url('assets/') ?>logo/logo-big.png" alt="Logo" class="w-75">
-                            </a>
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarOne" aria-controls="navbarOne" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="toggler-icon"></span>
+								<span class="toggler-icon"></span>
+								<span class="toggler-icon"></span>
+							</button>
 
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarOne" aria-controls="navbarOne" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                            </button>
+							<div class="collapse navbar-collapse sub-menu-bar" id="navbarOne">
+								<ul class="navbar-nav m-auto">
+									<li class="nav-item active">
+										<a class="page-scroll" href="#home">HOME</a>
+									</li>
+									<li class="nav-item">
+										<a class="page-scroll" href="#service">TENTANG</a>
+									</li>
+									<li class="nav-item">
+										<a class="page-scroll" href="#pricing">FITUR</a>
+									</li>
+									<li class="nav-item">
+										<a class="page-scroll" href="#contact">KONTAK</a>
+									</li>
+								</ul>
+							</div>
 
-                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarOne">
-                                <ul class="navbar-nav m-auto">
-                                    <li class="nav-item active">
-                                        <a class="page-scroll" href="#home">HOME</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#service">TENTANG</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#pricing">FITUR</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#contact">KONTAK</a>
-                                    </li>
-                                </ul>
-                            </div>
 
-                 
-                        </nav> <!-- navbar -->
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- navgition -->
+						</nav> <!-- navbar -->
+					</div>
+				</div> <!-- row -->
+			</div> <!-- container -->
+		</div> <!-- navgition -->
 
-        <div id="home" class="header-hero bg_cover" style="background-image:  url(assets/home/images/bg-head.png)">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-8 col-lg-10">
-                        <div class="header-content text-center">
-                            <div id="typing">
-                                <h3 class="header-title">Selamat Datang</h3> 
-                            </div>
-                            <p class="text">Siswa dan Guru Pengajar <span>SMK Kesatrian Purwokerto Di SiberHyl</span>, Sebuah platform yang memudahan proses belajar-mengajar anda dengan konsep Hybrid Learning  </p>
-                            <div class="header-btn mt-4">
-                                <a href="<?= base_url('login') ?>" class="main-btn btn-one">Masuk <i class="fa fa-caret-right" style="color: white;"></i></a>
-                            </div>
-                        </div> <!-- header content -->
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-            <div class="header-shape">
-                <img src="<?= base_url('assets/') ?>home/images/header-shape.svg" alt="shape">
-            </div>
-        </div> <!-- header content -->
-    </header>
+		<div id="home" class="header-hero bg_cover" style="background-image:  url(assets/home/images/bg-head.png)">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-xl-8 col-lg-10">
+						<div class="header-content text-center">
+							<div id="typing">
+								<h3 class="header-title">Selamat Datang</h3>
+							</div>
+							<p class="text">Siswa dan Guru Pengajar <span>SMK Kesatrian Purwokerto Di SiberHyl</span>, Sebuah platform yang memudahan proses belajar-mengajar anda dengan konsep Hybrid Learning </p>
+							<div class="header-btn mt-4">
+								<a href="<?= base_url('login') ?>" class="main-btn btn-one">Masuk <i class="fa fa-caret-right" style="color: white;"></i></a>
+							</div>
+						</div> <!-- header content -->
+					</div>
+				</div> <!-- row -->
+			</div> <!-- container -->
+			<div class="header-shape">
+				<img src="<?= base_url('assets/') ?>home/images/header-shape.svg" alt="shape">
+			</div>
+		</div> <!-- header content -->
+	</header>
 
-    <!--====== HEADER PART ENDS ======-->
+	<!--====== HEADER PART ENDS ======-->
 
-    <!--====== SERVICES PART START ======-->
+	<!--====== SERVICES PART START ======-->
 
-    <section id="service" class="services-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="section-title pb-10">
-                        <h4 class="title">Tentang SiberHyl</h4>
-                        <p class="text">
-                            <span>SiberHyl</span> adalah sebuah platfrom LMS(Learning Management System) dengan menciptakan pembelajaran secara hybrid learning. Hybrid learning sendiri merupakan metode pembelajaran yang menggabungkan kegiatan belajar daring dan luring secara teratur dan efektif.
-                        </p>
-                    </div> <!-- section title -->
-                </div>
-            </div> <!-- row -->
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="section-title mt-40 mb-20">
-                                <h4 class="sub-title">Tujuan Hybrid Learning</h4>
-                            </div>
-                            <div class="services-content d-sm-flex pb-15">
-                                <div class="services-icon">
-                                <img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
-                                </div>
-                                <div class="services-content media-body mt-n2">
-                                    <p class="text">
-                                        <span>Live event,</span> artinya pembelajaran langsung atau tatap muka yang dilakukan dengan waktu dan tempat yang sama. Bisa juga dilakukan dengan waktu yang sama pula  tetapi dengan tempat yang berbeda
-                                    </p>
-                                </div>
-                            </div> <!-- services content -->
-                            <div class="services-content d-sm-flex pb-15">
-                                <div class="services-icon">
-                                    <img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
-                                </div>
-                                <div class="services-content media-body mt-n2">
-                                    <p class="text">
-                                    <span>Self-paced learning,</span> artinya mengkombinasikan dengan pembelajaran secara mandiri yang memungkinkan siswa belajar kapan saja dan dimana saja secara daring
-                                    </p>
-                                </div>
-                            </div> <!-- services content -->
-                            <div class="services-content d-sm-flex pb-15">
-                                <div class="services-icon">
-                                    <img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
-                                </div>
-                                <div class="services-content media-body mt-n2">
-                                    <p class="text">
-                                    <span>Collaboration,</span> artinya kolaborasi antara guru dan siswa, siswa dan siswa dalam kegiatan belajar mengajar
-                                    </p>
-                                </div>
-                            </div> <!-- services content -->
-                            <div class="services-content d-sm-flex pb-15">
-                                <div class="services-icon">
-                                    <img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
-                                </div>
-                                <div class="services-content media-body mt-n2">
-                                    <p class="text">
-                                    <span>Assesment,</span> artinya guru dapat  mengkombinasikan penilaian daring ataupun luring. bentuknya seperti tugas harian dan ujian per-akhir bab
-                                    </p>
-                                </div>
-                            </div> <!-- services content -->
-                            <div class="services-content d-sm-flex pb-15">
-                                <div class="services-icon">
-                                    <img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
-                                </div>
-                                <div class="services-content media-body mt-n2">
-                                    <p class="text">
-                                    <span>Performa support materials,</span> artinya bahan ajar harus dapat tersedia dalam  bentuk digital. harapannya agar bahan ajar tersebut dapat dengan mudah di akses oleh siswa, baik secara daring maupun luring
-                                    </p>
-                                </div>
-                            </div> <!-- services content -->
-                        </div>
-                    </div> <!-- row -->
-                </div> <!-- row -->
-            </div> <!-- row -->
-        </div> <!-- conteiner -->
-        <div class="services-image d-lg-flex align-items-center">
-            <div class="image">
-                <img src="<?= base_url('assets/') ?>home/images/service-ilustration.png" alt="Services">
-            </div>
-        </div> <!-- services image -->
-    </section>
+	<section id="service" class="services-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-7">
+					<div class="section-title pb-10">
+						<h4 class="title">Tentang SiberHyl</h4>
+						<p class="text">
+							<span>SiberHyl</span> adalah sebuah platfrom LMS(Learning Management System) dengan menciptakan pembelajaran secara hybrid learning. Hybrid learning sendiri merupakan metode pembelajaran yang menggabungkan kegiatan belajar daring dan luring secara teratur dan efektif.
+						</p>
+					</div> <!-- section title -->
+				</div>
+			</div> <!-- row -->
+			<div class="row">
+				<div class="col-lg-7">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="section-title mt-40 mb-20">
+								<h4 class="sub-title">Tujuan Hybrid Learning</h4>
+							</div>
+							<div class="services-content d-sm-flex pb-15">
+								<div class="services-icon">
+									<img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
+								</div>
+								<div class="services-content media-body mt-n2">
+									<p class="text">
+										<span>Live event,</span> artinya pembelajaran langsung atau tatap muka yang dilakukan dengan waktu dan tempat yang sama. Bisa juga dilakukan dengan waktu yang sama pula tetapi dengan tempat yang berbeda
+									</p>
+								</div>
+							</div> <!-- services content -->
+							<div class="services-content d-sm-flex pb-15">
+								<div class="services-icon">
+									<img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
+								</div>
+								<div class="services-content media-body mt-n2">
+									<p class="text">
+										<span>Self-paced learning,</span> artinya mengkombinasikan dengan pembelajaran secara mandiri yang memungkinkan siswa belajar kapan saja dan dimana saja secara daring
+									</p>
+								</div>
+							</div> <!-- services content -->
+							<div class="services-content d-sm-flex pb-15">
+								<div class="services-icon">
+									<img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
+								</div>
+								<div class="services-content media-body mt-n2">
+									<p class="text">
+										<span>Collaboration,</span> artinya kolaborasi antara guru dan siswa, siswa dan siswa dalam kegiatan belajar mengajar
+									</p>
+								</div>
+							</div> <!-- services content -->
+							<div class="services-content d-sm-flex pb-15">
+								<div class="services-icon">
+									<img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
+								</div>
+								<div class="services-content media-body mt-n2">
+									<p class="text">
+										<span>Assesment,</span> artinya guru dapat mengkombinasikan penilaian daring ataupun luring. bentuknya seperti tugas harian dan ujian per-akhir bab
+									</p>
+								</div>
+							</div> <!-- services content -->
+							<div class="services-content d-sm-flex pb-15">
+								<div class="services-icon">
+									<img class="rotate90" src="<?= base_url('assets/') ?>home/images/favicon.png" alt="">
+								</div>
+								<div class="services-content media-body mt-n2">
+									<p class="text">
+										<span>Performa support materials,</span> artinya bahan ajar harus dapat tersedia dalam bentuk digital. harapannya agar bahan ajar tersebut dapat dengan mudah di akses oleh siswa, baik secara daring maupun luring
+									</p>
+								</div>
+							</div> <!-- services content -->
+						</div>
+					</div> <!-- row -->
+				</div> <!-- row -->
+			</div> <!-- row -->
+		</div> <!-- conteiner -->
+		<div class="services-image d-lg-flex align-items-center">
+			<div class="image">
+				<img src="<?= base_url('assets/') ?>home/images/service-ilustration.png" alt="Services">
+			</div>
+		</div> <!-- services image -->
+	</section>
 
-    <!--====== SERVICES PART ENDS ======-->
+	<!--====== SERVICES PART ENDS ======-->
 
-    <!--====== PRICING PART START ======-->
+	<!--====== PRICING PART START ======-->
 
-    <section id="pricing" class="pricing-area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section-title text-center pb-10">
-                        <h4 class="title">Fitur SiberHyl</h4>
-                        <p class="text">
-                            Dalam <span>SiberHyl</span> terdapat fitur-fitur utama untuk menunjang pembelajaran daring atau luring yang efektif dan efisien diantaranya :
-                        </p>
-                    </div> <!-- section title -->
-                </div>
-            </div> <!-- row -->
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-7 col-sm-9">
-                    <div class="single-pricing enterprise mt-40">
-                        <div class="pricing-flower">
-                            <img src="<?= base_url('assets/') ?>home/images/feature-siswa.png" alt="flower">
-                        </div>
-                        <div class="pricing-header text-right">
-                            <h5 class="price sub-title">Siswa</h5>
-                        </div> 
-                        <div class="pricing-list">
-                            <ul>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Informasi Akademik</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Jadwal Pelajaran</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Absensi</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Materi</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Video Pembelajaran</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Tugas </li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Ujian/Ulangan Harian </li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Pengajuan Surat</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Konsultasi bersama Wali Kelas </li>
-                            </ul>
-                        </div>
-                    </div> <!-- single pricing -->
-                </div>
+	<section id="pricing" class="pricing-area">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6">
+					<div class="section-title text-center pb-10">
+						<h4 class="title">Fitur SiberHyl</h4>
+						<p class="text">
+							Dalam <span>SiberHyl</span> terdapat fitur-fitur utama untuk menunjang pembelajaran daring atau luring yang efektif dan efisien diantaranya :
+						</p>
+					</div> <!-- section title -->
+				</div>
+			</div> <!-- row -->
+			<div class="row justify-content-center">
+				<div class="col-lg-4 col-md-7 col-sm-9">
+					<div class="single-pricing enterprise mt-40">
+						<div class="pricing-flower">
+							<img src="<?= base_url('assets/') ?>home/images/feature-siswa.png" alt="flower">
+						</div>
+						<div class="pricing-header text-right">
+							<h5 class="price sub-title">Siswa</h5>
+						</div>
+						<div class="pricing-list">
+							<ul>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Informasi Akademik</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Jadwal Pelajaran</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Absensi</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Materi</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Video Pembelajaran</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Tugas </li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Ujian/Ulangan Harian </li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Pengajuan Surat</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Konsultasi bersama Wali Kelas </li>
+							</ul>
+						</div>
+					</div> <!-- single pricing -->
+				</div>
 
-                <div class="col-lg-4 col-md-7 col-sm-9">
-                    <div class="single-pricing enterprise mt-40">
-                        <div class="pricing-flower">
-                            <img src="<?= base_url('assets/') ?>home/images/feature-guru.png" alt="guru">
-                        </div>
-                        <div class="pricing-header text-right">
-                            <h5 class="price sub-title">Guru</h5>
-                        </div> 
-                        <div class="pricing-list">
-                            <ul>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola informasi terbaru </li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Data Absensi</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Data Materi</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Data Tugas Harian</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Ulangan Harian</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Jurnal Materi</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola catatan KBM</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Menerima Pengajuan Surat</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi antara guru & siwa</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi antara guru & Wali Kelas</li>
-                            </ul>
+				<div class="col-lg-4 col-md-7 col-sm-9">
+					<div class="single-pricing enterprise mt-40">
+						<div class="pricing-flower">
+							<img src="<?= base_url('assets/') ?>home/images/feature-guru.png" alt="guru">
+						</div>
+						<div class="pricing-header text-right">
+							<h5 class="price sub-title">Guru</h5>
+						</div>
+						<div class="pricing-list">
+							<ul>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola informasi terbaru </li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Data Absensi</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Data Materi</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Data Tugas Harian</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Ulangan Harian</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Jurnal Materi</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola catatan KBM</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Menerima Pengajuan Surat</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi antara guru & siwa</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi antara guru & Wali Kelas</li>
+							</ul>
 
-                        </div>
-                    </div> <!-- single pricing -->
-                </div>
-                
-                <div class="col-lg-4 col-md-7 col-sm-9">
-                    <div class="single-pricing enterprise mt-40">
-                        <div class="pricing-flower">
-                            <img src="<?= base_url('assets/') ?>home/images/feature-wali-kelas.png" alt="wali kelas">
-                        </div>
-                        <div class="pricing-header text-right">
-                            <h5 class="price sub-title">Wali kelas</h5>
-                        </div> 
-                        <div class="pricing-list">
-                            <ul>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Jadwal</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Melihat data Siswa</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Data Absensi Siswa</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mlihat Jadwal Kelas  yang dipimpin</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi Antara  Wali Kelas & Siswa</li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi Antara Wali Kelas & Guru </li>
-                                <li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Catatan KBM Dari Guru </li>
-                            </ul>
+						</div>
+					</div> <!-- single pricing -->
+				</div>
 
-                        </div>
-                    </div> <!-- single pricing -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- conteiner -->
-    </section>
-    
-    <!--====== CONTACT PART START ======-->
+				<div class="col-lg-4 col-md-7 col-sm-9">
+					<div class="single-pricing enterprise mt-40">
+						<div class="pricing-flower">
+							<img src="<?= base_url('assets/') ?>home/images/feature-wali-kelas.png" alt="wali kelas">
+						</div>
+						<div class="pricing-header text-right">
+							<h5 class="price sub-title">Wali kelas</h5>
+						</div>
+						<div class="pricing-list">
+							<ul>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Jadwal</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Melihat data Siswa</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Data Absensi Siswa</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mlihat Jadwal Kelas yang dipimpin</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi Antara Wali Kelas & Siswa</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi Antara Wali Kelas & Guru </li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Catatan KBM Dari Guru </li>
+							</ul>
 
-    <section id="contact" class="contact-area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section-title text-center pb-10">
-                        <h4 class="title">Hubungi Kami</h4>
-                        <p class="text">
-                            Kami Siap Membantu Anda Jika memiliki Kendala Login 
-                            Dan  Pengaksesan Fitur  di <span>SiberHyl</span>
-                        </p>
-                    </div> <!-- section title -->
-                </div>
-            </div> <!-- row -->
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="contact-form">
-                        <form id="contact-form" action="<?= base_url('') ?>" method="post" data-toggle="validator">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="single-form form-group">
-                                        <input type="text" name="name" placeholder="Nama Lengkap" data-error="Name is required." required="required">
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="single-form form-group">
-                                        <input type="email" name="email" placeholder="Email" data-error="Valid email is required." required="required">
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="single-form form-group">
-                                        <input type="text" name="subject" placeholder="Subjek" data-error="Subject is required." required="required">
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="single-form form-group">
-                                        <input type="text" name="no_phone" placeholder="No Hp" data-error="Phone is required." required="required">
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="single-form form-group">
-                                        <textarea placeholder="Pesan Anda ..." name="message" data-error="Please, leave us a message." required="required"></textarea>
-                                        <div class="help-block with-errors"></div>
-                                    </div> <!-- single form -->
-                                </div>
-                                <p class="form-message"></p>
-                                <div class="col-md-12">
-                                    <div class="single-form form-group text-center">
-                                        <button type="submit" class="main-btn">Kirim</button>
-                                    </div> <!-- single form -->
-                                </div>
-                            </div> <!-- row -->
-                        </form>
-                    </div> <!-- row -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- conteiner -->
-    </section>
+						</div>
+					</div> <!-- single pricing -->
+				</div>
+			</div> <!-- row -->
+		</div> <!-- conteiner -->
+	</section>
 
-    <!--====== CONTACT PART ENDS ======-->
+	<!--====== CONTACT PART START ======-->
 
-    <!--====== FOOTER PART START ======-->
+	<section id="contact" class="contact-area">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6">
+					<div class="section-title text-center pb-10">
+						<h4 class="title">Hubungi Kami</h4>
+						<p class="text">
+							Kami Siap Membantu Anda Jika memiliki Kendala Login
+							Dan Pengaksesan Fitur di <span>SiberHyl</span>
+						</p>
+					</div> <!-- section title -->
+				</div>
+			</div> <!-- row -->
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="contact-form">
+						<?php $attr = array('id' => 'contact-form', 'data-toggle' => 'validator') ?>
+						<?= form_open('/', $attr) ?>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="single-form form-group">
+									<input type="text" name="nama_lengkap" placeholder="Nama Lengkap">
+									<div class="help-block with-errors"></div>
+									<?= form_error('nama_lengkap', '<div class="text-danger">', '</div>') ?>
+								</div> <!-- single form -->
+							</div>
+							<div class="col-md-6">
+								<div class="single-form form-group">
+									<input type="text" name="email_user" placeholder="Email">
+									<div class="help-block with-errors"></div>
+									<?= form_error('email_user', '<div class="text-danger">', '</div>') ?>
+								</div> <!-- single form -->
+							</div>
+							<div class="col-md-6">
+								<div class="single-form form-group">
+									<input type="text" name="subject" placeholder="Subjek">
+									<div class="help-block with-errors"></div>
+									<?= form_error('subject', '<div class="text-danger">', '</div>') ?>
+								</div> <!-- single form -->
+							</div>
+							<div class="col-md-6">
+								<div class="single-form form-group">
+									<input type="text" name="no_phone" placeholder="No Hp">
+									<div class="help-block with-errors"></div>
+									<?= form_error('no_phone', '<div class="text-danger">', '</div>') ?>
+								</div> <!-- single form -->
+							</div>
+							<div class="col-md-12">
+								<div class="single-form form-group">
+									<textarea placeholder="Pesan Anda ..." name="message"></textarea>
+									<div class="help-block with-errors"></div>
+									<?= form_error('message', '<div class="text-danger">', '</div>') ?>
+								</div> <!-- single form -->
+							</div>
+							<p class="form-message"></p>
+							<div class="col-md-12">
+								<div class="single-form form-group text-center">
+									<button type="submit" class="main-btn">Kirim</button>
+								</div> <!-- single form -->
+							</div>
+						</div> <!-- row -->
+						<?= form_close() ?>
+					</div> <!-- row -->
+				</div>
+			</div> <!-- row -->
+		</div> <!-- conteiner -->
+	</section>
 
-    <footer id="footer" class="footer-area">
-        <div class="footer-widget">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5 col-md-4 col-sm-6">
-                        <div class="footer-link">
-                            <h6 class="footer-title">Tentang Aplikasi</h6>
-                            <ul>
-                                <li><a href="#">➺ Sistem Informasi</a></li>
-                                <li><a href="#">➺ Hybrid Learning</a></li>
-                                <li><a href="#">➺ SiberHyl</a></li>
-                            </ul>
-                        </div> <!-- footer link -->
-                    </div>
-                    <div class="col-lg-5 col-md-4 col-sm-6">
-                        <div class="footer-link">
-                            <h6 class="footer-title">Sosial Media</h6>
-                            <ul class="py-3">
-                                <li><a href="#">➺ <i class="fa fa-instagram" aria-hidden="true"> </i> Instagram</a></li>
-                                <li><a href="#">➺ <i class="fa fa-facebook-square" aria-hidden="true"> </i> Facebook</a></li>
-                            </ul>
-                        </div> <!-- footer link -->
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="footer-link">
-                            <h6 class="footer-title">Kontak Kami</h6>
-                            <ul>
-                                <li><a href="#">➺ 
-                                    Jl.kyai badri, RT.07/03, Kec.Paguyangan,  Kab. Brebes 52276
-                                </a></li>
-                            </ul>
-                        </div> <!-- footer link -->
-                    </div>
-                    
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- footer widget -->
-        
-        <div class="footer-copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="copyright text-center">
-                            <p class="text"><i class="fa fa-copyright" aria-hidden="true"> 2022 Team Paradoks Technology</i></p>
-                        </div>
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- footer copyright -->
-    </footer>
+	<!--====== CONTACT PART ENDS ======-->
 
-    <!--====== FOOTER PART ENDS ======-->
+	<!--====== FOOTER PART START ======-->
 
-    <!--====== BACK TO TOP PART START ======-->
+	<footer id="footer" class="footer-area">
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-5 col-md-4 col-sm-6">
+						<div class="footer-link">
+							<h6 class="footer-title">Tentang Aplikasi</h6>
+							<ul>
+								<li><a href="#">➺ Sistem Informasi</a></li>
+								<li><a href="#">➺ Hybrid Learning</a></li>
+								<li><a href="#">➺ SiberHyl</a></li>
+							</ul>
+						</div> <!-- footer link -->
+					</div>
+					<div class="col-lg-5 col-md-4 col-sm-6">
+						<div class="footer-link">
+							<h6 class="footer-title">Sosial Media</h6>
+							<ul class="py-3">
+								<li><a href="#">➺ <i class="fa fa-instagram" aria-hidden="true"> </i> Instagram</a></li>
+								<li><a href="#">➺ <i class="fa fa-facebook-square" aria-hidden="true"> </i> Facebook</a></li>
+							</ul>
+						</div> <!-- footer link -->
+					</div>
+					<div class="col-lg-2 col-md-4 col-sm-6">
+						<div class="footer-link">
+							<h6 class="footer-title">Kontak Kami</h6>
+							<ul>
+								<li><a href="#">➺
+										Jl.kyai badri, RT.07/03, Kec.Paguyangan, Kab. Brebes 52276
+									</a></li>
+							</ul>
+						</div> <!-- footer link -->
+					</div>
 
-    <a class="back-to-top" href="#">  <img class="rotate45" src="<?= base_url('assets/') ?>home/images/favicon.png" alt=""> </a>
+				</div> <!-- row -->
+			</div> <!-- container -->
+		</div> <!-- footer widget -->
 
-    <!--====== BACK TO TOP PART ENDS ======-->
+		<div class="footer-copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="copyright text-center">
+							<p class="text"><i class="fa fa-copyright" aria-hidden="true"> 2022 Team Paradoks Technology</i></p>
+						</div>
+					</div>
+				</div> <!-- row -->
+			</div> <!-- container -->
+		</div> <!-- footer copyright -->
+	</footer>
 
-    <!--====== jquery js ======-->
-    <script src="<?= base_url('assets/') ?>home/js/vendor/modernizr-3.6.0.min.js"></script>
-    <script src="<?= base_url('assets/') ?>home/js/vendor/jquery-1.12.4.min.js"></script>
+	<!--====== FOOTER PART ENDS ======-->
 
-    <!--====== Bootstrap js ======-->
-    <script src="<?= base_url('assets/') ?>home/js/bootstrap.min.js"></script>
-    <script src="<?= base_url('assets/') ?>home/js/popper.min.js"></script>
+	<!--====== BACK TO TOP PART START ======-->
 
-    <!--====== Scrolling Nav js ======-->
-    <script src="<?= base_url('assets/') ?>home/js/jquery.easing.min.js"></script>
-    <script src="<?= base_url('assets/') ?>home/js/scrolling-nav.js"></script>
+	<a class="back-to-top" href="#"> <img class="rotate45" src="<?= base_url('assets/') ?>home/images/favicon.png" alt=""> </a>
 
-    <!--====== Magnific Popup js ======-->
-    <script src="<?= base_url('assets/') ?>home/js/jquery.magnific-popup.min.js"></script>
+	<!--====== BACK TO TOP PART ENDS ======-->
 
-    <!--====== Main js ======-->
-    <script src="<?= base_url('assets/') ?>home/js/main.js"></script>
+	<!--====== jquery js ======-->
+	<script src="<?= base_url('assets/') ?>home/js/vendor/modernizr-3.6.0.min.js"></script>
+	<script src="<?= base_url('assets/') ?>home/js/vendor/jquery-1.12.4.min.js"></script>
+
+	<!--====== Bootstrap js ======-->
+	<script src="<?= base_url('assets/') ?>home/js/bootstrap.min.js"></script>
+	<script src="<?= base_url('assets/') ?>home/js/popper.min.js"></script>
+
+	<!--====== Scrolling Nav js ======-->
+	<script src="<?= base_url('assets/') ?>home/js/jquery.easing.min.js"></script>
+	<script src="<?= base_url('assets/') ?>home/js/scrolling-nav.js"></script>
+
+	<!--====== Magnific Popup js ======-->
+	<script src="<?= base_url('assets/') ?>home/js/jquery.magnific-popup.min.js"></script>
+
+	<!--====== Main js ======-->
+	<script src="<?= base_url('assets/') ?>home/js/main.js"></script>
+
+	<script>
+		$(function() {
+			var title = '<?= $this->session->flashdata("title") ?>';
+			var text = '<?= $this->session->flashdata("text") ?>';
+			var type = '<?= $this->session->flashdata("type") ?>';
+			if (title) {
+				swal.fire({
+					icon: type,
+					title: title,
+					text: text,
+					type: type,
+					button: true,
+				});
+			};
+		});
+	</script>
 </body>
 
 </html>

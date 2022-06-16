@@ -62,9 +62,9 @@
 								<div class="input-group mb-3">
 									<select class="custom-select <?= (form_error('index_kelas')) ? 'is-invalid' : '' ?>" id="index_kelas" name="index_kelas">
 										<option selected>Pilih Index Kelas</option>
-										<option value="10">Kelas 10 </option>
-										<option value="11">Kelas 11</option>
-										<option value="12">Kelas 12</option>
+										<option value="X">Kelas X </option>
+										<option value="XI">Kelas XI</option>
+										<option value="XII">Kelas XII</option>
 									</select>
 									<div id="index_kelasFeedback" class="invalid-feedback">
 										<?= form_error('index_kelas', '<div class="text-danger">', '</div>') ?>

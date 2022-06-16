@@ -41,7 +41,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<h6 class="card-title">Data Materi Semester Gasal Tahun Pelajaran 2021/2022 </h6>
+						<h6 class="card-title">Data Materi Semester <?= $semester = ($tahun_ajar['semester'] == 0 ) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
 						<div class="mt-4 activity">
 							<table id="data_materi" class="table-responsive table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->

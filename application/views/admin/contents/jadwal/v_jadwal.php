@@ -41,7 +41,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<h6 class="card-title">Data Jadwal Pelajaran Semester Gasal Tahun Pelajaran 2021 /2022 </h6>
+						<h6 class="card-title">Data Jadwal Pelajaran Semester <?= $semester = ($tahun_ajar['semester'] == 0 ) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
 						<div class="mt-4 activity">
 							<table id="data_jadwal" class="table-responsive table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
@@ -54,7 +54,7 @@
 										<th style="width:7%;">Kode Guru</th>
 										<th style="width:9%;">Mulai</th>
 										<th style="width:9%;">Selesai</th>
-										<th style="width:9%;">Ruang</th>
+										<th style="width:9%;">Ruangan</th>
 										<th style="width:9%;">Dibuat</th>
 										<th style="width:9%;">Diubah</th>
 										<th style="width:14%;">Aksi</th>
@@ -71,7 +71,7 @@
 											<td><?= $value['guru_kode'] ?></td>
 											<td><?= date('H:i', strtotime($value['jam_masuk'])) ?></td>
 											<td><?= date('H:i', strtotime($value['jam_keluar'])) ?></td>
-											<td><?= $value['nama_ruang'] ?></td>
+											<td><?= $value['kode_ruang'] ?></td>
 											<td><?= date('d-m-Y H:i', strtotime($value['create_time'])) . " WIB" ?></td>
 											<td><?= ($value['create_time'] == $value['update_time']) ? ' - ' : date('d-m-Y H:i', strtotime($value['update_time'])) . " WIB" ?></td>
 											<td>

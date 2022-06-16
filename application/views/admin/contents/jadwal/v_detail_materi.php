@@ -7,15 +7,15 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title">Detail Jadwal</h3>
+				<h3 class="page-title">Detail Materi</h3>
 			</div>
 		</div>
 		<div class="d-flex align-items-center">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Setting Jadwal</li>
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi') ?>" class="text-muted">Jadwal</a></li>
-					<li class="breadcrumb-item text-muted active" aria-current="page">Detail Jadwal</li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi') ?>" class="text-muted">Materi</a></li>
+					<li class="breadcrumb-item text-muted active" aria-current="page">Detail Materi</li>
 				</ol>
 			</nav>
 		</div>
