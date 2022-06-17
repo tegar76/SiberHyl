@@ -11,12 +11,12 @@ class MasterModel extends CI_Model
 		4. Total Kelas
 		Fungsi ini mengembalikan nilai berupa Integer
 	*/
-	public function get_row_data($table = null)
+	public function get_row_data($table = null, $where = null)
 	{
 		if ($table == null) {
 			return false;
 		}
-		$query	= $this->db->get($table);
+		$query	= $this->db->get_where($table, $where);
 		if ($query->num_rows() > 0) {
 			return $query->num_rows();
 		} else {
