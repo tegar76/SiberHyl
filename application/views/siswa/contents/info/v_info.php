@@ -6,7 +6,7 @@
 		<div class="row">
             <!-- looping info -->
 			<div class="col-md-12">
-                <a href="<?= base_url('Siswa/info/infoPdf')?>">
+                <a target="blank" href="<?= base_url('Siswa/info/infoPdf')?>">
                     <div class="media mb-2">
                         <i class='bx bx-info-square bx-md color-cyan mr-2'></i>
                         <div class="row">
@@ -21,7 +21,7 @@
 			</div>     
              <!-- looping info -->
 			<div class="col-md-12">
-                <a href="<?= base_url('Siswa/info/infoPdf')?>">
+                <a target="blank" href="<?= base_url('Siswa/info/infoPdf')?>">
                     <div class="media mb-2">
                         <i class='bx bx-info-square bx-md color-cyan mr-2'></i>
                         <div class="row">
@@ -36,7 +36,7 @@
 			</div>     
              <!-- looping info -->
 			<div class="col-md-12">
-                <a href="<?= base_url('Siswa/info/infoPdf')?>">
+                <a target="blank" href="<?= base_url('Siswa/info/infoPdf')?>">
                     <div class="media mb-2">
                         <i class='bx bx-info-square bx-md color-cyan mr-2'></i>
                         <div class="row">
