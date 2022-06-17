@@ -62,8 +62,8 @@ class MasterModel extends CI_Model
 			$result = $query->result();
 			return $result;
 		} elseif ($table == 'guru') {
-			$query = $this->db->select('guru_id, guru_kode, guru_nama')
-				->from($table)->where('guru_kode !=', 'ADM')->order_by('guru_kode', 'ASC')->get();
+			$query = $this->db->select('guru_id, guru_kode, guru_nama', 'role_id')
+				->from($table)->where('role_id !=', 1)->order_by('guru_kode', 'ASC')->get();
 			$result = $query->result();
 			return $result;
 		} elseif ($table == 'ruangan') {

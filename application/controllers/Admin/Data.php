@@ -395,7 +395,7 @@ class Data extends CI_Controller
 	public function dataSiswa($kode = false)
 	{
 		$kelas = $this->db->order_by('kode_kelas', 'RANDOM')->limit(1)->get('kelas')->row();
-		if(empty($kelas)) {
+		if (empty($kelas)) {
 			$kode = null;
 		} else {
 			if ($kode == false) {
@@ -715,6 +715,25 @@ class Data extends CI_Controller
 				]
 			],
 			[
+				'field' => 'password',
+				'label' => 'Password',
+				'rules' => 'trim|xss_clean|min_length[8]',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+					'min_length' => '{field} terlalu pendek'
+				]
+			],
+			[
+				'field' => 'conf_pass',
+				'label' => 'Konfirmasi Password',
+				'rules' => 'trim|xss_clean|min_length[8]|matches[password]',
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}',
+					'min_length' => '{field} terlalu pendek',
+					'matches' => '{field} tidak sesuai'
+				]
+			],
+			[
 				'field' => 'status_siswa',
 				'label' => 'Status Siswa',
 				'rules' => 'trim|xss_clean',
@@ -740,12 +759,19 @@ class Data extends CI_Controller
 
 	public function process_update_siswa()
 	{
+		$siswa_id = $this->input->post('siswa_id', true);
+		$siswa = $this->db->get_where('siswa', ['siswa_id' => $siswa_id])->row();
 		$kelas_edit	= $this->input->post('kelas_edit', true);
 		$kelas_id	= $this->input->post('kelas_id', true);
 		if (isset($kelas_edit)) {
 			$kelas_id = $kelas_edit;
 		}
 
+		$pass	= htmlspecialchars($this->input->post('conf_pass', true));
+		$newpass = password_hash($pass, PASSWORD_DEFAULT);
+		if ($siswa->siswa_pass != $newpass) {
+			$this->db->set('siswa_pass', $newpass);
+		}
 		$updateSiswa = array(
 			'siswa_nis' => htmlspecialchars($this->input->post('nis_edit', true)),
 			'siswa_nisn' => htmlspecialchars($this->input->post('nisn_edit', true)),

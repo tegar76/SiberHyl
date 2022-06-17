@@ -166,6 +166,26 @@
 									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col">
+									<label for="password">Password Baru</label>
+									<div class="input-group mb-3">
+										<input type="text" name="password" id="password" placeholder="Masukan Password (minimal 8 karakter)" class="form-control <?= form_error('password') ? 'is-invalid' : '' ?>" value="<?= set_value('password') ?>">
+										<div class="invalid-feedback">
+											<?= form_error('password', '<div class="text-danger">', '</div>') ?>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<label for="conf_pass">Konfirmasi Password</label>
+									<div class="input-group mb-3">
+										<input type="text" name="conf_pass" id="conf_pass" placeholder="Masukan Konfirmasi Password" class="form-control <?= form_error('conf_pass') ? 'is-invalid' : '' ?>" value="<?= set_value('conf_pass') ?>">
+										<div class="invalid-feedback">
+											<?= form_error('conf_pass', '<div class="text-danger">', '</div>') ?>
+										</div>
+									</div>
+								</div>
+							</div>
 							<label for="status_siswa">Status</label>
 							<div class="input-group mb-3">
 								<div class="form-check ml-3 mr-3">
