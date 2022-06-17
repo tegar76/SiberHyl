@@ -362,6 +362,12 @@ $(document).ready(function() {
 		"TBSM"
 	];
 
+	var guruPengajar = [
+		// Guru Pengajar
+		"Suripto S.Pd",
+		"Sugiono S.Pd",
+	];
+
 
 	$("#kelas").mSelectDBox({
 		"list": kelas,
@@ -374,6 +380,15 @@ $(document).ready(function() {
 
 	$("#jurusan").mSelectDBox({
 		"list": jurusan,
+		"multiple": 1,
+		"autoComplete": true,
+		"onInit": function(ctx) {
+			new $.fn.mSelectDBox.MyCustomAppear1(ctx);
+		}
+	});
+
+	$("#guruPengajar").mSelectDBox({
+		"list": guruPengajar,
 		"multiple": 1,
 		"autoComplete": true,
 		"onInit": function(ctx) {

@@ -4,11 +4,16 @@
 <section class="container section section__height"> 
 
 <form action="">
-    <div class="title-form mb-1">
-        Form Tambah Diskusi Baru 
+    <div class="title-form mb-3">
+        Form Tambah Konsultasi Baru 
     </div>
-    <div class="sub-title-form mb-3">
-        Panel Sasis Dan Pemindahan Tenaga KR - IX TKRO 1  
+    <label for="">NIS</label>
+    <div class="input-group mb-3">
+        <input type="text" name="" id="" class="form-control" value="2010049" readonly>
+    </div>
+    <label for="">Nama</label>
+    <div class="input-group mb-3">
+        <input type="text" name="" id="" class="form-control" value="ADIT PRAYITNO" readonly>
     </div>
     <label for="">Judul</label>
     <div class="input-group mb-3">

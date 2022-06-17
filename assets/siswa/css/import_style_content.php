@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/style_contentt.css')?>">
+<link rel="stylesheet" href="<?= base_url('assets/siswa/css/style_content.css')?>">

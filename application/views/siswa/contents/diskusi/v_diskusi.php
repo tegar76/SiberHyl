@@ -20,9 +20,10 @@
                                     <div class="card comment p-1 border border-custom-blue rounded">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col">
-                                                <div class="text-xs ml-2 mr-2">
+                                                <div class="text-xs ml-2">
                                                     Komentar
-                                                    <button class="border-0 rounded ml-1 mr-1 px-2">1</button>
+                                                    <button class="border-0 rounded ml-1 mr-2 px-2">1</button>
+													<!-- <span class="badge-info-ds"></span> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -76,9 +77,10 @@
                                     <div class="card comment p-1 border border-custom-blue rounded">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col">
-                                                <div class="text-xs ml-2 mr-2">
+                                                <div class="text-xs ml-2">
                                                     Komentar
-                                                    <button class="border-0 rounded ml-1 mr-1 px-2">1</button>
+                                                    <button class="border-0 rounded ml-1 mr-2 px-2">1</button>
+													<span class="badge-info-ds"></span>
                                                 </div>
                                             </div>
                                         </div>

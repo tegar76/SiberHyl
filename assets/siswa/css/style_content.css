@@ -106,24 +106,6 @@ input:read-only {
 margin-left: 0.3rem;
 }
 
-.btn-primary {
-background-color:#2989A8;
-}
-
-.btn-primary:hover {
-    background-color: #296e85;
-}
-
-.btn-secondary {
-    background-color:#9b9b9b;
-    border-color: #9b9b9b;
-}
-
-.btn-secondary:hover {
-    background-color: #6e6e6e;
-    border-color: #9b9b9b;
-}
-
 .form-validation {
   font-size: 13px;
 }
@@ -757,9 +739,6 @@ background-color:#2989A8;
     
     }
     
-    
-    
-    
     /* Style Menu End */
     
     /* Style Konten  */
@@ -824,28 +803,6 @@ background-color:#2989A8;
     }
     .shadow-none {
       box-shadow: none!important;
-    }
-    
-    
-    
-    .btn-pink {
-      font-size: 15px;
-      line-height: 1.5;
-      color: #fff;
-      
-      width: 100px;
-      height: 38px;
-      border-radius: 10px;
-      background: rgba(236, 38, 143, 1);
-      justify-content: center;
-      align-items: center;
-    
-    }
-    
-    .btn-pink:hover {
-      background:  #209dd8;
-      color: #fff;
-      text-decoration: none;
     }
     
     #title {
@@ -1128,19 +1085,6 @@ background-color:#2989A8;
       text-decoration: none;
     }
     
-    .btn-success {
-      background-color:  rgb(113, 196, 88);
-      color: #ffffff;
-      opacity: 0.9;
-      border: none;
-    }
-    
-    .btn-success:hover {
-      background-color:  rgb(52, 131, 72);
-      opacity: 0.9;
-      border: none;
-    }
-    
     .title-popover {
       font-size: 15px;
       color: #333333;
@@ -1157,6 +1101,10 @@ background-color:#2989A8;
       font-size: 14px;
       color: #333333;
       opacity: 0.8;
+    }
+
+    .sub-title-form span {
+      color: #000000;
     }
     
     label {
@@ -1229,11 +1177,6 @@ background-color:#2989A8;
     .btn-info {
       background-color: #2989A8;
       border-color: #2989A8;
-    }
-    
-    .btn-secondary {
-      background-color: #8b8b8b;
-      border-color: #aaaaaa;
     }
     
     .alert {
@@ -1388,6 +1331,129 @@ background-color:#2989A8;
       -webkit-transition: all 0.3s;
       transition: all 0.3s;
     }
+    
+.btn-primary {
+  background-color:#2989A8;
+  }
+  
+  .btn-primary:hover {
+      background-color: #296e85;
+  }
+
+  .btn-success {
+    background-color:  rgb(36, 163, 29) !important;
+    color: #ffffff;
+    border: none;
+  }
+  
+  .btn-success:hover {
+    background-color:  rgb(39, 162, 70) !important;
+    border: none;
+  }
+  
+  .btn-secondary {
+      background-color:#979797 !important;
+      border-color: #9b9b9b;
+  }
+  
+  .btn-secondary:hover {
+      background-color: #6e6e6e !important;
+      border-color: #9b9b9b;
+  }
+
+  /* style absen */
+    .card-absen {
+      width: 320px;
+      height: fit-content;
+      border: solid 1px !important;
+      border-color: rgb(217, 231, 235) !important;
+    }
+    
+    .card-absen h6 {
+      color: #333333;
+      font-weight: 400;
+      font-size: 15px;
+    }
+
+    .card-absen p {
+      color: #6b6b6b;
+      font-weight: 300;
+      font-size: 13px;
+    }
+
+    .border-teal-blue {
+      border: 1px solid;
+      border-color: #acceda;
+    }
+
+    .field {
+      color: #3b3b3b;
+      font-weight: 400;
+      font-size: 13px;
+    }
+
+    .value {
+      color: #6b6b6b;
+      font-weight: 400;
+      font-size: 13px;
+    }
+
+    .form-info {
+      font-size: 12px;
+      color: #cc5d75;
+    }
+
+    .card-reporting {
+      background-color: #2989A8;
+      width: fit-content;
+      height: fit-content;
+    }
+
+    .card-reporting:hover {
+      background-color: #82aaba;
+    }
+
+    .ket-absen h6 {
+      font-size: 14px;
+      color: #6b6b6b;
+    }
+
+    .ket-absen p {
+      font-size: 13px;
+      color: #6b6b6b;
+      margin-bottom: 5px;
+    }
+
+    /* style info */
+    .color-cyan {
+      color: #2989A8;
+    }
+
+    .tanggal {
+      color: #7b7b7b;
+      font-size: 13px;
+    }
+
+    .judul {
+      color: #6b6b6b;
+      font-size: 15px;
+    }
+
+    .info hr {
+      margin-left: -60px;
+      margin-right: -15px;
+    }
+
+   /* Style konsultasi */
+   .atribute h6 {
+     color: #333333;
+     font-size: 14px;
+   }
+
+   .atribute p {
+    color: #4b4b4b;
+    font-size: 13px;
+  }
   
     @media screen and (max-width: 320px) {
       .nama, .tanggal {
@@ -1402,6 +1468,14 @@ background-color:#2989A8;
           height: 40px;
           line-height: 43px;
           font-size: 20px;
+      }
+
+      .judul {
+        font-size: 13px;
+      }
+
+      .tanggal {
+        font-size: 10px;
       }
     }
   
@@ -1418,6 +1492,14 @@ background-color:#2989A8;
           height: 40px;
           line-height: 43px;
           font-size: 20px;
+      }
+
+      .judul {
+        font-size: 12px;
+      }
+
+      .tanggal {
+        font-size: 10px;
       }
     }
 

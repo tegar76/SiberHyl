@@ -10,7 +10,7 @@
   --sat: 63%;
   --first-color: hsl(var(--hue), var(--sat), 40%);
   --first-color-alt: hsl(var(--hue), var(--sat), 36%);
-  --title-color: hsl(var(--hue), 12%, 15%);
+  --title-color: #CCCFD8;
   --text-color: hsl(var(--hue), 8%, 35%);
   --body-color: hsl(var(--hue), 100%, 99%);
   --container-color: #FFF;
@@ -66,13 +66,34 @@ img {
 }
 
 .badge-info-ak {
-  margin-left: 20px;
-  margin-bottom: -8px;
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #FF0000;
+  margin-left: 25px;
+  border-radius: 50%;
 }
 
 .badge-konsul{
-  margin-left: 70px;
-  margin-bottom: -8px;
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #FF0000;
+  margin-left: 75px;
+  border-radius: 50%;
+}
+
+.badge-info-ds {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background-color: #FF0000;
+  border-radius: 50%;
+  margin-top: -5px;
+  margin-right: 4px;
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
@@ -175,6 +196,7 @@ img {
 
 .nav__list {
   justify-content: space-around;
+  margin-bottom: auto;
 }
 
 .nav__name {
@@ -184,6 +206,7 @@ img {
 
 .nav__icon {
   font-size: 1.5rem;
+  color: var(--title-color);
 }
 
 .nav__item a:hover {
@@ -296,3 +319,35 @@ footer {
   opacity: 0.8;
   margin-top: 40px;
 }
+
+.btn-primary {
+  background-color:#2989A8;
+  }
+  
+  .btn-primary:hover {
+      background-color: #296e85;
+  }
+
+  .btn-success {
+    background-color:  rgb(113, 196, 88);
+    color: #ffffff;
+    opacity: 0.9;
+    border: none;
+  }
+  
+  .btn-success:hover {
+    background-color:  rgb(52, 131, 72);
+    opacity: 0.9;
+    border: none;
+  }
+  
+  .btn-secondary {
+      background-color:#9b9b9b;
+      border-color: #9b9b9b;
+  }
+  
+  .btn-secondary:hover {
+      background-color: #6e6e6e;
+      border-color: #9b9b9b;
+  }
+  

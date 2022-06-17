@@ -32,6 +32,14 @@ $(document).ready(function() {
     $('#nilai_evaluasi').DataTable(); 
 });
 
+$(document).ready(function() {
+    $('#riwayat_absensi').DataTable(); 
+});
+
+$(document).ready(function() {
+    $('#riwayat_pengajuan_surat').DataTable(); 
+});
+
 
 
 

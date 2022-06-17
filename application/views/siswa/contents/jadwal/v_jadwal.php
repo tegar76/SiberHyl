@@ -29,7 +29,7 @@
 											<p><?= $nowStudying->nama_mapel ?></p>
 										</center>
 									</div>
-									<a href="">
+									<a href="<?= base_url('Siswa/Absen')?>">
 										<div class="absen d-block justify-content-center">
 											<div class="card bg-absen-open shadow-sm px-3 pt-3">
 												<img src="<?= base_url() ?>assets/siswa/icons/absen.png" alt="" class="mx-auto">
@@ -90,6 +90,7 @@
 											<a href="<?= base_url('Siswa/Diskusi')?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
+														<span class="badge-info-ds"> </span>
 														<img src="<?= base_url('assets/siswa/icons/diskusi.png') ?>" alt="">
 														<p class="my-auto pt-1">Diskusi</p>
 													</div>
@@ -159,7 +160,7 @@
 											} else {
 												$absenOpen = 'bg-absen-close';
 											} ?>
-											<a href="">
+											<a href="<?= base_url('Siswa/Absen')?>">
 												<div class="absen d-block justify-content-center">
 													<div class="card <?= $absenOpen ?> shadow-sm px-3 pt-3">
 														<img src="<?= base_url() ?>assets/siswa/icons/absen.png" alt="" class="mx-auto">
@@ -222,8 +223,9 @@
 												<a href="<?= base_url('Siswa/Diskusi')?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
+															<span class="badge-info-ds"> </span>
 															<img src="<?= base_url('assets/siswa/icons/diskusi.png') ?>" alt="">
-															<p class="my-auto pt-1">Diskusi</p>
+															<p class="my-auto pt-1">Diskusi </p>
 														</div>
 													</div>
 												</a>

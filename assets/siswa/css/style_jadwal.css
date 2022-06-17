@@ -150,16 +150,23 @@
   color: #6b6b6b;
 }
 
+.badge-info-ds {
+  margin-left: 45px;
+  margin-bottom: -8px;
+}
+
   @media screen and (max-width: 767px) {
     .search-box {
         margin-top: -20px;
     }
+    
   }
 
   @media screen and (max-width: 320px) {
     .search-box {
         margin-top: -20px;
     }
+    
   }
 
   @media screen and (min-width: 576px) {

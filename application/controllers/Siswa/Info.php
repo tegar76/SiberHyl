@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Surat extends CI_Controller
+class Info extends CI_Controller
 {
 	public function __construct()
 	{
@@ -14,19 +14,19 @@ class Surat extends CI_Controller
 	public function index()
 	{
 		$data = [
-			'title' => 'Surat',
-			'content' => 'siswa/contents/surat/v_surat'
+			'title' => 'Info',
+			'content' => 'siswa/contents/info/v_info'
 		];
 
 		$this->load->view('siswa/layout/wrapper', $data, FALSE);
 	}
 
-	public function fileSuratImg()
+    public function infoPdf()
 	{
 		$data = [
-			'title' => 'File Surat',
+			'title' => 'Info Pdf',
 		];
 
-		$this->load->view('siswa/contents/surat/v_file_surat_img', $data, FALSE);
+		$this->load->view('siswa/contents/info/info_pdf/v_info_pdf', $data, FALSE);
 	}
 }

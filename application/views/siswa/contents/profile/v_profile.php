@@ -22,7 +22,7 @@
 						<p>Smk Kesatrian Purwokerto</p>
 					</div>
 					<div class="button-logout">
-						<a href="#" id="logout" class="btn btn-sm btn-danger px-4 logout">Logout</a>
+						<a href="#" id="logout" class="btn btn-sm btn-danger text-white px-4 logout">Logout</a>
 					</div>
 				</div>
 			</div>
@@ -71,8 +71,8 @@
 					</table>
 					<hr class="mt-n3">
 					<div class="button-action d-flex mb-3 mt-2">
-						<a href="<?= base_url('siswa/profile/editProfile') ?>" class="btn btn-sm btn-outline-info mr-2 px-4" type="submit">Edit Profile</a>
-						<a href="<?= base_url('siswa/profile/editPassword') ?>" class="btn btn-sm btn-outline-info px-4" type="submit">Edit Password</a>
+						<a href="<?= base_url('siswa/profile/editProfile') ?>" class="btn btn-sm btn-outline-info text-info mr-2 px-4" type="submit">Edit Profile</a>
+						<a href="<?= base_url('siswa/profile/editPassword') ?>" class="btn btn-sm btn-outline-info text-info px-4" type="submit">Edit Password</a>
 					</div>
 				</div>
 			</div>

@@ -43,8 +43,8 @@
 						<?= form_error('conf_pass', '<small class="text-danger">', '</s>') ?>
 					</div>
 					<div class="button-action d-flex mb-3 mt-2">
-						<button type="submit" class="btn btn-sm btn-success mr-2 px-4" type="submit">Update</button>
-						<button type="reset" class="btn btn-sm btn-secondary px-4" type="submit">Reset</button>
+						<button type="submit" class="btn btn-sm btn-success mr-2 px-4" style="background-color: rgb(113, 196, 88);">Update</button>
+						<button type="reset" class="btn btn-sm btn-secondary px-4" style="background-color: #9b9b9b;">Reset</button>
 					</div>
 					<?= form_close() ?>
 				</div>
