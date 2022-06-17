@@ -1424,6 +1424,10 @@ margin-left: 0.3rem;
       margin-bottom: 5px;
     }
 
+    .icon-reporting {
+      margin-top: 2px;
+    }
+
     /* style info */
     .color-cyan {
       color: #2989A8;

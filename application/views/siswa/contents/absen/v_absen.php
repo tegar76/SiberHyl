@@ -73,7 +73,7 @@
 									<div class="card mb-3 py-1 px-2 card-reporting">
 										<div class="container">
 											<div class="row">
-												<i class='bx bx-receipt bx-xs mr-1 text-white' ></i>
+												<i class='bx bx-receipt bx-xs mr-1 text-white icon-reporting' ></i>
 												<div class="table-title text-white">Reporting</div>
 											</div>
 										</div>

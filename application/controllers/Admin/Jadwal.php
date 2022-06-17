@@ -312,7 +312,7 @@ class Jadwal extends CI_Controller
 			foreach ($rooms as $room) {
 				$result[] = [
 					'id'	=> $room->ruang_id,
-					'text'	=> $room->nama_ruang,
+					'text'	=> $room->kode_ruang,
 				];
 			}
 		} elseif ($typesend == 'jurusan') {

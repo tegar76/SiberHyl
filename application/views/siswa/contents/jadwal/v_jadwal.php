@@ -49,7 +49,7 @@
 									</div>
 									<div class="d-flex justify-content-start">
 										<img src="<?= base_url('assets/siswa/icons/r-kelas.png') ?>" alt="">
-										<p><?= $nowStudying->nama_ruang ?></p>
+										<p><?= $nowStudying->kode_ruang ?></p>
 									</div>
 								</div>
 							</div>
@@ -118,7 +118,7 @@
 
 	<div class="jadwal-pelajaran">
 		<div class="section-title mt-3">
-			Jadwal Pelajaran XI TKRO 1 !!
+			Jadwal Pelajaran Kelas XI TKRO 1 Semester Genap Tahun Pelajaran 2021/2022
 			<hr>
 		</div>
 
@@ -180,7 +180,7 @@
 											</div>
 											<div class="d-flex justify-content-start">
 												<img src="<?= base_url('assets/siswa/icons/r-kelas.png') ?>" alt="">
-												<p><?= $study->nama_ruang ?></p>
+												<p><?= $study->kode_ruang ?></p>
 											</div>
 										</div>
 

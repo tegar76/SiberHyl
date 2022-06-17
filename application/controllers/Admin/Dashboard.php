@@ -25,7 +25,7 @@ class Dashboard extends CI_Controller
 		isAdmin();
 		$data['no'] = 1;
 		$data['tahun_ajar'] = $this->tahun_ajar;
-		$data['teacherRow'] = $this->master->get_row_data('guru');
+		$data['teacherRow'] = $this->master->get_row_data('guru', ['role_id !=' => 1]);
 		$data['studentRow'] = $this->master->get_row_data('siswa');
 		$data['classRow'] = $this->master->get_row_data('kelas');
 		$data['pesan'] = $this->master->get_pesan();

@@ -70,7 +70,7 @@
                                                             <td>08:00 WIB</td>
                                                             <td>Pilgan</td>
                                                             <td>
-																<a target="_blank" href="<?= base_url('Siswa/Evaluasi/soalEvaluasiPdf')?>" class="btn btn-outline-danger text-danger mx-auto d-block mb-3">Waktu Sudah Lewat</a>
+																<a role="button" class="btn btn-outline-danger text-danger mx-auto d-block mb-3">Waktu Sudah Lewat</a>
 															</td>
                                                         </tr>
 														<tr>
@@ -83,7 +83,7 @@
                                                             <td>08:00 WIB</td>
                                                             <td>Essay</td>
                                                             <td>
-																<a target="_blank" href="<?= base_url('Siswa/Evaluasi/soalEvaluasiPdf')?>" class="btn btn-outline-success text-success mx-auto d-block mb-3">Sudah Mengerjakan</a>
+																<a role="button" class="btn btn-outline-success text-success mx-auto d-block mb-3">Sudah Mengerjakan</a>
 															</td>
                                                         </tr>
                                                     </tbody>

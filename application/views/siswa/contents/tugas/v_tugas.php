@@ -46,8 +46,8 @@
 																</h5>
 															</div>
 															<div class="d-flex justify-content-center m-3">
-																	<a target="_blank" href="<?= base_url('Siswa/Tugas/soalTugaspdf')?>" class="btn btn-primary btn-sm mr-3 "><i class="fa-solid fa-magnifying-glass text-white mr-1"></i> Lihat Tugas </a>
-																	<a role="button" class="btn btn-success btn-sm"data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-upload text-white mr-1"></i> Kumpulkan </a>
+																	<a target="_blank" href="<?= base_url('Siswa/Tugas/soalTugaspdf')?>" class="btn btn-primary btn-sm mr-3 text-white"><i class="fa-solid fa-magnifying-glass text-white mr-1"></i> Lihat Tugas </a>
+																	<a role="button" class="btn btn-success btn-sm text-white"data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-upload text-white mr-1"></i> Kumpulkan </a>
 															</div>
 														</div>
 													</div>
@@ -75,8 +75,8 @@
 																</h5>
 															</div>
 															<div class="d-flex justify-content-center m-3">
-																	<a target="_blank" href="<?= base_url('Siswa/Tugas/soalTugaspdf')?>" class="btn btn-primary btn-sm mr-3 "><i class="fa-solid fa-magnifying-glass text-white mr-1"></i> Lihat Tugas </a>
-																	<a role="button" class="btn btn-success btn-sm"data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-upload text-white mr-1"></i> Kumpulkan </a>
+																	<a target="_blank" href="<?= base_url('Siswa/Tugas/soalTugaspdf')?>" class="btn btn-primary btn-sm mr-3 text-white"><i class="fa-solid fa-magnifying-glass text-white mr-1"></i> Lihat Tugas </a>
+																	<a role="button" class="btn btn-success btn-sm text-white"data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-upload text-white mr-1"></i> Kumpulkan </a>
 															</div>
 														</div>
 													</div>
@@ -104,8 +104,8 @@
 																</h5>
 															</div>
 															<div class="d-flex justify-content-center m-3">
-																	<a target="_blank" href="<?= base_url('Siswa/Tugas/soalTugaspdf')?>" class="btn btn-primary btn-sm mr-3 "><i class="fa-solid fa-magnifying-glass text-white mr-1"></i> Lihat Tugas </a>
-																	<a role="button" class="btn btn-success btn-sm"data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-upload text-white mr-1"></i> Kumpulkan </a>
+																	<a target="_blank" href="<?= base_url('Siswa/Tugas/soalTugaspdf')?>" class="btn btn-primary btn-sm mr-3 text-white"><i class="fa-solid fa-magnifying-glass text-white mr-1"></i> Lihat Tugas </a>
+																	<a role="button" class="btn btn-success btn-sm text-white"data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-upload text-white mr-1"></i> Kumpulkan </a>
 															</div>
 														</div>
 													</div>
@@ -133,8 +133,8 @@
 																</h5>
 															</div>
 															<div class="d-flex justify-content-center m-3">
-																	<a target="_blank" href="<?= base_url('Siswa/Tugas/soalTugaspdf')?>" class="btn btn-primary bg-sea btn-sm mr-3 "><i class="fa-solid fa-magnifying-glass text-white mr-1"></i> Lihat Tugas </a>
-																	<a role="button" class="btn btn-success btn-sm"data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-upload text-white mr-1"></i> Kumpulkan </a>
+																	<a target="_blank" href="<?= base_url('Siswa/Tugas/soalTugaspdf')?>" class="btn btn-primary bg-sea btn-sm mr-3 text-white"><i class="fa-solid fa-magnifying-glass text-white mr-1"></i> Lihat Tugas </a>
+																	<a role="button" class="btn btn-success btn-sm text-white"data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-upload text-white mr-1"></i> Kumpulkan </a>
 															</div>
 														</div>
 													</div>

@@ -115,20 +115,20 @@
 
 							<hr>
 							<?php if ($this->session->flashdata('message')) : ?>
-								<div class="alert alert-warning" role="alert">
+								<div class="alert alert-warning alert-login" role="alert">
 									<?= $this->session->flashdata('message') ?>
 								</div>
 							<?php endif ?>
 							<div class="form-group py-2">
 								<div class="input-field"> <span class="far fa-user p-2 bg-cyan"></span> <input type="text" name="username" id="username" <?= (form_error('username')) ? 'is-invalid' : '' ?>" value="<?= set_value('username', 'username') ?>" placeholder="Masukan Username"> </div>
 							</div>
-							<div id="usernameFeedback" class="invalid-feedback d-block mt-n4 mb-4" style="margin-left: 57px">
+							<div id="usernameFeedback" class="invalid-feedback alert-login d-block mt-n4 mb-4" style="margin-left: 57px">
 								<?= form_error('username', '<div class="text-danger">', '</div>') ?>
 							</div>
 							<div class="form-group py-1 pb-2">
 								<div class="input-field"> <span class="fas fa-lock px-2 bg-cyan"></span><input type="password" name="password" class="mr-2 <?= (form_error('password')) ? 'is-invalid' : '' ?>" value="<?= set_value('password') ?>" placeholder="Masukan Password" autocomplete="current-password" id="id_password"><i class="far fa-eye fa-xs bg-eye ml-n4" id="togglePassword"></i></span> </div>
 							</div>
-							<div id="passwordFeedback" class="invalid-feedback d-block mt-n2 mb-1" style="margin-left: 40px">
+							<div id="passwordFeedback" class="invalid-feedback alert-login d-block mt-n2 mb-1" style="margin-left: 40px">
 								<?= form_error('password', '<div class="text-danger">', '</div>') ?>
 							</div>
 

@@ -23,7 +23,7 @@
 					</div>
 					<div class="button-logout">
 						<input type="hidden" id="crsf_name" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
-						<a href="#" id="logout" class="btn btn-sm btn-danger px-4 logout">Logout</a>
+						<a href="#" id="logout" class="btn btn-sm btn-danger text-white px-4 logout">Logout</a>
 					</div>
 				</div>
 			</div>
