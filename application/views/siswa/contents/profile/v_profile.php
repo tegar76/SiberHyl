@@ -1,7 +1,8 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
 
 <section class="container section section__height mt-n3" id="about">
-	<div class="profile">
+	<div class="profile pb-5">
 		<div class="row">
 			<div class="col-md-4 text-center mb-3">
 				<div class="card shadow py-4">
@@ -71,8 +72,8 @@
 					</table>
 					<hr class="mt-n3">
 					<div class="button-action d-flex mb-3 mt-2">
-						<a href="<?= base_url('siswa/profile/editProfile') ?>" class="btn btn-sm btn-outline-info mr-2 px-4" type="submit">Edit Profile</a>
-						<a href="<?= base_url('siswa/profile/editPassword') ?>" class="btn btn-sm btn-outline-info px-4" type="submit">Edit Password</a>
+						<a href="<?= base_url('siswa/profile/editProfile') ?>" class="btn btn-sm btn-outline-info text-info mr-2 px-4" type="submit">Edit Profile</a>
+						<a href="<?= base_url('siswa/profile/editPassword') ?>" class="btn btn-sm btn-outline-info text-info px-4" type="submit">Edit Password</a>
 					</div>
 				</div>
 			</div>

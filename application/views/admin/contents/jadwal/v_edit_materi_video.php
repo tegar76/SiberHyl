@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->

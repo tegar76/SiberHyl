@@ -1,18 +1,11 @@
-<!-- multiple select -->
-<<<<<<< HEAD <script src="<?= base_url('assets/MSelectDialogBox-master/dist/m-select-d-box.js') ?>">
-	</script>
-	<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/') ?>/js/examplee.js"></script>
-	=======
-	<script src="<?= base_url('assets/MSelectDialogBox-master/dist/m-select-d-box.js') ?>"></script>
-	<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/') ?>js/custom-appearr.js"></script>
-	<script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/') ?>/js/example.js"></script>
-	>>>>>>> admin
+<!-- Import multiple select -->
+<?php include APPPATH.'../assets/MSelectDialogBox-master/import_multiple_select.php';?>
 
-	<!-- Select with search -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+<!-- import select search -->
+<?php include APPPATH.'../assets/select-with-search/import_select_with_search.php';?>
 
-	<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 	<div class="page-wrapper">
 		<!-- ============================================================== -->

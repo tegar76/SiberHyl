@@ -1,18 +1,13 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/jadwal/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/siswa/css/import_style_jadwal.php';?>
 
 <!-- Jquery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 
-<!--=============== HOME ===============-->
-<!-- <section class="container section section__height" id="home">
-    <h2 class="section__title">Home</h2>
-</section> -->
-
-<!--=============== SKILLS ===============-->
 <section class="container section section__height">
 
 	<div class="search-box d-flex justify-content-end">
-		<input type="text" class="search-click" name="" placeholder="&#xf002 Cari ..." style="font-family: FontAwesome;" />
+		<input type="text" class="search-click" name="" placeholder="🔍 Cari ..." />
 	</div>
 
 	<div class="now-studying">
@@ -34,7 +29,7 @@
 											<p><?= $nowStudying->nama_mapel ?></p>
 										</center>
 									</div>
-									<a href="">
+									<a href="<?= base_url('Siswa/Absen')?>">
 										<div class="absen d-block justify-content-center">
 											<div class="card bg-absen-open shadow-sm px-3 pt-3">
 												<img src="<?= base_url() ?>assets/siswa/icons/absen.png" alt="" class="mx-auto">
@@ -72,7 +67,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="">
+											<a href="<?= base_url('Siswa/tugas')?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
@@ -82,7 +77,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="">
+											<a href="<?= base_url('Siswa/Evaluasi')?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -92,9 +87,10 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="">
+											<a href="<?= base_url('Siswa/Diskusi')?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
+														<span class="badge-info-ds"> </span>
 														<img src="<?= base_url('assets/siswa/icons/diskusi.png') ?>" alt="">
 														<p class="my-auto pt-1">Diskusi</p>
 													</div>
@@ -164,7 +160,7 @@
 											} else {
 												$absenOpen = 'bg-absen-close';
 											} ?>
-											<a href="">
+											<a href="<?= base_url('Siswa/Absen')?>">
 												<div class="absen d-block justify-content-center">
 													<div class="card <?= $absenOpen ?> shadow-sm px-3 pt-3">
 														<img src="<?= base_url() ?>assets/siswa/icons/absen.png" alt="" class="mx-auto">
@@ -204,7 +200,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="">
+												<a href="<?= base_url('Siswa/tugas')?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
@@ -214,7 +210,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="">
+												<a href="<?= base_url('Siswa/Evaluasi')?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -224,11 +220,12 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="">
+												<a href="<?= base_url('Siswa/Diskusi')?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
+															<span class="badge-info-ds"> </span>
 															<img src="<?= base_url('assets/siswa/icons/diskusi.png') ?>" alt="">
-															<p class="my-auto pt-1">Diskusi</p>
+															<p class="my-auto pt-1">Diskusi </p>
 														</div>
 													</div>
 												</a>

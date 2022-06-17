@@ -1,12 +1,8 @@
-<!-- Data Tables -->
-<script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/admin/js/data-table/main.js') ?>"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/data-table-custom/style.css') ?>">
-<!-- End Data Tables -->
+<!-- import data tables -->
+<?php include APPPATH.'../assets/DataTables/import/import.php';?>
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/dashboard/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->

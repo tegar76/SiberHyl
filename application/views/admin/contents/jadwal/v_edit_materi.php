@@ -3,7 +3,8 @@
 <script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/') ?>js/custom-appearr.js"></script>
 <script type="application/javascript" src="<?= base_url('assets/MSelectDialogBox-master/examples/') ?>/js/example.js"></script>
 
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/jadwal/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->

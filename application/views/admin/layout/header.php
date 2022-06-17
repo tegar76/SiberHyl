@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 	<!-- Jquery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/jquery.js"></script>
 
 	<script src="<?= base_url('assets/admin/templates/assets/') ?>libs/popper.js/dist/umd/popper.min.js"></script>
 	<script src="<?= base_url('assets/admin/templates/assets/') ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>

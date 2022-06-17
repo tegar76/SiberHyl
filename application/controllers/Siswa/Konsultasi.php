@@ -13,6 +13,32 @@ class Konsultasi extends CI_Controller
 
 	public function index()
 	{
-		echo "konsultasi";
+		$data = [
+			'title' => 'Konsultasi',
+			'content' => 'siswa/contents/konsultasi/v_konsultasi'
+		];
+
+		$this->load->view('siswa/layout/wrapper', $data, FALSE);
 	}
+
+	public function detailKonsultasi()
+	{
+		$data = [
+			'title' => 'Detail Konsultasi',
+			'content' => 'siswa/contents/konsultasi/v_detail_konsultasi'
+		];
+
+		$this->load->view('siswa/layout/wrapper', $data, FALSE);
+	}
+
+	public function tambahKonsultasi()
+	{
+		$data = [
+			'title' => 'Tambah Konsultasi',
+			'content' => 'siswa/contents/konsultasi/v_tambah_konsultasi'
+		];
+
+		$this->load->view('siswa/layout/wrapper', $data, FALSE);
+	}
+
 }

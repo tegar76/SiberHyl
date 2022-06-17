@@ -13,6 +13,20 @@ class Surat extends CI_Controller
 
 	public function index()
 	{
-		echo "Surat";
+		$data = [
+			'title' => 'Surat',
+			'content' => 'siswa/contents/surat/v_surat'
+		];
+
+		$this->load->view('siswa/layout/wrapper', $data, FALSE);
+	}
+
+	public function fileSuratImg()
+	{
+		$data = [
+			'title' => 'File Surat',
+		];
+
+		$this->load->view('siswa/contents/surat/v_file_surat_img', $data, FALSE);
 	}
 }

@@ -1,7 +1,8 @@
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
 
 <section class="container section section__height mt-n3" id="about">
-	<div class="edit-profile">
+	<div class="edit-profile pb-5">
 		<?= form_open_multipart('siswa/profile/editProfile') ?>
 		<div class="row">
 			<div class="col-md-4 text-center mb-3">
@@ -76,9 +77,9 @@
 						<input type="text" id="alamat" class="form-control <?= (form_error('alamat')) ? 'is-invalid' : '' ?>" name="alamat" value="<?= $siswa->siswa_alamat ?>">
 						<?= form_error('alamat', '<div class="text-danger">', '</div>') ?>
 					</div>
-					<div class="button-action d-flex mb-3 mt-2">
-						<button type="submit" class="btn btn-sm btn-primary mr-2 px-4" type="submit">Simpan</button>
-						<button type="reset" class="btn btn-sm btn-secondary px-4" type="submit">Reset</button>
+					<div class="button-action mb-3 mt-2">
+						<button type="submit" class="btn btn-sm btn-success mr-2 px-4">Update</button>
+						<button type="reset" class="btn btn-sm btn-secondary px-4">Reset</button>
 					</div>
 				</div>
 			</div>

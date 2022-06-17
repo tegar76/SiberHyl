@@ -1,10 +1,11 @@
 <!-- Font awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
-<link rel="stylesheet" href="<?= base_url('assets/siswa/css/profile/style.css') ?>">
+<!-- import style -->
+<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
 
 <section class="container section section__height mt-n3" id="about">
-	<div class="edit-profile">
+	<div class="edit-profile pb-5">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card shadow px-3 pt-3">
@@ -42,8 +43,8 @@
 						<?= form_error('conf_pass', '<small class="text-danger">', '</s>') ?>
 					</div>
 					<div class="button-action d-flex mb-3 mt-2">
-						<button type="submit" class="btn btn-sm btn-primary mr-2 px-4" type="submit">Simpan</button>
-						<button type="reset" class="btn btn-sm btn-secondary px-4" type="submit">Reset</button>
+						<button type="submit" class="btn btn-sm btn-success mr-2 px-4" style="background-color: rgb(113, 196, 88);">Update</button>
+						<button type="reset" class="btn btn-sm btn-secondary px-4" style="background-color: #9b9b9b;">Reset</button>
 					</div>
 					<?= form_close() ?>
 				</div>

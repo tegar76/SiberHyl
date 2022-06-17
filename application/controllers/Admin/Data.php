@@ -784,7 +784,7 @@ class Data extends CI_Controller
 	{
 		$data['title'] = 'Admin Siberyl - Data Guru';
 		$data['content'] = 'admin/contents/data/v_data_guru';
-		$data['guru'] = $this->master->get_tablewhere('guru', ['guru_kode !=' => 'ADM']);
+		$data['guru'] = $this->master->get_tablewhere('guru', ['role_id !=' => 1]);
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}

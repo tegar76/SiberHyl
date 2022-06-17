@@ -104,6 +104,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 	var csrfName = $(".csrf_token").attr("name");
 	var csrfHash = $(".csrf_token").val();
+	$("#data_materi").DataTable();
 	$("#data_materi").on("click", ".delete-materi", function (e) {
 		e.preventDefault();
 		var materi_info_id = $(e.currentTarget).attr("materi-id");
