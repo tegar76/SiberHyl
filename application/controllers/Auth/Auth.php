@@ -9,6 +9,7 @@ class Auth extends CI_Controller
 		parent::__construct();
 		$this->load->model('SiswaModel', 'siswa', true);
 		$this->load->model('GuruModel', 'guru', true);
+		$this->load->model('AuthModel', 'auth', true);
 	}
 
 	// message sweetalert 2 flashdata
@@ -72,20 +73,22 @@ class Auth extends CI_Controller
 		$siswa = $this->siswa->getWhere(['siswa_nis' => $data['username']]);
 		$guru  = $this->guru->getWhere(['guru_username' => $data['username']]);
 		if ($siswa) {
-			if (password_verify($data['password'], $siswa['siswa_pass'])) {
+			if (password_verify($data['password'], $siswa->siswa_pass)) {
 				if ($data['hak_akses'] != 'siswa') {
 					$this->session->set_flashdata('message', 'Pengisian akun tidak sesuai ,silahkan cek kembali');
 					return redirect('login');
 				} else {
-					$set_user = [
-						'fullName' => $siswa['siswa_nama'],
-						'nis' 	=> $siswa['siswa_nis'],
+					$sess_ = [
+						'fullName' => $siswa->siswa_nama,
+						'nis' 	=> $siswa->siswa_nis,
+						'backToken' => crypt($siswa->siswa_nama, ''),
 						'level'		=> 'siswa',
 						'logged_in'	=> true
 					];
-					$this->session->set_userdata($set_user);
-					$this->siswa->updateWhere(['status_online' => 'online'], $siswa['siswa_nis']);
-					$this->message('Selamat Datang ' . $siswa['siswa_nama'] . ' ! ', 'Semoga hari anda menyenangkan :)', 'success');
+					$this->session->set_userdata($sess_);
+					$this->auth->registToken($forToken = ['access_token' => $sess_['backToken']]);
+					$this->siswa->updateWhere(['status_online' => 'online'], $siswa->siswa_nis);
+					$this->message('Selamat Datang ' . $siswa->siswa_nama . ' ! ', 'Semoga hari anda menyenangkan :)', 'success');
 					redirect('siswa/jadwal');
 				}
 			} else {
@@ -93,28 +96,34 @@ class Auth extends CI_Controller
 				redirect('login');
 			}
 		} elseif ($guru) {
-			if (password_verify($data['password'], $guru['guru_pass'])) {
+			if (password_verify($data['password'], $guru->guru_pass)) {
 				if ($data['hak_akses'] == 'guru') {
-					$set_user = [
-						'fullName' => $guru['guru_nama'],
-						'nip' => $guru['guru_nip'],
-						'kode' => $guru['guru_kode'],
+					$sess_ = [
+						'fullName' => $guru->guru_nama,
+						'nip' => $guru->guru_nip,
+						'kode' => $guru->guru_kode,
+						'backToken' => crypt($guru->guru_nama, ''),
 						'level'		=> 'guru',
 						'logged_in'	=> true
 					];
-					$this->session->set_userdata($set_user);
-					$this->guru->updateWhere(['status_online' => 'online'], $guru['guru_nip']);
+					$this->session->set_userdata($sess_);
+					$this->auth->registToken($forToken = ['access_token' => $sess_['backToken']]);
+					$this->guru->updateWhere(['status_online' => 'online'], $guru->guru_nip);
+					$this->message('Selamat Datang ' . $guru->guru_nama . ' ! ', 'Semoga hari anda menyenangkan :)', 'success');
 					redirect('guru/dashboard');
 				} elseif ($data['hak_akses'] == 'wali-kelas') {
-					$set_user = [
-						'fullName' => $guru['guru_nama'],
-						'nip' 	=> $guru['guru_nip'],
-						'kode' => $guru['guru_kode'],
+					$sess_ = [
+						'fullName' => $guru->guru_nama,
+						'nip' 	=> $guru->guru_nip,
+						'kode' => $guru->guru_kode,
+						'backToken' => crypt($guru->guru_nama, ''),
 						'level'		=> 'wali-kelas',
 						'logged_in'	=> true
 					];
-					$this->session->set_userdata($set_user);
-					$this->guru->updateWhere(['status_online' => 'online'], $guru['guru_nip']);
+					$this->session->set_userdata($sess_);
+					$this->auth->registToken($forToken = ['access_token' => $sess_['backToken']]);
+					$this->guru->updateWhere(['status_online' => 'online'], $guru->guru_nip);
+					$this->message('Selamat Datang ' . $guru->guru_nama . ' ! ', 'Semoga hari anda menyenangkan :)', 'success');
 					redirect('wali-kelas/dashboard');
 				} else {
 					$this->session->set_flashdata('message', 'Pengisian akun tidak sesuai ,silahkan cek kembali');
@@ -133,14 +142,6 @@ class Auth extends CI_Controller
 	// fungsi logout
 	public function logout()
 	{
-
-		$reponse = [
-			'csrfName' => $this->security->get_csrf_token_name(),
-			'csrfHash' => $this->security->get_csrf_hash(),
-			'success' => false,
-			'messages' => []
-		];
-
 		if ($this->session->userdata('level') == 'siswa') {
 
 			$reponse = [
@@ -153,6 +154,7 @@ class Auth extends CI_Controller
 				'last_login' => date('Y-m-d H:i:s'),
 				'status_online'	=> 'offline'
 			];
+			$this->auth->deleteToken($this->session->userdata('backToken'));
 			$this->siswa->updateWhere($update_, $this->session->userdata('nis'));
 			$this->session->sess_destroy();
 		} elseif ($this->session->userdata('level') == 'guru' or $this->session->userdata('level') == 'wali-kelas') {
@@ -167,6 +169,7 @@ class Auth extends CI_Controller
 				'last_login' => date('Y-m-d H:i:s'),
 				'status_online'	=> 'offline'
 			];
+			$this->auth->deleteToken($this->session->userdata('backToken'));
 			$this->guru->updateWhere($update_, $this->session->userdata('nip'));
 			$this->session->sess_destroy();
 		}

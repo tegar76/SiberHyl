@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
 	var KEY_UP = 38,
 		KEY_RIGHT = 39,
 		KEY_DOWN = 40,
@@ -6,19 +6,18 @@
 		KEY_ENTER = 13,
 		KEY_BACKSPACE = 8;
 
-	if (typeof $ != "function")
-		throw new Error("jQuery is not defined");
+	if (typeof $ != "function") throw new Error("jQuery is not defined");
 
 	/**
 	 * @constructor
 	 * */
-	var MyCustomAppear1 = function(ctx) {
+	var MyCustomAppear1 = function (ctx) {
 		// ctx - instance of "m-select-dialog-box"
 		this.msdbCtx = ctx;
 
 		this._timers = {
 			autoCompleteKeyUp: null,
-			focusOut: null
+			focusOut: null,
 		};
 
 		this._initStyles();
@@ -30,111 +29,102 @@
 	$.fn.mSelectDBox.MyCustomAppear1 = MyCustomAppear1;
 
 	MyCustomAppear1.prototype = {
-		"_initStyles": function() {
+		_initStyles: function () {
 			var styleElem = $("#msdb-eg-custom-control");
 
 			if (styleElem.length) return;
 
-			var css = "" +
+			var css =
+				"" +
 				".m-select-d-box__control_type_spec {" +
-					"padding: 5px 5px;" +
-					"border: 1px solid #d5e7ec; " +
-					"opacity: 0.3" +
-					"background: #ffffff; " +
-					"display: inline-block; " +
-					"text-align: left;" +
-					"color: black;" +
-					"-webkit-border-radius: 3px;" +
-					"-moz-border-radius: 3px;" +
-					"border-radius: 3px;" +
-					"font-size: 13px;" +
-					"cursor: pointer;" +
-					"outline: none;" +
+				"padding: 5px 5px;" +
+				"border: 1px solid #d5e7ec; " +
+				"opacity: 0.3" +
+				"background: #ffffff; " +
+				"display: inline-block; " +
+				"text-align: left;" +
+				"color: black;" +
+				"-webkit-border-radius: 3px;" +
+				"-moz-border-radius: 3px;" +
+				"border-radius: 3px;" +
+				"font-size: 13px;" +
+				"cursor: pointer;" +
+				"outline: none;" +
 				"}" +
-
 				".m-select-d-box__selected-holder { display: inline-block; }" +
-
 				".m-select-d-box__selected-holder-item {" +
-					"position: relative;" +
-					"display: inline-block; " +
-					"padding: 3px 6px; " +
-					"background: #f3fcff; " +
-					"color: #555555;" +
-					"margin: 2px;" +
-					"border: 1px solid #d5e7ec; " +
-					"opacity: 0.7" +
-					"border-radius: 2px;" +
-					"box-sizing: border-box;" +
-					"text-overflow: ellipsis; " +
-					"overflow: hidden;" +
-					"vertical-align: top;" +
+				"position: relative;" +
+				"display: inline-block; " +
+				"padding: 3px 6px; " +
+				"background: #f3fcff; " +
+				"color: #555555;" +
+				"margin: 2px;" +
+				"border: 1px solid #d5e7ec; " +
+				"opacity: 0.7" +
+				"border-radius: 2px;" +
+				"box-sizing: border-box;" +
+				"text-overflow: ellipsis; " +
+				"overflow: hidden;" +
+				"vertical-align: top;" +
 				"}" +
-
 				".m-select-d-box__selected-holder-item_hover," +
 				".m-select-d-box__selected-holder-item:hover { " +
-					"background: mediumseagreen;" +
-					"overflow: initial;" +
+				"background: mediumseagreen;" +
+				"overflow: initial;" +
 				"}" +
-
 				".m-select-d-box__selected-holder-item " +
 				".m-select-d-box__selected-holder-label {" +
-					"display: none;" +
-					"position: absolute;" +
-					"background: rgb(60, 179, 113);" +
-					"padding: 3px 6px;" +
-					"color: white;" +
-					"width: auto;" +
-					"bottom: 0px;" +
-					"left: 0px;" +
-					"border-radius: 2px;" +
-					"z-index: 1;" +
+				"display: none;" +
+				"position: absolute;" +
+				"background: rgb(60, 179, 113);" +
+				"padding: 3px 6px;" +
+				"color: white;" +
+				"width: auto;" +
+				"bottom: 0px;" +
+				"left: 0px;" +
+				"border-radius: 2px;" +
+				"z-index: 1;" +
 				"}" +
-
 				".m-select-d-box__selected-holder-item:hover " +
 				".m-select-d-box__selected-holder-label {" +
-					"display: block;" +
+				"display: block;" +
 				"}" +
-
 				"input.m-select-d-box__control-input {" +
-					"width: 32px;" +
-					"border: initial;" +
-					"outline: initial;" +
-					"margin: 4px; " +
-					"vertical-align: top;" +
+				"width: 32px;" +
+				"border: initial;" +
+				"outline: initial;" +
+				"margin: 4px; " +
+				"vertical-align: top;" +
 				"}" +
 				"";
 
 			$("body").append($('<style id="#msdb-eg-custom-control">').html(css));
 		},
 
-
-		"_initElem": function() {
+		_initElem: function () {
 			var $ = jQuery,
 				ctx = this.msdbCtx,
 				prevControl = ctx.get("target", void 0, 0),
 				prevInlineStyles = prevControl.getAttribute("style") || "";
 
 			var newAttrs = [
-				prevInlineStyles
-					? 'style="' + prevInlineStyles + '"'
-					: "",
+				prevInlineStyles ? 'style="' + prevInlineStyles + '"' : "",
 
-				prevControl.id
-					? 'id="' + prevControl.id + '"'
-					: "",
+				prevControl.id ? 'id="' + prevControl.id + '"' : "",
 
-				'class="' + (
-					prevControl.className
-						? prevControl.className
-						: ""
-				) + ' m-select-d-box__control_type_spec"'
+				'class="' +
+					(prevControl.className ? prevControl.className : "") +
+					' m-select-d-box__control_type_spec"',
 			];
 
-			var html = '' +
-				'<label ' + newAttrs.join(" ") + '>' +
+			var html =
+				"" +
+				"<label " +
+				newAttrs.join(" ") +
+				">" +
 				'<div class="m-select-d-box__selected-holder"></div>' +
 				'<input class="m-select-d-box__control-input" placeholder="">' +
-				'</label>';
+				"</label>";
 
 			var $newControl = $(html);
 
@@ -144,37 +134,48 @@
 			// use built-in key-value storage to link custom elements
 			ctx.set("$my-custom-control", $newControl, null, 0);
 			ctx.set("$my-custom-input", $newControl.find("input"), null, 0);
-			ctx.set("$my-selected-holder", $newControl.find(".m-select-d-box__selected-holder"));
+			ctx.set(
+				"$my-selected-holder",
+				$newControl.find(".m-select-d-box__selected-holder")
+			);
 
 			$(prevControl).after($newControl);
 
 			$(prevControl).remove();
 		},
 
-
-		"_initList": function() {
+		_initList: function () {
 			var list = this.msdbCtx.get("list", null, !1);
 
-			Object.keys(list).forEach(function(key) {
+			Object.keys(list).forEach(function (key) {
 				var item = list[key];
 
-				item.$holderLab = $('' +
-					'<div class="m-select-d-box__selected-holder-item" data-title="' + item.label + '" data-msdb-key="' + key + '">' +
-						'<span>' + item.label + '</span>' +
-						'<div class="m-select-d-box__selected-holder-label">' + item.label + '</div>' +
-					'</div>');
+				item.$holderLab = $(
+					"" +
+						'<div class="m-select-d-box__selected-holder-item" data-title="' +
+						item.label +
+						'" data-msdb-key="' +
+						key +
+						'">' +
+						"<span>" +
+						item.label +
+						"</span>" +
+						'<div class="m-select-d-box__selected-holder-label">' +
+						item.label +
+						"</div>" +
+						"</div>"
+				);
 			});
 		},
 
-
-		"_initEvents": function() {
+		_initEvents: function () {
 			var self = this,
 				ctx = this.msdbCtx,
 				$dbox = $(ctx.get("dbox", null, !1)),
 				$input = ctx.get("$my-custom-input", null, !1),
 				$control = ctx.get("$my-custom-control", null, !1);
 
-			$input.bind("focus", function() {
+			$input.bind("focus", function () {
 				ctx.open();
 			});
 
@@ -182,51 +183,53 @@
 
 			$input.bind("keydown", this._onDefKeyDown.bind(this));
 
-			$input.bind("focus", function() {
+			$input.bind("focus", function () {
 				clearTimeout(self._timers.focusOut);
 			});
 
-			$input.bind("focusout", function(e) {
+			$input.bind("focusout", function (e) {
 				clearTimeout(self._timers.focusOut);
 
 				console.log(e);
 
 				// ctx._isDBoxElement(e.currentTarget);
 
-				self._timers.focusOut = setTimeout(function() {
+				self._timers.focusOut = setTimeout(function () {
 					ctx.trigger("focusout");
 				}, 100);
 			});
 
-			$dbox.on("click", "*", function() {
+			$dbox.on("click", "*", function () {
 				clearTimeout(self._timers.focusOut);
 			});
 
-			ctx.on("select", function() {
+			ctx.on("select", function () {
 				self.applySelectedToHolder();
 			});
 
-			$control.on("click", ".m-select-d-box__selected-holder-item", function() {
-				ctx.deselect({ id: +this.getAttribute("data-msdb-key") });
-				ctx.applySelectedToList();
-				self.applySelectedToHolder();
-			});
+			$control.on(
+				"click",
+				".m-select-d-box__selected-holder-item",
+				function () {
+					ctx.deselect({ id: +this.getAttribute("data-msdb-key") });
+					ctx.applySelectedToList();
+					self.applySelectedToHolder();
+				}
+			);
 		},
 
-
-		"_onDefKeyUp": function(e) {
+		_onDefKeyUp: function (e) {
 			var self = this;
 
 			clearTimeout(this._timers.autoCompleteKeyUp);
 
-			this._timers.autoCompleteKeyUp = setTimeout(function() {
+			this._timers.autoCompleteKeyUp = setTimeout(function () {
 				self.msdbCtx.applyAutoComplete(e.currentTarget.value);
 				self.msdbCtx.open();
 			}, 500);
 		},
 
-
-		"_onDefKeyDown": function(e) {
+		_onDefKeyDown: function (e) {
 			var ctx = this.msdbCtx,
 				$hovLabElem,
 				elem = e.currentTarget,
@@ -234,24 +237,20 @@
 
 			if (e.keyCode == KEY_UP) {
 				ctx.hoverPrevVisibleItem(hov);
-
 			} else if (e.keyCode == KEY_DOWN) {
 				ctx.hoverNextVisibleItem(hov);
-
 			} else if (e.keyCode == KEY_ENTER) {
 				hov.selected
 					? ctx.deselect({ id: hov.id })
 					: ctx.select({ id: hov.id, blank: false });
 
 				this.applySelectedToHolder();
-
 			} else if (!elem.value) {
 				if (e.keyCode == KEY_BACKSPACE) {
 					$hovLabElem = this.getHoveredLab$();
 
 					if (!$hovLabElem.length) {
 						this.hoverLab(this.getLastLab$());
-
 					} else {
 						ctx.deselect({ id: $hovLabElem.attr("data-msdb-key") });
 						this.unhoverLab($hovLabElem);
@@ -259,14 +258,12 @@
 						!$hovLabElem.prev().length && this.hoverNextLab($hovLabElem);
 						this.applySelectedToHolder();
 					}
-
 				} else if (e.keyCode == KEY_LEFT) {
 					$hovLabElem = this.getHoveredLab$();
 
 					!$hovLabElem.length
 						? this.hoverLab(this.getLastLab$())
 						: this.hoverPrevLab($hovLabElem);
-
 				} else if (e.keyCode == KEY_RIGHT) {
 					$hovLabElem = this.getHoveredLab$();
 
@@ -279,122 +276,99 @@
 			ctx.calcScrollBarPosition();
 		},
 
-
-		"isLabHovered": function($lab) {
+		isLabHovered: function ($lab) {
 			return $lab.hasClass("m-select-d-box__selected-holder-item_hover");
 		},
 
-
-		"getLastLab$": function() {
+		getLastLab$: function () {
 			var $holder = this.msdbCtx.get("$my-selected-holder", null, !1);
 
 			return $holder.find(".m-select-d-box__selected-holder-item:last-child");
 		},
 
-
-		"getHoveredLab$": function() {
+		getHoveredLab$: function () {
 			var $holder = this.msdbCtx.get("$my-selected-holder", null, !1);
 
 			return $holder.find(".m-select-d-box__selected-holder-item_hover").last();
 		},
 
-
-		"hoverPrevLab": function($lab) {
+		hoverPrevLab: function ($lab) {
 			this.hoverLab($lab.prev());
 			$lab.prev().length && this.unhoverLab($lab);
 		},
 
-
-		"hoverNextLab": function($lab) {
+		hoverNextLab: function ($lab) {
 			this.hoverLab($lab.next());
 			$lab.next().length && this.unhoverLab($lab);
 		},
 
-
-		"hoverLab": function($lab) {
+		hoverLab: function ($lab) {
 			$lab.addClass("m-select-d-box__selected-holder-item_hover");
 		},
 
-
-		"unhoverLab": function($lab) {
+		unhoverLab: function ($lab) {
 			$lab.removeClass("m-select-d-box__selected-holder-item_hover");
 		},
 
-
-		"applySelectedToHolder": function() {
+		applySelectedToHolder: function () {
 			var ctx = this.msdbCtx,
 				items = ctx.getSelectedItems(),
 				list = ctx.get("list", null, 0),
 				$holder = ctx.get("$my-selected-holder", null, 0);
 
-			$holder.html('');
+			$holder.html("");
 
-			items.forEach(function(item) {
+			items.forEach(function (item) {
 				$holder.append(item.$holderLab);
 			});
-		}
+		},
 	};
 })(jQuery);
 
-$(document).ready(function() {
-
-
-	Math.rand = function(min, max) {
+$(document).ready(function () {
+	Math.rand = function (min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	};
 
-	$.prototype.mSelectDBox.prototype._globalStyles[".m-select-d-box__list-item_selected"]["background-color"] = "mediumseagreen";
-	$.prototype.mSelectDBox.prototype._globalStyles[".m-select-d-box__list-item_selected:hover, .m-select-d-box__list-item_selected.m-select-d-box__list-item_hover"]["background-color"] = "green";
-	$.prototype.mSelectDBox.prototype._globalStyles[".m-select-d-box__list-item:active, .m-select-d-box__list-item_selected:active"]["background-color"] = "darkgreen";
+	$.prototype.mSelectDBox.prototype._globalStyles[
+		".m-select-d-box__list-item_selected"
+	]["background-color"] = "mediumseagreen";
+	$.prototype.mSelectDBox.prototype._globalStyles[
+		".m-select-d-box__list-item_selected:hover, .m-select-d-box__list-item_selected.m-select-d-box__list-item_hover"
+	]["background-color"] = "green";
+	$.prototype.mSelectDBox.prototype._globalStyles[
+		".m-select-d-box__list-item:active, .m-select-d-box__list-item_selected:active"
+	]["background-color"] = "darkgreen";
 
 	var kelas = [
 		// Kelas
-		"VI TKRO 1",
-		"VI TKRO 2",
-		"VI TKRO 3",
-		"VI TKRO 4"
+		{ label: "X MM 1 ", value: "x-mm-1" },
+		{ label: "X MM 2 ", value: "x-mm-2" },
+		{ label: "X MM 3 ", value: "x-mm-3" },
 	];
 
 	var jurusan = [
 		// Jurusan
 		"TKRO",
 		"MM",
-		"TBSM"
+		"TBSM",
 	];
 
-	var guruPengajar = [
-		// Guru Pengajar
-		"Suripto S.Pd",
-		"Sugiono S.Pd",
-	];
+	// $("#kelas").mSelectDBox({
+	// 	list: kelas,
+	// 	multiple: 1,
+	// 	autoComplete: true,
+	// 	onInit: function (ctx) {
+	// 		new $.fn.mSelectDBox.MyCustomAppear1(ctx);
+	// 	},
+	// });
 
-
-	$("#kelas").mSelectDBox({
-		"list": kelas,
-		"multiple": 1,
-		"autoComplete": true,
-		"onInit": function(ctx) {
-			new $.fn.mSelectDBox.MyCustomAppear1(ctx);
-		}
-	});
-
-	$("#jurusan").mSelectDBox({
-		"list": jurusan,
-		"multiple": 1,
-		"autoComplete": true,
-		"onInit": function(ctx) {
-			new $.fn.mSelectDBox.MyCustomAppear1(ctx);
-		}
-	});
-
-	$("#guruPengajar").mSelectDBox({
-		"list": guruPengajar,
-		"multiple": 1,
-		"autoComplete": true,
-		"onInit": function(ctx) {
-			new $.fn.mSelectDBox.MyCustomAppear1(ctx);
-		}
-	});
-
-
+	// $("#jurusan").mSelectDBox({
+	// 	list: jurusan,
+	// 	multiple: 1,
+	// 	autoComplete: true,
+	// 	onInit: function (ctx) {
+	// 		new $.fn.mSelectDBox.MyCustomAppear1(ctx);
+	// 	},
+	// });
 });

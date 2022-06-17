@@ -2,41 +2,41 @@
 <?php include APPPATH.'../assets/admin/css/import_style.php';?>
 
 <div class="page-wrapper">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <div class="page-breadcrumb">
-        <div class="row">
-            <div class="col-7 align-self-center">
-                <h3 class="page-title">Tambah Kelas</h3>
-            </div>
-        </div>
-        <div class="d-flex align-items-center">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb m-0 p-0">
-                    <li class="breadcrumb-item text-muted active">Master Data</li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Admin/Data/dataKelas')?>" class="text-muted">Data Kelas</a></li>
-                    <li class="breadcrumb-item text-muted active" aria-current="page">Tambah Kelas</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
-    <div class="container-fluid">
-        <!-- *************************************************************** -->
-        <!-- Start First Cards -->
-        <!-- *************************************************************** -->
-        <!-- *************************************************************** -->
-        <!-- End Location and Earnings Charts Section -->
-        <!-- *************************************************************** -->
-        <!-- *************************************************************** -->
-        <!-- Start Top Leader Table -->
-        <!-- *************************************************************** -->
+	<!-- ============================================================== -->
+	<!-- Bread crumb and right sidebar toggle -->
+	<!-- ============================================================== -->
+	<div class="page-breadcrumb">
+		<div class="row">
+			<div class="col-7 align-self-center">
+				<h3 class="page-title">Tambah Kelas</h3>
+			</div>
+		</div>
+		<div class="d-flex align-items-center">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb m-0 p-0">
+					<li class="breadcrumb-item text-muted active">Master Data</li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/data/kelas') ?>" class="text-muted">Data Kelas</a></li>
+					<li class="breadcrumb-item text-muted active" aria-current="page">Tambah Kelas</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- End Bread crumb and right sidebar toggle -->
+	<!-- ============================================================== -->
+	<!-- ============================================================== -->
+	<!-- Container fluid  -->
+	<!-- ============================================================== -->
+	<div class="container-fluid">
+		<!-- *************************************************************** -->
+		<!-- Start First Cards -->
+		<!-- *************************************************************** -->
+		<!-- *************************************************************** -->
+		<!-- End Location and Earnings Charts Section -->
+		<!-- *************************************************************** -->
+		<!-- *************************************************************** -->
+		<!-- Start Top Leader Table -->
+		<!-- *************************************************************** -->
 
         <div class="row">
             <div class="col-12">

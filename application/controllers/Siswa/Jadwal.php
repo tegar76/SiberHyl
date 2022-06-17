@@ -22,7 +22,7 @@ class Jadwal extends CI_Controller
 		$timeNow = date('H:i');
 		$jadwalAktif = [
 			'hari' => $data['today'],
-			'jadwal.kelas_id' => $data['siswa']['kelas_id'],
+			'jadwal.kelas_id' => $data['siswa']->kelas_id,
 		];
 
 		$jadwal = $this->jadwal->getJadwalHariIni($jadwalAktif)->result();
@@ -38,7 +38,7 @@ class Jadwal extends CI_Controller
 				}
 			}
 		endforeach;
-		$data['title'] = 'Daftar Jadwal Pelajaran Kelas ' . $data['siswa']['nama_kelas'];
+		$data['title'] = 'Daftar Jadwal Pelajaran Kelas ' . $data['siswa']->nama_kelas;
 		$data['content'] = 'siswa/contents/jadwal/v_jadwal';
 		$this->load->view('siswa/layout/wrapper', $data);
 	}

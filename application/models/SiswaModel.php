@@ -23,14 +23,15 @@ class SiswaModel extends CI_Model
 		}
 		$query	= $this->db->select('*')
 			->from('siswa as siswa')
-			->join('kelas as kelas', 'siswa.kelas_id=kelas.kelas_id', 'left')
+			->join('kelas as kelas', 'siswa.kelas_id=kelas.kelas_id')
 			->where($params)
+			->order_by('siswa_nama', 'ASC')
 			->get();
 		$row = $query->num_rows();
 		if ($row > 1) {
-			return $query->result_array();
-		} elseif ($row == 1) {
-			return $query->row_array();
+			return $query->result();
+		} else {
+			return $query->row();
 		}
 	}
 

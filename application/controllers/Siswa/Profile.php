@@ -15,7 +15,7 @@ class Profile extends CI_Controller
 	public function index()
 	{
 		$data['siswa'] = $this->siswa;
-		$data['title'] = 'Profile Siswa' . $data['siswa']['siswa_nama'];
+		$data['title'] = 'Profile Siswa' . $data['siswa']->siswa_nama;
 		$data['content'] = 'siswa/contents/profile/v_profile';
 		$this->load->view('siswa/layout/wrapper', $data);
 	}
@@ -23,7 +23,7 @@ class Profile extends CI_Controller
 	public function editProfile()
 	{
 		$data['siswa'] = $this->siswa;
-		if ($data['siswa']['siswa_email'] == htmlspecialchars($this->input->post('email'))) {
+		if ($data['siswa']->siswa_email == htmlspecialchars($this->input->post('email'))) {
 			$rule_username = 'trim|xss_clean|valid_email';
 		} else {
 			$rule_username = 'trim|xss_clean|valid_email|is_unique[siswa.siswa_email]';
@@ -59,7 +59,7 @@ class Profile extends CI_Controller
 		]);
 
 		if ($this->form_validation->run() == false) {
-			$data['title'] = 'Update Profile Siswa' . $data['siswa']['siswa_nama'];
+			$data['title'] = 'Update Profile Siswa' . $data['siswa']->siswa_nama;
 			$data['content'] = 'siswa/contents/profile/v_edit_profile';
 			$this->load->view('siswa/layout/wrapper', $data);
 		} else {
@@ -79,8 +79,8 @@ class Profile extends CI_Controller
 				$dataUpload = $this->upload->data();
 				$resolution = ['width' => 500, 'height' => 500];
 				$this->compreesImage('siswa', $dataUpload['file_name'], $resolution);
-				if ($siswa['siswa_foto'] != 'default_foto.png') {
-					@unlink(FCPATH . './storage/siswa/profile/' . $siswa['siswa_foto']);
+				if ($siswa->siswa_foto != 'default_foto.png') {
+					@unlink(FCPATH . './storage/siswa/profile/' . $siswa->siswa_foto);
 				}
 				$newProfile = $this->upload->data('file_name');
 				$this->db->set('siswa_foto', $newProfile);
@@ -92,9 +92,9 @@ class Profile extends CI_Controller
 			'siswa_alamat' => $this->input->post('alamat', true)
 		];
 		$this->db->set($updateSiswa);
-		$this->db->where(['siswa_nis' => $siswa['siswa_nis']]);
+		$this->db->where(['siswa_nis' => $siswa->siswa_nis]);
 		$this->db->update('siswa');
-		$this->message('Profile Berhasil Diupdate', 'Selamat' . $siswa['siswa_nama'] . ', profile anda berhasil diperbarui', 'success');
+		$this->message('Profile Berhasil Diupdate', 'Selamat' . $siswa->siswa_nama . ', profile anda berhasil diperbarui', 'success');
 		redirect('siswa/profile');
 	}
 
@@ -166,9 +166,9 @@ class Profile extends CI_Controller
 		} else {
 			$newPassword = $this->input->post('new_pass', true);
 			$passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
-			$this->db->where('siswa_nis', $data['siswa']['siswa_nis']);
+			$this->db->where('siswa_nis', $data['siswa']->siswa_nis);
 			$this->db->update('siswa', ['siswa_pass' => $passwordHash]);
-			$this->message('Password Berhasil Diupdate', 'Selamat' .  $data['siswa']['siswa_nama'] . ', password anda berhasil diperbarui', 'success');
+			$this->message('Password Berhasil Diupdate', 'Selamat' .  $data['siswa']->siswa_nama . ', password anda berhasil diperbarui', 'success');
 			redirect('siswa/profile');
 		}
 	}
@@ -176,7 +176,8 @@ class Profile extends CI_Controller
 
 	public function password_check($str)
 	{
-		if (!password_verify($str, $this->siswa['siswa_pass'])) {
+		$siswa = $this->siswa;
+		if (!password_verify($str, $siswa->siswa_pass)) {
 			$this->form_validation->set_message('password_check', '{field} salah!');
 			return false;
 		}

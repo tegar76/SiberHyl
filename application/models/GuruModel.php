@@ -23,9 +23,9 @@ class GuruModel extends CI_Model
 		$query	= $this->db->get_where($this->table, $params);
 		$row = $query->num_rows();
 		if ($row > 1) {
-			return $query->result_array();
+			return $query->result();
 		} elseif ($row == 1) {
-			return $query->row_array();
+			return $query->row();
 		}
 	}
 
@@ -38,5 +38,11 @@ class GuruModel extends CI_Model
 		$this->db->set($update)
 			->where('guru_nip', $where)
 			->update($this->table);
+	}
+
+	public function insert_guru(array $data)
+	{
+		$this->db->insert($this->table, $data);
+		return true;
 	}
 }
