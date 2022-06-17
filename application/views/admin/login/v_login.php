@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">
 	<script src="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.all.min.js"></script>
 	<!-- style -->
-	<link rel="stylesheet" href="<?= base_url('assets/login/css/style.css') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/login/css/styless.css') ?>">
 
 	<title>Login Admin</title>
 </head>
@@ -44,7 +44,7 @@
 			};
 		});
 	</script>
-	<div class="container d-flex justify-content-center">
+	<!-- <div class="container d-flex justify-content-center">
 		<div class="card mt-5">
 			<div class="form-content">
 				<div class="logo d-flex justify-content-center mb-3">
@@ -95,6 +95,49 @@
 				</div>
 
 				</form>
+			</div>
+		</div>
+	</div> -->
+
+	<body oncontextmenu='return false' class='snippet-body'>
+
+	<div class="container">
+		<div class="row">
+			<div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+				<div class="panel border bg-white">
+					<div class="panel-body p-3">
+						<?= form_open('authadmin') ?>
+							<div class="logo d-flex justify-content-center mb-3">
+								<img src="<?= base_url('assets/logo/logo-big.png') ?>" alt="logo" style="width: 120px;">
+							</div>
+
+							<div class="title text-center">Admin</div>
+
+							<hr>
+							<?php if ($this->session->flashdata('message')) : ?>
+								<div class="alert alert-warning" role="alert">
+									<?= $this->session->flashdata('message') ?>
+								</div>
+							<?php endif ?>
+							<div class="form-group py-2">
+								<div class="input-field"> <span class="far fa-user p-2 bg-cyan"></span> <input type="text" name="username" id="username" <?= (form_error('username')) ? 'is-invalid' : '' ?>" value="<?= set_value('username', 'username') ?>" placeholder="Masukan Username"> </div>
+							</div>
+							<div id="usernameFeedback" class="invalid-feedback d-block mt-n4 mb-4" style="margin-left: 57px">
+								<?= form_error('username', '<div class="text-danger">', '</div>') ?>
+							</div>
+							<div class="form-group py-1 pb-2">
+								<div class="input-field"> <span class="fas fa-lock px-2 bg-cyan"></span><input type="password" name="password" class="mr-2 <?= (form_error('password')) ? 'is-invalid' : '' ?>" value="<?= set_value('password') ?>" placeholder="Masukan Password" autocomplete="current-password" id="id_password"><i class="far fa-eye fa-xs bg-eye ml-n4" id="togglePassword"></i></span> </div>
+							</div>
+							<div id="passwordFeedback" class="invalid-feedback d-block mt-n2 mb-1" style="margin-left: 40px">
+								<?= form_error('password', '<div class="text-danger">', '</div>') ?>
+							</div>
+
+							<div class="btn-submit ml-0">
+								<button type="submit" class="btn btn-masuk px-4">Masuk</button>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

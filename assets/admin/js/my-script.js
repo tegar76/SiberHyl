@@ -16,12 +16,11 @@ $(document).ready(function () {
 		searching: false,
 	});
 
-	table_pesan = $("#table-pesan-aduan").DataTable({
-		paging: false,
+	$("#table-pesan-aduan").DataTable({
 		searching: false,
 	});
 
-	table_pesan.destroy();
+	// table_pesan.destroy();
 });
 
 // jadwal pelajaran

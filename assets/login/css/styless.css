@@ -44,7 +44,7 @@ a:hover {
 }
 
 .panel {
-    min-height: 380px;
+    min-height: fit-content;
     box-shadow: 20px 20px 80px rgb(218, 218, 218);
     border-radius: 12px
 }
