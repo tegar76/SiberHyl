@@ -836,7 +836,7 @@ class Data extends CI_Controller
 			$result['mapel_id'] = $mapel;
 			$result['jumlah_rombel'] = count($kompetensi);
 			$result['jumlah_jam'] = $sum;
-			$result['total_jam'] = count($kompetensi) + $sum;
+			$result['total_jam'] = count($kompetensi) * $sum;
 			$jadwalGuru[]	= $result;
 		}
 		if (empty($jadwalGuru)) {

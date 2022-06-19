@@ -101,12 +101,12 @@
 
 	<body oncontextmenu='return false' class='snippet-body'>
 
-	<div class="container">
-		<div class="row">
-			<div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
-				<div class="panel border bg-white">
-					<div class="panel-body p-3">
-						<?= form_open('authadmin') ?>
+		<div class="container">
+			<div class="row">
+				<div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+					<div class="panel border bg-white">
+						<div class="panel-body p-3">
+							<?= form_open('authadmin') ?>
 							<div class="logo d-flex justify-content-center mb-3">
 								<img src="<?= base_url('assets/logo/logo-big.png') ?>" alt="logo" style="width: 120px;">
 							</div>
@@ -120,7 +120,7 @@
 								</div>
 							<?php endif ?>
 							<div class="form-group py-2">
-								<div class="input-field"> <span class="far fa-user p-2 bg-cyan"></span> <input type="text" name="username" id="username" <?= (form_error('username')) ? 'is-invalid' : '' ?>" value="<?= set_value('username', 'username') ?>" placeholder="Masukan Username"> </div>
+								<div class="input-field"> <span class="far fa-user p-2 bg-cyan"></span> <input type="text" name="username" id="username" <?= (form_error('username')) ? 'is-invalid' : '' ?>" value="<?= set_value('username') ?>" placeholder="Masukan Username"> </div>
 							</div>
 							<div id="usernameFeedback" class="invalid-feedback alert-login d-block mt-n4 mb-4" style="margin-left: 57px">
 								<?= form_error('username', '<div class="text-danger">', '</div>') ?>
@@ -135,51 +135,51 @@
 							<div class="btn-submit ml-0">
 								<button type="submit" class="btn btn-masuk px-4">Masuk</button>
 							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<footer>
-		<center>
-			<p>&copy; 2022 Team Paradoks Technology</p>
-		</center>
-	</footer>
+		<footer>
+			<center>
+				<p>&copy; 2022 Team Paradoks Technology</p>
+			</center>
+		</footer>
 
-	<script>
-		// Show Toggle Password
-		const togglePassword = document.querySelector('#togglePassword');
-		const password = document.querySelector('#id_password');
-		togglePassword.addEventListener('click', function(e) {
-			// toggle the type attribute
-			const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-			password.setAttribute('type', type);
-			// toggle the eye slash icon
-			this.classList.toggle('fa-eye-slash');
-		});
+		<script>
+			// Show Toggle Password
+			const togglePassword = document.querySelector('#togglePassword');
+			const password = document.querySelector('#id_password');
+			togglePassword.addEventListener('click', function(e) {
+				// toggle the type attribute
+				const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+				password.setAttribute('type', type);
+				// toggle the eye slash icon
+				this.classList.toggle('fa-eye-slash');
+			});
 
-		$(function() {
-			var title = '<?= $this->session->flashdata("title") ?>';
-			var text = '<?= $this->session->flashdata("text") ?>';
-			var type = '<?= $this->session->flashdata("type") ?>';
-			if (title) {
-				swal.fire({
-					icon: type,
-					title: title,
-					text: text,
-					type: type,
-					button: true,
-				});
-			};
-		});
-	</script>
+			$(function() {
+				var title = '<?= $this->session->flashdata("title") ?>';
+				var text = '<?= $this->session->flashdata("text") ?>';
+				var type = '<?= $this->session->flashdata("type") ?>';
+				if (title) {
+					swal.fire({
+						icon: type,
+						title: title,
+						text: text,
+						type: type,
+						button: true,
+					});
+				};
+			});
+		</script>
 
-	<!-- Bootstrap Js -->
-	<script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/jquery.js"></script>
-	<script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/popper.js"></script>
-	<script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/bootstrap.js"></script>
-</body>
+		<!-- Bootstrap Js -->
+		<script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/jquery.js"></script>
+		<script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/popper.js"></script>
+		<script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/bootstrap.js"></script>
+	</body>
 
 </html>

@@ -127,15 +127,18 @@ class Auth extends CI_Controller
 					redirect('wali-kelas/dashboard');
 				} else {
 					$this->session->set_flashdata('message', 'Pengisian akun tidak sesuai ,silahkan cek kembali');
-					redirect('login');
+					$data['title'] = 'Masuk Akun';
+					$this->load->view('auth/v_auth', $data, FALSE);
 				}
 			} else {
 				$this->session->set_flashdata('message', 'password salah');
-				redirect('login');
+				$data['title'] = 'Masuk Akun';
+				$this->load->view('auth/v_auth', $data, FALSE);
 			}
 		} else {
 			$this->session->set_flashdata('message', 'username & password tidak tersedia');
-			redirect('login');
+			$data['title'] = 'Masuk Akun';
+			$this->load->view('auth/v_auth', $data, FALSE);
 		}
 	}
 
