@@ -1,8 +1,8 @@
 <!-- Import multiple select -->
-<?php include APPPATH.'../assets/MSelectDialogBox-master/import_multiple_select.php';?>
+<?php include APPPATH . '../assets/MSelectDialogBox-master/import_multiple_select.php'; ?>
 
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -88,13 +88,13 @@
 									<?= form_error('judul_info', '<div class="text-danger">', '</div>') ?>
 								</div>
 							</div>
-							<label for="deskripsi_info">Deskripsi</label>
+							<!-- <label for="deskripsi_info">Deskripsi</label>
 							<div class="input-group mb-3">
-								<textarea type="text" name="deskripsi_info" id="deskripsi_info" placeholder="Masukan Deskripsi" class="form-control <?= (form_error('deskripsi_info')) ? 'is-invalid' : '' ?>"><?= set_value('deskripsi_info') ?></textarea>
+								<textarea type="text" name="deskripsi_info" id="deskripsi_info" placeholder="Masukan Deskripsi" class="form-control  (form_error('deskripsi_info')) ? 'is-invalid' : '' ?>"> set_value('deskripsi_info') ?></textarea>
 								<div class="invalid-feedback">
-									<?= form_error('deskripsi_info', '<div class="text-danger">', '</div>') ?>
+									//= form_error('deskripsi_info', '<div class="text-danger">', '</div>') ?>
 								</div>
-							</div>
+							</div> -->
 							<label for="file_info">Upload File</label>
 							<div class="input-group mb-3">
 								<input type="file" name="file_info" id="file_info" class="form-control <?= (form_error('file_info')) ? 'is-invalid' : '' ?>">
