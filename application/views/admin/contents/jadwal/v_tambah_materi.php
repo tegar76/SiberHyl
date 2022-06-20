@@ -157,7 +157,7 @@
 					});
 
 					$('#jurusan').select2({
-						placeholder: 'Pilih Materi Jurusan',
+						placeholder: 'Pilih Jurusan',
 						ajax: {
 							dataType: 'json',
 							url: '<?= base_url('master/jadwal/get_data?type=jurusan') ?>',

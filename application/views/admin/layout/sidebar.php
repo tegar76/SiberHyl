@@ -26,7 +26,7 @@
 					</ul>
 				</li>
 				<li class="list-divider"></li>
-				<li class="sidebar-item <?= ($this->uri->segment(2) == "jadwal") ? 'selected' : '' ?>"> <a class="sidebar-link has-arrow <?= ($this->uri->segment(2) == "jadwal") ? 'active' : '' ?>" href="javascript:void(0)" aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span class="hide-menu">Settings Jadwal </span></a>
+				<li class="sidebar-item "> <a class="sidebar-link has-arrow <?= ($this->uri->segment(2) == "jadwal") ? 'active' : '' ?>" href="javascript:void(0)" aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span class="hide-menu">Settings Jadwal </span></a>
 					<ul aria-expanded="false" class="collapse  first-level base-level-line <?= ($this->uri->segment(2) == "Jadwal") ? 'in' : '' ?>"><a href="<?= base_url('master/jadwal') ?>">
 							<li class="sidebar-item <?= ($this->uri->segment(2) == "jadwal") ? 'active' : '' ?>">
 								<a href="<?= base_url('master/jadwal') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "jadwal/") ? 'active' : '' ?>"><span class="hide-menu"> Jadwal</span></a>
@@ -39,7 +39,7 @@
 							</li>
 					</ul>
 				</li>
-				<li class="sidebar-item <?= ($this->uri->segment(2) == "info") ? 'selected' : '' ?>"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span class="hide-menu">Settings Info </span></a>
+				<li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span class="hide-menu">Settings Info </span></a>
 					<ul aria-expanded="false" class="collapse  first-level base-level-line">
 						<li class="sidebar-item">
 							<a href="<?= base_url('master/info/info-akademik') ?>" class="sidebar-link"><span class="hide-menu"> Informasi Akademik</span></a>

@@ -9,6 +9,7 @@ function base_url() {
 }
 
 const BASEURL = base_url();
+console.log(BASEURL);
 
 // Dashboard
 $(document).ready(function () {
