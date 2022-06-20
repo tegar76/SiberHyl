@@ -3,7 +3,7 @@
 
 <section class="container section section__height"> 
 
-<form action="<?= base_url('Siswa/Absen/cetakAbsensiPdf')?>">
+<form action="<?= base_url('Siswa/Absen/cetakAbsensi')?>">
     <div class="title-form mb-3">
         Form Cetak Reporting Absensi Siswa 
     </div>

@@ -74,8 +74,8 @@
 					</div>
 					<div class="form-group">
 						<label for="alamat">Alamat</label>
-						<input type="text" id="alamat" class="form-control <?= (form_error('alamat')) ? 'is-invalid' : '' ?>" name="alamat" value="<?= $siswa->siswa_alamat ?>">
-						<?= form_error('alamat', '<div class="text-danger">', '</div>') ?>
+						<textarea id="alamat" class="form-control <?= (form_error('alamat')) ? 'is-invalid' : '' ?>" name="alamat" value="<?= $siswa->siswa_alamat ?>">
+						<?= form_error('alamat', '<div class="text-danger">', '</div>') ?></textarea>
 					</div>
 					<div class="button-action mb-3 mt-2">
 						<button type="submit" class="btn btn-sm btn-success mr-2 px-4">Update</button>
