@@ -15,7 +15,7 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Master Data</li>
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/data/ruangan') ?>" class="text-muted">Data Mapel</a></li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/data/ruangan') ?>" class="text-muted">Data Ruangan</a></li>
 					<li class="breadcrumb-item text-muted active" aria-current="page">Edit Ruangan</li>
 				</ol>
 			</nav>

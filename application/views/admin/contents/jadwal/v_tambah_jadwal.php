@@ -52,7 +52,7 @@
 								<h6>Data Ke-1</h6>
 							</div>
 							<div class="form-group">
-								<label for="kelas">Pilih Kelas</label>
+								<label for="kelas">Kelas</label>
 								<select class="form-control select-class <?= (form_error('kelas[]')) ? 'is-invalid' : '' ?>" id="select-class" name="kelas[]" title="Pilih Kelas">
 								</select>
 								<div class="invalid-feedback" id="kelasFeedback"><?= form_error('kelas[]') ?></div>
@@ -99,7 +99,7 @@
 							</div>
 							<div class="form-group">
 								<label for="jumlah_jam">Jumlah Jam</label>
-								<input type="text" class="form-control <?= (form_error('jumlah_jam[]')) ? 'is-invalid' : '' ?>" id="jumlah_jam" name="jumlah_jam[]">
+								<input type="text" class="form-control <?= (form_error('jumlah_jam[]')) ? 'is-invalid' : '' ?>" id="jumlah_jam" name="jumlah_jam[]" placeholder="Masukan Jumlah Jam Mengajar">
 								<div class="invalid-feedback" id="jam_selesaiFeedback"><?= form_error('jumlah_jam[]') ?></div>
 							</div>
 						</div>

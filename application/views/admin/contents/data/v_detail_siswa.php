@@ -16,7 +16,7 @@
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Data Master</li>
 					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/data/siswa') ?>" class="text-muted">Data Siswa</a></li>
-					<li class="breadcrumb-item text-muted active" aria-current="page">Detail Siswal</li>
+					<li class="breadcrumb-item text-muted active" aria-current="page">Detail Siswa</li>
 				</ol>
 			</nav>
 		</div>

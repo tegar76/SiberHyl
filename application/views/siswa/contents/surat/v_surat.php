@@ -72,8 +72,9 @@
 											<div class="form-info mb-3">
 												Upload Surat dengan format PNG,JPEG,JPG dan dengan ukuran File max 2mb
 											</div>
-                                            <label for="">Guru Pengajar</label>
+                                            <label for="">Guru Pengajar</label> 
                                             <div class="input-group mb-3">
+												<!-- Form multiple select berdasarkan nama guru bukan kode guru -->
                                                 <input type="button" id="guruPengajar" class="" style="width:100%;">
                                                 <!-- value ada di ('assets/MSelectDialogBox-master/examples/')/js/example.js"> -->
                                             </div>

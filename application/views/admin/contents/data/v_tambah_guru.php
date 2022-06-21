@@ -51,9 +51,9 @@
 									<?= form_error('kode_guru', '<div class="text-danger">', '</div>') ?>
 								</div>
 							</div>
-							<label for="guru_nip">NIP</label>
+							<label for="guru_nip">NIP/NUPTK</label>
 							<div class="input-group mb-3">
-								<input type="text" name="guru_nip" id="guru_nip" placeholder="Masukan NIP" class="form-control <?= form_error('guru_nip') ? 'is-invalid' : '' ?>" value="<?= set_value('guru_nip') ?>">
+								<input type="text" name="guru_nip" id="guru_nip" placeholder="Masukan NIP/NUPTK" class="form-control <?= form_error('guru_nip') ? 'is-invalid' : '' ?>" value="<?= set_value('guru_nip') ?>">
 								<div class="invalid-feedback">
 									<?= form_error('guru_nip', '<div class="text-danger">', '</div>') ?>
 								</div>

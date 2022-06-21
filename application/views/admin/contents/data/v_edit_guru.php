@@ -52,9 +52,9 @@
 									<?= form_error('kode_guru_edit', '<div class="text-danger">', '</div>') ?>
 								</div>
 							</div>
-							<label for="guru_nip_edit">NIP</label>
+							<label for="guru_nip_edit">NIP/NUPTK</label>
 							<div class="input-group mb-3">
-								<input type="text" name="guru_nip_edit" id="guru_nip_edit" placeholder="Masukan NIP" class="form-control <?= form_error('guru_nip_edit') ? 'is-invalid' : '' ?>" value="<?= $guru->guru_nip ?>">
+								<input type="text" name="guru_nip_edit" id="guru_nip_edit" placeholder="Masukan NIP/NUPTK" class="form-control <?= form_error('guru_nip_edit') ? 'is-invalid' : '' ?>" value="<?= $guru->guru_nip ?>">
 								<div class="invalid-feedback">
 									<?= form_error('guru_nip_edit', '<div class="text-danger">', '</div>') ?>
 								</div>
@@ -87,7 +87,7 @@
 								</div>
 							</div>
 							<div class="btn-aksi">
-								<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
+								<button type="submit" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
 								<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset</button>
 							</div>
 							<?= form_close() ?>
