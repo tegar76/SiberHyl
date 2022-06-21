@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -69,7 +69,7 @@
 										<tbody>
 											<tr class="table-borderless">
 												<th scope="row">NIS</th>
-												<td><?= $student->siswa_nama ?></td>
+												<td><?= $student->siswa_nis ?></td>
 											</tr>
 											<tr>
 												<th scope="row">NISN</th>
@@ -77,23 +77,23 @@
 											</tr>
 											<tr>
 												<th scope="row">Tempat,Tanggal Lahir</th>
-												<td><?= $student->siswa_tempatlahir ?>, <?= date('d - m - Y', strtotime($student->siswa_tanggallahir)) ?></td>
+												<td><?= (!empty($student->siswa_tempatlahir)) ? $student->siswa_tempatlahir : '-' ?>, <?= ($student->siswa_tanggallahir == '0000-00-00') ? '-' : date('d - m - Y', strtotime($student->siswa_tanggallahir)) ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Jenis Kelamin</th>
-												<td><?= $student->siswa_kelamin ?></td>
+												<td><?= (!empty($student->siswa_kelamin)) ? $student->siswa_kelamin : '-' ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Email</th>
-												<td><?= $student->siswa_email ?></td>
+												<td><?= (!empty($student->siswa_email)) ? $student->siswa_email : '-' ?></td>
 											</tr>
 											<tr>
 												<th scope="row">No Handphone</th>
-												<td><?= $student->siswa_telp ?></td>
+												<td><?= (!empty($student->siswa_telp)) ? $student->siswa_telp : ' - ' ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Alamat</th>
-												<td><?= $student->siswa_alamat ?></td>
+												<td><?= (!empty($student->siswa_alamat)) ? $student->siswa_alamat : '-' ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Asal Kelas</th>

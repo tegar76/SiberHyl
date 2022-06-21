@@ -56,45 +56,49 @@ class Materi extends CI_Controller
 				'label' => 'Kelas',
 				'rules' => 'trim|required|xss_clean',
 				'errors' => [
-					'required' => '{field} harus diisi'
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}'
 				]
 			],
 			[
 				'field' => 'jurusan',
 				'label' => 'Jurusan',
 				'rules' => 'trim|xss_clean',
-				'errors' => []
+				'errors' => [
+					'xss_clean' => 'cek kembali pada {field}'
+				]
 			],
 			[
 				'field' => 'mapel',
 				'label' => 'Mata Pelajaran',
 				'rules' => 'trim|required|xss_clean',
 				'errors' => [
-					'required' => '{field} harus diisi'
+					'required' => '{field} harus diisi',
+					'xss_clean' => 'cek kembali pada {field}'
 				]
 			],
-			[
-				'field' => 'judul_materi[]',
-				'label' => 'Judul Materi Pembelajaran',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi'
-				]
-			],
-			[
-				'field' => 'judul_video[]',
-				'label' => 'Judul Video',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi'
-				]
-			],
-			[
-				'field' => 'link_video[]',
-				'label' => 'Link Video Pembelajaran',
-				'rules' => 'trim|xss_clean',
-				'errors' => []
-			]
+			// [
+			// 	'field' => 'judul_materi[]',
+			// 	'label' => 'Judul Materi Pembelajaran',
+			// 	'rules' => 'trim|required|xss_clean',
+			// 	'errors' => [
+			// 		'required' => '{field} harus diisi'
+			// 	]
+			// ],
+			// [
+			// 	'field' => 'judul_video[]',
+			// 	'label' => 'Judul Video',
+			// 	'rules' => 'trim|required|xss_clean',
+			// 	'errors' => [
+			// 		'required' => '{field} harus diisi'
+			// 	]
+			// ],
+			// [
+			// 	'field' => 'link_video[]',
+			// 	'label' => 'Link Video Pembelajaran',
+			// 	'rules' => 'trim|xss_clean',
+			// 	'errors' => []
+			// ]
 		]);
 
 		if ($this->form_validation->run() == false) {
@@ -102,7 +106,6 @@ class Materi extends CI_Controller
 			$data['content'] = 'admin/contents/jadwal/v_tambah_materi';
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		} else {
-
 			$jurusanID = $this->input->post('jurusan', true);
 			$infoMateri = [
 				'index_kelas' => $this->input->post('index_kelas', true),
@@ -111,8 +114,18 @@ class Materi extends CI_Controller
 			];
 			$this->db->insert('materi_info', $infoMateri);
 			$infoMateriID = $this->db->insert_id();
-			$this->processMateri($infoMateriID);
-			$this->processLinkVideo($infoMateriID);
+			$file_	= $_FILES['file_materi']['name'];
+			$title_	= $_POST['judul_video'];
+			$url_	= $_POST['link_video'];
+
+			if (isset($file_)) {
+				$this->processMateri($infoMateriID);
+			}
+
+			if (array_filter($url_)) {
+				$this->processLinkVideo($infoMateriID);
+			}
+
 			$this->message('Berhasil', 'Data Materi Berhasil Ditambah', 'success');
 			return redirect('master/materi');
 		}
@@ -172,7 +185,7 @@ class Materi extends CI_Controller
 	public function processLinkVideo($infoMateriID)
 	{
 		$url_video = $this->input->post('link_video', true);
-		if ($url_video) {
+		if (isset($url_video)) {
 			for ($i = 0; $i < count($url_video); $i++) {
 				$youtube = preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $url_video[$i], $url_match);
 				$embed_url[$i] = 'https://www.youtube.com/embed/' . $url_match[1];
@@ -229,8 +242,13 @@ class Materi extends CI_Controller
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		} else {
 			$infoMateriID = $this->input->post('materi_info_id', true);
+			$this->db->set('update_time', date('Y-m-d H:i:s'));
+			$this->db->where('materi_info_id', $infoMateriID);
+			$this->db->update('materi_info');
+
+			$url_	= $_POST['link_video'];
 			$this->processMateri($infoMateriID);
-			if ($_POST['link_video']) {
+			if (array_filter($url_)) {
 				$this->processLinkVideo($infoMateriID);
 			}
 			$this->message('Berhasil', 'Data Materi Berhasil Diupdate', 'success');
@@ -384,7 +402,9 @@ class Materi extends CI_Controller
 		} else {
 			$pathMateri = './storage/materi/' . $dirKelas . '/' . $materi->kode_jurusan . '/';
 		}
-
+		$this->db->set('update_time', date('Y-m-d H:i:s'));
+		$this->db->where('materi_info_id', $materi->materi_info_id);
+		$this->db->update('materi_info');
 		$updateMateri = $_FILES['file_materi_update']['name'];
 		if ($updateMateri) {
 			$config['allowed_types'] = 'pdf';
@@ -462,6 +482,9 @@ class Materi extends CI_Controller
 		$materi = $this->db->get_where('materi_kbm', ['materi_id' => $materiID])->row();
 		$judul_video = $this->input->post('judul_video_update', true);
 		$url_video = $this->input->post('link_video_update', true);
+		$this->db->set('update_time', date('Y-m-d H:i:s'));
+		$this->db->where('materi_info_id', $materi->materi_info_id);
+		$this->db->update('materi_info');
 		if ($materi->materi == $url_video) {
 			$this->db->set('materi', $url_video);
 		} else {

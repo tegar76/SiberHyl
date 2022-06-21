@@ -120,15 +120,15 @@ class Info extends CI_Controller
 					'xss_clean' => 'cek kembali pada {field}'
 				]
 			],
-			[
-				'field' => 'deskripsi_info',
-				'label' => 'Deskripsi Info Akademik',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi!',
-					'xss_clean' => 'cek kembali pada {field}'
-				]
-			]
+			// [
+			// 	'field' => 'deskripsi_info',
+			// 	'label' => 'Deskripsi Info Akademik',
+			// 	'rules' => 'trim|required|xss_clean',
+			// 	'errors' => [
+			// 		'required' => '{field} harus diisi!',
+			// 		'xss_clean' => 'cek kembali pada {field}'
+			// 	]
+			// ]
 		]);
 		if (empty($_FILES['file_info']['name'])) {
 			$this->form_validation->set_rules('file_info', 'File Info Akademik', 'required', [
@@ -169,7 +169,7 @@ class Info extends CI_Controller
 				$upload = array(
 					'judul_info' => htmlspecialchars($this->input->post('judul_info', true)),
 					'slug_judul' => url_title($_POST['judul_info'], 'dash', true),
-					'deskripsi_info' => htmlspecialchars($this->input->post('deskripsi_info', true)),
+					// 'deskripsi_info' => htmlspecialchars($this->input->post('deskripsi_info', true)),
 					'file_info' => $file_info['file_name'],
 					'tipe_file' => $file_info['file_ext'],
 					'ukuran_file' => $file_info['file_size'],

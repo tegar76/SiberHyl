@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -117,7 +117,7 @@
 								<select class="custom-select <?= (form_error('ruangan_edit')) ? 'is-invalid' : 'is-valid' ?>" id="ruangan_edit" name="ruangan_edit">
 									<option value="">Pilih Ruangan Kelas</option>
 									<?php foreach ($rooms as $room) : ?>
-										<option value="<?= $room->ruang_id ?>" <?= ($jadwalDetail->nama_ruang == $room->nama_ruang) ? 'selected' : '' ?>><?= $room->nama_ruang ?></option>
+										<option value="<?= $room->ruang_id ?>" <?= ($jadwalDetail->ruang_id == $room->ruang_id) ? 'selected' : '' ?>><?= $room->kode_ruang ?></option>
 									<?php endforeach ?>
 								</select>
 								<div id="ruangan_editFeedback" class="invalid-feedback">

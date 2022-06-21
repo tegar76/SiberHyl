@@ -1,6 +1,6 @@
 <!-- import style -->
 
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -63,6 +63,10 @@
 												<td class="col-md-3"><?= $guru->guru_kode ?></td>
 											</tr>
 											<tr>
+												<th scope="row">NIP/NUPTK</th>
+												<td><?= $guru->guru_nip ?></td>
+											</tr>
+											<tr>
 												<th scope="row">Nama</th>
 												<td><?= $guru->guru_nama ?></td>
 											</tr>
@@ -72,7 +76,7 @@
 											</tr>
 
 											<tr class="table-borderless">
-												<th scope="row" class="table-title">Pembagian Tugas Mengajar Semester <?= $semester = ($tahun_ajar['semester'] == 0 ) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></th>
+												<th scope="row" class="table-title">Pembagian Tugas Mengajar Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></th>
 												<!-- <td></td> -->
 											</tr>
 											<tr>

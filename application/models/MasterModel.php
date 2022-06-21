@@ -67,7 +67,7 @@ class MasterModel extends CI_Model
 			$result = $query->result();
 			return $result;
 		} elseif ($table == 'ruangan') {
-			$query = $this->db->select('ruang_id, nama_ruang')
+			$query = $this->db->select('ruang_id, kode_ruang')
 				->from('ruangan')->order_by('nama_ruang', 'ASC')->get();
 			$result = $query->result();
 			return $result;
@@ -99,11 +99,11 @@ class MasterModel extends CI_Model
 			}
 			return $query->result();
 		} elseif ($type == 'teacher') {
-			$this->db->select('guru_id, guru_kode, guru_nama');
+			$this->db->select('guru_id, guru_kode, guru_nama, role_id');
 			$this->db->from('guru');
 			$this->db->like('guru_kode', $search);
 			$this->db->like('guru_nama', $search);
-			$this->db->where('guru_kode !=', 'ADM');
+			$this->db->where('role_id !=', 1);
 			$this->db->order_by('guru_kode', 'ASC');
 			$query	= $this->db->get();
 			if ($query->num_rows() == null) {
@@ -147,7 +147,10 @@ class MasterModel extends CI_Model
 
 	public function getDetailMateri($idMateri)
 	{
-		$query	= $this->db->select('*')
+		$query	= $this->db->select('
+		mapel.nama_mapel, jurusan.jurusan_id, jurusan.kode_jurusan, jurusan.nama_jurusan, materi_info.index_kelas,
+		materi_info.create_time, materi_info.update_time, materi_info.materi_info_id
+		')
 			->from('materi_info')
 			->join('mapel', 'mapel.mapel_id=materi_info.mapel_id', 'left')
 			->join('jurusan', 'jurusan.jurusan_id=materi_info.jurusan_id', 'left')

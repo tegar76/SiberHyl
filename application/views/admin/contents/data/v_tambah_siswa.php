@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -69,7 +69,7 @@
 								<div class="col">
 									<label for="tempat_lahir">Tempat Lahir</label>
 									<div class="input-group mb-3">
-										<input type="text" name="tempat_lahir" id="tempat_lahir" placeholder="Masukan Tempat Lahir" class="form-control <?= form_error('tempat_lahir') ? 'is-invalid' : '' ?>" value="<?= set_value('tempat_lahir') ?>">
+										<input type="text" name="tempat_lahir" id="tempat_lahir" placeholder="Masukan Tempat Lahir" class="form-control <?= form_error('tempat_lahir') ? 'is-invalid' : '' ?>" value="<?= set_value('tempat_lahir') ?>" placeholder="dd-mm-yyyy" min="1997-01-01" max="2030-12-31">
 										<div class="invalid-feedback">
 											<?= form_error('tempat_lahir', '<div class="text-danger">', '</div>') ?>
 										</div>
