@@ -73,7 +73,7 @@
                                                             <td>08:15 WIB</td>
                                                             <td>Pilgan</td>
                                                             <td>
-																<a role="button" class="btn btn-sm btn-outline-danger disabled text-danger mx-auto d-block mb-3">Waktu Sudah Lewat</a>
+																<a role="button" class="btn btn-sm btn-outline-danger disabled text-danger mx-auto d-block">Waktu Sudah Lewat</a>
 															</td>
                                                         </tr>
 														<tr>
@@ -87,7 +87,7 @@
                                                             <td>08:15 WIB</td>
                                                             <td>Essay</td>
                                                             <td>
-																<a role="button" class="btn btn-sm btn-outline-success disabled text-success mx-auto d-block mb-3">Sudah Mengerjakan</a>
+																<a role="button" class="btn btn-sm btn-outline-success disabled text-success mx-auto d-block">Sudah Mengerjakan</a>
 															</td>
                                                         </tr>
                                                     </tbody>
