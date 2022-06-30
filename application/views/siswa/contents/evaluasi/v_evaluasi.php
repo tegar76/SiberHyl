@@ -38,11 +38,12 @@
                                                             <th style="width: 40px;">Mata Pelajaran</th>
 															<th style="width: 14px;">Evaluasi Ke-</th>
                                                             <th style="width: 24px;">Judul Evaluasi</th>
-                                                            <th style="width: 10px">Tanggal</th>
-                                                            <th style="width: 10px;">Dibuka</th>
-                                                            <th style="width: 10px;">Ditutup</th>
+                                                            <th style="width: 7px">Tanggal</th>
+                                                            <th style="width: 7px;">Dimulai</th>
+                                                            <th style="width: 7px;">Selesai</th>
+                                                            <th style="width: 12px;">Batas Pengumpulan</th>
                                                             <th style="width: 2px;">Jenis Soal</th>
-                                                            <th style="width: 18px;">Aksi</th>
+                                                            <th style="width: 20px;">Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -54,10 +55,11 @@
                                                             <td>25-05-2022</td>
                                                             <td>07:00 WIB</td>
                                                             <td>08:00 WIB</td>
+                                                            <td>08:15 WIB</td>
                                                             <td>Essay</td>
                                                             <td>
 																<a target="_blank" href="<?= base_url('Siswa/Evaluasi/soalEvaluasiPdf')?>" class="btn btn-success text-white mx-auto d-block mb-3">Mulai</a>
-																<a class="btn btn-primary text-white mx-auto d-block" role="button" data-toggle="popover" data-placement="bottom">Kumpulkan</a>
+																<a class="btn btn-sm btn-primary text-white mx-auto d-block" role="button" data-toggle="popover" data-placement="bottom">Kumpulkan</a>
 															</td>
                                                         </tr>
 														<tr>
@@ -68,9 +70,10 @@
                                                             <td>25-05-2022</td>
                                                             <td>07:00 WIB</td>
                                                             <td>08:00 WIB</td>
+                                                            <td>08:15 WIB</td>
                                                             <td>Pilgan</td>
                                                             <td>
-																<a role="button" class="btn btn-outline-danger disabled text-danger mx-auto d-block mb-3">Waktu Sudah Lewat</a>
+																<a role="button" class="btn btn-sm btn-outline-danger disabled text-danger mx-auto d-block mb-3">Waktu Sudah Lewat</a>
 															</td>
                                                         </tr>
 														<tr>
@@ -81,9 +84,10 @@
                                                             <td>25-05-2022</td>
                                                             <td>07:00 WIB</td>
                                                             <td>08:00 WIB</td>
+                                                            <td>08:15 WIB</td>
                                                             <td>Essay</td>
                                                             <td>
-																<a role="button" class="btn btn-outline-success disabled text-success mx-auto d-block mb-3">Sudah Mengerjakan</a>
+																<a role="button" class="btn btn-sm btn-outline-success disabled text-success mx-auto d-block mb-3">Sudah Mengerjakan</a>
 															</td>
                                                         </tr>
                                                     </tbody>
