@@ -135,7 +135,7 @@
 					</div>
 					<input type="hidden" name="kode_jadwal" value="<?= $jadwalDetail->kode_jadwal ?>">
 					<div class="btn-aksi">
-						<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
+						<button type="submit" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
 						<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset Form</button>
 					</div>
 					<?= form_close() ?>

@@ -50,7 +50,7 @@
 					</ul>
 				</li>
 				<li class="list-divider"></li>
-				<li class="sidebar-item <?= ($this->uri->segment(2) == "jurnal") ? 'selected' : '' ?>"> <a class="sidebar-link sidebar-link" href="<?= base_url('master/jurnal') ?>" aria-expanded="false"><i data-feather="book-open" class="feather-icon"></i><span class="hide-menu">Jurnal Materi</span></a></li>
+				<li class="sidebar-item <?= ($this->uri->segment(2) == "jurnal") ? 'selected' : '' ?>"> <a class="sidebar-link sidebar-link" href="<?= base_url('master/jurnal') ?>" aria-expanded="false"><i data-feather="book" class="feather-icon"></i><span class="hide-menu">Jurnal Materi</span></a></li>
 				<li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#" id="logout" aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span class="hide-menu">Logout</span></a></li>
 			</ul>
 		</nav>

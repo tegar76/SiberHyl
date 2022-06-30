@@ -6,8 +6,6 @@
 <link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">
 <title><?= $title ?></title>
 
-<!-- import style -->
-<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
 
 <section class="container section section__height px-0">
 

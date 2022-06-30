@@ -36,62 +36,63 @@
                 <div class="sub-title mb-4">SMK Kesatrian Purwokerto</div>
                 <div class="date text-right mb-3">Tanggal Cetak : 12 - 06 -2022</div>
                 <div class="row atribute text-left">
-                    <div class="col-sm-3"><p>Kode Guru</p></div>
+                    <div class="col-sm-2"><p>Kode Guru</p></div>
                     <div class="col"><p><span> : </span>AZ</p></div>
                 </div>
                 <div class="row atribute text-left">
-                    <div class="col-sm-3"><p>Kelas</p></div>
+                    <div class="col-sm-2"><p>Kelas</p></div>
                     <div class="col"><p><span> : </span>XI TKRO 1</p></div>
                 </div>
                 <div class="row atribute text-left">
-                    <div class="col-sm-3"><p>Mapel</p></div>
+                    <div class="col-sm-2"><p>Mapel</p></div>
                     <div class="col"><p><span> : </span>Panel Sasis Dan Pemindahan Tenaga KR</p></div>
                 </div>
                 <div class="row atribute text-left mb-4">
-                    <div class="col-sm-3"><p>Pertemuan Ke-</p></div>
+                    <div class="col-sm-2"><p>Pertemuan Ke-</p></div>
                     <div class="col"><p><span> : </span>1 s/d 7</p></div>
                 </div>
-                <div class="content">
-                    <table border="1" cellpadding="10">
+                <div class="content text-left">
+                    <table border="1" cellpadding="15">
+                       <thead>
                         <tr>
-                            <th rowspan="2">No</th>
-                            <th rowspan="2">NIS</th>
-                            <th rowspan="2">Nama</th>
-                            <th colspan="7">Pertemuan Ke-</th>
-                            <th colspan="4">Total</th>
-                        </tr>
-                        <tr>
-                            <!-- <td>1</td>
-                            <td>2010049</td>
-                            <td>ADIT PRAYITNO</td> -->
-                            <th>1</th>
-                            <th>2</th>
-                            <th>3</th>
-                            <th>4</th>
-                            <th>5</th>
-                            <th>6</th>
-                            <th>7</th>
-                            <th>H</th>
-                            <th>A</th>
-                            <th>S</th>
-                            <th>I</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2010049</td>
-                            <td>ADIT PRAYITNO</td>
-                            <td>h</td>
-                            <td>h</td>
-                            <td>h</td>
-                            <td>h</td>
-                            <td>h</td>
-                            <td>s</td>
-                            <td>s</td>
-                            <td>5</td>
-                            <td>0</td>
-                            <td>2</td>
-                            <td>0</td>
-                        </tr>
+                                <th rowspan="2">No</th>
+                                <th rowspan="2">NIS</th>
+                                <th rowspan="2">Nama</th>
+                                <th colspan="7">Pertemuan Ke-</th>
+                                <th colspan="4">Total</th>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                                <th>6</th>
+                                <th>7</th>
+                                <th>H</th>
+                                <th>A</th>
+                                <th>S</th>
+                                <th>I</th>
+                            </tr>
+                       </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2010049</td>
+                                <td>ADIT PRAYITNO</td>
+                                <td>h</td>
+                                <td>h</td>
+                                <td>h</td>
+                                <td>h</td>
+                                <td>h</td>
+                                <td>s</td>
+                                <td>s</td>
+                                <td>5</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>    

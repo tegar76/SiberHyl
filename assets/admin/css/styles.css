@@ -220,12 +220,12 @@ td a,
   }
 
   .btn-primary {
-      background-color: #28748d;
-      border-color: #28748d;
+      background-color: #28748d !important;
+      border-color: #28748d !important;
   }
 
   .btn-primary:hover {
-    background-color: #1a4a5a;
+    background-color: #1a4a5a !important;
 }
 
 .title-form h6 {
@@ -366,7 +366,7 @@ border-color: rgb(222, 243, 248)
 }
 
 .bg-blue {
-background-color: #2989A8;
+background-color: #2989A8 !important;
 }
 
 .menu .card img {

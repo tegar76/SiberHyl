@@ -17,7 +17,7 @@
 	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
 	<!-- style -->
-	<link rel="stylesheet" href="<?= base_url('assets/login/css/styless.css') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/login/css/styles.css') ?>">
 
 	<title>Login</title>
 </head>
@@ -27,11 +27,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
-				<div class="panel border bg-white">
-					<div class="panel-body p-3">
+				<div class="panel border bg-white d-flex justify-content-center">
+					<div class="panel-body p-3 ">
 						<?= form_open('login') ?>
 						<div class="logo d-flex justify-content-center mb-3">
-							<img src="<?= base_url('assets/logo/logo-big.png') ?>" alt="logo" style="width: 120px;">
+							<img src="<?= base_url('assets/logo/logo-big.png') ?>" alt="logo">
 						</div>
 
 						<hr>
@@ -49,13 +49,13 @@
 						<div id="usernameFeedback" class="invalid-feedback d-block mt-n3 mb-3">
 							<?= form_error('username', '<div class="text-danger">', '</div>') ?>
 						</div>
-						<div class="form-group py-1 pb-2">
-							<div class="input-field"> <span class="fas fa-lock px-2 bg-cyan"></span><input type="password" name="password" <?= (form_error('password')) ? 'is-invalid' : '' ?> value="<?= set_value('password') ?>" placeholder="Masukan Password" autocomplete="current-password" id="id_password"> <span style="cursor: pointer; "><i class="far fa-eye fa-xs bg-eye ml-n4" id="togglePassword"></i></span> </div>
+						<div class="form-group py-2">
+							<div class="input-field"> <span class="fas fa-lock p-2 bg-cyan"></span><input type="password" name="password" <?= (form_error('password')) ? 'is-invalid' : '' ?> value="<?= set_value('password') ?>" placeholder="Masukan Password" autocomplete="current-password" id="id_password"> <span style="cursor: pointer; "><i class="far fa-eye fa-xs bg-eye ml-n4" id="togglePassword"></i></span> </div>
 						</div>
 						<div id="passwordFeedback" class="invalid-feedback d-block mt-n3 mb-3">
 							<?= form_error('password', '<div class="text-danger">', '</div>') ?>
 						</div>
-						<div class="form-group py-1 pb-2">
+						<div class="form-group py-2 pb-2">
 							<div class="input-field">
 								<select class="custom-select <?= (form_error('hak_akses')) ? 'is-invalid' : '' ?>" id="hak_akses" name="hak_akses">
 									<option selected value="">Masuk Sebagai..?</option>
@@ -69,26 +69,23 @@
 							<?= form_error('hak_akses', '<div class="text-danger">', '</div>') ?>
 						</div>
 						<div class="form-group btn-submit mt-4 d-flex justify-content-between">
-							<button type="submit" class="btn btn-masuk mx-auto">Masuk</button>
-							<a href="" class="mx-auto">Lupa Password ?</a>
+							<button type="submit" class="btn btn-masuk">Masuk</button>
+							<a href="" class="mt-2"> Lupa Password ?</a>
 						</div>
-						<div class="catatan">
+						<div class="catatan mt-4">
 							<h6>Catatan : </h6>
 							<p> <span>Siswa</span> dalam menginput Username menggunakan <span>NIS (masing-masing)</span></p>
 							<p><span>Siswa</span> dalam menginput Password menggunakan Password default <span>siswa-2022</span></p>
 						</div>
 						</form>
+						<footer>
+							<p class="d-flex justify-content-center">&copy; 2022 Team Paradoks Technology</p>
+						</footer>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<footer>
-		<center>
-			<p>&copy; 2022 Team Paradoks Technology</p>
-		</center>
-	</footer>
 
 	<script>
 		// Show Toggle Password

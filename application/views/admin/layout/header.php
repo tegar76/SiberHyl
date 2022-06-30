@@ -17,33 +17,33 @@
 	<!-- Jquery -->
     <script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/jquery.js"></script>
 
-	<script src="<?= base_url('assets/admin/templates/assets/') ?>libs/popper.js/dist/umd/popper.min.js"></script>
-	<script src="<?= base_url('assets/admin/templates/assets/') ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/assets/') ?>libs/popper.js/dist/umd/popper.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/assets/') ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- apps -->
 	<!-- apps -->
-	<script src="<?= base_url('assets/admin/templates/dist/') ?>js/app-style-switcher.js"></script>
-	<script src="<?= base_url('assets/admin/templates/dist/') ?>js/feather.min.js"></script>
-	<script src="<?= base_url('assets/admin/templates/assets/') ?>libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-	<script src="<?= base_url('assets/admin/templates/dist/') ?>js/sidebarmenu.js"></script>
+	<script src="<?= base_url('assets/admin-mart/dist/') ?>js/app-style-switcher.js"></script>
+	<script src="<?= base_url('assets/admin-mart/dist/') ?>js/feather.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/assets/') ?>libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/dist/') ?>js/sidebarmenu.js"></script>
 	<!--Custom JavaScript -->
-	<script src="<?= base_url('assets/admin/templates/dist/') ?>js/custom.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/dist/') ?>js/custom.min.js"></script>
 	<!--This page JavaScript -->
-	<script src="<?= base_url('assets/admin/templates/assets/') ?>extra-libs/c3/d3.min.js"></script>
-	<script src="<?= base_url('assets/admin/templates/assets/') ?>extra-libs/c3/c3.min.js"></script>
-	<script src="<?= base_url('assets/admin/templates/assets/') ?>libs/chartist/dist/chartist.min.js"></script>
-	<script src="<?= base_url('assets/admin/templates/assets/') ?>libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-	<script src="<?= base_url('assets/admin/templates/assets/') ?>extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
-	<script src="<?= base_url('assets/admin/templates/assets/') ?>extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="<?= base_url('assets/admin/templates/dist/') ?>js/pages/dashboards/dashboard1.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/assets/') ?>extra-libs/c3/d3.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/assets/') ?>extra-libs/c3/c3.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/assets/') ?>libs/chartist/dist/chartist.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/assets/') ?>libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/assets/') ?>extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+	<script src="<?= base_url('assets/admin-mart/assets/') ?>extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="<?= base_url('assets/admin-mart/dist/') ?>js/pages/dashboards/dashboard1.min.js"></script>
 
 	<title>Admin Siberhyl</title>
 	<!-- Custom CSS -->
-	<link href="<?= base_url('assets/admin/templates/assets/') ?>extra-libs/c3/c3.min.css" rel="stylesheet">
-	<link href="<?= base_url('assets/admin/templates/assets/') ?>libs/chartist/dist/chartist.min.css" rel="stylesheet">
-	<link href="<?= base_url('assets/admin/templates/assets/') ?>extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+	<link href="<?= base_url('assets/admin-mart/assets/') ?>extra-libs/c3/c3.min.css" rel="stylesheet">
+	<link href="<?= base_url('assets/admin-mart/assets/') ?>libs/chartist/dist/chartist.min.css" rel="stylesheet">
+	<link href="<?= base_url('assets/admin-mart/assets/') ?>extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
 
 	<!-- Custom CSS -->
-	<link href="<?= base_url('assets/admin/templates/dist/') ?>css/style.min.css" rel="stylesheet">
+	<link href="<?= base_url('assets/admin-mart/dist/') ?>css/style.min.css" rel="stylesheet">
 
 	<!-- SweetAlert 2 -->
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">

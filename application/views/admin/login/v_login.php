@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">
 	<script src="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.all.min.js"></script>
 	<!-- style -->
-	<link rel="stylesheet" href="<?= base_url('assets/login/css/styless.css') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/login/css/styles.css') ?>">
 
 	<title>Login Admin</title>
 </head>
@@ -44,60 +44,6 @@
 			};
 		});
 	</script>
-	<!-- <div class="container d-flex justify-content-center">
-		<div class="card mt-5">
-			<div class="form-content">
-				<div class="logo d-flex justify-content-center mb-3">
-					<h2>Admin</h2>
-				</div>
-				<hr class="mt-n3 w-50"> <br>
-
-				<?= form_open('authadmin') ?>
-				<div class="row justify-content-center">
-					<?php if ($this->session->flashdata('message')) : ?>
-						<div class="alert alert-warning" role="alert">
-							<?= $this->session->flashdata('message') ?>
-						</div>
-					<?php endif ?>
-					<div class="row mb-3">
-						<div class="form-group d-flex justify-content-between">
-							<label for="username">
-								<img src="<?= base_url('assets/login/icons/user.png') ?>" alt="user" class="mr-3">
-							</label>
-							<input type="text" name="username" id="username" class="form-control <?= (form_error('username')) ? 'is-invalid' : '' ?>" value="<?= set_value('username', 'username') ?>" placeholder="Masukan Username">
-
-						</div>
-
-					</div>
-
-					<div id="usernameFeedback" class="invalid-feedback d-block mt-n4 mb-4" style="margin-left: 57px">
-						<?= form_error('username', '<div class="text-danger">', '</div>') ?>
-					</div>
-
-					<div class="row">
-						<div class="form-group d-flex justify-content-between ml-0">
-							<label for="password">
-								<img src="<?= base_url('assets/login/icons/pass.png') ?>" alt="user" class="mr-3">
-							</label>
-							<input type="password" name="password" class="form-control mr-2 <?= (form_error('password')) ? 'is-invalid' : '' ?>" value="<?= set_value('password') ?>" placeholder="Masukan Password" autocomplete="current-password" id="id_password">
-							<i class="far fa-eye fa-xs ml-n4" id="togglePassword"></i>
-						</div>
-
-					</div>
-				</div>
-
-				<div id="passwordFeedback" class="invalid-feedback d-block mt-n2 mb-1" style="margin-left: 40px">
-					<?= form_error('password', '<div class="text-danger">', '</div>') ?>
-				</div>
-
-				<div class="btn-submit row mt-n3">
-					<button type="submit" class="btn btn-masuk px-4">Masuk</button>
-				</div>
-
-				</form>
-			</div>
-		</div>
-	</div> -->
 
 	<body oncontextmenu='return false' class='snippet-body'>
 
@@ -108,45 +54,47 @@
 						<div class="panel-body p-3">
 							<?= form_open('authadmin') ?>
 							<div class="logo d-flex justify-content-center mb-3">
-								<img src="<?= base_url('assets/logo/logo-big.png') ?>" alt="logo" style="width: 120px;">
+								<img src="<?= base_url('assets/logo/logo-big.png') ?>" alt="logo">
 							</div>
-
-							<div class="title text-center">Admin</div>
-
 							<hr>
+							<div class="title-form text-center mb-2">ADMIN</div>
+							
 							<?php if ($this->session->flashdata('message')) : ?>
 								<div class="alert alert-warning alert-login" role="alert">
 									<?= $this->session->flashdata('message') ?>
 								</div>
 							<?php endif ?>
 							<div class="form-group py-2">
-								<div class="input-field"> <span class="far fa-user p-2 bg-cyan"></span> <input type="text" name="username" id="username" <?= (form_error('username')) ? 'is-invalid' : '' ?>" value="<?= set_value('username') ?>" placeholder="Masukan Username"> </div>
+								<div class="input-field"> <span class="far fa-user p-2 bg-cyan"></span> <input type="text" name="username" id="username" <?= (form_error('username')) ? 'is-invalid' : '' ?> value="<?= set_value('username') ?>" placeholder="Masukan Username"> </div>
 							</div>
-							<div id="usernameFeedback" class="invalid-feedback alert-login d-block mt-n4 mb-4" style="margin-left: 57px">
+							<div id="usernameFeedback" class="invalid-feedback d-block mt-n3 mb-3">
 								<?= form_error('username', '<div class="text-danger">', '</div>') ?>
 							</div>
-							<div class="form-group py-1 pb-2">
-								<div class="input-field"> <span class="fas fa-lock px-2 bg-cyan"></span><input type="password" name="password" class="mr-2 <?= (form_error('password')) ? 'is-invalid' : '' ?>" value="<?= set_value('password') ?>" placeholder="Masukan Password" autocomplete="current-password" id="id_password"><i class="far fa-eye fa-xs bg-eye ml-n4" id="togglePassword"></i></span> </div>
+							<div class="form-group py-2">
+								<div class="input-field"> <span class="fas fa-lock p-2 bg-cyan"></span><input type="password" name="password" class="mr-2 <?= (form_error('password')) ? 'is-invalid' : '' ?>" value="<?= set_value('password') ?>" placeholder="Masukan Password" autocomplete="current-password" id="id_password"><i class="far fa-eye fa-xs bg-eye ml-n4" id="togglePassword"></i></span> </div>
 							</div>
-							<div id="passwordFeedback" class="invalid-feedback alert-login d-block mt-n2 mb-1" style="margin-left: 40px">
+							<div id="passwordFeedback" class="invalid-feedback d-block mt-n3 mb-4">
 								<?= form_error('password', '<div class="text-danger">', '</div>') ?>
 							</div>
-
-							<div class="btn-submit ml-0">
-								<button type="submit" class="btn btn-masuk px-4">Masuk</button>
+							<div class="form-group">
+								<button type="submit" class="btn btn-masuk ml-0">Masuk</button>
 							</div>
 							</form>
+
+							<footer>
+								<p class="d-flex justify-content-center">&copy; 2022 Team Paradoks Technology</p>
+							</footer>
 						</div>
 					</div>
+
 				</div>
+
+				
+				
 			</div>
 		</div>
 
-		<footer>
-			<center>
-				<p>&copy; 2022 Team Paradoks Technology</p>
-			</center>
-		</footer>
+		
 
 		<script>
 			// Show Toggle Password
