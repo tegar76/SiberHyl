@@ -125,6 +125,93 @@ class Pembelajaran extends CI_Controller
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
+	public function evaluasi()
+	{
+		$data['title'] = 'Evaluasi';
+		$data['content'] = 'guru/contents/pembelajaran/v_evaluasi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
+
+
+	public function formCetakReportEvaluasi()
+	{
+		$data['title'] = 'Form Cetak Reporting Evaluasi';
+		$data['content'] = 'guru/contents/pembelajaran/v_form_cetak_report_evaluasi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
+
+	public function cetakReportEvaluasi()
+	{
+		$data['title'] = 'Cetak Reporting Evaluasi';
+		$this->load->view('guru/contents/pembelajaran/v_cetak_report_evaluasi', $data, FALSE);
+	}
+
+	public function tambahEvaluasi()
+	{
+		$data['title'] = 'Tambah Evaluasi';
+		$data['content'] = 'guru/contents/pembelajaran/v_tambah_evaluasi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
+
+	public function detailEvaluasi()
+	{
+		$data['title'] = 'Detail Evaluasi';
+		$data['content'] = 'guru/contents/pembelajaran/v_detail_evaluasi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
+
+	public function fileSoalEvaluasi()
+	{
+		$data['title'] = 'File Soal Evaluasi';
+		$this->load->view('guru/contents/pembelajaran/file_soal_evaluasi_pdf/v_file_soal_evaluasi_pdf', $data, FALSE);
+	}
+
+	public function fileJawabanEvaluasiImg()
+	{
+		$data['title'] = 'File Jawaban Evaluasi Img';
+		$this->load->view('guru/contents/pembelajaran/v_file_jawaban_evaluasi_img', $data, FALSE);
+	}
+
+	public function fileJawabanEvaluasiPdf()
+	{
+		$data['title'] = 'File Jawaban Evaluasi Pdf';
+		$this->load->view('guru/contents/pembelajaran/file_jawaban_evaluasi_pdf/v_file_jawaban_evaluasi_pdf', $data, FALSE);
+	}
+
+	public function nilaiEvaluasi()
+	{
+		$data['title'] = 'Nilai Evaluasi';
+		$data['content'] = 'guru/contents/pembelajaran/v_nilai_evaluasi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
+
+	public function editJamEvaluasi()
+	{
+		$data['title'] = 'Edit Jam Evaluasi';
+		$data['content'] = 'guru/contents/pembelajaran/v_edit_jam_evaluasi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
+
+	public function diskusi()
+	{
+		$data['title'] = 'Diskusi';
+		$data['content'] = 'guru/contents/pembelajaran/v_diskusi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
+
+	public function detailDiskusi()
+	{
+		$data['title'] = 'Forum Diskusi';
+		$data['content'] = 'guru/contents/pembelajaran/v_detail_diskusi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
+
+	public function tambahDiskusi()
+	{
+		$data['title'] = 'Tambah Diskusi';
+		$data['content'] = 'guru/contents/pembelajaran/v_tambah_diskusi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
 
 
 

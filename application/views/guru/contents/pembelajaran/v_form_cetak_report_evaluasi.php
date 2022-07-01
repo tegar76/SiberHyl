@@ -16,8 +16,7 @@
 					<ol class="breadcrumb m-0 p-0">
 						<li class="breadcrumb-item text-muted active">Pembelajaran</li>
 						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/mengajar') ?>" class="text-muted">Mengajar</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/tugasHarian') ?>" class="text-muted">Tugas Harian</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/detailTugasHarian') ?>" class="text-muted">Detail Tugas Harian</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/evaluasi') ?>" class="text-muted">Evaluasi</a></li>
 						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
 					</ol>
 				</nav>
@@ -43,60 +42,64 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="activity">
-						<?= form_open_multipart('') ?>
+						<?= form_open_multipart('Guru/Pembelajaran/cetakReportEvaluasi') ?>
 						<div class="card shadow mb-4">
 							<div class="container my-3">
-								<label for="">NIS</label>
+								<label for="">Kode Guru</label>
 								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="2010091" readonly>
+									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="AZ" readonly>
 									<div id="" class="invalid-feedback">
 										<?= form_error('', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
-								<label for="">Nama</label>
+								<label for="">Kelas</label>
 								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="ADIT PRAYITNO" readonly>
+									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="XI TKRO 1" readonly>
 									<div id="" class="invalid-feedback">
 										<?= form_error('', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
-								<label for="">Tanggal Pengumpulan</label>
+								<label for="">Mapel</label>
 								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="10 - 04 - 2022 09:00 WIB" readonly>
+									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="Panel Sasis dan Pemindahan Tenaga KR" readonly>
 									<div id="" class="invalid-feedback">
 										<?= form_error('', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
-								<label for="">Metode Pengumpulan</label>
-								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="Online" readonly>
-									<div id="" class="invalid-feedback">
-										<?= form_error('', '<div class="text-danger">', '</div>') ?>
+								<div class="row">
+									<div class="col">
+										<label for="">Evaluasi Ke-</label>
+										<div class="input-group mb-3">
+											<select name="" id="" class="form-control">
+												<option value="">Pilih Evaluasi Ke-</option>
+												<option value="">Evaluasi 1</option>
+												<option value="">Evaluasi 2</option>
+												<option value="">Evaluasi 3</option>
+											</select>
+										</div>
+									</div>
+									<div class="col">
+										<label for="">Sampai Evaluasi Ke-</label>
+										<div class="input-group mb-3">
+											<select name="" id="" class="form-control">
+												<option value="">Pilih Sampai Evaluasi Ke-</option>
+												<option value="">Sampai Evaluasi 1</option>
+												<option value="">Sampai Evaluasi 2</option>
+												<option value="">Sampai Evaluasi 3</option>
+											</select>
+										</div>
 									</div>
 								</div>
-								<label for="">File Jawaban</label>
+								<label for="">Format</label>
 								<div class="input-group mb-3">
-									<!-- Pengumpulan Online -->
-									<!-- Jawaban berupa img -->
-									<!-- <a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanTugasHarianImg')?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a> -->
-									<!-- Jawaban berupa pdf -->
-									<!-- <a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanTugasHarianPdf')?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a> -->
-									<!-- Pengumpulan Langsung -->
-									<div class="h6 text-secondary opacity-7">File Jawaban Tidak Ada !!</div>
-								</div>
-								<label for="">Komentar</label>
-								<div class="input-group mb-3">
-									<textarea name="" id="" placeholder="Masukan Komentar" class="form-control"></textarea>
-								</div>
-								<label for="">Nilai</label>
-								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" placeholder="Masukan Nilai Dengan Akumulasi 10 -100">
-									<div id="" class="invalid-feedback">
-										<?= form_error('', '<div class="text-danger">', '</div>') ?>
-									</div>
+									<select name="" id="" class="form-control">
+										<option value="">Pilih Format</option>
+										<option value="">PDF</option>
+										<option value="">EXCEL</option>
+									</select>
 								</div>
 								<div class="btn-aksi mt-4 mb-2">
-									<button type="submit" class="btn btn-sm btn-success border-0 rounded px-4 py-2 mr-3">Update</button>
+									<button type="submit" class="btn btn-sm btn-primary bg-blue border-0 rounded px-4 py-2 mr-3">Cetak</button>
 									<button type="reset" class="btn btn-sm btn-secondary border-0 rounded px-4 py-2">Reset</button>
 								</div>
 							</div>

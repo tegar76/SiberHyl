@@ -40,7 +40,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<a href="<?= base_url('Guru/Pembelajaran/formCetakReportTugasHarian')?>">
+						<a href="<?= base_url('Guru/Pembelajaran/formCetakReportEvaluasi')?>">
 							<div class="card mb-3 py-1 px-2 card-reporting">
 								<div class="container">
 									<div class="row">
@@ -51,19 +51,19 @@
 							</div>
 						</a>
 						<h6 class="card-title">
-							Data Tugas Harian Kelas XITKRO 1 Semester Gasal Tahun Pelajaran 2021/2022      
+							Data Evaluasi Kelas XI TKRO 1 Semester Gasal Tahun Pelajaran 2021/2022   
 						</h6>
 						<div class="mt-4 activity">
-							<table id="tugas_harian" class="table-responsive table-striped table-bordered" style="width:100%">
+							<table id="evaluasi" class="table-responsive table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id ada di assets/Data-table/js/data-table/main.js -->
 								<thead>
 									<tr>
 										<th style="width:2%">No</th>
 										<th style="width:18%;">Mapel</th>
-										<th style="width:12%;">Judul</th>
-										<th style="width:12%;">Pertemuan Ke-</th>
-										<th style="width:12%;">Dibuat</th>
-										<th style="width:12%;">Diedit</th>
+										<th style="width:10%;">Judul</th>
+										<th style="width:8%;">Tanggal</th>
+										<th style="width:8%;">Evaluasi Ke-</th>
+										<th style="width:14%;">Dibuat</th>
 										<th style="width:2%;">Aksi</th>
 									</tr>
 								</thead>
@@ -71,12 +71,12 @@
 									<tr>
 										<td>1</td>
 										<td>Panel Sasis dan Pemindahan Tenaga KR</td>
-										<td>Tugas Pertemuan 1</td>
+										<td>Evaluasi BAB I</td>
+										<td>01 - 05 - 2022</td>
 										<td>1</td>
 										<td>01 - 05 - 2022  08 : 00 WIB</td>
-										<td>-</td>
 										<td>
-											<a href="<?= base_url('Guru/Pembelajaran/detailTugasHarian')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+											<a href="<?= base_url('Guru/Pembelajaran/detailEvaluasi')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 										</td>
 									</tr>
 								</tbody>
@@ -94,7 +94,7 @@
 
 
 	<div class="floating-container">
-		<a href="<?= base_url('Guru/Pembelajaran/tambahTugasHarian') ?>">
+		<a href="<?= base_url('Guru/Pembelajaran/tambahEvaluasi') ?>">
 			<div class="floating-button">+</div>
 		</a>
 	</div>

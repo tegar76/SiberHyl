@@ -18,7 +18,7 @@
 						<ol class="breadcrumb m-0 p-0">
 							<li class="breadcrumb-item text-muted active">Pembelajaran</li>
 							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/mengajar') ?>" class="text-muted">Mengajar</a></li>
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/tugasHarian') ?>" class="text-muted">Tugas Harian</a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/evaluasi') ?>" class="text-muted">Evaluasi</a></li>
 							<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
 						</ol>
 					</nav>
@@ -102,32 +102,39 @@
 				<div class="card">
 					<div class="card-body">
 						<h6 class="card-title">
-							Detail Tugas 
+							Detail Evaluasi 
 						</h6>
 						<div class="mt-4 activity">
 							<table class="table-responsive table-bordered" style="width:100%">
 								<thead>
 									<tr>
 										<th style="width:2%">No</th>
-										<th style="width:6%;">Hari</th>
-										<th style="width:12%;">Mapel</th>
+										<th style="width:8%;">Hari, Tanggal</th>
+										<th style="width:10%;">Mapel</th>
+										<th style="width:6%;">Evaluasi Ke-</th>
 										<th style="width:6%;">Judul</th>
-										<th style="width:14%;">Deskripsi Tugas</th>
-										<th style="width:6%;">Pertemuan Ke-</th>
-										<th style="width:6%;">Deadline</th>
-										<th style="width:2%;">File</th>
+										<th style="width:6%;">Jenis Soal</th>
+										<th style="width:6%;">Mulai</th>
+										<th style="width:6%;">Selesai</th>
+										<th style="width:6%;">Batas Pengumpulan</th>
+										<th style="width:7%;">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>1</td>
-										<td>Senin</td>
+										<td>Senin, 01 - 05 - 2022</td>
 										<td>Panel Sasis dan Pemindahan Tenaga KR</td>
-										<td>Tugas Pertemuan 1</td>
-										<td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus adipisci hic vero repellendus deleniti sed eum necessitatibus nemo doloremque labore.</td>
 										<td>1</td>
-										<td>01 - 05 - 2022</td>
-										<td><a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileSoalTugasHarian')?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+										<td>Evaluasi BAB 1</td>
+										<td>Essay</td>
+										<td>07:00 WIB</td>
+										<td>08:00 WIB</td>
+										<td>08:15 WIB</td>
+										<td>
+											<a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileSoalEvaluasi') ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+											<a href="<?= base_url('Guru/Pembelajaran/editJamEvaluasi') ?>" class="btn btn-sm btn-success border-0 rounded mr-1"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -164,12 +171,12 @@
 										<td>ADIT PRAYITNO</td>
 										<td>10 - 04 - 2022 13:00 WIB</td>
 										<td>Online</td>
-										<td><a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanTugasHarianImg')?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a></td>
+										<td><a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanEvaluasiImg')?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a></td>
 										<td>Bagus</td>
 										<td>95</td>
 										<td>Sudah Dinilai</td>
 										<td>
-											<a href="<?= base_url('Guru/Pembelajaran/nilaiTugasHarian')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+											<a href="<?= base_url('Guru/Pembelajaran/nilaiEvaluasi')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 										</td>
 									</tr>
 									<tr>
@@ -183,7 +190,7 @@
 										<td>-</td>
 										<td>Menunggu Konfirmasi</td>
 										<td>
-											<a href="<?= base_url('Guru/Pembelajaran/nilaiTugasHarian')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+											<a href="<?= base_url('Guru/Pembelajaran/nilaiEvaluasi')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 										</td>
 									</tr>
 									<tr>
@@ -192,12 +199,12 @@
 										<td>ADIT PRAYITNO</td>
 										<td>10 - 04 - 2022 13:00 WIB</td>
 										<td>Online</td>
-										<td><a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanTugasHarianPdf')?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+										<td><a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanEvaluasiPdf')?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
 										<td>-</td>
 										<td>-</td>
 										<td>Sudah Mengerjakan</td>
 										<td>
-											<a href="<?= base_url('Guru/Pembelajaran/nilaiTugasHarian')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+											<a href="<?= base_url('Guru/Pembelajaran/nilaiEvaluasi')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 										</td>
 									</tr>
 									<tr>
@@ -211,7 +218,7 @@
 										<td>90</td>
 										<td>Sudah Diterima dan Sudah Dinilai</td>
 										<td>
-											<a href="<?= base_url('Guru/Pembelajaran/nilaiTugasHarian')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+											<a href="<?= base_url('Guru/Pembelajaran/nilaiEvaluasi')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 										</td>
 									</tr>
 									<tr>
@@ -225,7 +232,7 @@
 										<td>0</td>
 										<td>Tidak Mengerjakan</td>
 										<td>
-											<a href="<?= base_url('Guru/Pembelajaran/nilaiTugasHarian')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+											<a href="<?= base_url('Guru/Pembelajaran/nilaiEvaluasi')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 										</td>
 									</tr>
 									<tr>
@@ -239,7 +246,7 @@
 										<td>-</td>
 										<td>Belum Mengerjakan</td>
 										<td>
-											<a href="<?= base_url('Guru/Pembelajaran/nilaiTugasHarian')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+											<a href="<?= base_url('Guru/Pembelajaran/nilaiEvaluasi')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 										</td>
 									</tr>
 									<!-- Tampil Semua Siswa -->

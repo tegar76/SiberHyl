@@ -40,6 +40,25 @@ $(document).ready(function() {
     $('#riwayat_pengajuan_surat').DataTable(); 
 });
 
+// data table guru 
+$(document).ready(function() {
+    $('#pengajuan_surat').DataTable(); 
+});
+$(document).ready(function() {
+    $('#absensi').DataTable(); 
+});
+
+$(document).ready(function() {
+    $('#data_siswa').DataTable(); 
+});
+
+$(document).ready(function() {
+    $('#tugas_harian').DataTable(); 
+});
+
+$(document).ready(function() {
+    $('#evaluasi').DataTable(); 
+});
 
 
 

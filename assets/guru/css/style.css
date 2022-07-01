@@ -402,6 +402,7 @@ border-color: rgb(222, 243, 248)
 
 .bg-blue {
 background-color: #2989A8;
+color: white !important;
 }
 
 .menu .card img {
@@ -695,5 +696,120 @@ font-size: 13px;
 
 .icon-reporting {
   margin-top: 2px;
+}
+
+.badge-info-ak {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #FF0000;
+  border-radius: 50%;
+}
+
+.badge-info-ds {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background-color: #FF0000;
+  border-radius: 50%;
+  margin-top: -5px;
+  margin-left: 50px;
+}
+
+ /* diskusi */
+ .title {
+  font-size: 18px;
+  color: #333333;
+}
+.sub-title{
+  font-size: 14px;
+  color: #5b5b5b;
+}
+
+.subjek {
+  font-size: 16px;
+  color: #333333;
+}
+.pesan {
+  font-size: 14px;
+  color: #5b5b5b;
+}
+
+.comment:hover {
+  background-color: rgb(237, 250, 255);
+}
+
+.card a {
+  font-size: 14px;
+  color: #4b4b4b;
+}
+
+.card a:hover {
+  text-decoration: none;
+  color: #2e5b6a;
+}
+
+.border-custom-blue {
+  border-color: #a8c9d5 !important;
+}
+
+.nama, .tanggal {
+  color: #7b7b7b;
+  font-size: 13px;
+}
+
+.nama-big {
+color: #7b7b7b;
+font-size: 14px;
+}
+
+.jml-komen {
+font-size: 15px;
+color: #333333;
+}
+
+.jml-komen span {
+font-size: 15px;
+color: #7b7b7b;
+}
+
+.nama-small {
+font-size: 14px;
+color: #4b4b4b;
+}
+
+.post-on {
+font-size: 11px;
+color: #7b7b7b;
+}
+
+.komen {
+font-size: 13px;
+color: #646464;
+}
+
+.balas a {
+font-size: 13px;
+color: #2989A8;
+}
+
+.balas a:hover {
+color: #467585;
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+.badge-info-ds-content {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background-color: #FF0000;
+  border-radius: 50%;
+  margin-top: -5px;
 }
 

@@ -16,8 +16,8 @@
 					<ol class="breadcrumb m-0 p-0">
 						<li class="breadcrumb-item text-muted active">Pembelajaran</li>
 						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/mengajar') ?>" class="text-muted">Mengajar</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/tugasHarian') ?>" class="text-muted">Tugas Harian</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/detailTugasHarian') ?>" class="text-muted">Detail Tugas Harian</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/evaluasi') ?>" class="text-muted">Evaluasi</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/detailEvaluasi') ?>" class="text-muted">Detail Evaluasi</a></li>
 						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
 					</ol>
 				</nav>
@@ -78,11 +78,11 @@
 								<div class="input-group mb-3">
 									<!-- Pengumpulan Online -->
 									<!-- Jawaban berupa img -->
-									<!-- <a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanTugasHarianImg')?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a> -->
+									<!-- <a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanEvaluasiImg')?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a> -->
 									<!-- Jawaban berupa pdf -->
-									<!-- <a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanTugasHarianPdf')?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a> -->
+									<a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanEvaluasiPdf')?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a>
 									<!-- Pengumpulan Langsung -->
-									<div class="h6 text-secondary opacity-7">File Jawaban Tidak Ada !!</div>
+									<!-- <div class="h6 text-secondary opacity-7">File Jawaban Tidak Ada !!</div> -->
 								</div>
 								<label for="">Komentar</label>
 								<div class="input-group mb-3">

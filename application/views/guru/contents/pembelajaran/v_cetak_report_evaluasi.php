@@ -31,7 +31,7 @@
     <a role="button" class="btn btn-success btn-sm text-white ml-4 mt-3 mb-n4" data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-download text-white ml-1"></i> Unduh</a>
         <div class="main-page">
             <div class="sub-page text-center">
-                <div class="title mb-1">LAPORAN HASIL TUGAS HARIAN SISWA</div>
+                <div class="title mb-1">LAPORAN HASIL EVALUASI SISWA</div>
                 <div class="sub-title mb-1">Semester Genap Tahun Pelajaran 2021/2022</div>
                 <div class="sub-title mb-4">SMK Kesatrian Purwokerto</div>
                 <div class="date text-right mb-3">Tanggal Cetak : 12 - 06 -2022</div>
@@ -48,7 +48,7 @@
                     <div class="col"><p><span> : </span>Panel Sasis Dan Pemindahan Tenaga KR</p></div>
                 </div>
                 <div class="row atribute text-left mb-4">
-                    <div class="col-sm-2"><p>Tugas Pertemuan Ke-</p></div>
+                    <div class="col-sm-2"><p>Evaluasi Ke-</p></div>
                     <div class="col"><p><span> : </span>1 s/d 8</p></div>
                 </div>
                 <div class="content text-left">
@@ -58,7 +58,7 @@
                                 <th rowspan="2">No</th>
                                 <th rowspan="2">NIS</th>
                                 <th rowspan="2">Nama</th>
-                                <th colspan="7">Tugas Harian Ke-</th>
+                                <th colspan="7">Evaluasi Ke-</th>
                                 <th rowspan="2">Total</th>
                                 <th rowspan="2">Rata-rata</th>
                             </tr>

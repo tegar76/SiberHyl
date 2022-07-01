@@ -16,8 +16,8 @@
 					<ol class="breadcrumb m-0 p-0">
 						<li class="breadcrumb-item text-muted active">Pembelajaran</li>
 						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/mengajar') ?>" class="text-muted">Mengajar</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/tugasHarian') ?>" class="text-muted">Tugas Harian</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/detailTugasHarian') ?>" class="text-muted">Detail Tugas Harian</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/evaluasi') ?>" class="text-muted">Evaluasi</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/detailEvaluasi') ?>" class="text-muted">Detail Evaluasi</a></li>
 						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
 					</ol>
 				</nav>
@@ -46,51 +46,23 @@
 						<?= form_open_multipart('') ?>
 						<div class="card shadow mb-4">
 							<div class="container my-3">
-								<label for="">NIS</label>
+								<label for="">Mulai</label>
 								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="2010091" readonly>
+									<input type="time" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>">
 									<div id="" class="invalid-feedback">
 										<?= form_error('', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
-								<label for="">Nama</label>
+								<label for="">Selesai</label>
 								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="ADIT PRAYITNO" readonly>
+									<input type="time" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>">
 									<div id="" class="invalid-feedback">
 										<?= form_error('', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
-								<label for="">Tanggal Pengumpulan</label>
+								<label for="">Batas Pengumpulan</label>
 								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="10 - 04 - 2022 09:00 WIB" readonly>
-									<div id="" class="invalid-feedback">
-										<?= form_error('', '<div class="text-danger">', '</div>') ?>
-									</div>
-								</div>
-								<label for="">Metode Pengumpulan</label>
-								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="Online" readonly>
-									<div id="" class="invalid-feedback">
-										<?= form_error('', '<div class="text-danger">', '</div>') ?>
-									</div>
-								</div>
-								<label for="">File Jawaban</label>
-								<div class="input-group mb-3">
-									<!-- Pengumpulan Online -->
-									<!-- Jawaban berupa img -->
-									<!-- <a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanTugasHarianImg')?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a> -->
-									<!-- Jawaban berupa pdf -->
-									<!-- <a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanTugasHarianPdf')?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a> -->
-									<!-- Pengumpulan Langsung -->
-									<div class="h6 text-secondary opacity-7">File Jawaban Tidak Ada !!</div>
-								</div>
-								<label for="">Komentar</label>
-								<div class="input-group mb-3">
-									<textarea name="" id="" placeholder="Masukan Komentar" class="form-control"></textarea>
-								</div>
-								<label for="">Nilai</label>
-								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" placeholder="Masukan Nilai Dengan Akumulasi 10 -100">
+									<input type="time" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>">
 									<div id="" class="invalid-feedback">
 										<?= form_error('', '<div class="text-danger">', '</div>') ?>
 									</div>

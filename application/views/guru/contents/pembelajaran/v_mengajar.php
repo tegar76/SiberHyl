@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
+<?php include APPPATH.'../assets/guru/css/import_style.php';?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -8,16 +8,17 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title"><?= $title?></h3>
+				<h3 class="page-title"><?= $title .' Kelas XI TKRO 1'?></h3>
+				<div class="d-flex align-items-center">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb m-0 p-0">
+							<li class="breadcrumb-item text-muted active">Pembelajaran</li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/mengajar') ?>" class="text-muted">Mengajar</a></li>
+							<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
+						</ol>
+					</nav>
+				</div>
 			</div>
-		</div>
-		<div class="d-flex align-items-center">
-			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb m-0 p-0">
-					<li class="breadcrumb-item text-muted active">Pembelajaran</li>
-					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
-				</ol>
-			</nav>
 		</div>
 	</div>
 	<!-- ============================================================== -->
@@ -26,20 +27,14 @@
 	<!-- ============================================================== -->
 	<!-- Container fluid  -->
 	<!-- ============================================================== -->
-	<div class="container-fluid mt-n3">
+	<div class="container-fluid">
 		<!-- *************************************************************** -->
 		<!-- Start First Cards -->
-		<!-- *************************************************************** -->
-		<!-- *************************************************************** -->
-		<!-- End Location and Earnings Charts Section -->
-		<!-- *************************************************************** -->
-		<!-- *************************************************************** -->
-		<!-- Start Top Leader Table -->
 		<!-- *************************************************************** -->
 
 		<div class="row">
 			<!-- Pembelajaran berlangsung -->
-			<div class="activity col-md-12 p-0">
+			<div class="col-md-12 p-0">
 				<div class="container">
 					<div class="title mb-3">Pembelajaran Yang Sedang Berlangsung!!</div>
 					<div class="row">
@@ -101,7 +96,7 @@
 												</a>
 											</div>
 											<div class="section-menu mr-3">
-												<a href="<?= base_url('Siswa/Evaluasi')?>">
+												<a href="<?= base_url('Guru/Pembelajaran/evaluasi')?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 															<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -111,7 +106,7 @@
 												</a>
 											</div>
 											<div class="section-menu mr-3">
-												<a href="<?= base_url('Siswa/Diskusi')?>">
+												<a href="<?= base_url('Guru/Pembelajaran/diskusi')?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 															<span class="badge-info-ds"> </span>
@@ -142,7 +137,7 @@
 				</div>
 			</div>
 			<!-- Pembagian tugas mengajar -->
-			<div class="activity col-md-12 p-0">
+			<div class="col-md-12 p-0">
 				<div class="container mt-4">
 					<div class="title mb-3">Pembagian Tugas Mengajar Semester Gasal  Tahun Pelajaran 2021/2022 </div>
 						<div class="row">
@@ -210,7 +205,7 @@
 																</a>
 															</div>
 															<div class="section-menu mr-3">
-																<a href="<?= base_url('Siswa/Evaluasi')?>">
+																<a href="<?= base_url('Guru/Pembelajaran/evaluasi')?>">
 																	<div class="menu">
 																		<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																			<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -220,7 +215,7 @@
 																</a>
 															</div>
 															<div class="section-menu mr-3">
-																<a href="<?= base_url('Siswa/Diskusi')?>">
+																<a href="<?= base_url('Guru/Pembelajaran/diskusi')?>">
 																	<div class="menu">
 																		<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																			<span class="badge-info-ds"> </span>
@@ -252,8 +247,8 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- *************************************************************** -->
+		<!-- End Top Leader Table -->
+		<!-- *************************************************************** -->
 	</div>
-	<!-- *************************************************************** -->
-	<!-- End Top Leader Table -->
-	<!-- *************************************************************** -->
-</div>

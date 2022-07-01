@@ -1,3 +1,6 @@
+<!-- import style -->
+<?php include APPPATH.'../assets/guru/css/import_style.php';?>
+
 <aside class="left-sidebar" data-sidebarbg="skin6">
 	<!-- Sidebar scroll-->
 	<div class="scroll-sidebar" data-sidebarbg="skin6">
@@ -30,6 +33,17 @@
 						</li>
 					</ul>
 				</li>
+				<li class="list-divider"></li>
+				<li class="sidebar-item <?= ($this->uri->segment(2) == "") ? 'selected' : '' ?>"> 
+					<a class="sidebar-link sidebar-link" href="<?= base_url('') ?>" aria-expanded="false">
+						<i data-feather="info" class="feather-icon"></i>
+						<span class="hide-menu">Info Akademik
+							<!-- notif badge -->
+							<span class="badge-info-ak"></span>
+						</span>
+					</a>
+				</li>
+				<li class="list-divider"></li>
 			</ul>
 		</nav>
 		<!-- End Sidebar navigation -->
