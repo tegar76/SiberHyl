@@ -19,7 +19,76 @@
 	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
     <!-- style -->
-    <link rel="stylesheet" href="<?= base_url('assets/siswa/css/print/styles.css') ?>">
+    <style>
+        body {
+            width: 230mm;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0;
+            font-size: 12pt;
+            background: rgb(204,204,204); 
+        }
+        * {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+        .main-page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 10mm auto;
+            background: white;
+            box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+        }
+        .sub-page {
+            padding: 1cm;
+            height: 297mm;
+        }
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        @media print {
+            html, body {
+            width: 210mm;
+            height: 297mm;        
+            }
+            .main-page {
+            margin: 0;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+            }
+        }
+
+        .title {
+            font-size: 18px;
+            color: #333333;
+        }
+
+        .sub-title {
+            font: 15px;
+            color: #333333;
+        }
+
+        .date {
+            font-size: 14px;
+            color: #6b6b6b;
+        }
+
+        .atribute {
+            font-size: 14px;
+            color: #4b4b4b;
+        }
+
+        .content table {
+            font-size: 14px;
+            color: #4b4b4b;
+        }
+    </style>
     
     <title><?= $title ?></title>
 
