@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/siswa/css/import_style_jadwal.php';?>
+<?php include APPPATH . '../assets/siswa/css/import_style_jadwal.php'; ?>
 
 <!-- Jquery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
@@ -29,7 +29,7 @@
 											<p><?= $nowStudying->nama_mapel ?></p>
 										</center>
 									</div>
-									<a href="<?= base_url('Siswa/Absen')?>">
+									<a href="<?= base_url('siswa/absensi/ruang_absensi/' . $this->secure->encrypt_url($nowStudying->jadwal_id)) ?>">
 										<div class="absen d-block justify-content-center">
 											<div class="card bg-absen-open shadow-sm px-3 pt-3">
 												<img src="<?= base_url() ?>assets/siswa/icons/absen.png" alt="" class="mx-auto">
@@ -57,7 +57,7 @@
 								<div class="card px-3 pt-3">
 									<div class="row">
 										<div class="section-menu col">
-											<a href="<?= base_url('Siswa/Materi')?>">
+											<a href="<?= base_url('Siswa/Materi') ?>">
 												<div class="menu">
 													<div class="card  py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/materi-pem.png') ?>" alt="">
@@ -67,7 +67,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="<?= base_url('Siswa/tugas')?>">
+											<a href="<?= base_url('Siswa/tugas') ?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
@@ -77,7 +77,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="<?= base_url('Siswa/Evaluasi')?>">
+											<a href="<?= base_url('Siswa/Evaluasi') ?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -87,7 +87,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="<?= base_url('Siswa/Diskusi')?>">
+											<a href="<?= base_url('Siswa/Diskusi') ?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<span class="badge-info-ds"> </span>
@@ -160,7 +160,7 @@
 											} else {
 												$absenOpen = 'bg-absen-close';
 											} ?>
-											<a href="<?= base_url('Siswa/Absen')?>">
+											<a href="<?= base_url('siswa/absensi/ruang_absensi/' . $this->secure->encrypt_url($study->jadwal_id)) ?>">
 												<div class="absen d-block justify-content-center">
 													<div class="card <?= $absenOpen ?> shadow-sm px-3 pt-3">
 														<img src="<?= base_url() ?>assets/siswa/icons/absen.png" alt="" class="mx-auto">
@@ -190,7 +190,7 @@
 									<div class="card px-3 pt-3">
 										<div class="row">
 											<div class="section-menu col">
-												<a href="<?= base_url('Siswa/Materi')?>">
+												<a href="<?= base_url('siswa/materi/ruang_materi/' . $study->kode_jadwal) ?>">
 													<div class="menu">
 														<div class="card  py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/materi-pem.png') ?>" alt="">
@@ -200,7 +200,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="<?= base_url('Siswa/tugas')?>">
+												<a href="<?= base_url('Siswa/tugas') ?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
@@ -210,7 +210,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="<?= base_url('Siswa/Evaluasi')?>">
+												<a href="<?= base_url('Siswa/Evaluasi') ?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -220,7 +220,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="<?= base_url('Siswa/Diskusi')?>">
+												<a href="<?= base_url('Siswa/Diskusi') ?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<span class="badge-info-ds"> </span>
@@ -242,18 +242,18 @@
 		</div>
 	</div>
 
-<!--=============== PORTFOLIO ===============-->
-<!-- <section class="container section section__height" id="portfolio">
+	<!--=============== PORTFOLIO ===============-->
+	<!-- <section class="container section section__height" id="portfolio">
     <h2 class="section__title">Portfolio</h2>
 </section> -->
 
-<!--=============== CONTACTME ===============-->
-<!-- <section class="container section section__height" id="contactme">
+	<!--=============== CONTACTME ===============-->
+	<!-- <section class="container section section__height" id="contactme">
     <h2 class="section__title">Contactme</h2>
 </section> -->
 
-<script>
-	$(document).ready(function() {
-		$('[data-toggle="tooltip"]').tooltip();
-	});
-</script>
+	<script>
+		$(document).ready(function() {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
