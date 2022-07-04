@@ -213,15 +213,43 @@ class Pembelajaran extends CI_Controller
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
+	public function jurnalMateri()
+	{
+		$data['title'] = 'Jurnal Materi';
+		$data['content'] = 'guru/contents/pembelajaran/v_jurnal_materi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
 
+	public function formCetakReportJurnalMateri()
+	{
+		$data['title'] = 'Detail Jurnal Materi';
+		$data['content'] = 'guru/contents/pembelajaran/v_form_cetak_report_jurnal_materi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
 
+	public function cetakReportJurnalMateri()
+	{
+		$data['title'] = 'Cetak Reporting Jurnal Materi';
+		$this->load->view('guru/contents/pembelajaran/v_cetak_report_jurnal_materi', $data, FALSE);
+	}
 
+	public function detailJurnalMateri()
+	{
+		$data['title'] = 'Detail Jurnal Materi';
+		$data['content'] = 'guru/contents/pembelajaran/v_detail_jurnal_materi';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
 
-
+	public function surat()
+	{
+		$data['title'] = 'Surat - Surat';
+		$data['content'] = 'guru/contents/pembelajaran/v_surat';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
 
 	public function lihatFileSurat()
 	{
 		$data['title'] = 'File Surat';
-		$this->load->view('guru/contents/surat/v_file_surat_img', $data, FALSE);
+		$this->load->view('guru/contents/pembelajaran/v_file_surat_img', $data, FALSE);
 	}
 }

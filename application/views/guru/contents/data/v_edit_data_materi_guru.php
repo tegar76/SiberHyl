@@ -1,9 +1,6 @@
 <!-- multiple select -->
 <?php include APPPATH.'../assets/MSelectDialogBox-master/import_multiple_select.php';?>
 
-<!-- import style -->
-<?php include APPPATH.'../assets/guru/css/import_style.php';?>
-
 <div class="page-wrapper">
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->

@@ -1,6 +1,3 @@
-<!-- import style -->
-<?php include APPPATH.'../assets/guru/css/import_style.php';?>
-
 <div class="page-wrapper">
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->
@@ -117,7 +114,7 @@
 												</a>
 											</div>
 											<div class="section-menu mr-3">
-												<a href="<?= base_url('Siswa/Materi')?>">
+												<a href="<?= base_url('Guru/Pembelajaran/jurnalMateri')?>">
 													<div class="menu">
 														<div class="card  py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 															<img src="<?= base_url('assets/siswa/icons/jurnal.png') ?>" alt="">
@@ -226,7 +223,7 @@
 																</a>
 															</div>
 															<div class="section-menu mr-3">
-																<a href="<?= base_url('Siswa/Materi')?>">
+																<a href="<?= base_url('Guru/Pembelajaran/jurnalMateri')?>">
 																	<div class="menu">
 																		<div class="card  py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																			<img src="<?= base_url('assets/siswa/icons/jurnal.png') ?>" alt="">

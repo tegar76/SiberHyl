@@ -1,9 +1,6 @@
 <!-- import data tables -->
 <?php include APPPATH.'../assets/DataTables/import/import.php';?>
 
-<!-- import style -->
-<?php include APPPATH.'../assets/guru/css/import_style.php';?>
-
 <div class="page-wrapper">
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->
@@ -11,7 +8,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title">Dashboard</h3>
+				<h3 class="page-title"><?= $title?></h3>
 			</div>
 		</div>
 	</div>
@@ -84,14 +81,14 @@
 								<!-- pemanggilan tabel id ada di assets/admin/js/data-table/main.js -->
 								<thead>
 									<tr>
-										<th style="width: 6%;">No</th>
-										<th style="width: 23%;">Tanggal</th>
+										<th style="width: 4%;">No</th>
+										<th style="width: 15%;">Hari, tanggal</th>
 										<th style="width: 8%;">NIS</th>
 										<th style="width: 17%;">Nama</th>
-										<th style="width: 12%;">Kelas</th>
+										<th style="width: 8%;">Kelas</th>
 										<th style="width: 20%;">Jenis Surat</th>
-										<th style="width: 8%;">File</th>
-										<th style="width: 14%;">Aksi</th>
+										<th style="width: 4%;">File</th>
+										<th style="width: 12%;">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>

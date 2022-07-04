@@ -4,9 +4,6 @@
 <!-- import select search -->
 <?php include APPPATH.'../assets/select-with-search/import_select_with_search.php';?>
 
-<!-- import style -->
-<?php include APPPATH.'../assets/guru/css/import_style.php';?>
-
 	<div class="page-wrapper">
 		<!-- ============================================================== -->
 		<!-- Bread crumb and right sidebar toggle -->

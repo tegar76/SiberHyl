@@ -8,16 +8,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!--====== Favicon Icon ======-->
-	<link rel="shortcut icon" href="<?= base_url('assets/') ?>logo/logo-sm.png" type="image/png">
-
-	<!-- Bootstrap Css -->
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/css/bootstrap.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-	
-	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-
     <!-- style -->
     <style>
         body {
@@ -64,19 +54,26 @@
             }
         }
 
+        .title-page {
+            text-align: center;
+        }
+
         .title {
             font-size: 18px;
             color: #333333;
+            padding-bottom: 10px;
         }
 
         .sub-title {
             font: 15px;
-            color: #333333;
+            color: #444444;
+            padding-bottom: 10px;
         }
 
         .date {
             font-size: 14px;
             color: #6b6b6b;
+            text-align: right;
         }
 
         .atribute {
@@ -84,9 +81,30 @@
             color: #4b4b4b;
         }
 
-        .content table {
+        .atribute p span {
+            color: #6b6b6b;
+            margin-left: 10px;
+        }
+
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            border-radius: 5px;
+            margin-left: 40px;
+            margin-top: 40px;
+        }
+
+        table, th, td {
+            border: 1px solid;
+            border-collapse: collapse;
             font-size: 14px;
             color: #4b4b4b;
+            margin-top: 40px;
         }
     </style>
     
@@ -97,37 +115,33 @@
   <body>
    
     <div class="container">
-    <a role="button" class="btn btn-success btn-sm text-white ml-4 mt-3 mb-n4" data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-download text-white ml-1"></i> Unduh</a>
+        <br>
+        <a role="button" href="" class="button">Unduh</a>
         <div class="main-page">
-            <div class="sub-page text-center">
-                <div class="title mb-1">LAPORAN HASIL ABSENSI SISWA</div>
-                <div class="sub-title mb-1">Semester Genap Tahun Pelajaran 2021/2022</div>
-                <div class="sub-title mb-4">SMK Kesatrian Purwokerto</div>
-                <div class="date text-right mb-3">Tanggal Cetak : 12 - 06 -2022</div>
-                <div class="row atribute text-left">
-                    <div class="col-sm-2"><p>Kode Guru</p></div>
-                    <div class="col"><p><span> : </span>AZ</p></div>
+            <div class="sub-page">
+                <div class="title-page">
+                    <div class="title">LAPORAN HASIL ABSENSI SISWA</div>
+                    <div class="sub-title">Semester Genap Tahun Pelajaran 2021/2022</div>
+                    <div class="sub-title">SMK Kesatrian Purwokerto</div>
                 </div>
-                <div class="row atribute text-left">
-                    <div class="col-sm-2"><p>Kelas</p></div>
-                    <div class="col"><p><span> : </span>XI TKRO 1</p></div>
+                <div class="date">
+                    <p>Tanggal Cetak : 12 - 06 -2022</p>
                 </div>
-                <div class="row atribute text-left">
-                    <div class="col-sm-2"><p>Mapel</p></div>
-                    <div class="col"><p><span> : </span>Panel Sasis Dan Pemindahan Tenaga KR</p></div>
+                <div class="atribute">
+                    <p>Kode Guru <span>: AZ</span></p>
+                    <p>Kelas <span>: XI TKRO 1</span></p>
+                    <p>Mapel <span>: Panel Sasis dan Pemindahan Tenaga KR</span></p>
+                    <p>Pertemuan Ke- <span>: 1 s/d 8</span></p>
                 </div>
-                <div class="row atribute text-left mb-4">
-                    <div class="col-sm-2"><p>Pertemuan Ke-</p></div>
-                    <div class="col"><p><span> : </span>1 s/d 7</p></div>
-                </div>
+               
                 <div class="content text-left">
-                    <table border="1" cellpadding="15">
+                    <table cellpadding="14">
                        <thead>
                             <tr>
                                 <th rowspan="2">No</th>
                                 <th rowspan="2">NIS</th>
                                 <th rowspan="2">Nama</th>
-                                <th colspan="7">Pertemuan Ke-</th>
+                                <th colspan="8">Pertemuan Ke-</th>
                                 <th colspan="4">Total</th>
                             </tr>
                             <tr>
@@ -138,6 +152,7 @@
                                 <th>5</th>
                                 <th>6</th>
                                 <th>7</th>
+                                <th>8</th>
                                 <th>H</th>
                                 <th>A</th>
                                 <th>S</th>
@@ -155,21 +170,6 @@
                                 <td>h</td>
                                 <td>h</td>
                                 <td>s</td>
-                                <td>s</td>
-                                <td>5</td>
-                                <td>0</td>
-                                <td>2</td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>2010049</td>
-                                <td>ADZKA AZZAM FIKRI</td>
-                                <td>h</td>
-                                <td>h</td>
-                                <td>h</td>
-                                <td>h</td>
-                                <td>h</td>
                                 <td>s</td>
                                 <td>s</td>
                                 <td>5</td>
@@ -190,11 +190,6 @@
 			<p>&copy; 2022 Team Paradoks Technology</p>
 		</center>
 	</footer>
-
-	<!-- Bootstrap Js -->
-	<script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/jquery.js"></script>
-	<script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/popper.js"></script>
-	<script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/bootstrap.js"></script>
 
     </body>
 

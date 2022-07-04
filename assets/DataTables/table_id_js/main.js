@@ -60,6 +60,12 @@ $(document).ready(function() {
     $('#evaluasi').DataTable(); 
 });
 
+$(document).ready(function() {
+    $('#jurnal-materi').DataTable(); 
+});
+
+// Data table wali kelas
+
 
 
 

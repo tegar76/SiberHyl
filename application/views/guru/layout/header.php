@@ -48,6 +48,10 @@
 	<!-- Custom CSS -->
 	<link href="<?= base_url('assets/admin-mart/dist/') ?>css/style.min.css" rel="stylesheet">
 
+	<!-- import style -->
+	<?php include APPPATH.'../assets/guru/css/import_style.php';?>
+
+
 	<!-- SweetAlert 2 -->
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">
 	<script src="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.all.min.js"></script>

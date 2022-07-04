@@ -813,3 +813,24 @@ scroll-behavior: smooth;
   margin-top: -5px;
 }
 
+/* style info */
+.color-cyan {
+  color: #2989A8;
+}
+
+.tanggal {
+  color: #8b8b8b;
+  font-size: 13px;
+}
+
+.judul {
+  color: #7b7b7b;
+  font-size: 15px;
+}
+
+.info hr {
+  margin-left: -60px;
+  margin-right: -15px;
+}
+
+

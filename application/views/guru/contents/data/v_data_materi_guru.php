@@ -1,9 +1,6 @@
 <!-- import data tables -->
 <?php include APPPATH.'../assets/DataTables/import/import.php';?>
 
-<!-- import style -->
-<?php include APPPATH.'../assets/guru/css/import_style.php';?>
-
 <div class="page-wrapper">
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->

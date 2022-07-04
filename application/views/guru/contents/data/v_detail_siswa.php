@@ -1,6 +1,3 @@
-<!-- import style -->
-<?php include APPPATH.'../assets/guru/css/import_style.php';?>
-
 <div class="page-wrapper">
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->
@@ -67,7 +64,7 @@
 										<tbody>
 											<tr class="table-borderless">
 												<th scope="row" class="col-md-4">NIS</th>
-												<td>Lorem ipsum dolor sit amet./td>
+												<td>Lorem ipsum dolor sit amet.</td>
 											</tr>
 											<tr>
 												<th scope="row">NISN</th>

@@ -1,6 +1,3 @@
-<!-- import style -->
-<?php include APPPATH.'../assets/guru/css/import_style.php';?>
-
 <div class="page-wrapper">
 
   <div class="container-fluid">
