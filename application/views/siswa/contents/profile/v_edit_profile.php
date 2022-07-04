@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
+<?php include APPPATH . '../assets/siswa/css/import_style_content.php'; ?>
 
 <section class="container section section__height mt-n3" id="about">
 	<div class="edit-profile pb-5">
@@ -48,7 +48,7 @@
 					</div>
 					<div class="form-group">
 						<label for="">Tanggal Lahir</label>
-						<input type="text" class="form-control" value="<?= date('d-m-Y', strtotime($siswa->siswa_tanggallahir)) ?>" readonly>
+						<input type="text" class="form-control" value="<?= ($siswa->siswa_tanggallahir == '0000-00-00') ? '-' : date('d-m-Y', strtotime($siswa->siswa_tanggallahir)) ?>" readonly>
 					</div>
 					<div class="form-group">
 						<label for="">Jenis Kelamin</label>
@@ -87,13 +87,13 @@
 		<?= form_close() ?>
 	</div>
 
-<script>
-	// js upload file foto
-	const actualBtn = document.getElementById('imgInp');
+	<script>
+		// js upload file foto
+		const actualBtn = document.getElementById('imgInp');
 
-	const fileChosen = document.getElementById('file-chosen');
+		const fileChosen = document.getElementById('file-chosen');
 
-	actualBtn.addEventListener('change', function() {
-		fileChosen.textContent = this.files[0].name
-	})
-</script>
+		actualBtn.addEventListener('change', function() {
+			fileChosen.textContent = this.files[0].name
+		})
+	</script>

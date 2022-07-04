@@ -1,52 +1,58 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
+<?php include APPPATH . '../assets/siswa/css/import_style_content.php'; ?>
 
-<section class="container section section__height"> 
+<section class="container section section__height">
 
-<form action="<?= base_url('Siswa/Absen/cetakAbsensi')?>">
-    <div class="title-form mb-3">
-        Form Cetak Reporting Absensi Siswa 
-    </div>
-    <label for="">Kode Guru</label>
-    <div class="input-group mb-3">
-        <input type="text" name="" id="" class="form-control" value="AZ" readonly>
-    </div>
-    <label for="">Kelas</label>
-    <div class="input-group mb-3">
-        <input type="text" name="" id="" class="form-control" value="XI TKRO 1" readonly>
-    </div>
-    <label for="">Mapel</label>
-    <div class="input-group mb-3">
-        <input type="text" name="" id="" class="form-control" value="Panel Sasis Dan Pemindahan Tenaga KR" readonly>
-    </div>
-    <label for="">Pertemuan Ke-</label>
-    <div class="input-group mb-3">
-        <select name="" id="" class="form-control">
-            <option value="" selected>Pilih Pertemuan Ke-</option>
-            <option value="">1 (Satu)</option>
-            <option value="">2 (Dua)</option>
-            <option value="">3 (Tiga)</option>
-        </select>
-    </div>
-    <label for="">Sampai Pertemuan Ke-</label>
-    <div class="input-group mb-3">
-        <select name="" id="" class="form-control">
-            <option value="" selected>Pilih Sampai Pertemuan Ke-</option>
-            <option value="">1 (Satu)</option>
-            <option value="">2 (Dua)</option>
-            <option value="">3 (Tiga)</option>
-        </select>
-    </div>
-    <label for="">Format</label>
-    <div class="input-group mb-4">
-        <select name="" id="" class="form-control">
-            <option value="" selected>Pilih Format</option>
-            <option value="">PDF</option>
-            <option value="">EXCEL</option>
-        </select>
-    </div>
-    <div class="btn-aksi mb-4">
-        <button type="submit" class="btn btn-sm btn-primary rounded px-4 py-1 mr-3">Kirim</button>
-        <button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-1">Reset</button>
-    </div>
-</form>
+	<?= form_open('siswa/absensi/cetak_absensi/' . $this->secure->encrypt_url($result->jadwal_id)) ?>
+	<input type="hidden" name="jadwal_id" value="<?= $result->jadwal_id ?>">
+	<input type="hidden" name="siswa_nis" value="<?= $this->session->userdata('nis') ?>">
+	<div class="title-form mb-3">
+		Form Cetak Reporting Absensi Siswa
+	</div>
+	<label for="kode_guru">Kode Guru</label>
+	<div class="input-group mb-3">
+		<input type="text" name="kode_guru" id="kode_guru" class="form-control" value="<?= $result->guru_kode ?>" readonly>
+	</div>
+	<label for="kelas">Kelas</label>
+	<div class="input-group mb-3">
+		<input type="text" name="kelas" id="kelas" class="form-control" value="<?= $result->nama_kelas ?>" readonly>
+	</div>
+	<label for="mapel">Mapel</label>
+	<div class="input-group mb-3">
+		<input type="text" name="mapel" id="mapel" class="form-control" value="<?= $result->nama_mapel ?>" readonly>
+	</div>
+	<label for="pert_awal">Pertemuan Ke-</label>
+	<div class="input-group mb-3">
+		<select name="pert_awal" id="pert_awal" class="form-control custom-select <?= (form_error('pert_awal')) ? 'is-invalid' : '' ?>">
+			<option value="" selected>Pilih Pertemuan Ke-</option>
+			<?php for ($i = 1; $i <= 10; $i++) : ?>
+				<option value="<?= $i ?>">Pertemuan <?= $i ?></option>
+			<?php endfor ?>
+		</select>
+		<div id="pert_awal" class="invalid-feedback">
+			<?= form_error('pert_awal', '<div class="text-danger">', '</div>') ?>
+		</div>
+	</div>
+	<label for="pert_akhir">Sampai Pertemuan Ke-</label>
+	<div class="input-group mb-3">
+		<select name="pert_akhir" id="pert_akhir" class="form-control custom-select <?= (form_error('pert_akhir')) ? 'is-invalid' : '' ?>">
+			<option value="" selected>Pilih Sampai Pertemuan Ke-</option>
+			<?php for ($i = 1; $i <= 10; $i++) : ?>
+				<option value="<?= $i ?>">Pertemuan <?= $i ?></option>
+			<?php endfor ?>
+		</select>
+		<div id="pert_akhir" class="invalid-feedback">
+			<?= form_error('pert_akhir', '<div class="text-danger">', '</div>') ?>
+		</div>
+	</div>
+	<label for="format_print">Format</label>
+	<div class="input-group mb-3">
+		<input type="text" name="format_print" id="format_print" class="form-control" value="PDF" readonly>
+	</div>
+	<div class="btn-aksi mb-4">
+		<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-1 mr-3">Kirim</button>
+		<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-1">Reset</button>
+	</div>
+	<?= form_close() ?>
+
+	Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, asperiores!

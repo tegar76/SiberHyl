@@ -71,6 +71,15 @@ $route['siswa/profile/(:any)'] = 'Siswa/Profile/$1';
 $route['siswa/profile/(:any)/(:any)'] = 'Siswa/Profile/$1/$2';
 $route['siswa/profile/(:any)/(:any)/(:any)'] = 'Siswa/Profile/$1/$2/$3';
 
+$route['siswa/materi'] = 'Siswa/Materi';
+$route['siswa/materi/(:any)'] = 'Siswa/Materi/$1';
+$route['siswa/materi/(:any)/(:any)'] = 'Siswa/Materi/$1/$2';
+$route['siswa/materi/(:any)/(:any)/(:any)'] = 'Siswa/Materi/$1/$2/$3';
+
+$route['siswa/absensi'] = 'Siswa/Absen';
+$route['siswa/absensi/(:any)'] = 'Siswa/Absen/$1';
+$route['siswa/absensi/(:any)/(:any)'] = 'Siswa/Absen/$1/$2';
+$route['siswa/absensi/(:any)/(:any)/(:any)'] = 'Siswa/Absen/$1/$2/$3';
 // routing guru
 $route['guru/dashboard'] = 'Guru/Dashboard/index';
 

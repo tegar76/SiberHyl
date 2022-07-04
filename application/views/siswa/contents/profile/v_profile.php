@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
+<?php include APPPATH . '../assets/siswa/css/import_style_content.php'; ?>
 
 <section class="container section section__height mt-n3" id="about">
 	<div class="profile pb-5">
@@ -42,7 +42,7 @@
 							<th scope="row">Tempat Tanggal Lahir</th>
 							<td>
 								<?= ($siswa->siswa_tempatlahir) ? $siswa->siswa_tempatlahir . ", " : '-'  ?>
-								<?= (!empty($siswa->siswa_tanggallahir)) ? date('d-m-Y', strtotime($siswa->siswa_tanggallahir)) : '00-00-0000' ?>
+								<?= ($siswa->siswa_tanggallahir == '0000-00-00') ? '-' : date('d-m-Y', strtotime($siswa->siswa_tanggallahir)) ?>
 							</td>
 							</tr>
 							</tr>
@@ -55,18 +55,18 @@
 							</tr>
 							</tr>
 							<th scope="row">Email</th>
-							<td><?= $siswa->siswa_email ?></td>
+							<td><?= ($siswa->siswa_email) ? $siswa->siswa_email :  '-' ?></td>
 							</tr>
 							</tr>
 							<th scope="row">No. Handphone</th>
-							<td><?= $siswa->siswa_telp ?></td>
+							<td><?= ($siswa->siswa_telp) ? $siswa->siswa_telp :  '-' ?></td>
 							</tr>
 							</tr>
 							<th scope="row">Alamat</th>
-							<td><?= $siswa->siswa_alamat ?></td>
+							<td><?= ($siswa->siswa_alamat) ? $siswa->siswa_alamat :  '-' ?></td>
 							</tr>
 							<th scope="row">Status Kesiswaan</th>
-							<td>null</td>
+							<td><?= $siswa->status ?></td>
 							</tr>
 						</tbody>
 					</table>
