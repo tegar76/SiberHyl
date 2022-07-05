@@ -1,6 +1,25 @@
 <!-- import style -->
 <?php include APPPATH.'../assets/siswa/css/import_style_jadwal.php';?>
 
+<!-- style btn scroll to top -->
+<style>
+	#btn-back-to-top {
+	position: fixed;
+	bottom: 80px;
+	right: 20px;
+	display: none;
+	background-color: white;
+	border: 1px solid #2989A8;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+
+	}
+	#btn-back-to-top:hover {
+		background-color: darkcyan;
+	}
+</style>
+
 <!-- Jquery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 
@@ -242,6 +261,11 @@
 		</div>
 	</div>
 
+	<!-- Back to top button -->
+<button type="button" class="btn btn-floating btn-sm" id="btn-back-to-top" > <img class="rotate-sm-l-45" src="<?= base_url('assets/') ?>home/images/favicon.png" alt=""></button>
+
+	
+
 <!--=============== PORTFOLIO ===============-->
 <!-- <section class="container section section__height" id="portfolio">
     <h2 class="section__title">Portfolio</h2>
@@ -256,4 +280,35 @@
 	$(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip();
 	});
+</script>
+
+
+
+<!-- scroll to top -->
+<script>
+	//Get the button
+let mybutton = document.getElementById("btn-back-to-top");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function () {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (
+    document.body.scrollTop > 20 ||
+    document.documentElement.scrollTop > 20
+  ) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+// When the user clicks on the button, scroll to the top of the document
+mybutton.addEventListener("click", backToTop);
+
+function backToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
 </script>
