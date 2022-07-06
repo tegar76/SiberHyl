@@ -26,7 +26,7 @@
                             <div class="row">
                                 <!-- looping info -->
                                 <div class="col-md-12">
-                                    <a target="blank" href="<?= base_url('Guru/InfoAkademik/FileInfoAkademik')?>">
+                                    <a target="blank" href="<?= base_url('WaliKelas/InfoAkademik/FileInfoAkademik')?>">
                                         <div class="media mb-2">
                                             <i class='bx bx-info-square bx-md color-cyan mr-2'></i>
                                             <div class="row">
@@ -41,7 +41,7 @@
                                 </div>     
                                 <!-- looping info -->
                                 <div class="col-md-12">
-                                    <a target="blank" href="<?= base_url('Guru/InfoAkademik/FileInfoAkademik')?>">
+                                    <a target="blank" href="<?= base_url('WaliKelas/InfoAkademik/FileInfoAkademik')?>">
                                         <div class="media mb-2">
                                             <i class='bx bx-info-square bx-md color-cyan mr-2'></i>
                                             <div class="row">
@@ -56,7 +56,7 @@
                                 </div>     
                                 <!-- looping info -->
                                 <div class="col-md-12">
-                                    <a target="blank" href="<?= base_url('Guru/InfoAkademik/FileInfoAkademik')?>">
+                                    <a target="blank" href="<?= base_url('WaliKelas/InfoAkademik/FileInfoAkademik')?>">
                                         <div class="media mb-2">
                                             <i class='bx bx-info-square bx-md color-cyan mr-2'></i>
                                             <div class="row">

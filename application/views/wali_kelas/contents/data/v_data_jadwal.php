@@ -44,13 +44,51 @@
                         <div class="print col-md-2 mt-2">
 							<div class="card">
 								<div class="row ml-1 mt-1 ml-2">
-									<a href="" data-toggle="tooltip" data-placement="top" title="Print"><i class="fa-solid fa-print mr-2 color-cyan"></i></a>
-									<a href="" data-toggle="tooltip" data-placement="top" title="Print Pdf"><i class="fa-solid fa-file-pdf color-pink"></i></a>
+									<a href="<?= base_url('WaliKelas/cetakDataJadwal')?>" data-toggle="tooltip" data-placement="top" title="Print"><i class="fa-solid fa-print mr-2 color-cyan"></i></a>
+									<a href="<?= base_url('WaliKelas/Data/cetakDataJadwal')?>" data-toggle="tooltip" data-placement="top" title="Print Pdf"><i class="fa-solid fa-file-pdf color-pink"></i></a>
 								</div>
 							</div>
 						</div>
 						<div class="container py-2">
 								<div class="row">
+								<div class="content-card col-md-4">
+										<div class="card shadow">
+											<div class="hari mb-n4">
+												<div class="card d-flex align-items-center">
+													<p class="text-uppercase my-auto">Senin</p>
+												</div>
+											</div>
+											<!-- Looping mapel Kedua -->
+												<div class="jadwal mt-2">
+													<div class="mapel">
+														<div class="card shadow-sm p-2">
+															<div class="d-flex justify-content-lg-start">
+																<img role="button" src="<?= base_url('assets/siswa/img/perfil.png') ?>" alt="" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="Jason S.Pd">
+																<div class="mapel w-100">
+																	<center>
+																		<p>Panel Sasis Dan Pemindahan Tenaga KR</p>
+																	</center>
+																</div>
+															</div>
+															<div class="ket-mapel mt-3">
+																<div class="d-flex justify-content-start">
+																	<img src="<?= base_url('assets/siswa/icons/guru.png') ?>" alt="">
+																	<p>AZ</p>
+																</div>
+																<div class="d-flex justify-content-start">
+																	<img src="<?= base_url('assets/siswa/icons/waktu.png') ?>" alt="">
+																	<p>05-10-2022</p>
+																</div>
+																<div class="d-flex justify-content-start">
+																	<img src="<?= base_url('assets/siswa/icons/r-kelas.png') ?>" alt="">
+																	<p>MM 1</p>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+										</div>
+									</div>
 									<!-- Jadwal Harian Looping Disini -->
                                     <?php for($i = 1; $i < 6; $i++) :?>
 										<div class="content-card col-md-4">
@@ -95,43 +133,43 @@
 										</div>
                                     <?php endfor?>
                                     <div class="content-card col-md-4">
-											<div class="card shadow">
-												<div class="hari mb-n4">
-													<div class="card d-flex align-items-center">
-														<p class="text-uppercase my-auto">Senin</p>
-													</div>
+										<div class="card shadow">
+											<div class="hari mb-n4">
+												<div class="card d-flex align-items-center">
+													<p class="text-uppercase my-auto">Senin</p>
 												</div>
-												<!-- Looping mapel Kedua -->
-													<div class="jadwal mt-2">
-														<div class="mapel">
-															<div class="card shadow-sm p-2">
-																<div class="d-flex justify-content-lg-start">
-																	<img role="button" src="<?= base_url('assets/siswa/img/perfil.png') ?>" alt="" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="Jason S.Pd">
-																	<div class="mapel w-100">
-																		<center>
-																			<p>Panel Sasis Dan Pemindahan Tenaga KR</p>
-																		</center>
-																	</div>
+											</div>
+											<!-- Looping mapel Kedua -->
+												<div class="jadwal mt-2">
+													<div class="mapel">
+														<div class="card shadow-sm p-2">
+															<div class="d-flex justify-content-lg-start">
+																<img role="button" src="<?= base_url('assets/siswa/img/perfil.png') ?>" alt="" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="Jason S.Pd">
+																<div class="mapel w-100">
+																	<center>
+																		<p>Panel Sasis Dan Pemindahan Tenaga KR</p>
+																	</center>
 																</div>
-																<div class="ket-mapel mt-3">
-																	<div class="d-flex justify-content-start">
-																		<img src="<?= base_url('assets/siswa/icons/guru.png') ?>" alt="">
-																		<p>AZ</p>
-																	</div>
-																	<div class="d-flex justify-content-start">
-																		<img src="<?= base_url('assets/siswa/icons/waktu.png') ?>" alt="">
-																		<p>05-10-2022</p>
-																	</div>
-																	<div class="d-flex justify-content-start">
-																		<img src="<?= base_url('assets/siswa/icons/r-kelas.png') ?>" alt="">
-																		<p>MM 1</p>
-																	</div>
+															</div>
+															<div class="ket-mapel mt-3">
+																<div class="d-flex justify-content-start">
+																	<img src="<?= base_url('assets/siswa/icons/guru.png') ?>" alt="">
+																	<p>AZ</p>
+																</div>
+																<div class="d-flex justify-content-start">
+																	<img src="<?= base_url('assets/siswa/icons/waktu.png') ?>" alt="">
+																	<p>05-10-2022</p>
+																</div>
+																<div class="d-flex justify-content-start">
+																	<img src="<?= base_url('assets/siswa/icons/r-kelas.png') ?>" alt="">
+																	<p>MM 1</p>
 																</div>
 															</div>
 														</div>
 													</div>
-											</div>
+												</div>
 										</div>
+									</div>
 								</div>
 						</div>
 					</div>
