@@ -35,20 +35,12 @@
 		<!-- *************************************************************** -->
 
 		<div class="row">
-			<div class="activity col-12">
+			<div class="activity col-12 p-0">
 				<div class="container my-3">
 					<div class="card shadow">
-                        <h6 class="card-title opacity-7  ml-3 mt-3">
+                        <h6 class="card-title opacity-7  ml-3 mt-3 mb-4">
                             Jadwal Pelajaran Kelas XI TKRO 1 Semester Gasal Tahun Pelajaran 2021/2022     
 						</h6>
-                        <div class="print col-md-2 mt-2">
-							<div class="card">
-								<div class="row ml-1 mt-1 ml-2">
-									<a href="<?= base_url('WaliKelas/cetakDataJadwal')?>" data-toggle="tooltip" data-placement="top" title="Print"><i class="fa-solid fa-print mr-2 color-cyan"></i></a>
-									<a href="<?= base_url('WaliKelas/Data/cetakDataJadwal')?>" data-toggle="tooltip" data-placement="top" title="Print Pdf"><i class="fa-solid fa-file-pdf color-pink"></i></a>
-								</div>
-							</div>
-						</div>
 						<div class="container py-2">
 								<div class="row">
 								<div class="content-card col-md-4">

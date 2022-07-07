@@ -5,15 +5,15 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title">Detail Materi (Guru)</h3>
+				<h3 class="page-title"><?= $title?></h3>
 			</div>
 		</div>
 		<div class="d-flex align-items-center">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
-					<li class="breadcrumb-item text-muted active">Master Data</li>
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Data/dataMateriGuru') ?>" class="text-muted">Data Materi (Guru)</a></li>
-					<li class="breadcrumb-item text-muted active" aria-current="page">Detail Materi (Guru)</li>
+					<li class="breadcrumb-item text-muted active">Materi Pelajaran</li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('KepalaSekolah/MateriPelajaran/dataMateriAdmin') ?>" class="text-muted">Data Materi (Admin)</a></li>
+					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
 				</ol>
 			</nav>
 		</div>
@@ -45,8 +45,12 @@
 									<table class="table">
 										<tbody>
 											<tr class="table-borderless">
+												<th scope="row" class="col-sm-8">Nama Admin</th>
+												<td>Lutfi Haryati.S,Pd.</td>
+											</tr>
+											<tr>
 												<th scope="row" class="col-sm-8">Kelas</th>
-												<td>XI TKRO 1,XI TKRO 4</td>
+												<td>XI TKRO 1,XI TKRO 2,XI TKRO 3,XI TKRO 4,XI TKRO 5 </td>
 											</tr>
 											<tr>
 												<th scope="row">Mata Pelajaran</th>
@@ -68,7 +72,7 @@
 												<td class="item-pdf row">
 													<!-- looping item -->
 													<div class="pdf-file ml-3">
-														<a target="_blank" href="<?= base_url('Guru/Data/tampilFileMateri') ?>">
+														<a target="_blank" href="<?= base_url('KepalaSekolah/MateriPelajaran/tampilFileMateri') ?>">
 															<div class="card card-pdf">
 																<div class="container">
 																	<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf">
@@ -102,7 +106,7 @@
 									</table>
 									<hr class="mt-n3">
 									<div class="button-action d-flex mb-3 mt-2">
-										<a href="<?= base_url('Guru/data/dataMateriGuru') ?>" class="btn btn-sm btn-primary bg-blue rounded border-0 ml-3 px-3">Kembali</a>
+										<a href="<?= base_url('KepalaSekolah/MateriPelajaran/dataMateriAdmin') ?>" class="btn btn-sm btn-primary bg-blue  rounded border-0 ml-3 px-3">Kembali</a>
 									</div>
 								</div>
 							</div>

@@ -67,6 +67,10 @@ $(document).ready(function() {
 // Data table wali kelas
 
 
+// Data table kepala sekolah
+$(document).ready(function() {
+    $('#pembelajaran_berlangsung').DataTable(); 
+});
 
 
 

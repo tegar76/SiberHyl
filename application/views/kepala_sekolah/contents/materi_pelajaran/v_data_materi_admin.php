@@ -12,7 +12,7 @@
 				<div class="d-flex align-items-center">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb m-0 p-0">
-							<li class="breadcrumb-item text-muted active">Master Data</li>
+							<li class="breadcrumb-item text-muted active">Materi Pelajaran</li>
 							<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 						</ol>
 					</nav>
@@ -41,10 +41,10 @@
 								<thead>
 									<tr>
 										<th style="width:4%">No</th>
-										<th style="width:14%">Nama Admin</th>
-										<th style="width:20%;">Kelas</th>
-										<th style="width:22%;">Mapel</th>
-										<th style="width:16%;">Dibuat</th>
+										<th style="width:20%;">Nama Admin</th>
+										<th style="width:14%;">Kelas</th>
+										<th style="width:25%;">Mapel</th>
+										<th style="width:18%;">Dibuat</th>
 										<th style="width:4%;">Aksi</th>
 									</tr>
 								</thead>
@@ -52,11 +52,11 @@
 										<tr>
 											<td>1</td>
 											<td>Lutfi Haryati.S,Pd</td>
-											<td>XI TKRO 1,XI TKRO 2,XI TKRO 3,XI TKRO 4,XI TKRO 5</td>
+											<td>XI TKRO 1</td>
 											<td>Panel Sasis Dan Pemindahan Tenaga KR</td>
 											<td>10 - 05 - 2022 07 : 00 WIB </td>
 											<td>
-												<a href="<?= base_url('Guru/Data/detailDataMateriAdmin') ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+												<a href="<?= base_url('KepalaSekolah/MateriPelajaran/detailDataMateriAdmin') ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 											</td>
 										</tr>
 								</tbody>
