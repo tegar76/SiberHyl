@@ -170,40 +170,44 @@
 					<div class="card-body">
 						<h6 class="card-title">
 							<a class="search-icon" href="<?= base_url('master/jurnal') ?>"><i class="fa fa-magnifying-glass mr-2"></i></a>
-							Jurnal Materi Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?>
+							Pembelajaran Yang Sedang Berlangsung
 						</h6>
 						<div class="mt-4 activity">
 							<table id="table-jurnal" class="table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
 								<thead>
 									<tr>
-										<th style="width: 6%;">No</th>
-										<th style="width: 10%;">Hari</th>
-										<th style="width: 12%;">Tanggal</th>
-										<th style="width: 12%;">Kode Guru</th>
-										<th style="width: 12%;">Mapel</th>
-										<th style="width: 10%;">Kelas</th>
-										<th style="width: 12%;">Pertemuan ke-</th>
-										<th style="width: 20%;">Pembahasan</th>
-										<th style="width: 14%;">Aksi</th>
+										<th style="width: 4%;">No</th>
+										<th style="width: 6%;">Hari</th>
+										<th style="width: 8%;">Kode Guru</th>
+										<th style="width: 16%;">Mapel</th>
+										<th style="width: 12%;">Jam Pelajaran</th>
+										<th style="width: 6%;">Kelas</th>
+										<th style="width: 6%;">Ruang</th>
+										<th style="width: 12%;">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
-									<?php $no = 1;
-									foreach ($jurnal as $row => $value) : ?>
 										<tr>
-											<td><?= $no++ ?></td>
-											<td><?= $value->hari ?></td>
-											<td><?= date('d - m - Y', strtotime($value->tanggal)) ?></td>
-											<td><?= $value->guru_kode ?></td>
-											<td><?= $value->nama_mapel ?></td>
-											<td><?= $value->nama_kelas ?></td>
-											<td><?= $value->pert_ke ?></td>
-											<td><?= $value->pembahasan ?></td>
-											<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
-											<td><a id="id_bdt" href="#" class="btn btn-sm detail-jurnal <?= ($value->status == 0) ? 'btn-outline-danger text-danger' : 'btn-outline-success text-success' ?>   btn-rounded-sm " jurnal-id="<?= $this->secure->encrypt_url($value->jurnal_id) ?>" status="<?= $value->status ?>"><?= ($value->status == 0) ? 'Belum Dilihat' : 'Sudah Dilihat' ?></a></td>
+											<td>1</td>
+											<td>Senin</td>
+											<td>AB</td>
+											<td>Bahasa Inggris</td>
+											<td>07.00 - 09.00 WIB</td>
+											<td>XI TKRO 2</td>
+											<td>MM 1</td>
+											<td><a href="" class="d-block btn btn-sm btn-outline-primary border-blue rounded mx-auto">Kunjungi Kelas</a></td>
 										</tr>
-									<?php endforeach ?>
+										<tr>
+											<td>2</td>
+											<td>Senin</td>
+											<td>AB</td>
+											<td>Bahasa Inggris</td>
+											<td>07.00 - 09.00 WIB</td>
+											<td>XI TKRO 2</td>
+											<td>MM 1</td>
+											<td><a href="" class="d-block btn btn-sm btn-outline-warning border-yellow rounded mx-auto">Sudah Dikunjungi</a></td>
+										</tr>
 								</tbody>
 							</table>
 						</div>

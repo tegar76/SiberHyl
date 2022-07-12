@@ -37,18 +37,19 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<h6 class="card-title">Data Materi (Admin) Semester <?= $semester = ($tahun_ajar['semester'] == 0 ) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
+						<h6 class="card-title">Data Materi (Guru) Semester <?= $semester = ($tahun_ajar['semester'] == 0 ) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
 						<div class="mt-4 activity">
 							<table id="data_materi" class="table-responsive table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
 								<thead>
 									<tr>
-										<th style="width:5%">No</th>
+										<th style="width:2%">No</th>
+										<th style="width:10%">Kode Guru</th>
 										<th style="width:10%;">Kelas</th>
-										<th style="width:15%;">Jurusan</th>
+										<th style="width:10%;">Jurusan</th>
 										<th style="width:25%;">Mapel</th>
 										<th style="width:18%;">Dibuat</th>
-										<th style="width:12%;">Aksi</th>
+										<th style="width:2%;">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -56,15 +57,13 @@
 									foreach ($materi as $row => $value) : ?>
 										<tr>
 											<td><?= $i++ ?></td>
+											<td>AZ</td>
 											<td><?= $value->index_kelas ?></td>
 											<td><?= (!empty($value->kode_jurusan)) ? $value->kode_jurusan : '-' ?></td>
 											<td><?= $value->nama_mapel ?></td>
 											<td><?= date('d-m-Y H:i', strtotime($value->create_time)) . " WIB" ?></td>
 											<td>
-												<a href="<?= base_url('master/materi/detailMateri/' . $this->secure->encrypt_url($value->materi_info_id)) ?>" class="btn btn-sm btn-primary mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-												<a href="<?= base_url('master/materi/editMateri/' . $this->secure->encrypt_url($value->materi_info_id)) ?>" class="btn btn-sm btn-success mr-1"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-												<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
-												<a href="" class="btn btn-sm btn-danger delete-materi" materi-id="<?= $value->materi_info_id ?>"><i class="fa-solid fa-trash-can text-white" data-toggle="tooltip" data-placement="top" title="Hapus"></i></a>
+												<a href="<?= base_url('Admin/Materi/detailMateriGuru/')?>" class="btn btn-sm btn-primary mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>										
 											</td>
 										</tr>
 									<?php endforeach ?>
@@ -75,14 +74,6 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="floating-container">
-			<a href="<?= base_url('master/materi/tambahMateri') ?>">
-				<div class="floating-button">+</div>
-			</a>
-		</div>
-
-
 		<!-- *************************************************************** -->
 		<!-- End Top Leader Table -->
 		<!-- *************************************************************** -->

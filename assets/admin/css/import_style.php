@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="<?= base_url('assets/admin/css/styles.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/admin/css/style.css') ?>">

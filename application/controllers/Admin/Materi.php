@@ -30,7 +30,7 @@ class Materi extends CI_Controller
 
 	public function index()
 	{
-		$data['title'] = 'Materi';
+		$data['title'] = 'Materi (Admin)';
 		$data['content'] = 'admin/contents/jadwal/v_materi';
 		$data['materi'] = $this->master->get_materi()->result();
 		$data['tahun_ajar'] = $this->tahun_ajar;
@@ -40,7 +40,7 @@ class Materi extends CI_Controller
 	public function detailMateri($idMateri)
 	{
 		$idMateri = $this->secure->decrypt_url($idMateri);
-		$data['title'] = 'Detail Materi';
+		$data['title'] = 'Detail Materi (Admin)';
 		$data['content'] = 'admin/contents/jadwal/v_detail_materi';
 		$data['detailMateri'] = $this->master->getDetailMateri($idMateri);
 		$data['bahanMateri'] = $this->db->get_where('materi_kbm', ['materi_info_id' => $idMateri, 'jenis' => 'file'])->result();
@@ -102,7 +102,7 @@ class Materi extends CI_Controller
 		]);
 
 		if ($this->form_validation->run() == false) {
-			$data['title'] = 'Tambah Materi';
+			$data['title'] = 'Tambah Materi (Admin)';
 			$data['content'] = 'admin/contents/jadwal/v_tambah_materi';
 			$this->load->view('admin/layout/wrapper', $data, FALSE);
 		} else {
@@ -203,7 +203,7 @@ class Materi extends CI_Controller
 	public function editMateri($idMateri)
 	{
 		$idMateri = $this->secure->decrypt_url($idMateri);
-		$data['title'] = 'Edit Materi';
+		$data['title'] = 'Edit Materi (Admin)';
 		$data['content'] = 'admin/contents/jadwal/v_edit_materi';
 		$data['materi'] = $this->master->getDetailMateri($idMateri);
 		$data['bahanMateri'] = $this->db->get_where('materi_kbm', ['materi_info_id' => $idMateri, 'jenis' => 'file'])->result();
@@ -512,5 +512,23 @@ class Materi extends CI_Controller
 		}
 		$data['file_materi'] = base_url($path_pdf . $materiPDF->materi);
 		$this->load->view('admin/contents/jadwal/materi_pdf/v_materi_pdf', $data);
+	}
+
+
+	public function materiGuru()
+	{
+		$data['title'] = 'Materi (Guru)';
+		$data['content'] = 'admin/contents/jadwal/v_materi_guru';
+		$data['materi'] = $this->master->get_materi()->result();
+		$data['tahun_ajar'] = $this->tahun_ajar;
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function detailMateriGuru()
+	{
+		$data['title'] = 'Materi (Guru)';
+		$data['content'] = 'admin/contents/jadwal/v_detail_materi_guru';
+		$data['tahun_ajar'] = $this->tahun_ajar;
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 }

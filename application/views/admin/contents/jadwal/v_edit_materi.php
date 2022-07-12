@@ -13,7 +13,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title">Edit Materi</h3>
+				<h3 class="page-title"><?= $title?></h3>
 			</div>
 		</div>
 		<div class="d-flex align-items-center">
@@ -21,7 +21,7 @@
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Setting Jadwal</li>
 					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi') ?>" class="text-muted">Materi</a></li>
-					<li class="breadcrumb-item text-muted active" aria-current="page">Edit Materi</li>
+					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
 				</ol>
 			</nav>
 		</div>

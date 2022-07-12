@@ -369,6 +369,36 @@ border-color: rgb(222, 243, 248)
 background-color: #2989A8 !important;
 }
 
+.bg-blue:hover {
+  color: #ffffff !important;
+}
+
+.border-blue {
+  border-color: #2989A8 !important;
+  color: #2989A8 !important;
+}
+
+.border-blue:hover {
+  border-color: #ffffff!important;
+  background-color: #2989A8 !important;
+  color: #ffffff !important;
+}
+
+.bg-yellow:hover {
+  color: #ffffff !important;
+}
+
+.border-yellow {
+  border-color: #FFD233 !important;
+  color: #FFD233 !important;
+}
+
+.border-yellow:hover {
+  border-color: #ffffff!important;
+  background-color: #FFD233 !important;
+  color: #ffffff !important;
+}
+
 .menu .card img {
 width: 15px;
 height: 15px;
