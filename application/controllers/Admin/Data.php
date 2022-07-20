@@ -318,7 +318,7 @@ class Data extends CI_Controller
 		} else {
 			$data = array(
 				'kode_ruang' => htmlspecialchars($this->input->post('kode_ruangan', true)),
-				// 'nama_ruang' => htmlspecialchars($this->input->post('nama_ruangan', true)),
+				'nama_ruang' => htmlspecialchars($this->input->post('kode_ruangan', true)),
 				'keterangan' => htmlspecialchars($this->input->post('keterangan', true)),
 			);
 			$this->db->insert('ruangan', $data);

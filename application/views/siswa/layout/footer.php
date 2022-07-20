@@ -1,5 +1,5 @@
 <footer>
-		<p>&copy; 2022 Team Paradoks Technology</p>
+	<p>&copy; 2022 Team Paradoks Technology</p>
 </footer>
 
 </section>
@@ -11,6 +11,7 @@
 <script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/popper.js"></script>
 <script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/bootstrap.js"></script>
 <script src="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.all.min.js"></script>
+<?php include APPPATH . '../assets/siswa/js/import_script.php'; ?>
 
 <script type="text/javascript">
 	$(function() {

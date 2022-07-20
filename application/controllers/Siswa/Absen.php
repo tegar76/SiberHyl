@@ -19,84 +19,103 @@ class Absen extends CI_Controller
 		show_404();
 	}
 
-	public function ruang_absensi($jadwalID = null)
+	public function ruang_absensi($jadwalID = false)
 	{
 		$jadwalID = $this->secure->decrypt_url($jadwalID);
 		$siswa = $this->userSiswa;
 		$timeNow = date('H:i');
 		$dateNow = $this->datenow;
-		$test = $this->siswa->get_mulai_absen(['jurnal.jadwal_id' => $jadwalID]);
-		if (empty($jadwalID) && empty($test)) {
+		$data['title'] = 'Absensi Pelajaran';
+		if ($jadwalID == false) {
 			$data['content'] = 'siswa/contents/errors/404_notfound';
 		} else {
-			$data['content'] = 'siswa/contents/absen/v_absen';
-			if (strtotime($test->tanggal) == strtotime($this->datenow)) {
-				$absensi['jurnalID'] = $test->jurnal_id;
-				$absensi['jadwalID'] = $test->jadwal_id;
+			$infoJadwal = $this->siswa->get_jadwal_mapel($jadwalID);
+			$infoAbsensi = $this->siswa->get_mulai_absen(['jurnal.jadwal_id' => $jadwalID]);
+			if (empty($infoAbsensi)) {
+				$absensi['jurnalID'] = 0;
+				$absensi['jadwalID'] = $infoJadwal->jadwal_id;
 				$absensi['kelas'] = $siswa->nama_kelas;
-				$absensi['mapel'] = $test->nama_mapel;
-				$absensi['tanggal'] = date('d-m-Y', strtotime($test->tanggal));
-				$absensi['dibuka'] = date('H:i', strtotime($test->absen_mulai)) . " WIB";
-				$absensi['ditutup'] = date('H:i', strtotime($test->absen_selesai)) . " WIB";
-				$absensi['pertemuan'] = $test->pert_ke;
-				$absenSiswa = $this->siswa->get_absen_siswa([
-					'siswa_nis' => $siswa->siswa_nis,
-					'jurnal_id' => $test->jurnal_id
-				]);
-
-				if (strtotime($timeNow) >= strtotime($test->absen_selesai)) :
-					$absensi['status'] = '<span class="text-danger">Absen Sudah Ditutup</span>';
-				else :
-					if (empty($absenSiswa)) :
-						$absensi['status'] = '<span class="text-warning">Belum Absen</span>';
-					else :
-						$absensi['status'] = '<span class="text-success">Sudah Absen</span>';
-					endif;
-				endif;
-			} else {
-				$absensi['jurnalID'] = $test->jurnal_id;
-				$absensi['jadwalID'] = $test->jadwal_id;
-				$absensi['kelas'] = $siswa->nama_kelas;
-				$absensi['mapel'] = $test->nama_mapel;
+				$absensi['mapel'] = $infoJadwal->nama_mapel;
 				$absensi['tanggal'] = '-';
 				$absensi['dibuka'] = '-';
 				$absensi['ditutup'] = '-';
 				$absensi['pertemuan'] = '-';
 				$absensi['status'] = '<span class="text-danger">Belum Dimulai</span>';
-			}
-
-			$check_absen = $this->siswa->check_absensi_siswa($siswa->siswa_nis, $test->jurnal_id);
-			if ($check_absen > 0) :
-				$data['is_absen'] = true;
-			else :
-				$data['timeout_absen'] = false;
-				if (strtotime($dateNow) == strtotime($test->tanggal) and strtotime($timeNow) >= strtotime($test->absen_selesai)) :
-					$data['timeout_absen'] = true;
-				endif;
 				$data['is_absen'] = false;
-			endif;
+				$data['timeout_absen'] = false;
+				$data['riwayat'] = array();
+			} else {
+				if (strtotime($infoAbsensi->tanggal) == strtotime($this->datenow)) {
+					$absensi['jurnalID'] = $infoAbsensi->jurnal_id;
+					$absensi['jadwalID'] = $infoAbsensi->jadwal_id;
+					$absensi['kelas'] = $siswa->nama_kelas;
+					$absensi['mapel'] = $infoAbsensi->nama_mapel;
+					$absensi['tanggal'] = date('d-m-Y', strtotime($infoAbsensi->tanggal));
+					$absensi['dibuka'] = date('H:i', strtotime($infoAbsensi->absen_mulai)) . " WIB";
+					$absensi['ditutup'] = date('H:i', strtotime($infoAbsensi->absen_selesai)) . " WIB";
+					$absensi['pertemuan'] = $infoAbsensi->pert_ke;
+					$absenSiswa = $this->siswa->get_absen_siswa([
+						'siswa_nis' => $siswa->siswa_nis,
+						'jurnal_id' => $infoAbsensi->jurnal_id
+					]);
+
+					if (strtotime($timeNow) >= strtotime($infoAbsensi->absen_selesai)) {
+						$absensi['status'] = '<span class="text-danger">Absen Sudah Ditutup</span>';
+					} else {
+						if (empty($absenSiswa)) {
+							$absensi['status'] = '<span class="text-warning">Belum Absen</span>';
+						} else {
+							$absensi['status'] = '<span class="text-success">Sudah Absen</span>';
+						}
+					}
+				} else {
+					$absensi['jurnalID'] = $infoAbsensi->jurnal_id;
+					$absensi['jadwalID'] = $infoAbsensi->jadwal_id;
+					$absensi['kelas'] = $siswa->nama_kelas;
+					$absensi['mapel'] = $infoAbsensi->nama_mapel;
+					$absensi['tanggal'] = '-';
+					$absensi['dibuka'] = '-';
+					$absensi['ditutup'] = '-';
+					$absensi['pertemuan'] = '-';
+					$absensi['status'] = '<span class="text-danger">Belum Dimulai</span>';
+				}
+
+				$check_absen = $this->siswa->check_absensi_siswa($siswa->siswa_nis, $infoAbsensi->jurnal_id);
+				if ($check_absen > 0) {
+					$data['is_absen'] = true;
+				} else {
+					$data['timeout_absen'] = false;
+					if (strtotime($dateNow) == strtotime($infoAbsensi->tanggal) and strtotime($timeNow) >= strtotime($infoAbsensi->absen_selesai)) {
+						$data['timeout_absen'] = true;
+					}
+					$data['is_absen'] = false;
+				}
+			}
 
 			$nomor = 1;
 			$riwayatJurnal = $this->siswa->get_riwayat_jurnal($jadwalID);
-			foreach ($riwayatJurnal as $key => $value) {
-				$absenSiswa = $this->siswa->get_riwayat_absen($siswa->siswa_nis, $value->jurnal_id);
-				$result_absen['nomor'] = $nomor++;
-				$result_absen['status'] = 'A';
-				$result_absen['pembelajaran'] = '-';
-				if (!empty($absenSiswa)) :
-					$result_absen['status'] = $absenSiswa->status;
-					$result_absen['pembelajaran'] = $absenSiswa->metode_kbm;
-				endif;
-				$result_absen['tanggal'] = date('d-m-Y', strtotime($value->tanggal));
-				$result_absen['mapel'] = $value->nama_mapel;
-				$result_absen['pertemuan'] = $value->pert_ke;
-				$result_absen['pembahasan'] = $value->pembahasan;
-				$riwayatAbsen[] = $result_absen;
+			$data['riwayat'] = array();
+			if ($riwayatJurnal) {
+				foreach ($riwayatJurnal as $key => $value) {
+					$absenSiswa = $this->siswa->get_riwayat_absen($siswa->siswa_nis, $value->jurnal_id);
+					$result_absen['nomor'] = $nomor++;
+					$result_absen['status'] = 'Belum Absen';
+					$result_absen['pembelajaran'] = '-';
+					if (!empty($absenSiswa)) :
+						$result_absen['status'] = $absenSiswa->status;
+						$result_absen['pembelajaran'] = $absenSiswa->metode_kbm;
+					endif;
+					$result_absen['tanggal'] = date('d-m-Y', strtotime($value->tanggal));
+					$result_absen['mapel'] = $value->nama_mapel;
+					$result_absen['pertemuan'] = $value->pert_ke;
+					$result_absen['pembahasan'] = $value->pembahasan;
+					$riwayatAbsen[] = $result_absen;
+				}
+				$data['riwayat'] = $riwayatAbsen;
 			}
 			$data['absensi'] = $absensi;
-			$data['riwayat'] = $riwayatAbsen;
+			$data['content'] = 'siswa/contents/absen/v_absen';
 		}
-		$data['title'] = 'Absensi Pelajaran';
 
 		$this->load->view('siswa/layout/wrapper', $data, FALSE);
 	}
@@ -109,7 +128,7 @@ class Absen extends CI_Controller
 		$jurnal_id = $this->input->post('jurnal_id', true);
 		$absensi = $this->siswa->check_absensi($jurnal_id);
 		if (strtotime($dateNow) == strtotime($absensi->tanggal)) :
-			if (strtotime($timeNow) <= strtotime($absensi->absen_mulai)) :
+			if (strtotime($timeNow) < strtotime($absensi->absen_mulai)) :
 				$response = [
 					'csrfName' => $this->security->get_csrf_token_name(),
 					'csrfHash' => $this->security->get_csrf_hash(),

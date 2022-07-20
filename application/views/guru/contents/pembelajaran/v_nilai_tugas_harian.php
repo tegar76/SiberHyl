@@ -5,17 +5,17 @@
 		<div class="page-breadcrumb">
 			<div class="row">
 				<div class="col-7 align-self-center">
-					<h3 class="page-title"><?= $title?></h3>
+					<h3 class="page-title"><?= $title ?></h3>
 				</div>
 			</div>
 			<div class="d-flex align-items-center">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb m-0 p-0">
 						<li class="breadcrumb-item text-muted active">Pembelajaran</li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/mengajar') ?>" class="text-muted">Mengajar</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/tugasHarian') ?>" class="text-muted">Tugas Harian</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/detailTugasHarian') ?>" class="text-muted">Detail Tugas Harian</a></li>
-						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajaran') ?>" class="text-muted">Mengajar</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajaran/tugas_harian/' . $result['jadwal_id']) ?>" class="text-muted">Tugas Harian</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajaran/detail_tugas_harian/' . $result['tugas_id']) ?>" class="text-muted">Detail Tugas Harian</a></li>
+						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 					</ol>
 				</nav>
 			</div>
@@ -40,58 +40,52 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="activity">
-						<?= form_open_multipart('') ?>
+						<?= form_open('guru/pembelajaran/process_nilai') ?>
 						<div class="card shadow mb-4">
 							<div class="container my-3">
-								<label for="">NIS</label>
+								<label for="nis">NIS</label>
 								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="2010091" readonly>
-									<div id="" class="invalid-feedback">
-										<?= form_error('', '<div class="text-danger">', '</div>') ?>
+									<input type="text" name="nis" id="nis" class="form-control" value="<?= $result['nis'] ?>" readonly>
+								</div>
+								<label for="nama">Nama</label>
+								<div class="input-group mb-3">
+									<input type="text" name="nama" id="nama" class="form-control" value="<?= $result['nama'] ?>" readonly>
+								</div>
+								<label for="upload">Tanggal Pengumpulan</label>
+								<div class="input-group mb-3">
+									<input type="text" name="upload" id="upload" class="form-control" value="<?= $result['upload'] ?>" readonly>
+								</div>
+								<label for="metode">Metode Pengumpulan</label>
+								<div class="input-group mb-3">
+									<input type="text" name="metode" id="metode" class="form-control" value="<?= $result['metode'] ?>" readonly>
+								</div>
+								<label for="file">File Jawaban</label>
+								<div class="input-group mb-3">
+									<?php if ($result['metode'] == 'online') : ?>
+										<?php if ($result['file_ext'] == '.pdf') : ?>
+											<a target="_blank" href="<?= base_url('guru/pembelajaran/file_tugas_siswa/' . $result['id']) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a>
+										<?php else : ?>
+											<a target="_blank" href="<?= base_url('guru/pembelajaran/file_tugas_siswa/' . $result['id']) ?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a>
+										<?php endif ?>
+									<?php elseif ($result['metode'] == 'langsung') : ?>
+										<div class="h6 text-secondary opacity-7">Pengumpulan secara langsung</div>
+									<?php elseif (empty($result['file'])) : ?>
+										<div class="h6 text-secondary opacity-7">File Jawaban Kosong!!</div>
+									<?php endif ?>
+								</div>
+								<label for="komentar">Komentar</label>
+								<div class="input-group mb-3">
+									<textarea name="komentar" id="komentar" placeholder="Masukan Komentar" class="form-control"><?= $result['komentar'] ?></textarea>
+								</div>
+								<label for="nilai">Nilai</label>
+								<div class="input-group mb-3">
+									<input type="number" name="nilai" id="nilai" class="form-control <?= (form_error('nilai')) ? 'is-invalid' : '' ?>" placeholder="Masukan Nilai Dengan Akumulasi 10 -100" value="<?= $result['nilai'] ?>">
+									<div id="nilai" class="invalid-feedback">
+										<?= form_error('nilai', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
-								<label for="">Nama</label>
-								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="ADIT PRAYITNO" readonly>
-									<div id="" class="invalid-feedback">
-										<?= form_error('', '<div class="text-danger">', '</div>') ?>
-									</div>
-								</div>
-								<label for="">Tanggal Pengumpulan</label>
-								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="10 - 04 - 2022 09:00 WIB" readonly>
-									<div id="" class="invalid-feedback">
-										<?= form_error('', '<div class="text-danger">', '</div>') ?>
-									</div>
-								</div>
-								<label for="">Metode Pengumpulan</label>
-								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" value="Online" readonly>
-									<div id="" class="invalid-feedback">
-										<?= form_error('', '<div class="text-danger">', '</div>') ?>
-									</div>
-								</div>
-								<label for="">File Jawaban</label>
-								<div class="input-group mb-3">
-									<!-- Pengumpulan Online -->
-									<!-- Jawaban berupa img -->
-									<!-- <a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanTugasHarianImg')?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a> -->
-									<!-- Jawaban berupa pdf -->
-									<!-- <a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileJawabanTugasHarianPdf')?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a> -->
-									<!-- Pengumpulan Langsung -->
-									<div class="h6 text-secondary opacity-7">File Jawaban Tidak Ada !!</div>
-								</div>
-								<label for="">Komentar</label>
-								<div class="input-group mb-3">
-									<textarea name="" id="" placeholder="Masukan Komentar" class="form-control"></textarea>
-								</div>
-								<label for="">Nilai</label>
-								<div class="input-group mb-3">
-									<input type="text" name="" id="" class="form-control <?= (form_error('')) ? 'is-invalid' : '' ?>" placeholder="Masukan Nilai Dengan Akumulasi 10 -100">
-									<div id="" class="invalid-feedback">
-										<?= form_error('', '<div class="text-danger">', '</div>') ?>
-									</div>
-								</div>
+								<input type="hidden" name="tugas_id" value="<?= $result['tugas_id'] ?>">
+								<input type="hidden" name="tugas_siswa_id" value="<?= $result['id'] ?>">
 								<div class="btn-aksi mt-4 mb-2">
 									<button type="submit" class="btn btn-sm btn-success border-0 rounded px-4 py-2 mr-3">Update</button>
 									<button type="reset" class="btn btn-sm btn-secondary border-0 rounded px-4 py-2">Reset</button>

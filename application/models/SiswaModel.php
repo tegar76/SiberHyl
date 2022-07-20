@@ -99,7 +99,7 @@ class SiswaModel extends CI_Model
 		return $query->num_rows();
 	}
 
-	public function process_absensi($metode_absen, $nis)
+	public function  process_absensi($metode_absen, $nis)
 	{
 		$jurnal_id = $this->input->post('jurnal_id', true);
 		if ($metode_absen == 'offline') :
@@ -239,6 +239,200 @@ class SiswaModel extends CI_Model
 			->where('pert_ke <=', $pert_akhir)
 			->get();
 		$result = $query->result();
+		return $result;
+	}
+
+	public function get_tugas_harian($id_jadwal)
+	{
+		$this->db->where('jadwal_id', $id_jadwal);
+		$this->db->order_by('create_time', 'DESC');
+		$query	= $this->db->get('tugas');
+		return $query->result();
+	}
+
+	public function get_tugas_siswa($nis, $id)
+	{
+		$this->db->where('siswa_nis', $nis);
+		$this->db->where('tugas_id', $id);
+		$query	= $this->db->get('tugas_siswa');
+		return $query->row();
+	}
+
+	public function get_result_tugas($id)
+	{
+		$this->db->select('tugas.tugas_id, tugas.pertemuan, tugas.judul_tugas, mapel.nama_mapel');
+		$this->db->from('tugas');
+		$this->db->where('tugas.jadwal_id', $id);
+		$this->db->join('jadwal', 'jadwal.jadwal_id=tugas.jadwal_id');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function get_info_tugas($id)
+	{
+		$this->db->select("tugas.tugas_id, tugas.pertemuan, tugas.judul_tugas, jadwal.jadwal_id, mapel.nama_mapel");
+		$this->db->from('tugas');
+		$this->db->join('jadwal', 'jadwal.jadwal_id=tugas.jadwal_id', 'left');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left');
+		$this->db->where('tugas.tugas_id', $id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
+	public function process_assignment()
+	{
+		if ($_FILES['file_tugas']['name']) :
+			$conf['upload_path']   = './storage/siswa/tugas_harian';
+			$conf['allowed_types'] = 'pdf|jpg|png|jpeg';
+			$conf['max_size']      = 2000;
+			$conf['overwrite']     = TRUE;
+			$conf['encrypt_name'] = TRUE;
+			$this->load->library('upload', $conf);
+			$this->upload->initialize($conf);
+			$_FILES['file']['name']		= $_FILES['file_tugas']['name'];
+			$_FILES['file']['type'] 	= $_FILES['file_tugas']['type'];
+			$_FILES['file']['tmp_name'] = $_FILES['file_tugas']['tmp_name'];
+			$_FILES['file']['error'] 	= $_FILES['file_tugas']['error'];
+			$_FILES['file']['size'] 	= $_FILES['file_tugas']['size'];
+			$this->check_storage_siswa('tugas_harian');
+			if (!$this->upload->do_upload('file_tugas')) {
+				if (!$this->check_storage_siswa('tugas_harian')) {
+					rmdir('/storage/siswa/tugas_harian');
+				}
+				$result = array(
+					'status' => false,
+					'errors' => $this->upload->display_errors('<span>', '</span>')
+				);
+			} else {
+				$upload = $this->upload->data();
+				if ($upload['file_ext'] == '.pdf') {
+					$file_ = array(
+						'file_tugas_siswa' => $upload['file_name'],
+						'file_type' => $upload['file_ext'],
+						'file_size' => $upload['file_size']
+					);
+					$this->db->set($file_);
+				} else {
+					$resolution = ['width' => 500, 'height' => 500];
+					$this->compreesImage('tugas_harian', $upload['file_name'], $resolution);
+					$file_ = array(
+						'file_tugas_siswa' => $upload['file_name'],
+						'file_type' => $upload['file_ext'],
+						'file_size' => $upload['file_size']
+					);
+					$this->db->set($file_);
+				}
+				$desc = array(
+					'time_upload' => date('Y-m-d H:i:s'),
+					'metode' => 'online',
+					'status' => 1,
+					'siswa_nis' => $this->input->post('nis', true),
+					'tugas_id' => $this->input->post('tugas_id', true)
+				);
+				$this->db->set($desc);
+				$this->db->insert('tugas_siswa');
+			}
+			$result = array(
+				'status' => true,
+				'errors' => ''
+			);
+		endif;
+		return $result;
+	}
+
+	public function check_storage_siswa($dir)
+	{
+		if (!is_dir('storage')) :
+			mkdir('./storage', 0777, true);
+		endif;
+
+		$dir_exist = true;
+		if (!is_dir('storage/siswa')) :
+			mkdir('./storage/siswa', 0777, true);
+			$dir_exist = false; // dir not exist
+		endif;
+
+		if (!is_dir('storage/siswa/' . $dir)) :
+			mkdir('./storage/siswa/' . $dir, 0777, true);
+			$dir_exist = false; // dir not exist
+		endif;
+
+		return $dir_exist;
+	}
+
+	public function get_update_tugas($id)
+	{
+		$this->db->select("tugas.tugas_id, tugas.pertemuan, tugas.judul_tugas, jadwal.jadwal_id, mapel.nama_mapel, tugas_siswa.tugas_siswa_id, tugas_siswa.file_tugas_siswa");
+		$this->db->from('tugas_siswa');
+		$this->db->join('tugas', 'tugas.tugas_id=tugas_siswa.tugas_id');
+		$this->db->join('jadwal', 'jadwal.jadwal_id=tugas.jadwal_id', 'left');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left');
+		$this->db->where('tugas_siswa_id', $id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
+	public function update_assignment()
+	{
+		$tugasSiswa = $this->get_update_tugas($this->input->post('tugas_siswa_id', true));
+		$fileTugas = $tugasSiswa->file_tugas_siswa;
+		if ($_FILES['update_tugas']['name']) :
+			$conf['upload_path']   = './storage/siswa/tugas_harian';
+			$conf['allowed_types'] = 'pdf|jpg|png|jpeg';
+			$conf['max_size']      = 2000;
+			$conf['overwrite']     = TRUE;
+			$conf['encrypt_name'] = TRUE;
+			$this->load->library('upload', $conf);
+			$this->upload->initialize($conf);
+			$_FILES['file']['name']		= $_FILES['update_tugas']['name'];
+			$_FILES['file']['type'] 	= $_FILES['update_tugas']['type'];
+			$_FILES['file']['tmp_name'] = $_FILES['update_tugas']['tmp_name'];
+			$_FILES['file']['error'] 	= $_FILES['update_tugas']['error'];
+			$_FILES['file']['size'] 	= $_FILES['update_tugas']['size'];
+			$this->check_storage_siswa('tugas_harian');
+			if (!$this->upload->do_upload('update_tugas')) {
+				if (!$this->check_storage_siswa('tugas_harian')) {
+					rmdir('/storage/siswa/tugas_harian');
+				}
+				$result = array(
+					'status' => false,
+					'errors' => $this->upload->display_errors('<span>', '</span>')
+				);
+			} else {
+				if ($fileTugas) {
+					@unlink(FCPATH . './storage/siswa/tugas_harian/' . $fileTugas);
+				}
+				$upload = $this->upload->data();
+				if ($upload['file_ext'] == '.pdf') {
+					$file_ = array(
+						'file_tugas_siswa' => $upload['file_name'],
+						'file_type' => $upload['file_ext'],
+						'file_size' => $upload['file_size']
+					);
+					$this->db->set($file_);
+				} else {
+					$resolution = ['width' => 500, 'height' => 500];
+					$this->compreesImage('tugas_harian', $upload['file_name'], $resolution);
+					$file_ = array(
+						'file_tugas_siswa' => $upload['file_name'],
+						'file_type' => $upload['file_ext'],
+						'file_size' => $upload['file_size']
+					);
+					$this->db->set($file_);
+				}
+				$desc = array(
+					'time_upload' => date('Y-m-d H:i:s'),
+				);
+				$this->db->set($desc);
+				$this->db->where('tugas_siswa_id', $this->input->post('tugas_siswa_id', true));
+				$this->db->update('tugas_siswa');
+				$result = array(
+					'status' => true,
+					'errors' => ''
+				);
+			}
+		endif;
 		return $result;
 	}
 }

@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
 	<!-- Jquery -->
-    <script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/jquery.js"></script>
+	<script src="<?= base_url('assets/') ?>bootstrap-4.6.1-dist/js/jquery.js"></script>
 
 	<script src="<?= base_url('assets/admin-mart/assets/') ?>libs/popper.js/dist/umd/popper.min.js"></script>
 	<script src="<?= base_url('assets/admin-mart/assets/') ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -39,7 +39,7 @@
 	<script src="<?= base_url('assets/admin-mart/assets/') ?>extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
 	<script src="<?= base_url('assets/admin-mart/dist/') ?>js/pages/dashboards/dashboard1.min.js"></script>
 
-	<title>Guru Siberhyl</title>
+	<title><?= $title ?></title>
 	<!-- Custom CSS -->
 	<link href="<?= base_url('assets/admin-mart/assets/') ?>extra-libs/c3/c3.min.css" rel="stylesheet">
 	<link href="<?= base_url('assets/admin-mart/assets/') ?>libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -49,7 +49,7 @@
 	<link href="<?= base_url('assets/admin-mart/dist/') ?>css/style.min.css" rel="stylesheet">
 
 	<!-- import style -->
-	<?php include APPPATH.'../assets/guru/css/import_style.php';?>
+	<?php include APPPATH . '../assets/guru/css/import_style.php'; ?>
 
 
 	<!-- SweetAlert 2 -->
@@ -63,7 +63,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 
-	<script src="<?= base_url('assets/admin/js/my-script.js') ?>"></script>
+	<!-- import script -->
+	<?php include APPPATH . '../assets/guru/js/import_script.php' ?>
+
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>

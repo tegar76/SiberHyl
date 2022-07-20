@@ -47,6 +47,8 @@
 									<?php else : ?>
 										<?php if ($timeout_absen) : ?>
 											<!-- waktu abseni telah habis dan absen ditutup -->
+										<?php elseif ($absensi['jurnalID'] == 0) : ?>
+											<!-- belum ada pertemuan -->
 										<?php else : ?>
 											<hr>
 											<?= form_open_multipart('#', ['id' => 'submit_absen'])  ?>
