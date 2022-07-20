@@ -85,11 +85,11 @@ class JadwalModel extends CI_Model
 
 	public function getJurnalWhere(array $params)
 	{
-		$select = "jadwal.hari, jadwal.jam_masuk, jadwal.jam_keluar, 
-		jurnal.jurnal_id, jurnal.tanggal, jurnal.pert_ke, jurnal.kd_materi, jurnal.absen_mulai,
+		$select = "jadwal.jadwal_id, jadwal.hari, jadwal.jam_masuk, jadwal.jam_keluar, 
+		jurnal.jurnal_id, jurnal.tanggal, jurnal.pert_ke, jurnal.kd_materi, jurnal.absen_mulai, jurnal.absen_selesai,
 		jurnal.jumlah_siswa, jurnal.jumlah_hadir, jurnal.jumlah_alpha, jurnal.jumlah_izin, 
 		jurnal.jumlah_sakit, jurnal.pembahasan, jurnal.status, jurnal.catatan_kbm, 
-		guru.guru_kode, mapel.nama_mapel, kelas.nama_kelas, ruangan.kode_ruang
+		guru.guru_kode, mapel.nama_mapel, kelas.kelas_id, kelas.nama_kelas, ruangan.kode_ruang, ruangan.nama_ruang
 		";
 
 		$query = $this->db->select($select)->from('jurnal')
@@ -120,13 +120,14 @@ class JadwalModel extends CI_Model
 		return $result;
 	}
 
-	public function getKelasJadwal($mapel)
+	public function getKelasJadwal($mapel, $guru)
 	{
 		$select = "jadwal.jumlah_jam, jadwal.mapel_id, jadwal.kelas_id, kelas.nama_kelas";
 		$query = $this->db->select($select)
 			->from('kelas')
 			->join('jadwal', 'jadwal.kelas_id=kelas.kelas_id')
 			->where('mapel_id', $mapel)
+			->where('jadwal.guru_kode', $guru)
 			->group_by('nama_kelas')
 			->get();
 		$result = $query->result();
@@ -167,7 +168,7 @@ class JadwalModel extends CI_Model
 		return $result;
 	}
 
-	public function get_infolimit($limit) 
+	public function get_infolimit($limit)
 	{
 		$this->db->select("*");
 		$this->db->from('info_akademik');
@@ -203,5 +204,13 @@ class JadwalModel extends CI_Model
 			->get();
 		$result = $query->result();
 		return $result;
+	}
+
+	public function get_absen_siswa($id, $status)
+	{
+		$this->db->where('jurnal_id', $id);
+		$this->db->where('status', $status);
+		$query = $this->db->get('absensi');
+		return $query->num_rows();
 	}
 }

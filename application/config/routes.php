@@ -61,27 +61,47 @@ $route['login'] = 'Auth/Auth/login';
 $route['auth/logout'] = 'Auth/Auth/logout';
 
 // routing siswa
+# 1. Routing jadwal
 $route['siswa/jadwal'] = 'Siswa/Jadwal';
 $route['siswa/jadwal/(:any)'] = 'Siswa/Jadwal/$1';
 $route['siswa/jadwal/(:any)/(:any)'] = 'Siswa/Jadwal/$1/$2';
 $route['siswa/jadwal/(:any)/(:any)/(:any)'] = 'Siswa/Jadwal/$1/$2/$3';
 
+# 2. Routing profile
 $route['siswa/profile'] = 'Siswa/Profile';
 $route['siswa/profile/(:any)'] = 'Siswa/Profile/$1';
 $route['siswa/profile/(:any)/(:any)'] = 'Siswa/Profile/$1/$2';
 $route['siswa/profile/(:any)/(:any)/(:any)'] = 'Siswa/Profile/$1/$2/$3';
 
+# 3. Routing ruang materi pembelajaran
 $route['siswa/materi'] = 'Siswa/Materi';
 $route['siswa/materi/(:any)'] = 'Siswa/Materi/$1';
 $route['siswa/materi/(:any)/(:any)'] = 'Siswa/Materi/$1/$2';
 $route['siswa/materi/(:any)/(:any)/(:any)'] = 'Siswa/Materi/$1/$2/$3';
 
+# 4. Routing ruang absensi
 $route['siswa/absensi'] = 'Siswa/Absen';
 $route['siswa/absensi/(:any)'] = 'Siswa/Absen/$1';
 $route['siswa/absensi/(:any)/(:any)'] = 'Siswa/Absen/$1/$2';
 $route['siswa/absensi/(:any)/(:any)/(:any)'] = 'Siswa/Absen/$1/$2/$3';
-// routing guru
-$route['guru/dashboard'] = 'Guru/Dashboard/index';
+
+# 5. Routing ruang tugas
+$route['siswa/ruang_tugas'] = 'Siswa/Tugas';
+$route['siswa/ruang_tugas/(:any)'] = 'Siswa/Tugas/$1';
+$route['siswa/ruang_tugas/(:any)/(:any)'] = 'Siswa/Tugas/$1/$2';
+$route['siswa/ruang_tugas/(:any)/(:any)/(:any)'] = 'Siswa/Tugas/$1/$2/$3';
+
+# 6. Routing ruang evaluasi
+$route['siswa/evaluasi'] = 'Siswa/Evaluasi';
+$route['siswa/evaluasi/(:any)'] = 'Siswa/Evaluasi/$1';
+$route['siswa/evaluasi/(:any)/(:any)'] = 'Siswa/Evaluasi/$1/$2';
+$route['siswa/evaluasi/(:any)/(:any)/(:any)'] = 'Siswa/Evaluasi/$1/$2/$3';
+
+# 7. Routing ruang diskusi
+$route['siswa/diskusi'] = 'Siswa/Diskusi';
+$route['siswa/diskusi/(:any)'] = 'Siswa/Diskusi/$1';
+$route['siswa/diskusi/(:any)/(:any)'] = 'Siswa/Diskusi/$1/$2';
+$route['siswa/diskusi/(:any)/(:any)/(:any)'] = 'Siswa/Diskusi/$1/$2/$3';
 
 // routing wali kelas
 $route['wali-kelas/dashboard'] = 'WaliKelas/Dashboard/index';
@@ -138,3 +158,22 @@ $route['master/info/tahun-ajar'] = 'Admin/Info/tahunPembelajaran';
 $route['master/info/(:any)'] = 'Admin/Info/$1';
 $route['master/info/(:any)/(:any)'] = 'Admin/Info/$1/$2';
 $route['master/info/(:any)/(:any)/(:any)'] = 'Admin/Info/$1/$2/$3';
+
+// routing guru
+$route['guru/dashboard'] = 'Guru/Dashboard/index';
+
+$route['guru/profile'] = 'Guru/Profile';
+$route['guru/profile/(:any)'] = 'Guru/Profile/$1';
+$route['guru/profile/(:any)/(:any)'] = 'Guru/Profile/$1/$2';
+
+$route['guru/data'] = 'Guru/Data';
+$route['guru/data/(:any)'] = 'Guru/Data/$1';
+$route['guru/data/(:any)/(:any)'] = 'Guru/Data/$1/$2';
+$route['guru/data/(:any)/kelas/(:any)'] = 'Guru/Data/$1/$2';
+
+$route['guru/pembelajaran'] = 'Guru/Pembelajaran';
+$route['guru/pembelajaran/(:any)'] = 'Guru/Pembelajaran/$1';
+$route['guru/pembelajaran/(:any)/(:any)'] = 'Guru/Pembelajaran/$1/$2';
+
+
+$route['guru/export/absensi_siswa/(:any)'] = 'Guru/Docs/export_absensi_siswa/$1';

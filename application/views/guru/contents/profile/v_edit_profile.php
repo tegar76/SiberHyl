@@ -5,14 +5,14 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title"><?= $title?></h3>
+				<h3 class="page-title"><?= $title ?></h3>
 			</div>
 		</div>
 		<div class="d-flex align-items-center">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
-					<li class="breadcrumb-item text-muted active"><a href="<?= base_url('Guru/Dashboard') ?>" class="text-muted">Dashboard</a></li>
-					<li class="breadcrumb-item text-muted active"><a href="<?= base_url('Guru/Profile') ?>" class="text-muted">Profile</a></li>
+					<li class="breadcrumb-item text-muted active"><a href="<?= base_url('guru/dashboard') ?>" class="text-muted">Dashboard</a></li>
+					<li class="breadcrumb-item text-muted active"><a href="<?= base_url('guru/profile') ?>" class="text-muted">Profile</a></li>
 					<li class="breadcrumb-item text-muted active" aria-current="page">Edit Profile</li>
 				</ol>
 			</nav>
@@ -39,12 +39,16 @@
 			<div class="col-12">
 				<div class="mt-4 activity">
 					<div class="profile">
-					<?= form_open_multipart('') ?>
+						<?= form_open_multipart('guru/profile/process_update_profile') ?>
 						<div class="row">
 							<div class="col-md-4 text-center mb-3">
 								<div class="card shadow py-4">
 									<div class="img-photo justify-content-center">
-										<img class="mx-auto d-block rounded-circle" src="<?= base_url('assets/siswa/img/profile-default-siswa.png')?>" width="150" id="imagePreview" alt="">
+										<?php if ($guru->guru_foto == 'default_profile.png') : ?>
+											<img class="mx-auto d-block rounded-circle" src="<?= base_url('assets/siswa/img/profile-default-siswa.png') ?>" width="150" alt="Foto Profile guru">
+										<?php else : ?>
+											<img class="mx-auto d-block rounded-circle" src="<?= base_url('storage/guru/profile/' . $guru->guru_foto) ?>" width="150" alt="<?= $guru->guru_nama ?>">
+										<?php endif ?>
 									</div>
 									<div class="line">
 										<hr>
@@ -52,7 +56,7 @@
 									<div class="edit">
 										<h6>Edit Foto Profile</h6>
 										<!-- actual upload which is hidden -->
-										<input type="file" id="imgInp" name="image" hidden />
+										<input type="file" id="imgInp" name="image_teacher" hidden />
 
 										<label for="imgInp">Pilih File</label>
 										<div class="max-file">
@@ -67,16 +71,16 @@
 							<div class="col-md-8">
 								<div class="card shadow px-3 pt-3">
 									<div class="form-group">
-										<label for="">Kode Guru</label>
-										<input type="text" class="form-control" value="AZ" readonly>
+										<label for="kode_guru">Kode Guru</label>
+										<input name="kode_guru" id="kode_guru" type="text" class="form-control" value="<?= $guru->guru_kode ?>" readonly>
 									</div>
 									<div class="form-group">
-										<label for="">Nama</label>
-										<input type="text" class="form-control" value="Sulton Akbar Pamungkas, S. Pd." readonly>
+										<label for="nama_guru">Nama</label>
+										<input name="nama_guru" id="nama_guru" type="text" class="form-control" value="<?= $guru->guru_nama ?>" readonly>
 									</div>
 									<div class="form-group">
-										<label for="">NIP/NUPTK</label>
-										<input type="text" class="form-control" value="63763763737474774" readonly>
+										<label for="nip_guru">NIP/NUPTK</label>
+										<input name="nip_guru" id="nip_guru" type="text" class="form-control" value="<?= $guru->guru_nip ?>" readonly>
 									</div>
 									<div class="button-action mb-5 mt-2">
 										<button type="submit" class="btn btn-sm btn-success rounded mr-2 px-4">Update</button>
@@ -85,7 +89,7 @@
 								</div>
 							</div>
 						</div>
-					<?= form_close() ?>
+						<?= form_close() ?>
 					</div>
 				</div>
 			</div>
@@ -96,15 +100,13 @@
 	</div>
 
 
-<script>
-	// js upload file foto
-	const actualBtn = document.getElementById('imgInp');
+	<script>
+		// js upload file foto
+		const actualBtn = document.getElementById('imgInp');
 
-	const fileChosen = document.getElementById('file-chosen');
+		const fileChosen = document.getElementById('file-chosen');
 
-	actualBtn.addEventListener('change', function() {
-		fileChosen.textContent = this.files[0].name
-	})
-</script>
-
-
+		actualBtn.addEventListener('change', function() {
+			fileChosen.textContent = this.files[0].name
+		})
+	</script>

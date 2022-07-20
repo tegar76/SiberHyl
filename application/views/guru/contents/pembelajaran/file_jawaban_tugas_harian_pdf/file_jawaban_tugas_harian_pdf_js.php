@@ -73,7 +73,7 @@
         kind: OptionKind.VIEWER + OptionKind.PREFERENCE
     },
     defaultUrl: {
-        value: "<?= base_url('storage/pdf-test/test.pdf') ?>",
+        value: "<?= $file_tugas ?>",
         kind: OptionKind.VIEWER
     },
     defaultZoomValue: {

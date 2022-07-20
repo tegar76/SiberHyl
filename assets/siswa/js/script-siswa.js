@@ -74,3 +74,90 @@ $(document).ready(function () {
 		});
 	});
 });
+
+$(document).ready(function () {
+	var csrfName = $(".csrf_token").attr("name");
+	var csrfHash = $(".csrf_token").val();
+	var jadwal_id = $(".jadwal-id").val();
+	$(".submit-assignment").click(function (e) {
+		var tugas_id = $(e.target).attr("tugas-id");
+		$.ajax({
+			type: "GET",
+			url: BASEURL + "siswa/ruang_tugas/check_deadline?id=" + tugas_id,
+			dataType: "json",
+			success: function (response) {
+				if (response.success == true) {
+					$('[data-toggle="popover"]')
+						.popover({
+							placement: "bottom",
+							html: true,
+							title:
+								'<span class="title-popover mr-3">Metode Pengumpulan</span> <a href="#" class="close" data-dismiss="alert">&times;</a>',
+							content:
+								'<div class="media"><a href="' +
+								BASEURL +
+								"siswa/ruang_tugas/pengumpulan_online/" +
+								tugas_id +
+								'" class="btn btn-sm btn-outline-primary mr-3">Online</a><a role="button" class="btn-langsung btn btn-sm btn-outline-success" id="btn-confirm">Langsung</a></div>',
+						})
+						.on("show.bs.popover", function (e) {
+							$(document).on("click", ".popover .btn-langsung", function () {
+								var dataJson = {
+									[csrfName]: csrfHash,
+									tugas_id: tugas_id,
+								};
+								Swal.fire({
+									title: "Pengumpulan Tugas Langsung",
+									text: "Apakah tugas sudah di serahkan ke guru pengajar?",
+									icon: "question",
+									showDenyButton: true,
+									confirmButtonText: "Sudah",
+									confirmButtonColor: "#50B54A",
+									denyButtonText: `Belum`,
+									denyButtonColor: "#6C757D",
+								}).then((result) => {
+									if (result.isConfirmed) {
+										$.ajax({
+											type: "POST",
+											url: BASEURL + "siswa/ruang_tugas/pengumpulan_langsung",
+											data: dataJson,
+											success: function (data) {
+												swal
+													.fire({
+														icon: "success",
+														title: "Berhasil",
+														text: data.message,
+														html: "<strong>Berhasil,</strong> Silahkan cek pada tab <strong>nilai tugas !</strong>",
+													})
+													.then((result) => {
+														if (result.value) {
+															window.location =
+																BASEURL +
+																"siswa/ruang_tugas/tugas_harian/" +
+																jadwal_id;
+														}
+													});
+											},
+										});
+									} else if (result.isDenied) {
+										$("#result").html(
+											'<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Dibatalkan,</strong> Mohon serahkan pengerjaan tugas dahulu ke guru pengajar</div>'
+										);
+									}
+								});
+							});
+						});
+				} else {
+					swal.fire(
+						"Anda Terlambat!",
+						"Waktu Pengumpulan Tugas Latihan Telah Berakhir",
+						"warning"
+					);
+				}
+			},
+		});
+	});
+	$(document).on("click", ".popover .close", function () {
+		$(this).parents(".popover").popover("hide");
+	});
+});

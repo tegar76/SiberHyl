@@ -104,6 +104,7 @@ class Auth extends CI_Controller
 						'kode' => $guru->guru_kode,
 						'backToken' => crypt($guru->guru_nama, ''),
 						'level'		=> 'guru',
+						'id_' => $guru->guru_id,
 						'logged_in'	=> true
 					];
 					$this->session->set_userdata($sess_);
@@ -118,6 +119,7 @@ class Auth extends CI_Controller
 						'kode' => $guru->guru_kode,
 						'backToken' => crypt($guru->guru_nama, ''),
 						'level'		=> 'wali-kelas',
+						'id_' => $guru->guru_id,
 						'logged_in'	=> true
 					];
 					$this->session->set_userdata($sess_);

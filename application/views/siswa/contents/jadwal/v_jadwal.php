@@ -43,7 +43,7 @@
 						<div class="jadwal">
 							<div class="mapel">
 								<div class="d-flex justify-content-lg-start">
-									<img role="button" src="<?= ($nowStudying->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/perfil.png') : base_url('storage/guru/profile/' . $nowStudying->guru_foto) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $nowStudying->guru_nama ?>">
+									<img role="button" src="<?= ($nowStudying->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $nowStudying->guru_foto) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $nowStudying->guru_nama ?>">
 									<div class="mapel w-100">
 										<center>
 											<p><?= $nowStudying->nama_mapel ?></p>
@@ -77,7 +77,7 @@
 								<div class="card px-3 pt-3">
 									<div class="row">
 										<div class="section-menu col">
-											<a href="<?= base_url('Siswa/Materi') ?>">
+											<a href="<?= base_url('siswa/materi/ruang_materi/' . $this->secure->encrypt_url($nowStudying->jadwal_id)) ?>">
 												<div class="menu">
 													<div class="card  py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/materi-pem.png') ?>" alt="">
@@ -87,7 +87,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="<?= base_url('Siswa/tugas') ?>">
+											<a href="<?= base_url('siswa/ruang_tugas/tugas_harian/' . $this->secure->encrypt_url($nowStudying->jadwal_id)) ?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
@@ -97,7 +97,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="<?= base_url('Siswa/Evaluasi') ?>">
+											<a href="<?= base_url('siswa/evaluasi/ruang_evaluasi/' . $this->secure->encrypt_url($nowStudying->jadwal_id)) ?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -107,7 +107,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="<?= base_url('Siswa/Diskusi') ?>">
+											<a href="<?= base_url('siswa/diskusi/ruang_diskusi/' . $this->secure->encrypt_url($nowStudying->jadwal_id)) ?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<span class="badge-info-ds"> </span>
@@ -165,7 +165,7 @@
 								<div class="mapel mt-3" data-toggle="collapse" href="#collapse-<?= $study->jadwal_id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $study->jadwal_id ?>">
 									<div class="card shadow p-2">
 										<div class="d-flex justify-content-lg-start">
-											<img role="button" src="<?= ($study->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/perfil.png') : base_url('storage/guru/profile/' . $study->guru_foto) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $study->guru_nama ?>">
+											<img role="button" src="<?= ($study->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $study->guru_foto) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $study->guru_nama ?>">
 											<div class="mapel w-100">
 												<center>
 													<p><?= $study->nama_mapel ?></p>
@@ -210,7 +210,7 @@
 									<div class="card px-3 pt-3">
 										<div class="row">
 											<div class="section-menu col">
-												<a href="<?= base_url('siswa/materi/ruang_materi/' . $study->kode_jadwal) ?>">
+												<a href="<?= base_url('siswa/materi/ruang_materi/' . $this->secure->encrypt_url($study->jadwal_id)) ?>">
 													<div class="menu">
 														<div class="card  py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/materi-pem.png') ?>" alt="">
@@ -220,7 +220,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="<?= base_url('Siswa/tugas') ?>">
+												<a href="<?= base_url('siswa/ruang_tugas/tugas_harian/' . $this->secure->encrypt_url($study->jadwal_id)) ?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
@@ -230,7 +230,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="<?= base_url('Siswa/Evaluasi') ?>">
+												<a href="<?= base_url('siswa/evaluasi/ruang_evaluasi/' . $this->secure->encrypt_url($study->jadwal_id)) ?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -240,7 +240,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="<?= base_url('Siswa/Diskusi') ?>">
+												<a href="<?= base_url('siswa/diskusi/ruang_diskusi/' . $this->secure->encrypt_url($study->jadwal_id)) ?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<span class="badge-info-ds"> </span>
