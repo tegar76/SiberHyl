@@ -45,6 +45,10 @@
 									<table class="table">
 										<tbody>
 											<tr class="table-borderless">
+												<th scope="row" class="col-sm-8">Nama Admin</th>
+												<td>Lorem ipsum dolor sit amet.</td>
+											</tr>
+											<tr>
 												<th scope="row" class="col-sm-8">Kelas</th>
 												<td>XI TKRO 1,XI TKRO 2,XI TKRO 3,XI TKRO 4,XI TKRO 5 </td>
 											</tr>
@@ -102,7 +106,7 @@
 									</table>
 									<hr class="mt-n3">
 									<div class="button-action d-flex mb-3 mt-2">
-										<a href="<?= base_url('Guru/data/dataMateriAdmin') ?>" class="btn btn-sm btn-primary rounded border-0 ml-3 px-3">Kembali</a>
+										<a href="<?= base_url('Guru/data/dataMateriAdmin') ?>" class="btn btn-sm btn-primary bg-blue rounded border-0 ml-3 px-3">Kembali</a>
 									</div>
 								</div>
 							</div>

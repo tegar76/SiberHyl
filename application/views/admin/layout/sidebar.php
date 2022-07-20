@@ -35,7 +35,10 @@
 								<a href="<?= base_url('master/jadwal/pratinjauJadwal') ?>" class="sidebar-link <?= ($this->uri->segment(3) == "pratinjauJadwal") ? 'active' : '' ?>"><span class="hide-menu"> Pratinjau</span></a>
 							</li>
 							<li class="sidebar-item">
-								<a href="<?= base_url('master/materi') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materi/") ? 'active' : '' ?>"><span class="hide-menu"> Materi</span></a>
+								<a href="<?= base_url('master/materi') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materi/") ? 'active' : '' ?>"><span class="hide-menu"> Materi (Admin)</span></a>
+							</li>
+							<li class="sidebar-item">
+								<a href="<?= base_url('Admin/Materi/materiGuru') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materiGuru/") ? 'active' : '' ?>"><span class="hide-menu"> Materi (Guru)</span></a>
 							</li>
 					</ul>
 				</li>
@@ -51,7 +54,17 @@
 				</li>
 				<li class="list-divider"></li>
 				<li class="sidebar-item <?= ($this->uri->segment(2) == "jurnal") ? 'selected' : '' ?>"> <a class="sidebar-link sidebar-link" href="<?= base_url('master/jurnal') ?>" aria-expanded="false"><i data-feather="book" class="feather-icon"></i><span class="hide-menu">Jurnal Materi</span></a></li>
+				<li class="list-divider"></li>
+				<li class="sidebar-item <?= ($this->uri->segment(2) == "") ? 'selected' : '' ?>"> 
+					<a class="sidebar-link sidebar-link" href="<?= base_url('Admin/SuperVisor') ?>" aria-expanded="false">
+						<i data-feather="airplay" class="feather-icon"></i>
+						<span class="hide-menu">Super Visor
+						</span>
+					</a>
+				</li>
+				<li class="list-divider"></li>
 				<li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#" id="logout" aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span class="hide-menu">Logout</span></a></li>
+				<li class="list-divider"></li>
 			</ul>
 		</nav>
 		<!-- End Sidebar navigation -->

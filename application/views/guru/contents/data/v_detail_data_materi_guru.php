@@ -102,7 +102,7 @@
 									</table>
 									<hr class="mt-n3">
 									<div class="button-action d-flex mb-3 mt-2">
-										<a href="<?= base_url('Guru/data/dataMateriGuru') ?>" class="btn btn-sm btn-primary rounded border-0 ml-3 px-3">Kembali</a>
+										<a href="<?= base_url('Guru/data/dataMateriGuru') ?>" class="btn btn-sm btn-primary bg-blue rounded border-0 ml-3 px-3">Kembali</a>
 									</div>
 								</div>
 							</div>

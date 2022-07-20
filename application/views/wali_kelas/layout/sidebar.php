@@ -25,11 +25,25 @@
 					</a>
 				</li><li class="list-divider"></li>
 				<li class="sidebar-item <?= ($this->uri->segment(2) == "") ? 'selected' : '' ?>"> 
-					<a class="sidebar-link sidebar-link" href="<?= base_url('Guru/InfoAkademik') ?>" aria-expanded="false">
+					<a class="sidebar-link sidebar-link" href="<?= base_url('WaliKelas/Konsultasi') ?>" aria-expanded="false">
 						<i data-feather="message-square" class="feather-icon"></i>
-						<span class="hide-menu">Konsultasi</span>
+						<span class="hide-menu">Konsultasi
+								<!-- notif badge -->
+								<span class="badge-info-ak"></span>
+						</span>
 					</a>
-				</li><li class="list-divider"></li>
+				</li>
+				<li class="list-divider"></li>
+				<li class="sidebar-item <?= ($this->uri->segment(2) == "") ? 'selected' : '' ?>"> 
+					<a class="sidebar-link sidebar-link" href="<?= base_url('WaliKelas/InfoAkademik') ?>" aria-expanded="false">
+						<i data-feather="info" class="feather-icon"></i>
+						<span class="hide-menu">Info Akademik
+							<!-- notif badge -->
+							<span class="badge-info-ak"></span>
+						</span>
+					</a>
+				</li>
+				<li class="list-divider"></li>
 				<li class="sidebar-item <?= ($this->uri->segment(2) == "") ? 'selected' : '' ?>"> 
 					<a class="sidebar-link sidebar-link" href="<?= base_url('Guru/InfoAkademik') ?>" aria-expanded="false">
 						<i data-feather="log-out" class="feather-icon"></i>

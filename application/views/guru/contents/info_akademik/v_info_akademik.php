@@ -1,6 +1,3 @@
-<!-- import data tables -->
-<?php include APPPATH.'../assets/DataTables/import/import.php';?>
-
 <div class="page-wrapper">
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->

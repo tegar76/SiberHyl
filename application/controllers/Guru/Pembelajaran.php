@@ -99,6 +99,13 @@ class Pembelajaran extends CI_Controller
 		$data['content'] = 'guru/contents/pembelajaran/v_detail_tugas_harian';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
+	
+	public function editDeadlineTugasHarian()
+	{
+		$data['title'] = 'Edit Deadline Tugas Harian';
+		$data['content'] = 'guru/contents/pembelajaran/v_edit_deadline_tugas_harian';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
 
 	public function fileSoalTugasHarian()
 	{

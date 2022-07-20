@@ -41,15 +41,17 @@
 								<thead>
 									<tr>
 										<th style="width:4%">No</th>
+										<th style="width:14%">Nama Admin</th>
 										<th style="width:20%;">Kelas</th>
-										<th style="width:25%;">Mapel</th>
-										<th style="width:18%;">Dibuat</th>
+										<th style="width:22%;">Mapel</th>
+										<th style="width:16%;">Dibuat</th>
 										<th style="width:4%;">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
 										<tr>
 											<td>1</td>
+											<td>Lutfi Haryati.S,Pd</td>
 											<td>XI TKRO 1,XI TKRO 2,XI TKRO 3,XI TKRO 4,XI TKRO 5</td>
 											<td>Panel Sasis Dan Pemindahan Tenaga KR</td>
 											<td>10 - 05 - 2022 07 : 00 WIB </td>

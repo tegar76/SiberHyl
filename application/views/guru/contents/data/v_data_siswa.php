@@ -32,18 +32,6 @@
 		<!-- *************************************************************** -->
 
 		<div class="row">
-			<div class="form-group col-md-4">
-				<div class="input-group mb-2">
-					<select id="change-kelas" class="form-control">
-						<option value="">Pilih Kelas</option>
-						<option value="">XI TKR0 1</option>
-						<option value="">XI MM 1</option>
-					</select>
-					<div class="input-group-prepend">
-						<div class="input-group-text"><i class="fas fa-filter"></i></div>
-					</div>
-				</div>
-			</div>
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
@@ -83,7 +71,7 @@
 										<td>Tidak Aktif</td>
 										<td class="text-danger">Offline</td>
 										<td>
-											<a href="<?= base_url('Guru/Data/detailSiswa')?>" class="btn btn-sm btn-primary bg-blue border-0 rounded"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+											<a href="<?= base_url('WaliKelas/Data/detailSiswa')?>" class="btn btn-sm btn-primary bg-blue border-0 rounded"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 										</td>
 									</tr>
 									<tr>
@@ -96,7 +84,7 @@
 										<td>Aktif</td>
 										<td class="text-success">Online</td>
 										<td>
-											<a href="<?= base_url('Guru/Data/detailSiswa')?>" class="btn btn-sm btn-primary bg-blue border-0  rounded"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+											<a href="<?= base_url('WaliKelas/Data/detailSiswa')?>" class="btn btn-sm btn-primary bg-blue border-0  rounded"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 										</td>
 									</tr>
 								</tbody>

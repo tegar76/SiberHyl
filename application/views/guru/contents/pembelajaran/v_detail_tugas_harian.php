@@ -99,7 +99,7 @@
 				<div class="card">
 					<div class="card-body">
 						<h6 class="card-title">
-							Detail Tugas 
+							Detail Tugas Harian
 						</h6>
 						<div class="mt-4 activity">
 							<table class="table-responsive table-bordered" style="width:100%">
@@ -112,7 +112,7 @@
 										<th style="width:14%;">Deskripsi Tugas</th>
 										<th style="width:6%;">Pertemuan Ke-</th>
 										<th style="width:6%;">Deadline</th>
-										<th style="width:2%;">File</th>
+										<th style="width:6%;">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -123,8 +123,11 @@
 										<td>Tugas Pertemuan 1</td>
 										<td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus adipisci hic vero repellendus deleniti sed eum necessitatibus nemo doloremque labore.</td>
 										<td>1</td>
-										<td>01 - 05 - 2022</td>
-										<td><a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileSoalTugasHarian')?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+										<td>20-05-2022 08 : 00 WIB</td>
+										<td>
+											<a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileSoalTugasHarian')?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="detail"></i></a>
+											<a href="<?= base_url('Guru/Pembelajaran/editDeadlineTugasHarian')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+										</td>
 									</tr>
 								</tbody>
 							</table>
