@@ -531,4 +531,15 @@ class SiswaModel extends CI_Model
 		endif;
 		return $result;
 	}
+
+	public function add_forum_diskusi()
+	{
+		$data = array(
+			'pembuat' => htmlspecialchars($this->input->post('nama_siswa', true)),
+			'judul' => htmlspecialchars($this->input->post('judul_diskusi', true)),
+			'deskripsi' => htmlspecialchars($this->input->post('deskripsi', true)),
+			'jadwal_id' => htmlspecialchars($this->input->post('jadwal_id', true)),
+		);
+		$this->db->insert('forum_diskusi', $data);
+	}
 }

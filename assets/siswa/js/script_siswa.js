@@ -227,4 +227,63 @@ $(document).ready(function () {
 		});
 	});
 });
-// });
+
+$(document).ready(function () {
+	load_comment();
+	$("#submit-diskusi").submit(function (e) {
+		e.preventDefault();
+		var form = this;
+		var formdata = new FormData(form);
+		$.ajax({
+			url: BASEURL + "siswa/diskusi/submit_diskusi",
+			type: "POST",
+			processData: false,
+			contentType: false,
+			data: formdata,
+			dataType: "json",
+			success: function (response) {
+				// $("#info-data").html(response.messages).attr("disabled", false).show();
+				if (response.success == true) {
+					// $(".text-danger").remove();
+					// swal.fire({
+					// 	icon: "success",
+					// 	title: "Komentar Berhasil",
+					// 	text: "Penambahan komentar sudah berhasil !",
+					// 	showConfirmButton: false,
+					// 	timer: 1500,
+					// });
+					$("#diskusi_id").val("0");
+					load_comment();
+					form.reset();
+				}
+			},
+			error: function () {
+				swal.fire(
+					"Penambahan Komentar Gagal",
+					"Ada Kesalahan Saat penambahan Komentar!",
+					"error"
+				);
+			},
+		});
+	});
+
+	function load_comment() {
+		var id_forum = $("#id_forum").val();
+		$.ajax({
+			type: "GET",
+			url: BASEURL + "siswa/diskusi/get_komentar?id=" + id_forum,
+			dataType: "json",
+			success: function (reponse) {
+				$("#display_forum").html(reponse);
+			},
+			error: function (reponse) {
+				console.log(reponse.responseText);
+			},
+		});
+	}
+	$(document).on("click", ".balas", function (e) {
+		var id_forum = $(e.target).attr("id-komen");
+		$("#diskusi_id").val(id_forum);
+		$("#text-message").focus();
+	});
+});

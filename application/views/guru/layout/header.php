@@ -91,3 +91,4 @@
 			};
 		});
 	</script>
+	<?php include APPPATH . '../assets/DataTables/import/import.php'; ?>

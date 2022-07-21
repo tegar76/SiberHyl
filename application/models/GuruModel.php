@@ -388,4 +388,75 @@ class GuruModel extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	// diskusi
+	public function get_diskusi($id_jadwal)
+	{
+		$this->db->where('jadwal_id', $id_jadwal);
+		$this->db->order_by('create_time', 'DESC');
+		$query = $this->db->get('forum_diskusi');
+		return $query->result();
+	}
+
+	public function get_reply_forum($id)
+	{
+		$this->db->where('forum_diskusi_id', $id);
+		$this->db->order_by('create_time', 'DESC');
+		$query = $this->db->get('diskusi_siswa');
+		return $query->result();
+	}
+
+	public function add_forum_diskusi()
+	{
+		$data = array(
+			'pembuat' => htmlspecialchars($this->input->post('nama_guru', true)),
+			'judul' => htmlspecialchars($this->input->post('judul_diskusi', true)),
+			'deskripsi' => htmlspecialchars($this->input->post('deskripsi', true)),
+			'jadwal_id' => htmlspecialchars($this->input->post('jadwal_id', true)),
+		);
+		$this->db->insert('forum_diskusi', $data);
+	}
+
+	public function get_siswa($id)
+	{
+		$this->db->select('siswa.siswa_id, siswa.siswa_nama, siswa.siswa_nis, siswa.siswa_foto');
+		$this->db->from('siswa');
+		$this->db->where('siswa.siswa_nis', $id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
+	public function get_guru($id)
+	{
+		$this->db->select('guru.guru_id, guru.guru_kode, guru_nip, guru.guru_nama, guru.guru_foto');
+		$this->db->from('guru');
+		$this->db->where('guru_nip', $id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
+	public function get_reply_diskusi($where = null, $order, $desc)
+	{
+		$this->db->select(
+			'diskusi.diskusi_siswa_id, diskusi.parent_diskusi_id, diskusi.message, diskusi.create_time, diskusi.user_id,
+			forum.forum_diskusi_id, forum.pembuat, forum.judul, forum.deskripsi, forum.jadwal_id'
+		);
+		$this->db->from('diskusi_siswa as diskusi');
+		$this->db->join('forum_diskusi as forum', 'forum.forum_diskusi_id=diskusi.forum_diskusi_id');
+		$this->db->where($where);
+		$this->db->order_by('diskusi.' . $order, $desc);
+		$query = $this->db->get();
+		return $query;
+	}
+
+	public function insert_diskusi()
+	{
+		$data = array(
+			'parent_diskusi_id' => $this->input->post('parent_diskusi_id', true),
+			'user_id' => $this->input->post('user_id', true),
+			'message' => $this->input->post('message', true),
+			'forum_diskusi_id' => $this->input->post('forum_diskusi_id', true),
+		);
+		$this->db->insert('diskusi_siswa', $data);
+	}
 }
