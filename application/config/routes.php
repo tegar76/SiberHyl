@@ -93,7 +93,7 @@ $route['siswa/ruang_tugas/(:any)/(:any)/(:any)'] = 'Siswa/Tugas/$1/$2/$3';
 
 # 6. Routing ruang evaluasi
 $route['siswa/evaluasi'] = 'Siswa/Evaluasi';
-$route['siswa/evaluasi/(:any)'] = 'Siswa/Evaluasi/$1';
+$route['siswa/evaluasi/(:any)'] = 'Siswa/Evaluasi/index/$1';
 $route['siswa/evaluasi/(:any)/(:any)'] = 'Siswa/Evaluasi/$1/$2';
 $route['siswa/evaluasi/(:any)/(:any)/(:any)'] = 'Siswa/Evaluasi/$1/$2/$3';
 

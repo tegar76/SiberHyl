@@ -12,6 +12,6 @@
 <section class="container section section__height px-0">
 
     <div class="card shadow p-2 bg-gray-300 my-5">
-        <img src="<?= base_url('storage/img-test/jawaban.jpg')?>" class="img-responsive d-block mx-auto" alt="Responsive image" style="width: 100%;">
+        <img src="<?= $file_ ?>" class="img-responsive d-block mx-auto" alt="Responsive image" style="width: 100%;">
     </div>
 

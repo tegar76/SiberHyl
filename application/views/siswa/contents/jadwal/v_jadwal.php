@@ -97,7 +97,7 @@
 											</a>
 										</div>
 										<div class="section-menu col">
-											<a href="<?= base_url('siswa/evaluasi/ruang_evaluasi/' . $this->secure->encrypt_url($nowStudying->jadwal_id)) ?>">
+											<a href="<?= base_url('siswa/evaluasi/' . $this->secure->encrypt_url($nowStudying->jadwal_id)) ?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 														<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -230,7 +230,7 @@
 												</a>
 											</div>
 											<div class="section-menu col">
-												<a href="<?= base_url('siswa/evaluasi/ruang_evaluasi/' . $this->secure->encrypt_url($study->jadwal_id)) ?>">
+												<a href="<?= base_url('siswa/evaluasi/' . $this->secure->encrypt_url($study->jadwal_id)) ?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
 															<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">

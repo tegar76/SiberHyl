@@ -1,36 +1,41 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/siswa/css/import_style_content.php';?>
+<?php include APPPATH . '../assets/siswa/css/import_style_content.php'; ?>
 
-<section class="container section section__height"> 
+<section class="container section section__height">
 
-<form action="">
-    <div class="title-form mb-1">
-        Form Pengumpulan Evaluasi (Online)
-    </div>
-    <div class="sub-title-form mb-3">
-        Panel Sasis Dan Pemindahan Tenaga KR - Evaluasi Ke- 3
-    </div>
-    <label for="">Nama</label>
-    <div class="input-group mb-3">
-        <input type="text" name="" id="" class="form-control" value="ADIT PRAYITNO" readonly>
-    </div>
-    <label for="">Kelas</label>
-    <div class="input-group mb-3">
-        <input type="text" name="" id="" class="form-control" value="XI TKRO 1" readonly>
-    </div>
-    <label for="">Upload File</label>
-    <div class="input-group mb-3">
-        <input type="file" name="" id="" class="form-control">
-    </div>
-    <div class="input-group mb-4">
-        <p>* Upload Tugas   dengan ukuran File max 2mb</p>
-    </div>
-    <div class="btn-aksi mb-4">
-        <button type="submit" class="btn btn-sm btn-info rounded px-4 py-1 mr-3">Kirim</button>
-        <button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-1">Reset</button>
-    </div>
-    <div class="ketentuan pb-4">
-        <h6>Ketentuan :</h6>
-        <p>Tugas dikumpulkan bisa dalam bentuk PDF, PNG, JPG, JPEG. Jika penulisan  tugas dengan metode tulis tangan dan jawabannya lebih 1 (satu) lembar. Maka untuk pengumpulan tugas di <span class="app-name">SiberHyl</span> dianjurkan untuk menggabungkan jawaban-jawaban  tersebut menajadi 1 (satu) file terlebih dahulu. <span class="panduan"><a target="_blank" href="<?= base_url('Siswa/Evaluasi/panduanPengumpulanEvaluasi')?>">Berikut Panduannya</a></span></p>
-    </div>
-</form>
+	<?= form_open_multipart('siswa/evaluasi/pengumpulan_online/' . $this->secure->encrypt_url($evaluasi->evaluasi_id)) ?>
+	<input type="hidden" name="nis" value="<?= $siswa->siswa_nis ?>	">
+	<input type="hidden" name="evaluasi_id" value="<?= $evaluasi->evaluasi_id ?>">
+	<div class="title-form mb-1">
+		Form Pengumpulan Evaluasi (Online)
+	</div>
+	<div class="sub-title-form mb-3">
+		<?= $evaluasi->nama_mapel ?> - Tugas <?= $evaluasi->evaluasi_ke . ' (' . $evaluasi->judul . ')' ?>
+	</div>
+	<label for="nama">Nama</label>
+	<div class="input-group mb-3">
+		<input type="text" name="nama" id="nama" class="form-control" value="<?= $siswa->siswa_nama ?>" readonly>
+	</div>
+	<label for="kelas">Kelas</label>
+	<div class="input-group mb-3">
+		<input type="text" name="kelas" id="kelas" class="form-control" value="<?= $siswa->nama_kelas ?>" readonly>
+	</div>
+	<label for="file_evaluasi">Upload File</label>
+	<div class="input-group mb-3">
+		<input type="file" name="file_evaluasi" id="file_evaluasi" class="form-control <?= (form_error('file_evaluasi')) ? 'is-invalid' : '' ?>">
+		<div id="file_evaluasiFeedback" class="invalid-feedback">
+			<?= form_error('file_evaluasi', '<div class="text-danger">', '</div>') ?>
+		</div>
+	</div>
+	<div class="input-group mb-4">
+		<p>* Upload Tugas dengan ukuran File max 2mb</p>
+	</div>
+	<div class="btn-aksi mb-4">
+		<button type="submit" class="btn btn-sm btn-info rounded px-4 py-1 mr-3">Kirim</button>
+		<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-1">Reset</button>
+	</div>
+	<div class="ketentuan pb-4">
+		<h6>Ketentuan :</h6>
+		<p>Tugas dikumpulkan bisa dalam bentuk PDF, PNG, JPG, JPEG. Jika penulisan tugas dengan metode tulis tangan dan jawabannya lebih 1 (satu) lembar. Maka untuk pengumpulan tugas di <span class="app-name">SiberHyl</span> dianjurkan untuk menggabungkan jawaban-jawaban tersebut menajadi 1 (satu) file terlebih dahulu. <span class="panduan"><a target="_blank" href="<?= base_url('siswa/evaluasi/panduan_pengumpulan_evaluasi/view') ?>">Berikut Panduannya</a></span></p>
+	</div>
+	<?= form_close() ?>

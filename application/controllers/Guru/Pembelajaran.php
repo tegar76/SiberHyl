@@ -434,75 +434,80 @@ class Pembelajaran extends CI_Controller
 
 	public function tambah_tugas_harian($id = false)
 	{
-		$jadwal = $this->jadwal->getJadwalHariIni(['jadwal_id' => $id])->row();
-		if ($jadwal) {
-			$data['guru'] = $this->userGuru;
-			$data['title'] = 'Tambah Tugas Harian';
-			$data['content'] = 'guru/contents/pembelajaran/v_tambah_tugas_harian';
-			$data['jadwal'] = $jadwal;
-			$this->form_validation->set_rules([
-				[
-					'field' => 'judul_tugas',
-					'label' => 'Judul Tugas Harian',
-					'rules' => 'trim|required|xss_clean|min_length[8]',
-					'errors' => [
-						'required' => '{field} harus diisi',
-						'xss_clean' => 'cek kembali pada {field}',
-						'min_length' => '{field} terlalu pendek (minimal 8 karakter)'
-					]
-				],
-				[
-					'field' => 'pertemuan',
-					'label' => 'Pertemuan Tugas',
-					'rules' => 'trim|required|xss_clean',
-					'errors' => [
-						'required' => '{field} harus diisi',
-						'xss_clean' => 'cek kembali pada {field}',
-					]
-				],
-				[
-					'field' => 'deskripsi',
-					'label' => 'Deskripsi Tugas',
-					'rules' => 'trim|required|xss_clean|min_length[18]',
-					'errors' => [
-						'required' => '{field} harus diisi',
-						'xss_clean' => 'cek kembali pada {field}',
-						'min_length' => '{field} terlalu pendek (minimal 18 karakter)'
-					]
-				],
-				[
-					'field' => 'tanggal',
-					'label' => 'Tanggal Deadline',
-					'rules' => 'trim|required|xss_clean',
-					'errors' => [
-						'required' => '{field} harus diisi',
-						'xss_clean' => 'cek kembali pada {field}',
-					]
-				],
-				[
-					'field' => 'jam',
-					'label' => 'Jam Deadline',
-					'rules' => 'trim|required|xss_clean',
-					'errors' => [
-						'required' => '{field} harus diisi',
-						'xss_clean' => 'cek kembali pada {field}',
-					]
-				],
-			]);
-			$this->form_validation->set_rules('file_tugas', 'File Tugas Harian', 'callback_file_tugas_check');
+		$data['guru'] = $this->userGuru;
+		if ($id) {
+			$jadwal = $this->jadwal->getJadwalHariIni(['jadwal_id' => $id])->row();
+			if ($jadwal) {
+				$data['title'] = 'Tambah Tugas Harian';
+				$data['content'] = 'guru/contents/pembelajaran/v_tambah_tugas_harian';
+				$data['jadwal'] = $jadwal;
+				$this->form_validation->set_rules([
+					[
+						'field' => 'judul_tugas',
+						'label' => 'Judul Tugas Harian',
+						'rules' => 'trim|required|xss_clean|min_length[8]',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}',
+							'min_length' => '{field} terlalu pendek (minimal 8 karakter)'
+						]
+					],
+					[
+						'field' => 'pertemuan',
+						'label' => 'Pertemuan Tugas',
+						'rules' => 'trim|required|xss_clean',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}',
+						]
+					],
+					[
+						'field' => 'deskripsi',
+						'label' => 'Deskripsi Tugas',
+						'rules' => 'trim|required|xss_clean|min_length[18]',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}',
+							'min_length' => '{field} terlalu pendek (minimal 18 karakter)'
+						]
+					],
+					[
+						'field' => 'tanggal',
+						'label' => 'Tanggal Deadline',
+						'rules' => 'trim|required|xss_clean',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}',
+						]
+					],
+					[
+						'field' => 'jam',
+						'label' => 'Jam Deadline',
+						'rules' => 'trim|required|xss_clean',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}',
+						]
+					],
+				]);
+				$this->form_validation->set_rules('file_tugas', 'File Tugas Harian', 'callback_file_tugas_check');
 
-			if ($this->form_validation->run() == false) {
-				$this->load->view('guru/layout/wrapper', $data, FALSE);
-			} else {
-				$check = $this->guru->check_tugas_exist();
-				if ($check > 0) {
-					$this->message('Tugas Pertemuan ' . $_POST['pertemuan'] . 'telah tersedia', 'tugas pertemuan ini telah tersedia, masukan kembali', 'error');
+				if ($this->form_validation->run() == false) {
 					$this->load->view('guru/layout/wrapper', $data, FALSE);
 				} else {
-					$this->guru->tambah_tugas_harian();
-					$this->message('Berhasil', 'Tugas Pertemuan ' . $_POST['pertemuan'] . 'berhasil ditambahkan', 'success');
-					return redirect('guru/pembelajaran/tugas_harian/' . $_POST['jadwal_id']);
+					$check = $this->guru->check_tugas_exist();
+					if ($check > 0) {
+						$this->message('Tugas Pertemuan ' . $_POST['pertemuan'] . 'telah tersedia', 'tugas pertemuan ini telah tersedia, masukan kembali', 'error');
+						$this->load->view('guru/layout/wrapper', $data, FALSE);
+					} else {
+						$this->guru->tambah_tugas_harian();
+						$this->message('Berhasil', 'Tugas Pertemuan ' . $_POST['pertemuan'] . 'berhasil ditambahkan', 'success');
+						return redirect('guru/pembelajaran/tugas_harian/' . $_POST['jadwal_id']);
+					}
 				}
+			} else {
+				$data['title'] = 'Not Found';
+				$data['content'] = 'guru/contents/eror/v_not_found';
 			}
 		} else {
 			$data['title'] = 'Not Found';
@@ -513,8 +518,8 @@ class Pembelajaran extends CI_Controller
 
 	public function detail_tugas_harian($id = false)
 	{
+		$data['guru'] = $this->userGuru;
 		if ($id) {
-			$data['guru'] = $this->userGuru;
 			$data['detail'] = $this->guru->get_detail_tugas($id);
 			$siswa = $this->db->get_where('siswa', ['kelas_id' => $data['detail']->kelas_id])->result();
 			$jumlah_siswa = count($siswa);
@@ -588,7 +593,7 @@ class Pembelajaran extends CI_Controller
 
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
-	
+
 	public function editDeadlineTugasHarian()
 	{
 		$data['title'] = 'Edit Deadline Tugas Harian';
@@ -720,12 +725,34 @@ class Pembelajaran extends CI_Controller
 		return redirect('guru/pembelajaran/detail_tugas_harian/' . $tugas_id);
 	}
 
-	public function evaluasi()
+	public function evaluasi($id = false)
 	{
 		$data['guru'] = $this->userGuru;
-
-		$data['title'] = 'Evaluasi';
-		$data['content'] = 'guru/contents/pembelajaran/v_evaluasi';
+		if ($id) {
+			$data['title'] = 'Evaluasi';
+			$data['content'] = 'guru/contents/pembelajaran/v_evaluasi';
+			$data['tahun_ajar'] = $this->tahun_ajar;
+			$eval = $this->guru->get_info_evaluasi($id);
+			$data['evaluasi'] = array();
+			if ($eval) {
+				$no = 1;
+				foreach ($eval as $row => $value) {
+					$eval_['nomor'] = $no++;
+					$eval_['mapel'] = $value->nama_mapel;
+					$eval_['judul'] = $value->judul;
+					$eval_['tanggal'] = date('d-m-Y', strtotime($value->tanggal));
+					$eval_['ke_'] = $value->evaluasi_ke;
+					$eval_['create'] = date('d-m-Y H:i', strtotime($value->create_time)) . " WIB";
+					$eval_['id_'] = $value->evaluasi_id;
+					$result[] = $eval_;
+				}
+				$data['evaluasi'] = $result;
+				$data['info'] = $this->guru->get_jadwal_mapel($id);
+			}
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
+		}
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
@@ -747,61 +774,323 @@ class Pembelajaran extends CI_Controller
 		$this->load->view('guru/contents/pembelajaran/v_cetak_report_evaluasi', $data, FALSE);
 	}
 
-	public function tambahEvaluasi()
+	public function tambah_evaluasi($id = false)
 	{
 		$data['guru'] = $this->userGuru;
-
-		$data['title'] = 'Tambah Evaluasi';
-		$data['content'] = 'guru/contents/pembelajaran/v_tambah_evaluasi';
+		if ($id) {
+			$jadwal = $this->jadwal->getJadwalHariIni(['jadwal_id' => $id])->row();
+			if ($jadwal) {
+				$data['title'] = 'Tambah Evaluasi';
+				$data['content'] = 'guru/contents/pembelajaran/v_tambah_evaluasi';
+				$data['jadwal'] = $jadwal;
+				$this->form_validation->set_rules([
+					[
+						'field' => 'judul',
+						'label' => 'Judul Evaluasi',
+						'rules' => 'trim|required|xss_clean|min_length[8]',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}',
+							'min_length' => '{field} terlalu pendek (minimal 8 karakter)'
+						]
+					],
+					[
+						'field' => 'jenis',
+						'label' => 'Jenis Soal Evaluasi',
+						'rules' => 'trim|required|xss_clean',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}',
+						]
+					],
+					[
+						'field' => 'tanggal',
+						'label' => 'Tanggal',
+						'rules' => 'trim|required|xss_clean',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}',
+						]
+					],
+					[
+						'field' => 'evaluasi_ke',
+						'label' => 'Evaluasi ke-',
+						'rules' => 'trim|required|xss_clean',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}',
+						]
+					],
+				]);
+				$this->form_validation->set_rules('file_evaluasi', 'File Tugas Harian', 'callback_file_evaluasi_check');
+				if ($this->form_validation->run() == false) {
+					$this->load->view('guru/layout/wrapper', $data, FALSE);
+				} else {
+					$check = $this->guru->check_evaluasi_exist();
+					if ($check > 0) {
+						$this->message('Evaluasi ' . $_POST['evaluasi_ke'] . ' telah tersedia', 'Evaluasi ini telah tersedia, masukan kembali', 'error');
+						$this->load->view('guru/layout/wrapper', $data, FALSE);
+					} else {
+						$this->guru->tambah_evaluasi();
+						$this->message('Berhasil', 'Evaluasi ' . $_POST['evaluasi_ke'] . 'berhasil ditambahkan', 'success');
+						return redirect('guru/pembelajaran/evaluasi/' . $_POST['jadwal_id']);
+					}
+				}
+			} else {
+				$data['title'] = 'Not Found';
+				$data['content'] = 'guru/contents/eror/v_not_found';
+			}
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
+		}
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
-	public function detailEvaluasi()
+	public function file_evaluasi_check()
+	{
+		if (empty($_FILES['file_evaluasi']['name'])) {
+			$this->form_validation->set_message('file_evaluasi_check', 'Anda harus upload {field}!');
+			return false;
+		}
+		return true;
+	}
+
+	public function detail_evaluasi($id)
 	{
 		$data['guru'] = $this->userGuru;
+		if ($id) {
+			$data['title'] = 'Detail Evaluasi';
+			$data['content'] = 'guru/contents/pembelajaran/v_detail_evaluasi';
+			$data['detail'] = $this->guru->get_detail_evaluasi($id);
+			$siswa = $this->db->get_where('siswa', ['kelas_id' => $data['detail']->kelas_id])->result();
+			$no = 1;
+			foreach ($siswa as $row => $value) {
+				$eval_ = $this->db->get_where('evaluasi_siswa', [
+					'siswa_nis' => $value->siswa_nis,
+					'evaluasi_id' => $data['detail']->evaluasi_id,
+				])->row();
+				$result['nomor'] = $no++;
+				$result['nis'] = $value->siswa_nis;
+				$result['nama'] = $value->siswa_nama;
+				if (empty($eval_)) {
+					$result['upload_time'] = '-';
+					$result['metode_upload'] = '-';
+					$result['file'] = '-';
+					$result['komentar'] = '-';
+					$result['nilai'] = '-';
+					$result['keterangan'] = 'Belum Mengerjakan';
+					$result['evaluasi_siswa_id'] = 0;
+					$result['evaluasi_id'] = $data['detail']->evaluasi_id;
+				} else {
+					$result['upload_time'] = date('d-m-Y H:i', strtotime($eval_->time_upload)) . " WIB";
+					$result['metode_upload'] = $eval_->metode;
+					if ($eval_->file_type == '.pdf') {
+						$icon_file = base_url('assets/admin/icons/pdf.png');
+					} else {
+						$icon_file = base_url('assets/admin/icons/img.png');
+					}
 
-		$data['title'] = 'Detail Evaluasi';
-		$data['content'] = 'guru/contents/pembelajaran/v_detail_evaluasi';
+					if ($eval_->status == 0) {
+						$status = 'Tidak Mengerjakan';
+					} elseif ($eval_->status == 1) {
+						$status = 'Sudah Mengerjakan';
+					} elseif ($eval_->status == 2) {
+						$status = 'Sudah Dinilai';
+					} elseif ($eval_->status == 3) {
+						$status = 'Menunggu Konfirmasi';
+					} elseif ($eval_->status == 4) {
+						$status = 'Sudah Diterima dan Sudah Dinilai';
+					}
+
+					$result['file_evaluasi_siswa'] = '-';
+					if ($eval_->file_evaluasi_siswa) {
+						$result['file'] = '<a target="_blank" href="' . base_url('guru/pembelajaran/file_evaluasi_siswa/' . $eval_->evaluasi_siswa_id) . '"><img src="' . $icon_file . '" alt=""></a>';
+					}
+					$result['komentar'] = $eval_->komentar;
+					$result['nilai'] = $eval_->nilai;
+					$result['keterangan'] = $status;
+					$result['evaluasi_siswa_id'] = $eval_->evaluasi_siswa_id;
+					$result['evaluasi_id'] = $data['detail']->evaluasi_id;
+				}
+				$rekap_eval[] = $result;
+			}
+			$data['rekap'] = $rekap_eval;
+			$jumlah_siswa = count($siswa);
+			$sm = $this->guru->get_count_evaluasi($id, 'SM');
+			$sn = $this->guru->get_count_evaluasi($id, 'SN');
+			$bm = $jumlah_siswa - ($sm + $sn);
+			$data['jumlah_siswa'] = $jumlah_siswa;
+			$data['tahun_ajar'] = $this->tahun_ajar;
+			$data['sm'] = $sm;
+			$data['sn'] = $sn;
+			$data['bm'] = $bm;
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
+		}
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
-	public function fileSoalEvaluasi()
+	public function file_soal_evaluasi($file = false)
 	{
-		$data['guru'] = $this->userGuru;
-
-		$data['title'] = 'File Soal Evaluasi';
-		$this->load->view('guru/contents/pembelajaran/file_soal_evaluasi_pdf/v_file_soal_evaluasi_pdf', $data, FALSE);
+		if ($file) {
+			$data['guru'] = $this->userGuru;
+			$data['title'] = 'File Soal Evaluasi';
+			$data['soal'] = base_url('storage/guru/evaluasi/') . $file;
+			$this->load->view('guru/contents/pembelajaran/file_soal_evaluasi_pdf/v_file_soal_evaluasi_pdf', $data, FALSE);
+		}
 	}
 
-	public function fileJawabanEvaluasiImg()
+	public function file_evaluasi_siswa($id = false)
 	{
-		$data['guru'] = $this->userGuru;
-
-		$data['title'] = 'File Jawaban Evaluasi Img';
-		$this->load->view('guru/contents/pembelajaran/v_file_jawaban_evaluasi_img', $data, FALSE);
+		if ($id) {
+			$evaluasi = $this->db->get_where('evaluasi_siswa', ['evaluasi_siswa_id' => $id])->row();
+			if ($evaluasi->file_type == '.pdf') {
+				$data['title'] = 'File Jawaban Evaluasi Pdf';
+				$data['file_tugas'] = base_url('storage/siswa/evaluasi/') . $evaluasi->file_evaluasi_siswa;
+				$this->load->view('guru/contents/pembelajaran/file_jawaban_tugas_harian_pdf/v_file_jawaban_tugas_harian_pdf', $data, FALSE);
+			} else {
+				$data['title'] = 'File Jawaban Evaluasi Img';
+				$data['file_tugas'] = base_url('storage/siswa/evaluasi/') . $evaluasi->file_evaluasi_siswa;
+				$this->load->view('guru/contents/pembelajaran/v_file_jawaban_tugas_harian_img', $data, FALSE);
+			}
+		}
 	}
 
-	public function fileJawabanEvaluasiPdf()
-	{
-		$data['title'] = 'File Jawaban Evaluasi Pdf';
-		$this->load->view('guru/contents/pembelajaran/file_jawaban_evaluasi_pdf/v_file_jawaban_evaluasi_pdf', $data, FALSE);
-	}
-
-	public function nilaiEvaluasi()
+	public function nilai_evaluasi()
 	{
 		$data['guru'] = $this->userGuru;
-
+		$status = $this->input->get('status');
+		if ($status == 'sm') {
+			$evaluasiId = $this->input->get('evaluasi');
+			$result = $this->guru->get_nilai_evaluasi($evaluasiId);
+			$jadwalId = $this->db->select('jadwal_id')->where('evaluasi_id', $result['evaluasi_id'])->get('evaluasi')->row();
+			$nilai = array(
+				'id' => $result['evaluasi_siswa_id'],
+				'nis' => $result['siswa_nis'],
+				'nama' => $result['siswa_nama'],
+				'upload' => date('d-m-Y H:i', strtotime($result['time_upload'])) . " WIB",
+				'metode' => $result['metode'],
+				'file' => $result['file_evaluasi_siswa'],
+				'file_ext' => $result['file_type'],
+				'nilai' => $result['nilai'],
+				'komentar' => $result['komentar'],
+				'evaluasi_id' => $result['evaluasi_id'],
+				'jadwal_id' => $jadwalId->jadwal_id
+			);
+			$data['result'] = $nilai;
+		} elseif ($status == 'bm') {
+			$evaluasi_id = $this->input->get('evaluasi');
+			$nis = $this->input->get('nis');
+			$siswa = $this->db->select('siswa_nis, siswa_nama')->where('siswa_nis', $nis)->get('siswa')->row_array();
+			$jadwalId = $this->db->select('jadwal_id')->where('evaluasi_id', $evaluasi_id)->get('evaluasi')->row();
+			$nilai = array(
+				'id' => 0,
+				'nis' => $siswa['siswa_nis'],
+				'nama' => $siswa['siswa_nama'],
+				'upload' => null,
+				'metode' => null,
+				'file' => null,
+				'file_ext' => null,
+				'nilai' => 0,
+				'komentar' => null,
+				'evaluasi_id' => $evaluasi_id,
+				'jadwal_id' => $jadwalId->jadwal_id
+			);
+			$data['result'] = $nilai;
+		}
 		$data['title'] = 'Nilai Evaluasi';
 		$data['content'] = 'guru/contents/pembelajaran/v_nilai_evaluasi';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
-	public function editJamEvaluasi()
+	public function process_nilai_evaluasi()
+	{
+		$evaluasi_siswa_id = $this->input->post('evaluasi_siswa_id', true);
+		$evaluasi_id = $this->input->post('evaluasi_id', true);
+		if ($evaluasi_siswa_id == 0) {
+			$data = array(
+				'time_upload' => date('Y-m-d H:i:s'),
+				'metode' => '-',
+				'nilai' => htmlspecialchars($this->input->post('nilai')),
+				'komentar' => htmlspecialchars($this->input->post('komentar')),
+				'siswa_nis' => htmlspecialchars($this->input->post('nis')),
+				'status' => 2,
+				'evaluasi_id' => $evaluasi_id
+			);
+			$this->db->insert('evaluasi_siswa', $data);
+		} else {
+			$metode = $this->input->post('metode', true);
+			if ($metode == 'online') {
+				$status = 2;
+			} elseif ($metode == 'langsung') {
+				$status = 4;
+			}
+			$data = array(
+				'nilai' => htmlspecialchars($this->input->post('nilai')),
+				'komentar' => htmlspecialchars($this->input->post('komentar')),
+				'status' => $status
+			);
+			$this->db->set($data);
+			$this->db->where('evaluasi_siswa_id', $evaluasi_siswa_id);
+			$this->db->update('evaluasi_siswa');
+		}
+		$this->message('Berhasil', 'Evaluasi dari siswa ' . $_POST['nama'] . ' telah dinilai', 'success');
+		return redirect('guru/pembelajaran/detail_evaluasi/' . $evaluasi_id);
+	}
+	public function set_deadline_evaluasi($id = false)
 	{
 		$data['guru'] = $this->userGuru;
-
-		$data['title'] = 'Edit Jam Evaluasi';
-		$data['content'] = 'guru/contents/pembelajaran/v_edit_jam_evaluasi';
+		if ($id) {
+			$data['eval'] = $this->guru->get_detail_evaluasi($id);
+			$data['title'] = 'Edit Jam Evaluasi';
+			$data['content'] = 'guru/contents/pembelajaran/v_edit_jam_evaluasi';
+			$this->form_validation->set_rules([
+				[
+					'field' => 'mulai',
+					'label' => 'Waktu Mulai',
+					'rules' => 'trim|required|xss_clean',
+					'errors' => [
+						'required' => '{field} harus diisi',
+						'xss_clean' => 'cek kembali pada {field}'
+					]
+				],
+				[
+					'field' => 'selesai',
+					'label' => 'Waktu Selesai',
+					'rules' => 'trim|required|xss_clean',
+					'errors' => [
+						'required' => '{field} harus diisi',
+						'xss_clean' => 'cek kembali pada {field}'
+					]
+				],
+				[
+					'field' => 'deadline',
+					'label' => 'Batas Pengumpulan',
+					'rules' => 'trim|required|xss_clean',
+					'errors' => [
+						'required' => '{field} harus diisi',
+						'xss_clean' => 'cek kembali pada {field}'
+					]
+				]
+			]);
+			if ($this->form_validation->run() == FALSE) {
+				$this->load->view('guru/layout/wrapper', $data, FALSE);
+			} else {
+				$set_time = array(
+					'waktu_mulai' => htmlspecialchars($this->input->post('mulai', true)),
+					'waktu_selesai' => htmlspecialchars($this->input->post('selesai', true)),
+					'waktu_deadline' => htmlspecialchars($this->input->post('deadline', true))
+				);
+				$this->db->update('evaluasi', $set_time, ['evaluasi_id' => $this->input->post('evaluasi_id', true)]);
+				$this->message('Berhasil', 'Waktu Evaluasi berhasil di setting', 'success');
+				return redirect('guru/pembelajaran/detail_evaluasi/' . $id);
+			}
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
+		}
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
@@ -832,12 +1121,18 @@ class Pembelajaran extends CI_Controller
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
-	public function jurnal()
+	public function jurnal($id = false)
 	{
 		$data['guru'] = $this->userGuru;
-
-		$data['title'] = 'Jurnal Materi';
-		$data['content'] = 'guru/contents/pembelajaran/v_jurnal_materi';
+		if ($id) {
+			$data['jurnal'] = $this->guru->get_jurnal_materi($id);
+			$data['tahun_ajar'] = $this->tahun_ajar;
+			$data['title'] = 'Jurnal Materi';
+			$data['content'] = 'guru/contents/pembelajaran/v_jurnal_materi';
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
+		}
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
@@ -847,6 +1142,7 @@ class Pembelajaran extends CI_Controller
 
 		$data['title'] = 'Detail Jurnal Materi';
 		$data['content'] = 'guru/contents/pembelajaran/v_form_cetak_report_jurnal_materi';
+
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
@@ -856,12 +1152,18 @@ class Pembelajaran extends CI_Controller
 		$this->load->view('guru/contents/pembelajaran/v_cetak_report_	jurnal_materi', $data, FALSE);
 	}
 
-	public function detailJurnalMateri()
+	public function detail_jurnal_materi($id = false)
 	{
 		$data['guru'] = $this->userGuru;
-
-		$data['title'] = 'Detail Jurnal Materi';
-		$data['content'] = 'guru/contents/pembelajaran/v_detail_jurnal_materi';
+		if ($id) {
+			$data['jurnal'] = $this->jadwal->getJurnalWhere(['jurnal_id' => $id]);
+			$data['tahun_ajar'] = $this->tahun_ajar;
+			$data['title'] = 'Detail Jurnal Materi';
+			$data['content'] = 'guru/contents/pembelajaran/v_detail_jurnal_materi';
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
+		}
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 

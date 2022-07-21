@@ -435,4 +435,100 @@ class SiswaModel extends CI_Model
 		endif;
 		return $result;
 	}
+
+	public function get_mapel($id)
+	{
+		$this->db->select('mapel.mapel_id, mapel.nama_mapel, jadwal.jadwal_id');
+		$this->db->from('mapel');
+		$this->db->join('jadwal', 'jadwal.mapel_id=mapel.mapel_id');
+		$this->db->where('jadwal_id', $id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
+	public function get_evaluasi($jadwalId)
+	{
+		$query = $this->db->where('jadwal_id', $jadwalId)->get('evaluasi');
+		return $query->result();
+	}
+
+	public function get_evaluasi_siswa($nis, $id)
+	{
+		$this->db->where('siswa_nis', $nis);
+		$this->db->where('evaluasi_id', $id);
+		$query = $this->db->get('evaluasi_siswa');
+		return $query->row();
+	}
+
+	public function get_info_evaluasi($id)
+	{
+		$this->db->select("evaluasi.evaluasi_id, evaluasi.evaluasi_ke, evaluasi.judul, jadwal.jadwal_id, mapel.nama_mapel");
+		$this->db->from('evaluasi');
+		$this->db->join('jadwal', 'jadwal.jadwal_id=evaluasi.jadwal_id', 'left');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left');
+		$this->db->where('evaluasi.evaluasi_id', $id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
+	public function process_evaluasi()
+	{
+		if ($_FILES['file_evaluasi']['name']) :
+			$conf['upload_path']   = './storage/siswa/evaluasi';
+			$conf['allowed_types'] = 'pdf|jpg|png|jpeg';
+			$conf['max_size']      = 2000;
+			$conf['overwrite']     = TRUE;
+			$conf['encrypt_name'] = TRUE;
+			$this->load->library('upload', $conf);
+			$this->upload->initialize($conf);
+			$_FILES['file']['name']		= $_FILES['file_evaluasi']['name'];
+			$_FILES['file']['type'] 	= $_FILES['file_evaluasi']['type'];
+			$_FILES['file']['tmp_name'] = $_FILES['file_evaluasi']['tmp_name'];
+			$_FILES['file']['error'] 	= $_FILES['file_evaluasi']['error'];
+			$_FILES['file']['size'] 	= $_FILES['file_evaluasi']['size'];
+			$this->check_storage_siswa('evaluasi');
+			if (!$this->upload->do_upload('file_evaluasi')) {
+				if (!$this->check_storage_siswa('evaluasi')) {
+					rmdir('/storage/siswa/evaluasi');
+				}
+				$result = array(
+					'status' => false,
+					'errors' => $this->upload->display_errors('<span>', '</span>')
+				);
+			} else {
+				$upload = $this->upload->data();
+				if ($upload['file_ext'] == '.pdf') {
+					$file_ = array(
+						'file_evaluasi_siswa' => $upload['file_name'],
+						'file_type' => $upload['file_ext'],
+						'file_size' => $upload['file_size']
+					);
+					$this->db->set($file_);
+				} else {
+					$resolution = ['width' => 500, 'height' => 500];
+					$this->compreesImage('evaluasi', $upload['file_name'], $resolution);
+					$file_ = array(
+						'file_evaluasi_siswa' => $upload['file_name'],
+						'file_type' => $upload['file_ext'],
+						'file_size' => $upload['file_size']
+					);
+					$this->db->set($file_);
+				}
+				$desc = array(
+					'time_upload' => date('Y-m-d H:i:s'),
+					'metode' => 'online',
+					'status' => 1,
+					'siswa_nis' => $this->input->post('nis', true),
+					'evaluasi_id' => $this->input->post('evaluasi_id', true)
+				);
+				$this->db->set($desc);
+				$this->db->insert('evaluasi_siswa');
+			}
+			$result = array(
+				'status' => true,
+				'errors' => ''
+			);
+		endif;
+		return $result;
+	}
 }

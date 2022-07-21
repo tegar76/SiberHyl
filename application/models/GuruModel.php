@@ -170,35 +170,16 @@ class GuruModel extends CI_Model
 			$conf['max_size']      = 2000;
 			$conf['overwrite']     = TRUE;
 			$conf['encrypt_name'] = TRUE;
-
 			$this->load->library('upload', $conf);
 			$this->upload->initialize($conf);
-
 			$_FILES['file']['name']		= $_FILES['file_tugas']['name'];
 			$_FILES['file']['type'] 	= $_FILES['file_tugas']['type'];
 			$_FILES['file']['tmp_name'] = $_FILES['file_tugas']['tmp_name'];
 			$_FILES['file']['error'] 	= $_FILES['file_tugas']['error'];
 			$_FILES['file']['size'] 	= $_FILES['file_tugas']['size'];
-
-			# cek apakah direktori upload file soal tugas sudah tersedia
-			if (!is_dir('storage')) :
-				mkdir('./storage', 0777, true);
-			endif;
-
-			$dir_exist = true;
-			if (!is_dir('storage/guru')) :
-				mkdir('./storage/guru', 0777, true);
-				$dir_exist = false; // dir not exist
-			endif;
-
-			if (!is_dir('storage/guru/tugas_harian')) :
-				mkdir('./storage/guru/tugas_harian', 0777, true);
-				$dir_exist = false; // dir not exist
-			endif;
-			# end
-
+			$this->check_storage_guru('tugas_harian');
 			if (!$this->upload->do_upload('file_tugas')) :
-				if (!$dir_exist) :
+				if (!$this->check_storage_guru('tugas_harian')) :
 					rmdir('/storage/guru/tugas_harian');
 				endif;
 				$response = [
@@ -214,24 +195,24 @@ class GuruModel extends CI_Model
 				);
 				$this->db->set($tugas);
 			endif;
+			$tangaldl = htmlspecialchars($this->input->post('tanggal', true));
+			$jamdl = htmlspecialchars($this->input->post('jam', true));
+			$data = array(
+				'tanggal_tugas' => date('Y-m-d'),
+				'pertemuan'	=> htmlspecialchars($this->input->post('pertemuan', true)),
+				'judul_tugas' => htmlspecialchars($this->input->post('judul_tugas', true)),
+				'deskripsi' => htmlspecialchars($this->input->post('deskripsi', true)),
+				'deadline' => $tangaldl . ' ' . $jamdl,
+				'jadwal_id' =>  htmlspecialchars($this->input->post('jadwal_id', true))
+			);
+			$this->db->set($data);
+			$this->db->insert('tugas');
+			$response = [
+				'success' => true,
+				'errors' => ''
+			];
+			return $response;
 		}
-		$tangaldl = htmlspecialchars($this->input->post('tanggal', true));
-		$jamdl = htmlspecialchars($this->input->post('jam', true));
-		$data = array(
-			'tanggal_tugas' => date('Y-m-d'),
-			'pertemuan'	=> htmlspecialchars($this->input->post('pertemuan', true)),
-			'judul_tugas' => htmlspecialchars($this->input->post('judul_tugas', true)),
-			'deskripsi' => htmlspecialchars($this->input->post('deskripsi', true)),
-			'deadline' => $tangaldl . ' ' . $jamdl,
-			'jadwal_id' =>  htmlspecialchars($this->input->post('jadwal_id', true))
-		);
-		$this->db->set($data);
-		$this->db->insert('tugas');
-		$response = [
-			'success' => true,
-			'errors' => ''
-		];
-		return $response;
 	}
 
 	public function check_tugas_exist()
@@ -264,5 +245,147 @@ class GuruModel extends CI_Model
 		$this->db->where('tugas_siswa_id', $id);
 		$query = $this->db->get();
 		return $query->row_array();
+	}
+
+	public function check_storage_guru($dir)
+	{
+		if (!is_dir('storage')) :
+			mkdir('./storage', 0777, true);
+		endif;
+
+		$dir_exist = true;
+		if (!is_dir('storage/guru')) :
+			mkdir('./storage/guru', 0777, true);
+			$dir_exist = false; // dir not exist
+		endif;
+
+		if (!is_dir('storage/guru/' . $dir)) :
+			mkdir('./storage/guru/' . $dir, 0777, true);
+			$dir_exist = false; // dir not exist
+		endif;
+
+		return $dir_exist;
+	}
+
+	// Evaluasi
+	public function get_info_evaluasi($id_jadwal)
+	{
+		$this->db->select("jadwal.jadwal_id, mapel.nama_mapel, evaluasi.evaluasi_id, evaluasi.judul, 
+		evaluasi.evaluasi_ke, evaluasi.tanggal, evaluasi.create_time, evaluasi.update_time");
+		$this->db->from('evaluasi');
+		$this->db->join('jadwal', 'jadwal.jadwal_id=evaluasi.jadwal_id', 'left');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left');
+		$this->db->where('evaluasi.jadwal_id', $id_jadwal);
+		$query	= $this->db->get();
+		$result = $query->result();
+		return $result;
+	}
+
+	public function check_evaluasi_exist()
+	{
+		$tugas = $this->db->get_where('evaluasi', [
+			'evaluasi_ke' => htmlspecialchars($this->input->post('evaluasi_ke', true)),
+			'jadwal_id' => htmlspecialchars($this->input->post('jadwal_id', true))
+		])->num_rows();
+		return $tugas;
+	}
+
+	public function tambah_evaluasi()
+	{
+		$file_evaluasi = $_FILES['file_evaluasi']['name'];
+		if ($file_evaluasi) {
+			$conf['upload_path']   = './storage/guru/evaluasi';
+			$conf['allowed_types'] = 'pdf';
+			$conf['max_size']      = 2000;
+			$conf['overwrite']     = TRUE;
+			$conf['encrypt_name'] = TRUE;
+			$this->load->library('upload', $conf);
+			$this->upload->initialize($conf);
+			$_FILES['file']['name']		= $_FILES['file_evaluasi']['name'];
+			$_FILES['file']['type'] 	= $_FILES['file_evaluasi']['type'];
+			$_FILES['file']['tmp_name'] = $_FILES['file_evaluasi']['tmp_name'];
+			$_FILES['file']['error'] 	= $_FILES['file_evaluasi']['error'];
+			$_FILES['file']['size'] 	= $_FILES['file_evaluasi']['size'];
+			$this->check_storage_guru('evaluasi');
+			if (!$this->upload->do_upload('file_evaluasi')) :
+				if (!$this->check_storage_guru('evaluasi')) :
+					rmdir('/storage/guru/evaluasi');
+				endif;
+				$response = [
+					'success' => false,
+					'errors' => $this->upload->display_errors('<span>', '</span>')
+				];
+			else :
+				$upload = $this->upload->data();
+				$file_eval = array(
+					'file_evaluasi' => $upload['file_name'],
+					'file_type'	 => $upload['file_ext'],
+					'file_size'  => $upload['file_size']
+				);
+				$this->db->set($file_eval);
+			endif;
+			$data = array(
+				'tanggal' => htmlspecialchars($this->input->post('tanggal', true)),
+				'judul' => htmlspecialchars($this->input->post('judul', true)),
+				'jenis_soal' => htmlspecialchars($this->input->post('jenis', true)),
+				'evaluasi_ke'	=> htmlspecialchars($this->input->post('evaluasi_ke', true)),
+				'jadwal_id' =>  htmlspecialchars($this->input->post('jadwal_id', true))
+			);
+			$this->db->set($data);
+			$this->db->insert('evaluasi');
+			$response = [
+				'success' => true,
+				'errors' => ''
+			];
+			return $response;
+		}
+	}
+
+	public function get_detail_evaluasi($id)
+	{
+		$this->db->select("jadwal.jadwal_id, jadwal.hari, jadwal.kelas_id, kelas.nama_kelas, mapel.nama_mapel,evaluasi.evaluasi_id, 
+		evaluasi.judul, evaluasi.tanggal,  evaluasi.jenis_soal, evaluasi.evaluasi_ke, evaluasi.file_evaluasi, evaluasi.waktu_mulai,
+		evaluasi.waktu_mulai, evaluasi.waktu_selesai, evaluasi.waktu_deadline");
+		$this->db->from('evaluasi');
+		$this->db->join('jadwal', 'jadwal.jadwal_id=evaluasi.jadwal_id', 'left');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left');
+		$this->db->join('kelas', 'kelas.kelas_id=jadwal.kelas_id');
+		$this->db->where('evaluasi_id', $id);
+		$query	= $this->db->get();
+		return $query->row();
+	}
+
+	public function get_count_evaluasi($id, $type)
+	{
+		if ($type == 'SM') {
+			$this->db->where_in('status', [1, 3]);
+		} elseif ($type == 'SN') {
+			$this->db->where_in('status', [2, 4]);
+		}
+		$this->db->where('evaluasi_id', $id);
+		$query = $this->db->get('evaluasi_siswa');
+		return $query->num_rows();
+	}
+
+	public function get_nilai_evaluasi($id)
+	{
+		$this->db->select('evaluasi_siswa.evaluasi_siswa_id, evaluasi_siswa.time_upload, evaluasi_siswa.metode, evaluasi_siswa.file_evaluasi_siswa, evaluasi_siswa.file_type, evaluasi_siswa.nilai, evaluasi_siswa.komentar, evaluasi_siswa.status, evaluasi_siswa.siswa_nis, evaluasi_siswa.evaluasi_id, siswa.siswa_nama');
+		$this->db->from('evaluasi_siswa');
+		$this->db->join('siswa', 'siswa.siswa_nis=evaluasi_siswa.siswa_nis');
+		$this->db->where('evaluasi_siswa_id', $id);
+		$query = $this->db->get();
+		return $query->row_array();
+	}
+
+	public function get_jurnal_materi($id)
+	{
+		$this->db->select("jadwal.jadwal_id, jadwal.hari, mapel.nama_mapel, kelas.nama_kelas, jurnal.tanggal, jurnal.kd_materi, jurnal.pert_ke, jurnal.pembahasan, jurnal.jurnal_id");
+		$this->db->from('jurnal');
+		$this->db->join('jadwal', 'jadwal.jadwal_id=jurnal.jadwal_id');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
+		$this->db->join('kelas', 'kelas.kelas_id=jadwal.kelas_id');
+		$this->db->where('jurnal.jadwal_id', $id);
+		$query = $this->db->get();
+		return $query->result();
 	}
 }
