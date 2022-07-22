@@ -54,3 +54,18 @@ function isAdmin()
 		return redirect('block');
 	}
 }
+
+function isGuruLogin()
+{
+	$CI = &get_instance();
+	$CI->load->model('GuruModel', 'guru', true);
+	$nipGuru = $CI->session->userdata('nip');
+	$userGuru = $CI->guru->getWhere(['guru_nip' => $nipGuru]);
+
+	if (!$CI->session->userdata('logged_in')) {
+		return redirect('login');
+	} elseif (empty($userGuru)) {
+		$CI->session->sess_destroy();
+		return redirect('login');
+	}
+}

@@ -5,14 +5,14 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title"><?= $title?></h3>
+				<h3 class="page-title"><?= $title ?></h3>
 			</div>
 		</div>
 		<div class="d-flex align-items-center">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('WaliKelas/JurnalMateri') ?>" class="text-muted">Jurnal Materi</a></li>
-					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('wali-kelas/jurnal_materi') ?>" class="text-muted">Jurnal Materi</a></li>
+					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 				</ol>
 			</nav>
 		</div>
@@ -42,66 +42,70 @@
 							<table class="table">
 								<tbody>
 									<tr class="table-borderless">
-										<th scope="row" class="col-md-4">Tanggal</th>
-										<td>Lorem ipsum dolor sit amet.</td>
+										<th scope="row" class="col-md-4">Hari, Tanggal</th>
+										<td><?= $jurnal->hari . ', ' . date('d-m-Y', strtotime($jurnal->tanggal)) ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Kode Guru</th>
-										<td>Lorem ipsum dolor sit amet.</td>
+										<td><?= $jurnal->guru_kode ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Mapel</th>
-										<td>Lorem ipsum dolor sit amet.</td>
+										<td><?= $jurnal->nama_mapel ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Jam Pelajaran</th>
-										<td>Lorem ipsum dolor sit amet.</td>
+										<td><?= date('H:i', strtotime($jurnal->jam_masuk)) . ' - ' . date('H:i', strtotime($jurnal->jam_keluar)) ?> WIB</td>
 									</tr>
 									<tr>
 										<th scope="row">Kelas</th>
-										<td>Lorem ipsum dolor sit amet.</td>
+										<td><?= $jurnal->nama_kelas ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Pertemuan Ke-</th>
-										<td>Lorem ipsum dolor sit amet</td>
+										<td><?= $jurnal->pert_ke ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Ruang Kelas</th>
-										<td>Lorem ipsum dolor sit amet</td>
+										<td><?= $jurnal->kode_ruang ?></td>
+									</tr>
+									<tr>
+										<th scope="row">KD Materi</th>
+										<td><?= $jurnal->kd_materi ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Pembahasan</th>
-										<td>Lorem ipsum dolor sit amet</td>
+										<td><?= $jurnal->pembahasan ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Jumlah Siswa</th>
-										<td>Lorem ipsum dolor sit amet</td>
+										<td><?= $jurnal->jumlah_siswa ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Hadir</th>
-										<td>Lorem ipsum dolor sit amet</td>
+										<td><?= $jurnal->jumlah_hadir ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Alpa</th>
-										<td>Lorem ipsum dolor sit amet</td>
+										<td><?= $jurnal->jumlah_alpha ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Izin</th>
-										<td>Lorem ipsum dolor sit amet</td>
+										<td><?= $jurnal->jumlah_izin ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Sakit</th>
-										<td>Lorem ipsum dolor sit amet</td>
+										<td><?= $jurnal->jumlah_sakit ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Catatan</th>
-										<td>Lorem ipsum dolor sit amet</td>
+										<td><?= $jurnal->catatan_kbm ?></td>
 									</tr>
 								</tbody>
 							</table>
 							<hr class="mt-n3">
 							<div class="button-action d-flex mb-3 mt-2">
-								<a href="<?= base_url('WaliKelas/JurnalMateri') ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded ml-3 px-3">Kembali</a>
+								<a href="<?= base_url('wali_kelas/jurnal_materi') ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded ml-3 px-3">Kembali</a>
 							</div>
 						</div>
 					</div>

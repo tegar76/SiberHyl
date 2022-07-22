@@ -103,9 +103,6 @@ $route['siswa/diskusi/(:any)'] = 'Siswa/Diskusi/$1';
 $route['siswa/diskusi/(:any)/(:any)'] = 'Siswa/Diskusi/$1/$2';
 $route['siswa/diskusi/(:any)/(:any)/(:any)'] = 'Siswa/Diskusi/$1/$2/$3';
 
-// routing wali kelas
-$route['wali-kelas/dashboard'] = 'WaliKelas/Dashboard/index';
-
 // routing admin
 $route['authadmin'] = 'Admin/Login';
 $route['authadmin/logout'] = 'Admin/Login/logout';
@@ -177,3 +174,27 @@ $route['guru/pembelajaran/(:any)/(:any)'] = 'Guru/Pembelajaran/$1/$2';
 
 
 $route['guru/export/absensi_siswa/(:any)'] = 'Guru/Docs/export_absensi_siswa/$1';
+
+
+// routing wali kelas
+$route['wali-kelas/dashboard'] = 'WaliKelas/Dashboard/index';
+
+$route['wali-kelas/profile'] = 'WaliKelas/Profile';
+$route['wali-kelas/profile/(:any)'] = 'WaliKelas/Profile/$1';
+$route['wali-kelas/profile/(:any)/(:any)'] = 'WaliKelas/Profile/$1/$2';
+
+$route['wali-kelas/data'] = 'WaliKelas/Data';
+$route['wali-kelas/data/(:any)'] = 'WaliKelas/Data/$1';
+$route['wali-kelas/data/(:any)/(:any)'] = 'WaliKelas/Data/$1/$2';
+
+$route['wali-kelas/jurnal_materi'] = 'WaliKelas/JurnalMateri';
+$route['wali-kelas/jurnal_materi/(:any)'] = 'WaliKelas/JurnalMateri/$1';
+$route['wali-kelas/jurnal_materi/(:any)/(:any)'] = 'WaliKelas/JurnalMateri/$1/$2';
+
+$route['wali-kelas/konsultasi'] = 'WaliKelas/Konsultasi';
+$route['wali-kelas/konsultasi/(:any)'] = 'WaliKelas/Konsultasi/$1';
+$route['wali-kelas/konsultasi/(:any)/(:any)'] = 'WaliKelas/Konsultasi/$1/$2';
+
+$route['wali-kelas/info_akademik'] = 'WaliKelas/InfoAkademik';
+$route['wali-kelas/info_akademik/(:any)'] = 'WaliKelas/InfoAkademik/$1';
+$route['wali-kelas/info_akademik/(:any)/(:any)'] = 'WaliKelas/InfoAkademik/$1/$2';

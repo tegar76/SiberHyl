@@ -11,8 +11,8 @@
 		<div class="d-flex align-items-center">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
-					<li class="breadcrumb-item text-muted active"><a href="<?= base_url('guru/dashboard') ?>" class="text-muted">Dashboard</a></li>
-					<li class="breadcrumb-item text-muted active"><a href="<?= base_url('guru/profile') ?>" class="text-muted">Profile</a></li>
+					<li class="breadcrumb-item text-muted active"><a href="<?= base_url($this->session->userdata('level') . '/dashboard') ?>" class="text-muted">Dashboard</a></li>
+					<li class="breadcrumb-item text-muted active"><a href="<?= base_url($this->session->userdata('level') . '/profile') ?>" class="text-muted">Profile</a></li>
 					<li class="breadcrumb-item text-muted active" aria-current="page">Edit Profile</li>
 				</ol>
 			</nav>
@@ -39,7 +39,7 @@
 			<div class="col-12">
 				<div class="mt-4 activity">
 					<div class="profile">
-						<?= form_open_multipart('guru/profile/process_update_profile') ?>
+						<?= form_open_multipart($this->session->userdata('level') . '/profile/process_update_profile') ?>
 						<div class="row">
 							<div class="col-md-4 text-center mb-3">
 								<div class="card shadow py-4">

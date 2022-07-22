@@ -75,6 +75,7 @@ class Data extends CI_Controller
 
 	public function dataMateriGuru()
 	{
+		$data['guru'] = $this->userGuru;
 		$data['title'] = 'Data Materi (Guru)';
 		$data['content'] = 'guru/contents/data/v_data_materi_guru';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -82,6 +83,7 @@ class Data extends CI_Controller
 
 	public function detailDataMateriGuru()
 	{
+		$data['guru'] = $this->userGuru;
 		$data['title'] = 'Data Materi (Guru)';
 		$data['content'] = 'guru/contents/data/v_detail_data_materi_guru';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -89,6 +91,7 @@ class Data extends CI_Controller
 
 	public function tambahDataMateriGuru()
 	{
+		$data['guru'] = $this->userGuru;
 		$data['title'] = 'Tambah Data Materi (Guru)';
 		$data['content'] = 'guru/contents/data/v_tambah_data_materi_guru';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -96,6 +99,7 @@ class Data extends CI_Controller
 
 	public function editDataMateriGuru()
 	{
+		$data['guru'] = $this->userGuru;
 		$data['title'] = 'Edit Data Materi (Guru)';
 		$data['content'] = 'guru/contents/data/v_edit_data_materi_guru';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -103,6 +107,7 @@ class Data extends CI_Controller
 
 	public function editFileMateriGuru()
 	{
+		$data['guru'] = $this->userGuru;
 		$data['title'] = 'Edit File Materi (Guru)';
 		$data['content'] = 'guru/contents/data/v_edit_file_materi_guru';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -110,6 +115,7 @@ class Data extends CI_Controller
 
 	public function editVideoMateriGuru()
 	{
+		$data['guru'] = $this->userGuru;
 		$data['title'] = 'Edit Video Materi (Guru)';
 		$data['content'] = 'guru/contents/data/v_edit_video_materi_guru';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -123,6 +129,7 @@ class Data extends CI_Controller
 
 	public function dataMateriAdmin()
 	{
+		$data['guru'] = $this->userGuru;
 		$data['title'] = 'Data Materi (Admin)';
 		$data['content'] = 'guru/contents/data/v_data_materi_admin';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -130,6 +137,7 @@ class Data extends CI_Controller
 
 	public function detailDataMateriAdmin()
 	{
+		$data['guru'] = $this->userGuru;
 		$data['title'] = 'Detail Data Materi (Admin)';
 		$data['content'] = 'guru/contents/data/v_detail_data_materi_admin';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
