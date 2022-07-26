@@ -58,7 +58,7 @@
 
 							<span class="ml-2 d-none d-lg-inline-block"><span>Selamat Datang,</span> <span class="text-dark mr-1"><?= $this->session->userdata('fullName') ?></span>
 
-								<img src="<?= ($guru->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $guru->guru_foto) ?>" alt="user" class="rounded-circle" width="40">
+								<img src="<?= ($guru->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $guru->guru_foto) ?>" alt="user" class="rounded-circle" width="40" height="40">
 						</a>
 						<div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
 							<a class="dropdown-item" href="<?= base_url('guru/profile') ?>"><i data-feather="user" class="svg-icon mr-2 ml-1"></i>

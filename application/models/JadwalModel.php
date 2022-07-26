@@ -213,4 +213,10 @@ class JadwalModel extends CI_Model
 		$query = $this->db->get('absensi');
 		return $query->num_rows();
 	}
+
+	public function get_new_info()
+	{
+		$query = "SELECT judul_info, max(create_time) as date FROM info_akademik";
+		return $result = $this->db->query($query);
+	}
 }

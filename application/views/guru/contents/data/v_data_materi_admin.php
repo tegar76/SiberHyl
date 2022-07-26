@@ -1,5 +1,5 @@
 <!-- import data tables -->
-<?php include APPPATH.'../assets/DataTables/import/import.php';?>
+<?php include APPPATH . '../assets/DataTables/import/import.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -49,16 +49,19 @@
 									</tr>
 								</thead>
 								<tbody>
+									<?php $i = 1;
+									foreach ($materi as $row => $value) : ?>
 										<tr>
-											<td>1</td>
+											<td><?= $i++ ?></td>
 											<td>Lutfi Haryati.S,Pd</td>
-											<td>XI TKRO 1,XI TKRO 2,XI TKRO 3,XI TKRO 4,XI TKRO 5</td>
-											<td>Panel Sasis Dan Pemindahan Tenaga KR</td>
-											<td>10 - 05 - 2022 07 : 00 WIB </td>
+											<td><?= $value->index_kelas . ' ' . (!empty($value->kode_jurusan)) ? $value->kode_jurusan : '' ?></td>
+											<td><?= $value->nama_mapel ?></td>
+											<td><?= date('d-m-Y H:i', strtotime($value->create_time)) . " WIB" ?></td>
 											<td>
-												<a href="<?= base_url('Guru/Data/detailDataMateriAdmin') ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+												<a href="<?= base_url('guru/data/detail_materi?user=admin&id=' . $value->materi_info_id) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 											</td>
 										</tr>
+									<?php endforeach ?>
 								</tbody>
 							</table>
 						</div>

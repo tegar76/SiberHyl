@@ -287,3 +287,10 @@ $(document).ready(function () {
 		$("#text-message").focus();
 	});
 });
+
+$(document).ready(function () {
+	$("#guru_pengajar").select2({
+		placeholder: "Pilih Guru",
+		// minimumResultsForSearch: -1,
+	});
+});

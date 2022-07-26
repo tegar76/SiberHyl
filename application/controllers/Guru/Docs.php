@@ -175,4 +175,17 @@ class Docs extends CI_Controller
 			$writer->save('php://output');
 		}
 	}
+
+	public function export_tugas_siswa()
+	{
+		$data['title'] = 'Form Cetak Reporting Tugas Harian';
+		$data['content'] = 'guru/contents/pembelajaran/v_form_cetak_report_tugas_harian';
+		$this->load->view('guru/layout/wrapper', $data, FALSE);
+	}
+
+	public function cetakReportTugasHarian()
+	{
+		$data['title'] = 'Cetak Reporting Tugas Harian';
+		$this->load->view('guru/contents/pembelajaran/v_cetak_report_tugas_harian', $data, FALSE);
+	}
 }

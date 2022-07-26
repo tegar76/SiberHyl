@@ -13,6 +13,7 @@ class Profile extends CI_Controller
 	public function index()
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		$data['title'] = 'Profile Guru ' . $this->userGuru->guru_nama;
 		$data['content'] = 'guru/contents/profile/v_profile';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -21,6 +22,7 @@ class Profile extends CI_Controller
 	public function update_profile()
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		$data['title'] = 'Edit Profile Guru ' . $this->userGuru->guru_nama;
 		$data['content'] = 'guru/contents/profile/v_edit_profile';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -54,6 +56,7 @@ class Profile extends CI_Controller
 	public function update_password()
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		$this->form_validation->set_rules('old_pass', 'Password Lama', 'callback_password_check');
 		$this->form_validation->set_rules([
 			[
@@ -94,7 +97,7 @@ class Profile extends CI_Controller
 	public function imageConf($dirName = NULL)
 	{
 		$conf['upload_path']   = './storage/' . $dirName . '/profile/';
-		$conf['allowed_types'] = 'gif|jpg|png|jpeg|mp3';
+		$conf['allowed_types'] = 'gif|jpg|png|jpeg';
 		$conf['max_size']      = 2000;
 		$conf['overwrite']     = TRUE;
 		$conf['encrypt_name'] = TRUE;
@@ -134,9 +137,5 @@ class Profile extends CI_Controller
 			return false;
 		}
 		return true;
-	}
-
-	public function logout()
-	{
 	}
 }

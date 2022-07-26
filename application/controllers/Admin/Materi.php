@@ -111,6 +111,8 @@ class Materi extends CI_Controller
 				'index_kelas' => $this->input->post('index_kelas', true),
 				'mapel_id'	=> $this->input->post('mapel', true),
 				'jurusan_id'  => (isset($jurusanID)) ? $jurusanID : 0,
+				'guru_id' => $this->session->userdata('adminId'),
+				'kelas_id' => 0
 			];
 			$this->db->insert('materi_info', $infoMateri);
 			$infoMateriID = $this->db->insert_id();

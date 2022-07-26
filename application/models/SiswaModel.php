@@ -542,4 +542,25 @@ class SiswaModel extends CI_Model
 		);
 		$this->db->insert('forum_diskusi', $data);
 	}
+
+	public function pengajuanSurat($nis)
+	{
+		$this->db->select("st.surat_id, st.hari, st.tanggal, st.jenis, st.file_surat, sw.siswa_nama, sw.siswa_nis");
+		$this->db->from('pengajuansurat as st');
+		$this->db->join('siswa as sw', 'sw.siswa_nis=st.siswa_nis');
+		$this->db->where('sw.siswa_nis', $nis);
+		$this->db->order_by('surat_id', 'DESC');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function recive_surat($id)
+	{
+		$this->db->select("ps.surat_id, g.guru_nama, g.guru_nip");
+		$this->db->from('penerimasurat as ps');
+		$this->db->join('guru as g', 'g.guru_nip=ps.guru_nip');
+		$this->db->where('ps.surat_id', $id);
+		$query = $this->db->get();
+		return $query->result();
+	}
 }

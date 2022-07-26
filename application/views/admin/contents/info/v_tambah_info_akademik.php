@@ -75,7 +75,7 @@
 							</div>
 							<label for="kelas_jurusan">Kelas</label>
 							<div class="input-group mb-3">
-								<select class="form-control custom-select <?= (form_error('kelas_jurusan[]')) ? 'is-invalid' : '' ?>" id="kelas_jurusan" name="kelas_jurusan[]" title="Pilih Jurusan" multiple="multiple">
+								<select class="form-control custom-select <?= (form_error('kelas_jurusan[]')) ? 'is-invalid' : '' ?>" id="send" name="kelas_jurusan[]" title="Pilih Jurusan" multiple="multiple">
 								</select>
 								<div class="invalid-feedback">
 									<?= form_error('kelas_jurusan[]', '<div class="text-danger">', '</div>') ?>

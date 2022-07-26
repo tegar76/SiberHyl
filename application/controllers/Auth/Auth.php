@@ -156,7 +156,6 @@ class Auth extends CI_Controller
 			];
 
 			$update_ = [
-				'last_login' => date('Y-m-d H:i:s'),
 				'status_online'	=> 'offline'
 			];
 			$this->auth->deleteToken($this->session->userdata('backToken'));
@@ -171,7 +170,6 @@ class Auth extends CI_Controller
 			];
 
 			$update_ = [
-				'last_login' => date('Y-m-d H:i:s'),
 				'status_online'	=> 'offline'
 			];
 			$this->auth->deleteToken($this->session->userdata('backToken'));

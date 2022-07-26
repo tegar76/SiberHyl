@@ -177,31 +177,28 @@ class Info extends CI_Controller
 				);
 				$this->db->insert('info_akademik', $upload);
 				$infoakd_id = $this->db->insert_id();
-				var_dump($infoakd_id);
-				die;
-			}
-			// $infoakd_id = $infoakd_id;
-			if (isset($_POST['kelas_jurusan'])) {
-				$kelas = $_POST['kelas_jurusan'];
-				foreach ($kelas as $row => $value) {
+				if (isset($_POST['kelas_jurusan'])) {
+					$kelas = $_POST['kelas_jurusan'];
+					foreach ($kelas as $row => $value) {
+						$upload = array(
+							'index_kelas' => htmlspecialchars($this->input->post('index_kelas', true)),
+							'kode_jurusan' => (isset($_POST['jurusan'])) ? $_POST['jurusan'] : null,
+							'kelas_id'	=> $_POST['kelas_jurusan'][$row],
+							'infoakd_id' => $infoakd_id
+						);
+						$this->db->insert('infoakd_kelas', $upload);
+					}
+					$this->db->trans_complete();
+				} else {
 					$upload = array(
 						'index_kelas' => htmlspecialchars($this->input->post('index_kelas', true)),
 						'kode_jurusan' => (isset($_POST['jurusan'])) ? $_POST['jurusan'] : null,
-						'kelas_id'	=> $_POST['kelas_jurusan'][$row],
-						// 'infoakd_id' => $infoakd_id
+						'kelas_id'	=> 0,
+						'infoakd_id' => $infoakd_id
 					);
 					$this->db->insert('infoakd_kelas', $upload);
+					$this->db->trans_complete();
 				}
-				$this->db->trans_complete();
-			} else {
-				$upload = array(
-					'index_kelas' => htmlspecialchars($this->input->post('index_kelas', true)),
-					'kode_jurusan' => (isset($_POST['jurusan'])) ? $_POST['jurusan'] : null,
-					'kelas_id'	=> 0,
-					// 'infoakd_id' => $infoakd_id
-				);
-				$this->db->insert('infoakd_kelas', $upload);
-				$this->db->trans_complete();
 			}
 		}
 	}

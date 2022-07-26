@@ -5,15 +5,15 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title"><?= $title?></h3>
+				<h3 class="page-title"><?= $title ?></h3>
 			</div>
 		</div>
 		<div class="d-flex align-items-center">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Master Data</li>
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Data/dataMateriAdmin') ?>" class="text-muted">Data Materi (Admin)</a></li>
-					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/data/data_materi?user=admin') ?>" class="text-muted">Data Materi (Admin)</a></li>
+					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 				</ol>
 			</nav>
 		</div>
@@ -46,23 +46,27 @@
 										<tbody>
 											<tr class="table-borderless">
 												<th scope="row" class="col-sm-8">Nama Admin</th>
-												<td>Lorem ipsum dolor sit amet.</td>
+												<td>Lutfi Haryati.S,Pd.</td>
 											</tr>
 											<tr>
 												<th scope="row" class="col-sm-8">Kelas</th>
-												<td>XI TKRO 1,XI TKRO 2,XI TKRO 3,XI TKRO 4,XI TKRO 5 </td>
+												<td><?= $detailMateri->index_kelas ?></td>
+											</tr>
+											<tr>
+												<th scope="row">Jurusan</th>
+												<td><?= (!empty($detailMateri->nama_jurusan)) ? $detailMateri->nama_jurusan : '-' ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Mata Pelajaran</th>
-												<td>Panel Sasis Dan Pemindahan Tenaga KR</td>
+												<td><?= $detailMateri->nama_mapel ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Dibuat</th>
-												<td>01 - 05 - 2022 07 : 00 WIB </td>
+												<td><?= date('Y-m-d H:i:s', strtotime($detailMateri->create_time)) . " WIB" ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Diedit</th>
-												<td>-</td>
+												<td><?= ($detailMateri->create_time == $detailMateri->update_time) ? '-' : date('Y-m-d H:i:s', strtotime($detailMateri->update_time)) . " WIB" ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Materi Pembelajaran</th>
@@ -70,18 +74,21 @@
 											</tr>
 											<tr class="table-borderless">
 												<td class="item-pdf row">
-													<!-- looping item -->
-													<div class="pdf-file ml-3">
-														<a target="_blank" href="<?= base_url('Guru/Data/tampilFileMateri') ?>">
-															<div class="card card-pdf">
-																<div class="container">
-																	<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf">
-																	<hr class="w-50 mx-auto">
-																	<h6 class="text-center mt-n1">Ebook Panel Sasis Dan Pemindahan Tenaga KR</h6>
+													<?php foreach ($bahanMateri as $materi) : ?>
+														<!-- looping item -->
+														<div class="pdf-file ml-3">
+															<a href="<?= base_url('guru/data/view_materi?file=' . $materi->materi) ?>">
+																<div class="card card-pdf">
+																	<div class="container">
+																		<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf">
+																		<hr class="w-50 mx-auto">
+																		<h6 class="text-center mt-n1"><?= $materi->judul ?></h6>
+																	</div>
 																</div>
-															</div>
-														</a>
-													</div>
+															</a>
+														</div>
+														<!-- looping item -->
+													<?php endforeach ?>
 												</td>
 											</tr>
 											<tr>
@@ -91,22 +98,24 @@
 											<tr class="table-borderless">
 												<td class="item-video row">
 													<!-- looping item -->
-													<div class="pdf-file ml-3">
-														<div class="card card-video">
-															<div class="container">
-																<iframe class="d-block mx-auto" src="https://www.youtube.com/embed/u5aHyZV0CTI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-																<h6 class="mt-1">2021-10-12</h6>
-																<h6 class="mt-n1">Panel Sasis Dan Pemindahan Tenaga KR</h6>
+													<?php foreach ($videoMateri as $video) : ?>
+														<div class="pdf-file ml-3">
+															<div class="card card-video">
+																<div class="container">
+																	<iframe class="d-block mx-auto" src="<?= $video->materi ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+																	<h6 class="mt-1"><?= date('Y-m-d', strtotime($detailMateri->create_time)) ?></h6>
+																	<h6 class="mt-n1"><?= $video->judul ?></h6>
+																</div>
 															</div>
 														</div>
-													</div>
+													<?php endforeach; ?>
 												</td>
 											</tr>
 										</tbody>
 									</table>
 									<hr class="mt-n3">
 									<div class="button-action d-flex mb-3 mt-2">
-										<a href="<?= base_url('Guru/data/dataMateriAdmin') ?>" class="btn btn-sm btn-primary bg-blue rounded border-0 ml-3 px-3">Kembali</a>
+										<a href="<?= base_url('guru/data/data_materi?user=admin') ?>" class="btn btn-sm btn-primary rounded ml-3 px-3">Kembali</a>
 									</div>
 								</div>
 							</div>

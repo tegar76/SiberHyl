@@ -176,3 +176,238 @@ $(document).ready(function () {
 		$("#text-message").focus();
 	});
 });
+
+$(document).ready(function () {
+	$("#pilih-kelas-materi").select2({
+		placeholder: "Pilih Kelas",
+		minimumResultsForSearch: -1,
+	});
+
+	$("#pilih-mapel-materi").select2({
+		placeholder: "Pilih Mata Pelajaran",
+		minimumResultsForSearch: -1,
+	});
+
+	$("#btn-tambah-materi").click(function () {
+		var jumlah = parseInt($("#jumlah-materi").val());
+		var nextMateri = jumlah + 1;
+		$("#next-materi").append(
+			'<label for="judul_materi">Judul Materi ke- ' +
+				nextMateri +
+				"</label>" +
+				'<div class="input-group mb-3">' +
+				'<input type="text" name="judul_materi[]" id="judul_materi" class="form-control" placeholder="Masukan Judul">' +
+				"</div>" +
+				'<label for="file_materi">Unggah Materi Pembelajaran ke- ' +
+				nextMateri +
+				"</label>" +
+				'<div class="input-group mb-3">' +
+				'<input type="file" name="file_materi[]" id="file_materi" class="form-control">' +
+				"</div>" +
+				'<div class="input-group mb-3">' +
+				"<p>*File max 2mb dengan format PDF</p>" +
+				"</div>"
+		);
+		$("#jumlah-materi").val(nextMateri);
+	});
+
+	$("#btn-tambah-video").click(function () {
+		var jumlah = parseInt($("#jumlah-video").val());
+		var nextVideo = jumlah + 1;
+		$("#next-video").append(
+			'<label for = "judul_video" > Judul Video Pembelajaran ke - ' +
+				nextVideo +
+				" </label>" +
+				'<div class="input-group mb-3">' +
+				'<input type="text" name="judul_video[]" id="judul_video" class="form-control" placeholder="Masukan Judul Video">' +
+				"</div>" +
+				'<label for="link_video">Video Pembelajaran ke- ' +
+				nextVideo +
+				"</label>" +
+				'<div class="input-group mb-3">' +
+				'<input type="text" name="link_video[]" id="link_video" class="form-control" placeholder="Masukan Link Video">' +
+				"</div>"
+		);
+		$("#jumlah-video").val(nextVideo);
+	});
+});
+
+$(document).ready(function () {
+	$("#data-materi-guru").DataTable();
+	$("#data-materi-guru").on("click", ".delete-materi", function (e) {
+		e.preventDefault();
+		var materi_info_id = $(e.currentTarget).attr("materi-id");
+		Swal.fire({
+			title: "Hapus Semua Materi Pembelajaran",
+			text: "Anda yakin ingin menghapus semua materi pembelajaran ini!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Ya, Hapus!",
+		}).then((result) => {
+			if (result.value) {
+				$.ajax({
+					type: "GET",
+					url: BASEURL + "guru/data/delete_all_materi?id=" + materi_info_id,
+					beforeSend: function () {
+						swal.fire({
+							imageUrl: BASEURL + "assets/logo/rolling.png",
+							title: "Menghapus Semua Materi Pembelajaran",
+							text: "Silahkan Tunggu",
+							showConfirmButton: false,
+							allowOutsideClick: false,
+						});
+					},
+					success: function (data) {
+						if (data.success == false) {
+							swal.fire({
+								icon: "error",
+								title: "Menghapus Materi Pembelajaran Gagal",
+								text: data.message,
+								showConfirmButton: false,
+								timer: 1500,
+							});
+						} else {
+							swal.fire({
+								icon: "success",
+								title: "Menghapus Materi Pembelajaran Berhasil",
+								text: data.message,
+								showConfirmButton: false,
+								timer: 1500,
+							});
+							window.location = BASEURL + "guru/data/data_materi?user=guru";
+						}
+					},
+					error: function () {
+						swal.fire(
+							"Penghapusan Materi Pembelajaran Gagal",
+							"Ada Kesalahan Saat menghapus materi pembelajaran!",
+							"error"
+						);
+					},
+				});
+			}
+		});
+	});
+});
+
+$(document).ready(function () {
+	$(".hapus-materi-pdf").click(function (e) {
+		e.preventDefault();
+		var materi_id = $(e.currentTarget).attr("materi-id");
+		var materi_info_id = $(e.currentTarget).attr("materi-info-id");
+		Swal.fire({
+			title: "Hapus File Materi Pembelajaran",
+			text: "Anda yakin ingin menghapus file materi pembelajaran ini!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Ya, Hapus!",
+		}).then((result) => {
+			if (result.value) {
+				$.ajax({
+					type: "GET",
+					url: BASEURL + "guru/data/delete_materi_pdf?materi_id=" + materi_id,
+					beforeSend: function () {
+						swal.fire({
+							imageUrl: BASEURL + "assets/logo/rolling.png",
+							title: "Menghapus File Materi Pembelajaran",
+							text: "Silahkan Tunggu",
+							showConfirmButton: false,
+							allowOutsideClick: false,
+						});
+					},
+					success: function (data) {
+						if (data.success == false) {
+							swal.fire({
+								icon: "error",
+								title: "Menghapus Materi Pembelajaran Gagal",
+								text: data.message,
+								showConfirmButton: false,
+								timer: 1500,
+							});
+						} else {
+							swal.fire({
+								icon: "success",
+								title: "Menghapus Materi Pembelajaran Berhasil",
+								text: data.message,
+								showConfirmButton: false,
+								timer: 1500,
+							});
+							window.location =
+								BASEURL + "guru/data/edit_materi/" + materi_info_id;
+						}
+					},
+					error: function () {
+						swal.fire(
+							"Penghapusan Materi Pembelajaran Gagal",
+							"Ada Kesalahan Saat menghapus materi pembelajaran!",
+							"error"
+						);
+					},
+				});
+			}
+		});
+	});
+
+	$(".hapus-materi-video").click(function (e) {
+		e.preventDefault();
+		var materi_id = $(e.currentTarget).attr("materi-id");
+		var materi_info_id = $(e.currentTarget).attr("materi-info-id");
+		Swal.fire({
+			title: "Hapus Video Pembelajaran",
+			text: "Anda yakin ingin mengahapus video pembelajaran ini!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Ya, Hapus!",
+		}).then((result) => {
+			if (result.value) {
+				$.ajax({
+					type: "GET",
+					url: BASEURL + "guru/data/delete_materi_video?materi_id=" + materi_id,
+					beforeSend: function () {
+						swal.fire({
+							imageUrl: BASEURL + "assets/logo/rolling.png",
+							title: "Menghapus kelas",
+							text: "Silahkan Tunggu",
+							showConfirmButton: false,
+							allowOutsideClick: false,
+						});
+					},
+					success: function (data) {
+						if (data.success == false) {
+							swal.fire({
+								icon: "error",
+								title: "Menghapus Video Pembelajaran Gagal",
+								text: data.message,
+								showConfirmButton: false,
+								timer: 1500,
+							});
+						} else {
+							swal.fire({
+								icon: "success",
+								title: "Menghapus Video Pembelajaran Berhasil",
+								text: data.message,
+								showConfirmButton: false,
+								timer: 1500,
+							});
+							window.location =
+								BASEURL + "guru/data/edit_materi/" + materi_info_id;
+						}
+					},
+					error: function () {
+						swal.fire(
+							"Penghapusan Video Pembelajaran Gagal",
+							"Ada Kesalahan Saat menghapus video pembelajaran!",
+							"error"
+						);
+					},
+				});
+			}
+		});
+	});
+});

@@ -32,6 +32,7 @@ class Pembelajaran extends CI_Controller
 		]);
 	}
 
+	// fungsi menampilkan jadwal pembelajaran dari guru
 	public function index()
 	{
 		$guru = $this->userGuru;
@@ -85,14 +86,18 @@ class Pembelajaran extends CI_Controller
 		}
 		$data['title'] = 'Mengajar';
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$data['study'] = $new_schedule;
 		$data['content'] = 'guru/contents/pembelajaran/v_mengajar';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
+	// ruang absensi
 	public function absensi($id = false)
 	{
+		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$jurnal = $this->guru->jurnal_absensi($id);
 			$no = 1;
@@ -115,7 +120,6 @@ class Pembelajaran extends CI_Controller
 			$data['tahun_ajar'] = $this->tahun_ajar;
 			$data['id_jadwal'] = $id;
 			$data['title'] = 'Absensi';
-			$data['guru'] = $this->userGuru;
 			$data['info'] = $this->guru->get_jadwal_mapel($id);
 			$data['content'] = 'guru/contents/pembelajaran/v_absensi';
 		} else {
@@ -125,13 +129,15 @@ class Pembelajaran extends CI_Controller
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
+	// tambah pertemuan pembelajaran, absensi sekaligus jurnal materi
 	public function tambah_pertemuan($id = false)
 	{
 		$jadwal = $this->jadwal->getJadwalHariIni(['jadwal_id' => $id])->row();
+		$data['notif'] = check_new_info();
+		$data['guru'] = $this->userGuru;
 		if ($jadwal) {
 			$data['id_jadwal'] = $id;
 			$data['jadwal'] = $jadwal;
-			$data['guru'] = $this->userGuru;
 			$data['title'] = 'Tambah Pertemuan';
 			$data['content'] = 'guru/contents/pembelajaran/v_tambah_pertemuan';
 			$this->form_validation->set_rules([
@@ -184,6 +190,8 @@ class Pembelajaran extends CI_Controller
 
 	public function detail_absensi($id = false)
 	{
+		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		$jurnal = $this->jadwal->getJurnalWhere(['jurnal_id' => $id]);
 		if ($jurnal) {
 			$data['H'] =  $this->jadwal->get_absen_siswa($id, 'H');
@@ -223,7 +231,6 @@ class Pembelajaran extends CI_Controller
 			$data['tahun_ajar'] = $this->tahun_ajar;
 			$data['setting_abs'] = $jurnal;
 			$data['rekap_absen'] = $rekap_abs;
-			$data['guru'] = $this->userGuru;
 			$data['title'] = 'Detail Absensi';
 			$data['content'] = 'guru/contents/pembelajaran/v_detail_absensi';
 		} else {
@@ -235,6 +242,8 @@ class Pembelajaran extends CI_Controller
 
 	public function tambah_jurnal_materi($id = false)
 	{
+		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		$jurnal = $this->jadwal->getJurnalWhere(['jurnal_id' => $id]);
 		if ($jurnal) {
 			$data['jurnal'] = $jurnal;
@@ -242,7 +251,6 @@ class Pembelajaran extends CI_Controller
 			$data['A'] =  $this->jadwal->get_absen_siswa($id, 'A');
 			$data['I'] =  $this->jadwal->get_absen_siswa($id, 'I');
 			$data['S'] =  $this->jadwal->get_absen_siswa($id, 'S');
-			$data['guru'] = $this->userGuru;
 			$data['students'] = $this->db->get_where('siswa', ['kelas_id' => $jurnal->kelas_id])->num_rows();
 			$data['title'] = 'Tambah Jurnal Materi';
 			$data['content'] = 'guru/contents/pembelajaran/v_tambah_jurnal_materi';
@@ -294,11 +302,12 @@ class Pembelajaran extends CI_Controller
 
 	public function set_waktu_absensi($id = false)
 	{
+		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		$jurnal = $this->jadwal->getJurnalWhere(['jurnal_id' => $id]);
 		if ($jurnal) {
 			$data['jurnal'] = $jurnal;
 			$data['title'] = 'Edit Jam Absen';
-			$data['guru'] = $this->userGuru;
 			$data['content'] = 'guru/contents/pembelajaran/v_edit_jam_absen';
 			$this->form_validation->set_rules([
 				[
@@ -389,6 +398,8 @@ class Pembelajaran extends CI_Controller
 
 	public function tugas_harian($id = false)
 	{
+		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$tugas = $this->guru->get_info_tugas($id);
 			$no = 1;
@@ -406,7 +417,6 @@ class Pembelajaran extends CI_Controller
 				}
 				$data['tugas'] = $tugasx;
 			}
-			$data['guru'] = $this->userGuru;
 			$data['tahun_ajar'] = $this->tahun_ajar;
 			$data['info'] = $this->guru->get_jadwal_mapel($id);
 			$data['title'] = 'Tugas Harian';
@@ -418,23 +428,10 @@ class Pembelajaran extends CI_Controller
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
-
-	public function formCetakReportTugasHarian()
-	{
-		$data['title'] = 'Form Cetak Reporting Tugas Harian';
-		$data['content'] = 'guru/contents/pembelajaran/v_form_cetak_report_tugas_harian';
-		$this->load->view('guru/layout/wrapper', $data, FALSE);
-	}
-
-	public function cetakReportTugasHarian()
-	{
-		$data['title'] = 'Cetak Reporting Tugas Harian';
-		$this->load->view('guru/contents/pembelajaran/v_cetak_report_tugas_harian', $data, FALSE);
-	}
-
 	public function tambah_tugas_harian($id = false)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$jadwal = $this->jadwal->getJadwalHariIni(['jadwal_id' => $id])->row();
 			if ($jadwal) {
@@ -519,6 +516,7 @@ class Pembelajaran extends CI_Controller
 	public function detail_tugas_harian($id = false)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$data['detail'] = $this->guru->get_detail_tugas($id);
 			$siswa = $this->db->get_where('siswa', ['kelas_id' => $data['detail']->kelas_id])->result();
@@ -646,6 +644,7 @@ class Pembelajaran extends CI_Controller
 	public function nilai_tugas_harian()
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		$status = $this->input->get('status');
 		if ($status == 'sm') {
 			$tugasId = $this->input->get('tugas');
@@ -728,6 +727,7 @@ class Pembelajaran extends CI_Controller
 	public function evaluasi($id = false)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$data['title'] = 'Evaluasi';
 			$data['content'] = 'guru/contents/pembelajaran/v_evaluasi';
@@ -777,6 +777,7 @@ class Pembelajaran extends CI_Controller
 	public function tambah_evaluasi($id = false)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$jadwal = $this->jadwal->getJadwalHariIni(['jadwal_id' => $id])->row();
 			if ($jadwal) {
@@ -859,6 +860,7 @@ class Pembelajaran extends CI_Controller
 	public function detail_evaluasi($id)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$data['title'] = 'Detail Evaluasi';
 			$data['content'] = 'guru/contents/pembelajaran/v_detail_evaluasi';
@@ -961,6 +963,7 @@ class Pembelajaran extends CI_Controller
 	public function nilai_evaluasi()
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		$status = $this->input->get('status');
 		if ($status == 'sm') {
 			$evaluasiId = $this->input->get('evaluasi');
@@ -1042,6 +1045,7 @@ class Pembelajaran extends CI_Controller
 	public function set_deadline_evaluasi($id = false)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$data['eval'] = $this->guru->get_detail_evaluasi($id);
 			$data['title'] = 'Edit Jam Evaluasi';
@@ -1097,6 +1101,7 @@ class Pembelajaran extends CI_Controller
 	public function diskusi($id = false)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$data['title'] = 'Diskusi';
 			$data['content'] = 'guru/contents/pembelajaran/v_diskusi';
@@ -1126,6 +1131,7 @@ class Pembelajaran extends CI_Controller
 	public function forum_diskusi($id = false)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$data['title'] = 'Forum Diskusi';
 			$data['content'] = 'guru/contents/pembelajaran/v_detail_diskusi';
@@ -1142,6 +1148,7 @@ class Pembelajaran extends CI_Controller
 	public function tambah_forum_diskusi($id)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$data['title'] = 'Tambah Diskusi';
 			$data['content'] = 'guru/contents/pembelajaran/v_tambah_diskusi';
@@ -1329,6 +1336,7 @@ class Pembelajaran extends CI_Controller
 	public function jurnal($id = false)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$data['jurnal'] = $this->guru->get_jurnal_materi($id);
 			$data['tahun_ajar'] = $this->tahun_ajar;
@@ -1344,6 +1352,7 @@ class Pembelajaran extends CI_Controller
 	public function formCetakReportJurnalMateri()
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 
 		$data['title'] = 'Detail Jurnal Materi';
 		$data['content'] = 'guru/contents/pembelajaran/v_form_cetak_report_jurnal_materi';
@@ -1360,6 +1369,7 @@ class Pembelajaran extends CI_Controller
 	public function detail_jurnal_materi($id = false)
 	{
 		$data['guru'] = $this->userGuru;
+		$data['notif'] = check_new_info();
 		if ($id) {
 			$data['jurnal'] = $this->jadwal->getJurnalWhere(['jurnal_id' => $id]);
 			$data['tahun_ajar'] = $this->tahun_ajar;
@@ -1375,15 +1385,20 @@ class Pembelajaran extends CI_Controller
 	public function surat()
 	{
 		$data['guru'] = $this->userGuru;
-
+		$data['notif'] = check_new_info();
+		$data['surat'] = $this->guru->get_pengajuan_surat($data['guru']->guru_nip);
+		// var_dump($data['surat']);
+		// die;
 		$data['title'] = 'Surat - Surat';
 		$data['content'] = 'guru/contents/pembelajaran/v_surat';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
-	public function lihatFileSurat()
+	public function view_surat_surat()
 	{
+		$file = $this->input->get('file');
 		$data['title'] = 'File Surat';
+		$data['surat'] = base_url('storage/siswa/surat/' . $file);
 		$this->load->view('guru/contents/pembelajaran/v_file_surat_img', $data, FALSE);
 	}
 }

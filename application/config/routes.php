@@ -103,6 +103,11 @@ $route['siswa/diskusi/(:any)'] = 'Siswa/Diskusi/$1';
 $route['siswa/diskusi/(:any)/(:any)'] = 'Siswa/Diskusi/$1/$2';
 $route['siswa/diskusi/(:any)/(:any)/(:any)'] = 'Siswa/Diskusi/$1/$2/$3';
 
+# 8. Routing Surat-surat
+$route['siswa/surat'] = 'Siswa/Surat';
+$route['siswa/surat/(:any)'] = 'Siswa/Surat/$1';
+$route['siswa/surat/(:any)/(:any)'] = 'Siswa/Surat/$1/$2';
+
 // routing wali kelas
 $route['wali-kelas/dashboard'] = 'WaliKelas/Dashboard/index';
 
@@ -177,3 +182,7 @@ $route['guru/pembelajaran/(:any)/(:any)'] = 'Guru/Pembelajaran/$1/$2';
 
 
 $route['guru/export/absensi_siswa/(:any)'] = 'Guru/Docs/export_absensi_siswa/$1';
+
+$route['guru/info_akademik'] = 'Guru/InfoAkademik';
+$route['guru/info_akademik/(:any)'] = 'Guru/InfoAkademik/$1';
+$route['guru/info_akademik/(:any)/(:any)'] = 'Guru/InfoAkademik/$1/$2';

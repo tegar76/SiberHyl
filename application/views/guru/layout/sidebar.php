@@ -12,10 +12,10 @@
 							<a href="<?= base_url('guru/data/data_siswa') ?>" class="sidebar-link"><span class="hide-menu"> Data Siswa</span></a>
 						</li>
 						<li class="sidebar-item">
-							<a href="<?= base_url('guru/data/dataMateriGuru') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Guru)</span></a>
+							<a href="<?= base_url('guru/data/data_materi?user=guru') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Guru)</span></a>
 						</li>
 						<li class="sidebar-item">
-							<a href="<?= base_url('guru/data/dataMateriAdmin') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Admin)</span></a>
+							<a href="<?= base_url('guru/data/data_materi?user=admin') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Admin)</span></a>
 						</li>
 					</ul>
 				</li>
@@ -32,11 +32,11 @@
 				</li>
 				<li class="list-divider"></li>
 				<li class="sidebar-item <?= ($this->uri->segment(2) == "") ? 'selected' : '' ?>">
-					<a class="sidebar-link sidebar-link" href="<?= base_url('Guru/InfoAkademik') ?>" aria-expanded="false">
+					<a class="sidebar-link sidebar-link" href="<?= base_url('guru/info_akademik') ?>" aria-expanded="false">
 						<i data-feather="info" class="feather-icon"></i>
 						<span class="hide-menu">Info Akademik
 							<!-- notif badge -->
-							<span class="badge-info-ak"></span>
+							<?= $notif ?>
 						</span>
 					</a>
 				</li>

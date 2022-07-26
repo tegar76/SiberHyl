@@ -59,6 +59,28 @@ class GuruModel extends CI_Model
 		return $result;
 	}
 
+	public function get_mapel_guru($where)
+	{
+		$this->db->select("mapel.mapel_id, mapel.slug_mapel, mapel.nama_mapel");
+		$this->db->from('mapel');
+		$this->db->join('jadwal', 'jadwal.mapel_id=mapel.mapel_id');
+		$this->db->where('jadwal.guru_kode', $where);
+		$this->db->group_by('nama_mapel');
+		$this->db->order_by('mapel.nama_mapel', 'ASC');
+		$query = $this->db->get();
+		$result = $query->result();
+		return $result;
+	}
+
+	public function get_kelas_jurusan($id)
+	{
+		$this->db->select('k.kelas_id, k.index_kelas, k.nama_kelas, j.jurusan_id, j.kode_jurusan');
+		$this->db->from('kelas as k');
+		$this->db->join('jurusan as j', 'j.kode_jurusan=k.kode_jurusan');
+		$this->db->where('k.kelas_id', $id);
+		return $this->db->get()->row();
+	}
+
 	public function jurnal_absensi($where)
 	{
 		$this->db->select("jadwal.jadwal_id, jadwal.hari, jadwal.jam_masuk, jadwal.jam_keluar,
@@ -458,5 +480,49 @@ class GuruModel extends CI_Model
 			'forum_diskusi_id' => $this->input->post('forum_diskusi_id', true),
 		);
 		$this->db->insert('diskusi_siswa', $data);
+	}
+
+	public function get_materi_guru($id)
+	{
+		$this->db->select("*");
+		$this->db->from('materi_info');
+		$this->db->join('mapel', 'mapel.mapel_id=materi_info.mapel_id', 'left');
+		$this->db->join('kelas', 'kelas.kelas_id=materi_info.kelas_id', 'left');
+		$this->db->where('guru_id', $id);
+		$this->db->order_by('materi_info.create_time', 'DESC');
+		return $this->db->get();
+	}
+
+	public function getDetailMateri($idMateri)
+	{
+		$query	= $this->db->select('
+		mapel.nama_mapel, materi_info.index_kelas, kelas.nama_kelas,
+		materi_info.create_time, materi_info.update_time, materi_info.materi_info_id
+		')
+			->from('materi_info')
+			->join('mapel', 'mapel.mapel_id=materi_info.mapel_id', 'left')
+			->join('kelas', 'kelas.kelas_id=materi_info.kelas_id', 'left')
+			->where('materi_info_id', $idMateri)
+			->get();
+		if ($query->num_rows() > 0) {
+			return $query->row();
+		} else {
+			return false;
+		}
+	}
+
+	public function get_pengajuan_surat($nip)
+	{
+		$query = $this->db->select("
+			penerima.guru_nip as nip, penerima.status, surat.surat_id as id, surat.hari, surat.tanggal, surat.jenis, 
+			surat.file_surat as file, surat.file_type as type, surat.siswa_nis as nis, siswa.siswa_nama as nama, kelas.nama_kelas as kelas
+		")->from('pengajuansurat as surat')
+		->join('penerimasurat as penerima', 'penerima.surat_id=surat.surat_id')
+		->join('siswa', 'siswa.siswa_nis=surat.siswa_nis')
+		->join('kelas', 'kelas.kelas_id=siswa.kelas_id')
+		->where('guru_nip', $nip)
+		->get();
+		return $query->result();
+
 	}
 }

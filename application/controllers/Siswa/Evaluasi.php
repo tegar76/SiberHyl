@@ -168,10 +168,23 @@ class Evaluasi extends CI_Controller
 
 	public function soal_evaluasi($soal = false)
 	{
+		$date = date('Y-m-d');
+		$time = date('H:i:s');
 		if ($soal) {
 			$data['title'] = 'Soal Evaluasi';
 			$data['file_soal'] = base_url('storage/guru/evaluasi/') . $soal;
-			$this->load->view('siswa/contents/evaluasi/soal_evaluasi_pdf/v_soal_evaluasi_pdf', $data, FALSE);
+			$eval = $this->db->where('`file_evaluasi`', $soal)->get('evaluasi')->row();
+			if (strtotime($date) < strtotime($eval->tanggal)) {
+				$this->message('Waktu Berakhir', 'waktu liat soal telah berakhir', 'warning');
+				redirect('siswa/evaluasi/' . $this->secure->encrypt_url($eval->jadwal_id));
+			} elseif (strtotime($date) == strtotime($eval->tanggal)) {
+				if (strtotime($time) > strtotime($eval->waktu_selesai)) {
+					$this->message('Waktu Berakhir', 'waktu liat soal telah berakhir', 'warning');
+					redirect('siswa/evaluasi/' . $this->secure->encrypt_url($eval->jadwal_id));
+				} else {
+					$this->load->view('siswa/contents/evaluasi/soal_evaluasi_pdf/v_soal_evaluasi_pdf', $data, FALSE);
+				}
+			}
 		} else {
 			$data['content'] = 'siswa/contents/errors/404_notfound';
 			$this->load->view('siswa/layout/wrapper', $data, FALSE);

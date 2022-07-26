@@ -24,26 +24,29 @@ class Dashboard extends CI_Controller
 	{
 		$guru = $this->userGuru;
 		$jadwal_guru = $this->jadwal->getJadwalGuru($guru->guru_kode);
-		$no = 1;
-		foreach ($jadwal_guru as $row => $value) {
-			$sum = 0;
-			$kompetensi = $this->jadwal->getKelasJadwal($value->mapel_id, $value->guru_kode);
-			foreach ($kompetensi as $row => $komp) {
-				$mapel = $komp->mapel_id;
-				$sum += $komp->jumlah_jam;
+		$data['jadwal'] = array();
+		if ($jadwal_guru) {
+			$no = 1;
+			foreach ($jadwal_guru as $row => $value) {
+				$sum = 0;
+				$kompetensi = $this->jadwal->getKelasJadwal($value->mapel_id, $value->guru_kode);
+				foreach ($kompetensi as $row => $komp) {
+					$mapel = $komp->mapel_id;
+					$sum += $komp->jumlah_jam;
+				}
+				$result['nomor'] = $no++;
+				$result['mapel'] = $value->nama_mapel;
+				$result['guru_kode'] = $value->guru_kode;
+				$result['mapel_id'] = $mapel;
+				$result['jumlah_rombel'] = count($kompetensi);
+				$result['jumlah_jam'] = $sum;
+				$result['total_jam'] = count($kompetensi) * $sum;
+				$jadwalGuru[]	= $result;
 			}
-			$result['nomor'] = $no++;
-			$result['mapel'] = $value->nama_mapel;
-			$result['guru_kode'] = $value->guru_kode;
-			$result['mapel_id'] = $mapel;
-			$result['jumlah_rombel'] = count($kompetensi);
-			$result['jumlah_jam'] = $sum;
-			$result['total_jam'] = count($kompetensi) * $sum;
-			$jadwalGuru[]	= $result;
+			$data['jadwal'] = $jadwalGuru;
 		}
-
 		$data['guru'] = $guru;
-		$data['jadwal'] = $jadwalGuru;
+		$data['notif'] = check_new_info();
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$data['title'] = 'Dashboard Guru';
 		$data['content'] = 'guru/contents/dashboard/v_dashboard';

@@ -45,7 +45,7 @@
 										<?php if ($guru->guru_foto == 'default_profile.png') : ?>
 											<img class="mx-auto d-block rounded-circle" src="<?= base_url('assets/siswa/img/profile-default-siswa.png') ?>" width="150" alt="Foto Profile guru">
 										<?php else : ?>
-											<img class="mx-auto d-block rounded-circle" src="<?= base_url('storage/guru/profile/' . $guru->guru_foto) ?>" width="150" alt="<?= $guru->guru_nama ?>">
+											<img class="mx-auto d-block rounded-circle" src="<?= base_url('storage/guru/profile/' . $guru->guru_foto) ?>" width="150" height="150" alt="<?= $guru->guru_nama ?>">
 										<?php endif ?>
 									</div>
 								</div>

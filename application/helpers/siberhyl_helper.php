@@ -54,3 +54,18 @@ function isAdmin()
 		return redirect('block');
 	}
 }
+
+// untuk menampilkan icon notifikasi informasi akademik
+function check_new_info()
+{
+	$CI = &get_instance();
+	$CI->load->model('JadwalModel', 'jadwal', true);
+	$new_info = $CI->jadwal->get_new_info()->row();
+	$date = date('Y-m-d H:i:s');
+	if (strtotime($new_info->date) < strtotime($date)) {
+		$notif = '<span class="badge-info-ak"></span>';
+	} else {
+		$notif = '';
+	}
+	return $notif;
+}
