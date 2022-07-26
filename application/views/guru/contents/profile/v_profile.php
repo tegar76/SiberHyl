@@ -11,7 +11,7 @@
 		<div class="d-flex align-items-center">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
-					<li class="breadcrumb-item text-muted active"><a href="<?= base_url('guru/dashboard') ?>" class="text-muted">Dashboard</a></li>
+					<li class="breadcrumb-item text-muted active"><a href="<?= base_url($this->session->userdata('level') . '/dashboard') ?>" class="text-muted">Dashboard</a></li>
 					<li class="breadcrumb-item text-muted active" aria-current="page">Profile</li>
 				</ol>
 			</nav>
@@ -71,7 +71,7 @@
 									</table>
 									<hr class="mt-n3">
 									<div class="button-action d-flex mb-3 mt-2">
-										<a href="<?= base_url('guru/profile/update_profile') ?>" class="btn btn-sm btn-outline-primary rounded ml-3 px-3">Edit Profile</a>
+										<a href="<?= base_url($this->session->userdata('level') . '/profile/update_profile') ?>" class="btn btn-sm btn-outline-primary rounded ml-3 px-3">Edit Profile</a>
 									</div>
 								</div>
 							</div>

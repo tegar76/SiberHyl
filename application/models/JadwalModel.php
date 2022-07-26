@@ -64,12 +64,12 @@ class JadwalModel extends CI_Model
 		return $newKode;
 	}
 
-	public function get_jurnal($limit = null)
+	public function get_jurnal($where = null, $limit = null)
 	{
 		$select = "
 			jadwal.kode_jadwal, jadwal.hari,jurnal.jurnal_id, 
 			jurnal.tanggal, jurnal.pert_ke, jurnal.pembahasan, jurnal.status,
-			jurnal.catatan_kbm, guru.guru_kode, mapel.nama_mapel, kelas.nama_kelas
+			jurnal.catatan_kbm, guru.guru_kode, mapel.nama_mapel, kelas.nama_kelas, kelas.kode_kelas
 		";
 		$this->db->select($select);
 		$this->db->from('jurnal');
@@ -77,6 +77,9 @@ class JadwalModel extends CI_Model
 		$this->db->join('guru', 'guru.guru_kode=jadwal.guru_kode');
 		$this->db->join('kelas', 'kelas.kelas_id=jadwal.kelas_id');
 		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
+		if ($where) {
+			$this->db->where($where);
+		}
 		$this->db->order_by('jurnal.tanggal', 'DESC');
 		$this->db->limit($limit);
 		$result = $this->db->get();
@@ -93,11 +96,11 @@ class JadwalModel extends CI_Model
 		";
 
 		$query = $this->db->select($select)->from('jurnal')
-			->join('jadwal', 'jadwal.jadwal_id=jurnal.jadwal_id')
-			->join('guru', 'guru.guru_kode=jadwal.guru_kode')
-			->join('kelas', 'kelas.kelas_id=jadwal.kelas_id')
-			->join('mapel', 'mapel.mapel_id=jadwal.mapel_id')
-			->join('ruangan', 'ruangan.ruang_id=jadwal.ruang_id')
+			->join('jadwal', 'jadwal.jadwal_id=jurnal.jadwal_id', 'left')
+			->join('guru', 'guru.guru_kode=jadwal.guru_kode', 'left')
+			->join('kelas', 'kelas.kelas_id=jadwal.kelas_id', 'left')
+			->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left')
+			->join('ruangan', 'ruangan.ruang_id=jadwal.ruang_id', 'left')
 			->where($params)
 			->get();
 		$result = $query->row();
@@ -218,5 +221,17 @@ class JadwalModel extends CI_Model
 	{
 		$query = "SELECT judul_info, max(create_time) as date FROM info_akademik";
 		return $result = $this->db->query($query);
+	}
+	
+	public function get_jurnal_materi($id)
+	{
+		$this->db->select("jadwal.jadwal_id, jadwal.hari, mapel.nama_mapel, kelas.nama_kelas, jurnal.tanggal, jurnal.kd_materi, jurnal.pert_ke, jurnal.pembahasan, jurnal.jurnal_id");
+		$this->db->from('jurnal');
+		$this->db->join('jadwal', 'jadwal.jadwal_id=jurnal.jadwal_id');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
+		$this->db->join('kelas', 'kelas.kelas_id=jadwal.kelas_id');
+		$this->db->where('jadwal.kelas_id', $id);
+		$query = $this->db->get();
+		return $query->result();
 	}
 }

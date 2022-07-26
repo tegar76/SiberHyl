@@ -482,6 +482,7 @@ class GuruModel extends CI_Model
 		$this->db->insert('diskusi_siswa', $data);
 	}
 
+<<<<<<< HEAD
 	public function get_materi_guru($id)
 	{
 		$this->db->select("*");
@@ -524,5 +525,15 @@ class GuruModel extends CI_Model
 		->get();
 		return $query->result();
 
+=======
+	public function get_wali_kelas($where)
+	{
+		$this->db->select('guru.guru_kode, guru.guru_nama, kelas.kelas_id, kelas.kode_kelas, kelas.nama_kelas, kelas.create_time, kelas.update_time');
+		$this->db->from('kelas');
+		$this->db->join('guru', 'guru.guru_kode=kelas.guru_kode');
+		$this->db->where('kelas.guru_kode', $where);
+		$query = $this->db->get();
+		return $query->row();
+>>>>>>> wali-kelas
 	}
 }

@@ -42,13 +42,16 @@ class JurnalMateri extends CI_Controller
 	{
 		$jurnal_id = $this->input->post('jurnal_id', true);
 		$jurnal_id = $this->secure->decrypt_url($jurnal_id);
-		$this->db->set('status', 1);
+		$jurnal = $this->db->select('status')->where('jurnal_id', $jurnal_id)->get('jurnal')->row();
+		$status = $jurnal->status;
+		$status = $status + 1;
+		$this->db->set('status', $status);
 		$this->db->where('jurnal_id', $jurnal_id);
 		$this->db->update('jurnal');
 		$reponse = [
 			'csrfName' => $this->security->get_csrf_token_name(),
 			'csrfHash' => $this->security->get_csrf_hash(),
-			'message' => 'Anda telah menghapus mata pelajaran ini',
+			'message' => 'Anda telah Melihat Jurnal Materi ini',
 			'success' => true
 		];
 		echo json_encode($reponse);

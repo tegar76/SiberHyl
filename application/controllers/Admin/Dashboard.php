@@ -29,7 +29,7 @@ class Dashboard extends CI_Controller
 		$data['studentRow'] = $this->master->get_row_data('siswa');
 		$data['classRow'] = $this->master->get_row_data('kelas');
 		$data['pesan'] = $this->master->get_pesan();
-		$data['jurnal'] = $this->jadwal->get_jurnal(5);
+		$data['jurnal'] = $this->jadwal->get_jurnal(null, 5);
 		$data['info_akademik'] = $this->jadwal->get_infolimit(5);
 		$data['title'] = 'Dashboard Admin';
 		$data['content'] = 'admin/contents/dashboard/v_dashboard';

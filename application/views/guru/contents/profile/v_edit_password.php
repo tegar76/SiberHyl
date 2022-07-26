@@ -11,7 +11,7 @@
 		<div class="d-flex align-items-center">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
-					<li class="breadcrumb-item text-muted active"><a href="<?= base_url('guru/dashboard') ?>" class="text-muted">Dashboard</a></li>
+					<li class="breadcrumb-item text-muted active"><a href="<?= base_url($this->session->userdata('level') . '/dashboard') ?>" class="text-muted">Dashboard</a></li>
 					<li class="breadcrumb-item text-muted active" aria-current="page">Edit Password</li>
 				</ol>
 			</nav>
@@ -41,7 +41,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="card shadow px-3 pt-3">
-									<?= form_open('guru/profile/update_password') ?>
+									<?= form_open($this->session->userdata('level') . '/profile/update_password') ?>
 									<div class="form-group">
 										<label for="username">Username</label>
 										<input type="text" id="username" name="username" class="form-control" value="<?= $guru->guru_username ?>" readonly>
