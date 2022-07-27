@@ -62,13 +62,13 @@ class MasterModel extends CI_Model
 			$result = $query->result();
 			return $result;
 		} elseif ($table == 'guru') {
-			$query = $this->db->select('guru_id, guru_kode, guru_nama', 'role_id')
+			$query = $this->db->select('guru_nip, guru_kode, guru_nama', 'role_id')
 				->from($table)->where('role_id !=', 1)->order_by('guru_kode', 'ASC')->get();
 			$result = $query->result();
 			return $result;
 		} elseif ($table == 'ruangan') {
 			$query = $this->db->select('ruang_id, kode_ruang')
-				->from('ruangan')->order_by('nama_ruang', 'ASC')->get();
+				->from('ruangan')->order_by('kode_ruang', 'ASC')->get();
 			$result = $query->result();
 			return $result;
 		} else {
@@ -99,8 +99,9 @@ class MasterModel extends CI_Model
 			}
 			return $query->result();
 		} elseif ($type == 'teacher') {
-			$this->db->select('guru_id, guru_kode, guru_nama, role_id');
+			$this->db->select('guru_id, guru_nip, guru_kode, guru_nama, role_id');
 			$this->db->from('guru');
+			$this->db->like('guru_nip', $search);
 			$this->db->like('guru_kode', $search);
 			$this->db->like('guru_nama', $search);
 			$this->db->where('role_id !=', 1);
@@ -113,8 +114,8 @@ class MasterModel extends CI_Model
 		} elseif ($type == 'room') {
 			$this->db->select('ruang_id, kode_ruang');
 			$this->db->from('ruangan');
-			$this->db->like('nama_ruang', $search);
-			$this->db->order_by('nama_ruang', 'ASC');
+			$this->db->like('kode_ruang', $search);
+			$this->db->order_by('kode_ruang', 'ASC');
 			$query	= $this->db->get();
 			if ($query->num_rows() == null) {
 				return 0;
@@ -168,7 +169,7 @@ class MasterModel extends CI_Model
 		$select = "kelas.kode_kelas, kelas.nama_kelas, kelas.create_time, kelas.update_time, guru.guru_nama, jurusan.kode_jurusan";
 		$query	= $this->db->select($select)
 			->from('kelas')
-			->join('guru', 'guru.guru_kode=kelas.guru_kode', 'left')
+			->join('guru', 'guru.guru_nip=kelas.guru_nip', 'left')
 			->join('jurusan', 'jurusan.kode_jurusan=kelas.kode_jurusan', 'left')
 			->order_by('create_time', 'DESC')
 			->get();
@@ -181,7 +182,7 @@ class MasterModel extends CI_Model
 		$select = "kelas.kode_kelas, kelas.nama_kelas, kelas.create_time, kelas.update_time, guru.guru_nama, guru.guru_kode, jurusan.kode_jurusan";
 		$query	= $this->db->select($select)
 			->from('kelas')
-			->join('guru', 'guru.guru_kode=kelas.guru_kode', 'left')
+			->join('guru', 'guru.guru_nip=kelas.guru_nip', 'left')
 			->join('jurusan', 'jurusan.kode_jurusan=kelas.kode_jurusan', 'left')
 			->where('kode_kelas', $kodeKelas)
 			->get();
@@ -226,7 +227,7 @@ class MasterModel extends CI_Model
 
 	public function check_walikelas($waliKelas)
 	{
-		$query	= $this->db->get_where('kelas', ['guru_kode' => $waliKelas], 1);
+		$query	= $this->db->get_where('kelas', ['guru_nip' => $waliKelas], 1);
 		$result = $query->num_rows();
 		if ($result == 1) {
 			return false;

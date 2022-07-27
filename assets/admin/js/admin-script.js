@@ -26,16 +26,16 @@ $(document).ready(function () {
 
 // jadwal pelajaran
 $(document).ready(function () {
-	$("#data_jadwal").DataTable();
+	$("#table-jadwal-pelajaran").DataTable();
 	$('[data-toggle="tooltip"]').tooltip();
 	var csrfName = $(".csrf_token").attr("name");
 	var csrfHash = $(".csrf_token").val();
-	$("#data_jadwal").on("click", ".delete-schedule", function (e) {
+	$("#table-jadwal-pelajaran").on("click", ".delete-schedule", function (e) {
 		e.preventDefault();
-		var kodeJadwal = $(e.currentTarget).attr("kode-jadwal");
+		var jadwal_id = $(e.currentTarget).attr("id-jadwal");
 		var dataJson = {
 			[csrfName]: csrfHash,
-			kodeJadwal: kodeJadwal,
+			jadwal_id: jadwal_id,
 		};
 		console.log(dataJson);
 		Swal.fire({
@@ -50,7 +50,7 @@ $(document).ready(function () {
 			if (result.value) {
 				$.ajax({
 					type: "POST",
-					url: BASEURL + "master/jadwal/hapusJadwal",
+					url: BASEURL + "master/jadwal/delete_jadwal",
 					data: dataJson,
 					beforeSend: function () {
 						swal.fire({
@@ -84,7 +84,7 @@ $(document).ready(function () {
 					error: function () {
 						swal.fire(
 							"Penghapusan Jadwal Pelajaran Gagal",
-							"Ada Kesalahan Saat menghapus jadwal!",
+							"Anda tidak dapat menghapus jadwal pelajaran yang masih berlangsung!",
 							"error"
 						);
 					},
@@ -97,7 +97,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$("#pratinjau-kelas-id").change(function () {
 		var kelas = $("#pratinjau-kelas-id").val();
-		window.location = BASEURL + "master/jadwal/pratinjauJadwal/" + kelas;
+		window.location = BASEURL + "master/jadwal/pratinjau_jadwal?kelas=" + kelas;
 	});
 });
 
@@ -581,7 +581,7 @@ $(document).ready(function () {
 					error: function () {
 						swal.fire(
 							"Penghapusan Ruangan Gagal",
-							"Ada Kesalahan Saat menghapus Ruangan!",
+							"Anda tidak dapat menghapus data ruangan yang sedang digunakan!",
 							"error"
 						);
 					},
@@ -648,7 +648,7 @@ $(document).ready(function () {
 					error: function () {
 						swal.fire(
 							"Penghapusan Data Guru Gagal",
-							"Ada Kesalahan Saat menghapus Data Guru!",
+							"Anda tidak dapat menghapus data guru pengajar yang masih bertugas!!",
 							"error"
 						);
 					},
@@ -757,6 +757,7 @@ $(document).ready(function () {
 			showCancelButton: true,
 			confirmButtonColor: "#3085d6",
 			cancelButtonColor: "#d33",
+			cancelButtonText: "Batal",
 			confirmButtonText: "Ya, Hapus!",
 		}).then((result) => {
 			if (result.value) {
@@ -791,7 +792,7 @@ $(document).ready(function () {
 								timer: 1500,
 							});
 							window.location =
-								BASEURL + "master/data/siswa/kelas/" + kode_kelas;
+								BASEURL + "master/data/siswa?kelas=" + kode_kelas;
 						}
 					},
 					error: function () {
@@ -838,7 +839,11 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$("#change-kelas").change(function () {
 		var data = $("#change-kelas option:selected").val();
-		window.location = BASEURL + "master/data/siswa/kelas/" + data;
+		if (data === "") {
+			window.location = BASEURL + "master/data/siswa";
+		} else {
+			window.location = BASEURL + "master/data/siswa?kelas=" + data;
+		}
 	});
 });
 

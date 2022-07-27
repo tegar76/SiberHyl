@@ -29,16 +29,16 @@
 				<li class="sidebar-item "> <a class="sidebar-link has-arrow <?= ($this->uri->segment(2) == "jadwal") ? 'active' : '' ?>" href="javascript:void(0)" aria-expanded="false"><i data-feather="settings" class="feather-icon"></i><span class="hide-menu">Settings Jadwal </span></a>
 					<ul aria-expanded="false" class="collapse  first-level base-level-line <?= ($this->uri->segment(2) == "Jadwal") ? 'in' : '' ?>"><a href="<?= base_url('master/jadwal') ?>">
 							<li class="sidebar-item <?= ($this->uri->segment(2) == "jadwal") ? 'active' : '' ?>">
-								<a href="<?= base_url('master/jadwal') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "jadwal/") ? 'active' : '' ?>"><span class="hide-menu"> Jadwal</span></a>
+								<a href="<?= base_url('master/jadwal') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "jadwal") ? 'active' : '' ?>"><span class="hide-menu"> Jadwal</span></a>
 							</li>
 							<li class="sidebar-item">
-								<a href="<?= base_url('master/jadwal/pratinjauJadwal') ?>" class="sidebar-link <?= ($this->uri->segment(3) == "pratinjauJadwal") ? 'active' : '' ?>"><span class="hide-menu"> Pratinjau</span></a>
+								<a href="<?= base_url('master/jadwal/pratinjau_jadwal') ?>" class="sidebar-link <?= ($this->uri->segment(3) == "pratinjau_jadwal") ? 'active' : '' ?>"><span class="hide-menu"> Pratinjau</span></a>
 							</li>
 							<li class="sidebar-item">
 								<a href="<?= base_url('master/materi') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materi/") ? 'active' : '' ?>"><span class="hide-menu"> Materi (Admin)</span></a>
 							</li>
 							<li class="sidebar-item">
-								<a href="<?= base_url('Admin/Materi/materiGuru') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materiGuru/") ? 'active' : '' ?>"><span class="hide-menu"> Materi (Guru)</span></a>
+								<a href="<?= base_url('master/materi/materiGuru') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materiGuru/") ? 'active' : '' ?>"><span class="hide-menu"> Materi (Guru)</span></a>
 							</li>
 					</ul>
 				</li>
@@ -55,8 +55,8 @@
 				<li class="list-divider"></li>
 				<li class="sidebar-item <?= ($this->uri->segment(2) == "jurnal") ? 'selected' : '' ?>"> <a class="sidebar-link sidebar-link" href="<?= base_url('master/jurnal') ?>" aria-expanded="false"><i data-feather="book" class="feather-icon"></i><span class="hide-menu">Jurnal Materi</span></a></li>
 				<li class="list-divider"></li>
-				<li class="sidebar-item <?= ($this->uri->segment(2) == "") ? 'selected' : '' ?>"> 
-					<a class="sidebar-link sidebar-link" href="<?= base_url('Admin/SuperVisor') ?>" aria-expanded="false">
+				<li class="sidebar-item <?= ($this->uri->segment(2) == "") ? 'selected' : '' ?>">
+					<a class="sidebar-link sidebar-link" href="<?= base_url('master/super_visor') ?>" aria-expanded="false">
 						<i data-feather="airplay" class="feather-icon"></i>
 						<span class="hide-menu">Super Visor
 						</span>

@@ -40,7 +40,8 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="activity">
-					<?= form_open('master/jadwal/editJadwal/' . $jadwalDetail->kode_jadwal) ?>
+					<?= form_open('master/jadwal/update_jadwal/' . $jadwal->jadwal_id) ?>
+					<input type="hidden" name="jadwal_id" value="<?= $jadwal->jadwal_id ?>">
 					<!-- looping card -->
 					<div class="card shadow mb-4">
 						<div class="container my-3">
@@ -49,7 +50,7 @@
 								<select class="custom-select <?= (form_error('kelas_edit')) ? 'is-invalid' : 'is-valid' ?>" id="kelas_edit" name="kelas_edit">
 									<option value="">Pilih Kelas</option>
 									<?php foreach ($classes as $class) : ?>
-										<option value="<?= $class->kelas_id ?>" <?= ($jadwalDetail->kelas_id == $class->kelas_id) ? 'selected' : '' ?>><?= $class->nama_kelas ?></option>
+										<option value="<?= $class->kelas_id ?>" <?= ($jadwal->kelas_id == $class->kelas_id) ? 'selected' : '' ?>><?= $class->nama_kelas ?></option>
 									<?php endforeach ?>
 								</select>
 								<div id="kelas_editFeedback" class="invalid-feedback">
@@ -61,7 +62,7 @@
 								<select class="custom-select <?= (form_error('hari_edit')) ? 'is-invalid' : 'is-valid' ?>" id="hari_edit" name="hari_edit">
 									<option value="">Pilih Hari</option>
 									<?php foreach ($days as $day) : ?>
-										<option value="<?= $day ?>" <?= ($jadwalDetail->hari == $day) ? 'selected' : '' ?>><?= $day ?></option>
+										<option value="<?= $day ?>" <?= ($jadwal->hari == $day) ? 'selected' : '' ?>><?= $day ?></option>
 									<?php endforeach ?>
 								</select>
 								<div id="hari_editFeedback" class="invalid-feedback">
@@ -73,7 +74,7 @@
 								<select class="custom-select <?= (form_error('mapel_edit')) ? 'is-invalid' : 'is-valid' ?>" id="mapel_edit" name="mapel_edit">
 									<option value="">Pilih Mata Pelajaran</option>
 									<?php foreach ($lessons as $lesson) : ?>
-										<option value="<?= $lesson->mapel_id ?>" <?= ($jadwalDetail->nama_mapel == $lesson->nama_mapel) ? 'selected' : '' ?>><?= $lesson->nama_mapel ?></option>
+										<option value="<?= $lesson->mapel_id ?>" <?= ($jadwal->nama_mapel == $lesson->nama_mapel) ? 'selected' : '' ?>><?= $lesson->nama_mapel ?></option>
 									<?php endforeach ?>
 								</select>
 								<div id="mapel_editFeedback" class="invalid-feedback">
@@ -85,7 +86,7 @@
 								<select class="custom-select <?= (form_error('guru_edit')) ? 'is-invalid' : 'is-valid' ?>" id="guru_edit" name="guru_edit">
 									<option value="">Pilih Kode Guru</option>
 									<?php foreach ($teachers as $teacher) : ?>
-										<option value="<?= $teacher->guru_kode ?>" <?= ($jadwalDetail->guru_kode == $teacher->guru_kode) ? 'selected' : '' ?>><?= $teacher->guru_kode ?></option>
+										<option value="<?= $teacher->guru_nip ?>" <?= ($jadwal->guru_nip == $teacher->guru_nip) ? 'selected' : '' ?>><?= $teacher->guru_kode ?></option>
 									<?php endforeach ?>
 								</select>
 								<div id="guru_editFeedback" class="invalid-feedback">
@@ -96,7 +97,7 @@
 								<div class="col">
 									<label for="jam_masuk_edit">Jam Mulai</label>
 									<div class="input-group mb-3">
-										<input type="text" class="form-control <?= (form_error('jam_masuk_edit')) ? 'is-invalid' : 'is-valid' ?>" name="jam_masuk_edit" id="jam_masuk_edit" value="<?= date('H:i', strtotime($jadwalDetail->jam_masuk)) ?>">
+										<input type="text" class="form-control <?= (form_error('jam_masuk_edit')) ? 'is-invalid' : 'is-valid' ?>" name="jam_masuk_edit" id="jam_masuk_edit" value="<?= date('H:i', strtotime($jadwal->jam_masuk)) ?>">
 										<div id="jam_masuk_editFeedback" class="invalid-feedback">
 											<?= form_error('jam_masuk_edit', '<div class="text-danger">', '</div>') ?>
 										</div>
@@ -105,7 +106,7 @@
 								<div class="col">
 									<label for="jam_keluar_edit">Jam Selesai</label>
 									<div class="input-group mb-3">
-										<input type="text" class="form-control <?= (form_error('jam_keluar_edit')) ? 'is-invalid' : 'is-valid' ?>" name="jam_keluar_edit" id="jam_keluar_edit" value="<?= date('H:i', strtotime($jadwalDetail->jam_keluar)) ?>">
+										<input type="text" class="form-control <?= (form_error('jam_keluar_edit')) ? 'is-invalid' : 'is-valid' ?>" name="jam_keluar_edit" id="jam_keluar_edit" value="<?= date('H:i', strtotime($jadwal->jam_keluar)) ?>">
 										<div id="jam_keluar_editFeedback" class="invalid-feedback">
 											<?= form_error('jam_keluar_edit', '<div class="text-danger">', '</div>') ?>
 										</div>
@@ -117,7 +118,7 @@
 								<select class="custom-select <?= (form_error('ruangan_edit')) ? 'is-invalid' : 'is-valid' ?>" id="ruangan_edit" name="ruangan_edit">
 									<option value="">Pilih Ruangan Kelas</option>
 									<?php foreach ($rooms as $room) : ?>
-										<option value="<?= $room->ruang_id ?>" <?= ($jadwalDetail->ruang_id == $room->ruang_id) ? 'selected' : '' ?>><?= $room->kode_ruang ?></option>
+										<option value="<?= $room->ruang_id ?>" <?= ($jadwal->ruang_id == $room->ruang_id) ? 'selected' : '' ?>><?= $room->kode_ruang ?></option>
 									<?php endforeach ?>
 								</select>
 								<div id="ruangan_editFeedback" class="invalid-feedback">
@@ -126,16 +127,15 @@
 							</div>
 							<label for="jam_mengajar_edit">Jam Mengajar</label>
 							<div class="input-group mb-3">
-								<input type="text" name="jam_mengajar_edit" id="jam_mengajar_edit" placeholder="Masukan Jumlah Jam Mengajar" class="form-control  <?= (form_error('jam_mengajar_edit')) ? 'is-invalid' : 'is-valid' ?>" value="<?= $jadwalDetail->jumlah_jam ?>">
+								<input type="text" name="jam_mengajar_edit" id="jam_mengajar_edit" placeholder="Masukan Jumlah Jam Mengajar" class="form-control  <?= (form_error('jam_mengajar_edit')) ? 'is-invalid' : 'is-valid' ?>" value="<?= $jadwal->jumlah_jam ?>">
 								<div id="jam_mengajar_editFeedback" class="invalid-feedback">
 									<?= form_error('jam_mengajar_edit', '<div class="text-danger">', '</div>') ?>
 								</div>
 							</div>
 						</div>
 					</div>
-					<input type="hidden" name="kode_jadwal" value="<?= $jadwalDetail->kode_jadwal ?>">
 					<div class="btn-aksi">
-						<button type="submit" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
+						<button type="submit" name="update" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
 						<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset Form</button>
 					</div>
 					<?= form_close() ?>

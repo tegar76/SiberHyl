@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -15,7 +15,7 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Master Data</li>
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/data/siswa') ?>" class="text-muted">Data Siswa</a></li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/data/siswa?kelas=' . $student->kode_kelas) ?>" class="text-muted">Data Siswa</a></li>
 					<li class="breadcrumb-item text-muted active" aria-current="page">Edit Siswa</li>
 				</ol>
 			</nav>
@@ -43,7 +43,7 @@
 				<div class="activity">
 					<div class="card shadow mb-4">
 						<div class="container my-3">
-							<?= form_open('master/data/siswa/update_siswa/' . $this->secure->encrypt_url($student->siswa_id)) ?>
+							<?= form_open('master/data/siswa/update_siswa/' . $student->siswa_nis) ?>
 							<input type="hidden" name="siswa_id" value="<?= $student->siswa_id ?>">
 							<input type="hidden" name="kelas_id" value="<?= $student->kelas_id ?>">
 							<label for="nis_edit">NIS</label>
@@ -202,7 +202,7 @@
 								</div>
 							</div>
 							<div class="btn-aksi">
-								<button type="submit" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
+								<button type="submit" name="update" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
 								<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset</button>
 							</div>
 							<?= form_close() ?>

@@ -72,12 +72,15 @@ class Info extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function detail_info_akademik($params)
+	public function detail_info_akademik()
 	{
-		$info = $this->db->get_where('info_akademik', ['file_info' => $params])->row();
-		$data['title'] = $info->judul_info;
-		$data['file_info'] = base_url('storage/info/') . $info->file_info;
-		$this->load->view('admin/contents/info/pdf_view_info_akademik/v_info_akademik_pdf', $data, FALSE);
+		$file = $this->input->get('file');
+		if ($file) {
+			$data['pdf'] = base_url('storage/info/' . $file);
+			$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
+		} else {
+			redirect('master/dashboard');
+		}
 	}
 
 	public function tambah_info_akademik()

@@ -1,9 +1,9 @@
 <!-- Data Tables -->
 <!-- import data tables -->
-<?php include APPPATH.'../assets/DataTables/import/import.php';?>
+<?php include APPPATH . '../assets/DataTables/import/import.php'; ?>
 
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 
 <div class="page-wrapper">
@@ -39,7 +39,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<h6 class="card-title">Data Guru Semester <?= $semester = ($tahun_ajar['semester'] == 0 ) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
+						<h6 class="card-title">Data Guru Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
 						<div class="mt-4 activity">
 							<table id="data-guru" class="table-responsive table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
@@ -54,39 +54,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php if(!empty($guru)) : ?>
-										<?php if(is_array($guru)) : ?>
-											<?php $no = 1;
-											foreach ($guru as $row => $value) : ?>
-												<tr>
-													<td><?= $no++ ?></td>
-													<td><?= $value->guru_kode ?></td>
-													<td><?= $value->guru_nama ?></td>
-													<td><?= date('d-m-Y H:i', strtotime($value->create_time)) . " WIB" ?></td>
-													<td><?= ($value->create_time == $value->update_time) ? '-' : date('d-m-Y H:i', strtotime($value->update_time)) . " WIB" ?></td>
-													<td class="d-flex justify-content-center">
-														<a href="<?= base_url('master/data/guru/detail_guru/' . $this->secure->encrypt_url($value->guru_id)) ?>" class="btn btn-sm btn-primary mr-2"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-														<a href="<?= base_url('master/data/guru/update_guru/' . $this->secure->encrypt_url($value->guru_id)) ?>" class="btn btn-sm btn-success mr-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-														<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
-														<a href="#" class="btn btn-sm btn-danger delete-guru" guru-nip="<?= $value->guru_nip ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
-													</td>
-												</tr>
-											<?php endforeach ?>
-										<?php else : ?>
+									<?php if ($guru) : ?>
+										<?php $no = 1;
+										foreach ($guru as $row => $value) : ?>
 											<tr>
-												<td><?= 1 ?></td>
-												<td><?= $guru->guru_kode ?></td>
-												<td><?= $guru->guru_nama ?></td>
-												<td><?= date('d-m-Y H:i', strtotime($guru->create_time)) . " WIB" ?></td>
-												<td><?= ($guru->create_time == $guru->update_time) ? '-' : date('d-m-Y H:i', strtotime($guru->update_time)) . " WIB" ?></td>
+												<td><?= $no++ ?></td>
+												<td><?= $value->guru_kode ?></td>
+												<td><?= $value->guru_nama ?></td>
+												<td><?= date('d-m-Y H:i', strtotime($value->create_time)) . " WIB" ?></td>
+												<td><?= ($value->create_time == $value->update_time) ? '-' : date('d-m-Y H:i', strtotime($value->update_time)) . " WIB" ?></td>
 												<td class="d-flex justify-content-center">
-													<a href="<?= base_url('master/data/guru/detail_guru/' . $this->secure->encrypt_url($guru->guru_id)) ?>" class="btn btn-sm btn-primary mr-2"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-													<a href="<?= base_url('master/data/guru/update_guru/' . $this->secure->encrypt_url($guru->guru_id)) ?>" class="btn btn-sm btn-success mr-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+													<a href="<?= base_url('master/data/guru/detail_guru?nip=' . $value->guru_nip) ?>" class="btn btn-sm btn-primary mr-2"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+													<a href="<?= base_url('master/data/guru/update_guru/' . $value->guru_nip) ?>" class="btn btn-sm btn-success mr-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 													<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
-													<a href="#" class="btn btn-sm btn-danger delete-guru" guru-nip="<?= $guru->guru_nip ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+													<a href="javascript:void(0)" class="btn btn-sm btn-danger delete-guru" guru-nip="<?= $value->guru_nip ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
 												</td>
 											</tr>
-										<?php endif ?>
+										<?php endforeach ?>
 									<?php endif ?>
 								</tbody>
 							</table>

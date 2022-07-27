@@ -81,7 +81,7 @@
 								<select class="form-control custom-select <?= (form_error('kode_guru')) ? 'is-invalid' : '' ?>" id="kode_guru" name="kode_guru" title="Pilih Kode Guru">
 									<option value="" selected>Pilih Guru yang menjadi wali kelas</option>
 									<?php foreach ($guru as $row => $value) : ?>
-										<option value="<?= $value->guru_kode ?>" <?= (set_value('kode_guru') == $value->guru_kode) ? 'selected' : '' ?>><?= $value->guru_nama ?></option>
+										<option value="<?= $value->guru_nip ?>" <?= (set_value('kode_guru') == $value->guru_kode) ? 'selected' : '' ?>><?= $value->guru_nama ?></option>
 									<?php endforeach; ?>
 								</select>
 								<div class="invalid-feedback">

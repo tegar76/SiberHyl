@@ -73,7 +73,7 @@
         kind: OptionKind.VIEWER + OptionKind.PREFERENCE
     },
     defaultUrl: {
-        value: "<?= $file_pdf ?>",
+        value: "<?= $pdf ?>",
         kind: OptionKind.VIEWER
     },
     defaultZoomValue: {
@@ -15664,3 +15664,4 @@
     ;
     //# sourceMappingURL=viewer.js.map
   </script>
+

@@ -123,8 +123,7 @@
 							</div>
 							<label for="alamat">Alamat</label>
 							<div class="input-group mb-3">
-								<textarea name="alamat" id="alamat" placeholder="Masukan Alamat Lengkap" class="form-control <?= form_error('alamat') ? 'is-invalid' : '' ?>" value="<?= set_value('alamat') ?>">
-								</textarea>
+								<textarea name="alamat" id="alamat" placeholder="Masukan Alamat Lengkap" class="form-control <?= form_error('alamat') ? 'is-invalid' : '' ?>"><?= set_value('alamat') ?></textarea>
 								<div class="invalid-feedback">
 									<?= form_error('alamat', '<div class="text-danger">', '</div>') ?>
 								</div>

@@ -49,7 +49,12 @@
 								<select id="pratinjau-kelas-id" class="form-control">
 									<option selected value="">Pilih Kelas</option>
 									<?php foreach ($classes as $cls) : ?>
-										<option value="<?= $cls->kode_kelas ?>" <?= ($cls->kode_kelas == $this->uri->segment(4)) ? 'selected' : '' ?>><?= $cls->nama_kelas ?></option>
+										<?php if (isset($_GET['kelas']) && $cls->kode_kelas == $_GET['kelas']) : ?>
+											<?php $selected = 'selected' ?>
+										<?php else : ?>
+											<?php $selected = '' ?>
+										<?php endif ?>
+										<option value="<?= $cls->kode_kelas ?>" <?= $selected ?>><?= $cls->nama_kelas ?></option>
 									<?php endforeach ?>
 								</select>
 								<div class="input-group-prepend">
@@ -60,7 +65,7 @@
 					</div>
 					<div class="card shadow">
 						<div class="container py-3">
-							<?php if (empty($this->uri->segment(4))) : ?>
+							<?php if (!isset($_GET['kelas']) || empty($schedule)) : ?>
 								<div class="row">
 									<!-- Jadwal Harian Looping Disini -->
 									<?php foreach ($days as $day) : ?>
@@ -74,7 +79,6 @@
 												<div class="jadwal mt-2">
 													<div class="mapel">
 														<div class="card shadow-sm p-2">
-
 														</div>
 													</div>
 												</div>
@@ -85,47 +89,38 @@
 							<?php else : ?>
 								<div class="row">
 									<!-- Jadwal Harian Looping Disini -->
-									<?php foreach ($days as $day) : ?>
+									<?php foreach ($schedule as $value) : ?>
 										<div class="content-card col-md-4 mb-3">
 											<div class="card shadow">
 												<div class="hari mb-n4">
 													<div class="card d-flex align-items-center">
-														<p class="text-uppercase my-auto"><?= $day ?></p>
+														<p class="text-uppercase my-auto"><?= $value['hari'] ?></p>
 													</div>
 												</div>
-												<?php
-												$CI = &get_instance();
-												$CI->load->model('JadwalModel', 'jadwal', true);
-												$studying = $CI->jadwal->getJadwalHariIni([
-													'hari' => $day,
-													'jadwal.kelas_id' => $class->kelas_id
-												])->result();
-												?>
-												<!-- Looping mapel Kedua -->
-												<?php foreach ($studying as $study) : ?>
+												<?php foreach ($value['sch'] as $study) : ?>
 													<div class="jadwal mt-2">
 														<div class="mapel">
 															<div class="card shadow-sm p-2">
 																<div class="d-flex justify-content-lg-start">
-																	<img role="button" src="<?= ($study->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $study->guru_foto) ?>" alt="" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="<?= $study->guru_nama ?>">
+																	<img role="button" src="<?= ($study['foto'] == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $study['foto']) ?>" alt="" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="<?= $study['nama'] ?>">
 																	<div class="mapel w-100">
 																		<center>
-																			<p><?= $study->nama_mapel ?></p>
+																			<p><?= $study['mapel'] ?></p>
 																		</center>
 																	</div>
 																</div>
 																<div class="ket-mapel mt-3">
 																	<div class="d-flex justify-content-start">
 																		<img src="<?= base_url('assets/siswa/icons/guru.png') ?>" alt="">
-																		<p><?= $study->guru_kode ?></p>
+																		<p><?= $study['kode'] ?></p>
 																	</div>
 																	<div class="d-flex justify-content-start">
 																		<img src="<?= base_url('assets/siswa/icons/waktu.png') ?>" alt="">
-																		<p><?= date('H:i', strtotime($study->jam_masuk)) . ' - ' . date('H:i', strtotime($study->jam_keluar)) ?></p>
+																		<p><?= $study['jam'] ?></p>
 																	</div>
 																	<div class="d-flex justify-content-start">
 																		<img src="<?= base_url('assets/siswa/icons/r-kelas.png') ?>" alt="">
-																		<p><?= $study->kode_ruang ?></p>
+																		<p><?= $study['ruang'] ?></p>
 																	</div>
 																</div>
 															</div>
@@ -143,8 +138,8 @@
 			</div>
 		</div>
 	</div>
-	</div>
-	<!-- *************************************************************** -->
-	<!-- End Top Leader Table -->
-	<!-- *************************************************************** -->
+</div>
+<!-- *************************************************************** -->
+<!-- End Top Leader Table -->
+<!-- *************************************************************** -->
 </div>

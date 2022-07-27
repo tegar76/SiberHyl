@@ -1,10 +1,8 @@
 <!-- import pdf js-->
 <?php include APPPATH . '../assets/pdfjs-2.12.313-legacy-dist/import_pdfjs.php'; ?>
 
-<?php
-include('pdf_viewer_js.php');
-// file pdf ada di file file_jawaban_evaluasi_pdf_js.php dengan nama defaultUrl:
-?>
+<?php include('pdf_viewer_js.php'); ?>
+
 <section class="container section section__height">
 
 	<div class="card w-100 h-100" style="background-color: #e8ebed;">

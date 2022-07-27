@@ -1,4 +1,5 @@
 <!-- import style -->
+<?php include APPPATH . '../assets/DataTables/import/import.php'; ?>
 
 <?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
@@ -47,7 +48,7 @@
 							<div class="col-md-3 text-center mb-3">
 								<div class="card shadow py-4">
 									<div class="img-photo justify-content-center">
-										<img class="mx-auto d-block rounded-circle" src="<?= ($guru->guru_foto != 'default_profile.png') ? base_url('storage/guru/profile/' . $guru->guru_foto) : base_url('assets/siswa/img/profile-default-siswa.png') ?>" width="150" alt="<?= $guru->guru_nama ?>">
+										<img class="mx-auto d-block rounded-circle" src="<?= ($guru->profile != 'default_profile.png') ? base_url('storage/guru/profile/' . $guru->profile) : base_url('assets/siswa/img/profile-default-siswa.png') ?>" width="150" alt="<?= $guru->guru_nama ?>">
 									</div>
 								</div>
 							</div>
@@ -72,7 +73,7 @@
 											</tr>
 											<tr>
 												<th scope="row">Username</th>
-												<td><?= $guru->guru_username ?></td>
+												<td><?= $guru->username ?></td>
 											</tr>
 
 											<tr class="table-borderless">
@@ -81,7 +82,7 @@
 											</tr>
 											<tr>
 												<th scope="row">
-													<table class="table-responsive table-striped table-bordered" style="width:200%">
+													<table id="table-tugas-mengajar-guru" class="table-responsive table-striped table-bordered" style="width:200%">
 														<thead>
 															<tr>
 																<th>No</th>
@@ -103,7 +104,7 @@
 																		<td><?= $value['nomor'] ?></td>
 																		<td><?= $value['mapel'] ?></td>
 																		<td>
-																			<?php $kelas = $this->jadwal->getKelasJadwal($value['mapel_id']);
+																			<?php $kelas = $this->jadwal->getKelasJadwal($value['mapel_id'], $guru->guru_nip);
 																			foreach ($kelas as $row) {
 																				echo $row->nama_kelas . '<br>';
 																			} ?>

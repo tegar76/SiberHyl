@@ -1,8 +1,8 @@
 <!-- import data tables -->
-<?php include APPPATH.'../assets/DataTables/import/import.php';?>
+<?php include APPPATH . '../assets/DataTables/import/import.php'; ?>
 
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -107,12 +107,12 @@
 								</thead>
 								<tbody>
 									<?php $no = 1; ?>
-									<?php foreach ($info_akademik as $info ) : ?>
+									<?php foreach ($info_akademik as $info) : ?>
 										<tr>
 											<td><?= $no++ ?></td>
 											<td><?= date('d-m-Y H:i', strtotime($info->create_time)) ?></td>
 											<td><?= $info->judul_info ?></td>
-											<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik/' . $info->file_info) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+											<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik?file=' . $info->file_info) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
 										</tr>
 									<?php endforeach ?>
 								</tbody>
@@ -188,26 +188,26 @@
 									</tr>
 								</thead>
 								<tbody>
-										<tr>
-											<td>1</td>
-											<td>Senin</td>
-											<td>AB</td>
-											<td>Bahasa Inggris</td>
-											<td>07.00 - 09.00 WIB</td>
-											<td>XI TKRO 2</td>
-											<td>MM 1</td>
-											<td><a href="" class="d-block btn btn-sm btn-outline-primary border-blue rounded mx-auto">Kunjungi Kelas</a></td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Senin</td>
-											<td>AB</td>
-											<td>Bahasa Inggris</td>
-											<td>07.00 - 09.00 WIB</td>
-											<td>XI TKRO 2</td>
-											<td>MM 1</td>
-											<td><a href="" class="d-block btn btn-sm btn-outline-warning border-yellow rounded mx-auto">Sudah Dikunjungi</a></td>
-										</tr>
+									<tr>
+										<td>1</td>
+										<td>Senin</td>
+										<td>AB</td>
+										<td>Bahasa Inggris</td>
+										<td>07.00 - 09.00 WIB</td>
+										<td>XI TKRO 2</td>
+										<td>MM 1</td>
+										<td><a href="" class="d-block btn btn-sm btn-outline-primary border-blue rounded mx-auto">Kunjungi Kelas</a></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Senin</td>
+										<td>AB</td>
+										<td>Bahasa Inggris</td>
+										<td>07.00 - 09.00 WIB</td>
+										<td>XI TKRO 2</td>
+										<td>MM 1</td>
+										<td><a href="" class="d-block btn btn-sm btn-outline-warning border-yellow rounded mx-auto">Sudah Dikunjungi</a></td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -219,4 +219,3 @@
 		<!-- End Top Leader Table -->
 		<!-- *************************************************************** -->
 	</div>
-

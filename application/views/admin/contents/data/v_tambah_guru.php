@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -86,7 +86,7 @@
 								</div>
 							</div> -->
 							<div class="btn-aksi">
-								<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
+								<button type="submit" name="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
 								<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset</button>
 							</div>
 							<?= form_close() ?>

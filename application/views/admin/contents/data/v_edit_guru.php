@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -43,7 +43,7 @@
 				<div class="activity">
 					<div class="card shadow mb-4">
 						<div class="container my-3">
-							<?= form_open('master/data/guru/update_guru/' . $this->secure->encrypt_url($guru->guru_id)) ?>
+							<?= form_open('master/data/guru/update_guru/' . $guru->guru_nip) ?>
 							<input type="hidden" name="guru_id" value="<?= $guru->guru_id ?>">
 							<label for="kode_guru_edit">Kode</label>
 							<div class="input-group mb-3">
@@ -87,7 +87,7 @@
 								</div>
 							</div>
 							<div class="btn-aksi">
-								<button type="submit" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
+								<button type="submit" name="update" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
 								<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset</button>
 							</div>
 							<?= form_close() ?>

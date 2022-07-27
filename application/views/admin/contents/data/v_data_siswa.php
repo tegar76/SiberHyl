@@ -1,9 +1,9 @@
 <!-- Data Tables -->
 <!-- import data tables -->
-<?php include APPPATH.'../assets/DataTables/import/import.php';?>
+<?php include APPPATH . '../assets/DataTables/import/import.php'; ?>
 
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -41,7 +41,12 @@
 					<select id="change-kelas" class="form-control">
 						<option value="">Pilih Kelas</option>
 						<?php foreach ($classes as $row => $value) : ?>
-							<option value="<?= $value->kode_kelas ?>" <?= ($value->kode_kelas == $this->uri->segment(5)) ? 'selected' : '' ?>><?= $value->nama_kelas ?></option>
+							<?php if (isset($_GET['kelas']) && $value->kode_kelas == $_GET['kelas']) : ?>
+								<?php $selected = 'selected' ?>
+							<?php else : ?>
+								<?php $selected = '' ?>
+							<?php endif ?>
+							<option value="<?= $value->kode_kelas ?>" <?= $selected ?>><?= $value->nama_kelas ?></option>
 						<?php endforeach ?>
 					</select>
 					<div class="input-group-prepend">
@@ -52,7 +57,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<h6 class="card-title">Data Siswa Semester <?= $semester = ($tahun_ajar['semester'] == 0 ) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
+						<h6 class="card-title">Data Siswa Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
 						<p class="card-sub-title mb-1 mt-4">Kelas : <span><?= (empty($walikelas)) ? '-' : $walikelas->nama_kelas ?></span></p>
 						<p class="card-sub-title">Wali Kelas : <span><?= (empty($walikelas)) ? '-' : $walikelas->guru_nama ?></span></p>
 						<div class="mt-4 activity">
@@ -71,7 +76,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php if (is_array($students)) : ?>
+									<?php if (!empty($students)) : ?>
 										<?php $no = 1;
 										foreach ($students as $row => $value) : ?>
 											<tr>
@@ -83,29 +88,13 @@
 												<td><?= $value->asal_kelas ?></td>
 												<td><?= $value->status ?></td>
 												<td class="d-flex justify-content-center">
-													<a href="<?= base_url('master/data/siswa/detail_siswa/' . $this->secure->encrypt_url($value->siswa_id)) ?>" class="btn btn-sm btn-primary mr-2"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-													<a href="<?= base_url('master/data/siswa/update_siswa/' . $this->secure->encrypt_url($value->siswa_id)) ?>" class="btn btn-sm btn-success mr-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+													<a href="<?= base_url('master/data/siswa/detail_siswa?nis=' . $value->siswa_nis) ?>" class="btn btn-sm btn-primary mr-2"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+													<a href="<?= base_url('master/data/siswa/update_siswa/' . $value->siswa_nis) ?>" class="btn btn-sm btn-success mr-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 													<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
-													<a href="#" class="btn btn-sm btn-danger delete-siswa" kode-kelas="<?= $value->kode_kelas ?>" siswa-id="<?= $this->secure->encrypt_url($value->siswa_id) ?>" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+													<a href="javascript:void(0)" class="btn btn-sm btn-danger delete-siswa" kode-kelas="<?= $value->kode_kelas ?>" siswa-id="<?= $this->secure->encrypt_url($value->siswa_id) ?>" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
 												</td>
 											</tr>
 										<?php endforeach ?>
-									<?php elseif (is_object($students)) : ?>
-										<tr>
-											<td><?= 1 ?></td>
-											<td><?= $students->siswa_nis ?></td>
-											<td><?= $students->siswa_nisn ?></td>
-											<td><?= $students->siswa_nama ?></td>
-											<td><?= $students->siswa_kelamin ?></td>
-											<td><?= $students->asal_kelas ?></td>
-											<td><?= $students->status ?></td>
-											<td class="d-flex justify-content-center">
-												<a href="<?= base_url('master/data/siswa/detail_siswa/' . $this->secure->encrypt_url($students->siswa_id)) ?>" class="btn btn-sm btn-primary mr-2"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-												<a href="<?= base_url('master/data/siswa/update_siswa/' . $this->secure->encrypt_url($students->siswa_id)) ?>" class="btn btn-sm btn-success mr-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-												<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
-												<a href="#" class="btn btn-sm btn-danger delete-siswa" kode-kelas="<?= $students->kode_kelas ?>" siswa-id="<?= $this->secure->encrypt_url($students->siswa_id) ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
-											</td>
-										</tr>
 									<?php endif ?>
 								</tbody>
 							</table>

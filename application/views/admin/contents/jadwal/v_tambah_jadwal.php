@@ -44,7 +44,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="activity">
-					<?= form_open('master/jadwal/tambahJadwal') ?>
+					<?= form_open('master/jadwal/tambah_jadwal_pelajaran') ?>
 					<!-- looping card -->
 					<div class="card shadow mb-4">
 						<div class="container my-3">
@@ -105,9 +105,9 @@
 						</div>
 					</div>
 					<div id="next-form"></div>
-					<input type="hidden" id="jumlah-form"" name=" jumlah_form" value="1">
+					<input type="hidden" id="jumlah-form" name="jumlah_form" value="1">
 					<div class="btn-aksi">
-						<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
+						<button type="submit" name="submit_jadwal" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
 						<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2" id="btn-reset-form">Reset Form</button>
 					</div>
 					<?= form_close() ?>

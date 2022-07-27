@@ -67,12 +67,12 @@ class Login extends CI_Controller
 		$data 	= $this->input->post();
 		$admin  = $this->auth->getAdminByUsername($data['username']);
 		if ($admin) {
-			if (password_verify($data['password'], $admin->guru_pass)) {
+			if (password_verify($data['password'], $admin->password)) {
 				if ($admin->role_id === '1') {
 					$sess_ = [
 						'adminId'	=> $admin->guru_id,
 						'fullName'	=> $admin->guru_nama,
-						'username'	=> $admin->guru_username,
+						'username'	=> $admin->username,
 						'backToken' => crypt($admin->guru_nama, ''),
 						'level'		=> 'admin',
 						'logged_in'	=> true
@@ -83,7 +83,7 @@ class Login extends CI_Controller
 					redirect('master/dashboard');
 				} else {
 					$this->session->set_flashdata('message', 'Hak akses Anda tidak tersedia untuk masuk kedalam sistem Admin!');
-					$data['title'] = 'Masuk Sebagai Ad Admin';
+					$data['title'] = 'Masuk Sebagai Admin';
 					$this->load->view('admin/login/v_login');
 				}
 			} else {

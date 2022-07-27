@@ -57,7 +57,7 @@
 							<div class="input-group mb-3">
 								<select class="form-control custom-select <?= (form_error('wali_kelas_edit')) ? 'is-invalid' : '' ?>" id="wali_kelas_edit" name="wali_kelas_edit" title="Pilih Wali Kelas">
 									<?php foreach ($guru as $row => $value) : ?>
-										<option value="<?= $value->guru_kode ?>" <?= ($kelas->guru_kode === $value->guru_kode) ? 'selected' : '' ?>><?= $value->guru_nama ?></option>
+										<option value="<?= $value->guru_nip ?>" <?= ($kelas->guru_kode === $value->guru_kode) ? 'selected' : '' ?>><?= $value->guru_nama ?></option>
 									<?php endforeach; ?>
 								</select>
 								<div class="invalid-feedback">

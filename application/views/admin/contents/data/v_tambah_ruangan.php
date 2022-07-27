@@ -51,20 +51,6 @@
 									<?= form_error('kode_ruangan', '<div class="text-danger">', '</div>') ?>
 								</div>
 							</div>
-							<!-- <label for="nama_ruangan">Nama Ruangan</label>
-							<div class="input-group mb-3">
-								<input type="text" name="nama_ruangan" id="nama_ruangan" placeholder="Masukan Nama Ruangan" class="form-control // form_error('nama_ruangan') ? 'is-invalid' : '' ?>" value="// set_value('nama_ruangan') ?>">
-								<div class="invalid-feedback">
-									// form_error('nama_ruangan', '<div class="text-danger">', '</div>') ?>
-								</div>
-							</div> -->
-							<label for="keterangan">Keterangan Ruangan</label>
-							<div class="input-group mb-3">
-								<textarea class="form-control <?= form_error('keterangan') ? 'is-invalid' : '' ?>" name="keterangan" id="keterangan" placeholder="keterangan ruangan (jika perlu)"><?= set_value('keterangan') ?></textarea>
-								<div class="invalid-feedback">
-									<?= form_error('keterangan', '<div class="text-danger">', '</div>') ?>
-								</div>
-							</div>
 							<div class="btn-aksi">
 								<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
 								<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset</button>

@@ -43,27 +43,13 @@
 				<div class="activity">
 					<div class="card shadow mb-4">
 						<div class="container my-3">
-							<?= form_open('master/data/ruangan/update_ruangan/' . $ruangan->kode_ruang) ?>
+							<?= form_open('master/data/ruangan/update_ruangan/' . $ruangan->ruang_id) ?>
 							<input type="hidden" name="ruang_id" value="<?= $ruangan->ruang_id ?>">
 							<label for="kode_ruang_edit">Kode Ruangan</label>
 							<div class="input-group mb-3">
 								<input type="text" name="kode_ruang_edit" id="kode_ruang_edit" placeholder="Masukan Kode Ruangan" class="form-control <?= form_error('kode_ruang_edit') ? 'is-invalid' : '' ?>" value="<?= $ruangan->kode_ruang ?>">
 								<div class="invalid-feedback">
 									<?= form_error('kode_ruang_edit', '<div class="text-danger">', '</div>') ?>
-								</div>
-							</div>
-							<!-- <label for="nama_ruang_edit">Nama Ruangan</label>
-							<div class="input-group mb-3">
-								<input type="text" name="nama_ruang_edit" id="nama_ruang_edit" placeholder="Masukan Nama Ruangan" class="form-control < form_error('nama_ruang_edit') ? 'is-invalid' : '' ?>" value="< $ruangan->nama_ruang ?>">
-								<div class="invalid-feedback">
-									<form_error('nama_ruang_edit', '<div class="text-danger">', '</div>') ?>
-								</div>
-							</div> -->
-							<label for="keterangan_edit">Keterangan</label>
-							<div class="input-group mb-3">
-								<textarea class="form-control <?= form_error('keterangan_edit') ? 'is-invalid' : '' ?>" name="keterangan_edit" id="keterangan_edit" placeholder="keterangan ruangan (jika perlu)"><?= $ruangan->keterangan ?></textarea>
-								<div class="invalid-feedback">
-									<?= form_error('keterangan_edit', '<div class="text-danger">', '</div>') ?>
 								</div>
 							</div>
 							<div class="btn-aksi">

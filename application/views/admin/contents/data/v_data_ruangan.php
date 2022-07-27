@@ -44,7 +44,6 @@
 									<tr>
 										<th style="width:4%">No</th>
 										<th style="width:10%;">Kode Ruangan</th>
-										<th style="width:21%;">Keterangan</th>
 										<th style="width:16%;">Dibuat</th>
 										<th style="width:16%;">Diedit</th>
 										<th style="width:6%;">Aksi</th>
@@ -56,11 +55,10 @@
 										<tr>
 											<td><?= $i++ ?></td>
 											<td><?= $value->kode_ruang ?></td>
-											<td><?= $value->keterangan ?></td>
 											<td><?= date('d-m-Y H:i', strtotime($value->create_time)) . " WIB" ?></td>
 											<td><?= ($value->create_time == $value->update_time) ? '-' : date('d-m-Y H:i', strtotime($value->update_time)) . " WIB" ?></td>
 											<td class="d-flex justify-content-center">
-												<a href="<?= base_url('master/data/ruangan/update_ruangan/' . $value->kode_ruang) ?>" class="btn btn-sm btn-success mr-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+												<a href="<?= base_url('master/data/ruangan/update_ruangan/' . $value->ruang_id) ?>" class="btn btn-sm btn-success mr-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 												<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
 												<a href="#" class="btn btn-sm btn-danger delete-ruangan" ruang-id="<?= $value->ruang_id ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
 											</td>

@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -46,7 +46,7 @@
 							<div class="col-md-4 text-center mb-3">
 								<div class="card shadow py-4">
 									<div class="img-photo justify-content-center">
-										<img class="mx-auto d-block rounded-circle" src="<?= ($jadwalDetail->guru_foto != 'default_profile.png') ? base_url('storage/guru/profile/' . $jadwalDetail->guru_foto) : base_url('assets/siswa/img/profile-default-siswa.png') ?>" width="150" alt="Foto Profile Guru">
+										<img class="mx-auto d-block rounded-circle" src="<?= ($jadwalDetail->profile != 'default_profile.png') ? base_url('storage/guru/profile/' . $jadwalDetail->profile) : base_url('assets/siswa/img/profile-default-siswa.png') ?>" width="150" alt="Foto Profile Guru">
 									</div>
 									<div class="line">
 										<hr>
@@ -86,7 +86,7 @@
 											</tr>
 											<tr>
 												<th scope="row">Ruang Kelas</th>
-												<td><?= $jadwalDetail->nama_ruang ?></td>
+												<td><?= $jadwalDetail->kode_ruang ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Jumlah Jam Mengajar</th>
