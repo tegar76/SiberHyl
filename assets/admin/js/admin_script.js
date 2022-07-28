@@ -216,7 +216,7 @@ $(document).ready(function () {
 	$(".hapus-file-materi").click(function (e) {
 		e.preventDefault();
 		var materi_id = $(e.currentTarget).attr("materi-id");
-		var materi_info_id = $(e.currentTarget).attr("materi-info-id");
+		var materi_info_id = $(e.currentTarget).attr("detail-materi-id");
 		var dataJson = {
 			[csrfName]: csrfHash,
 			materi_info_id: materi_info_id,
@@ -234,7 +234,7 @@ $(document).ready(function () {
 			if (result.value) {
 				$.ajax({
 					type: "POST",
-					url: BASEURL + "master/materi/deleteMateri",
+					url: BASEURL + "master/materi/delete_file_materi",
 					data: dataJson,
 					beforeSend: function () {
 						swal.fire({
@@ -263,7 +263,7 @@ $(document).ready(function () {
 								timer: 1500,
 							});
 							window.location =
-								BASEURL + "master/materi/editMateri/" + materi_info_id;
+								BASEURL + "master/materi/update_materi/" + materi_info_id;
 						}
 					},
 					error: function () {
@@ -299,7 +299,7 @@ $(document).ready(function () {
 			if (result.value) {
 				$.ajax({
 					type: "POST",
-					url: BASEURL + "master/materi/deleteVideoMateri",
+					url: BASEURL + "master/materi/delete_materi_video",
 					data: dataJson,
 					beforeSend: function () {
 						swal.fire({
@@ -328,7 +328,7 @@ $(document).ready(function () {
 								timer: 1500,
 							});
 							window.location =
-								BASEURL + "master/materi/editMateri/" + materi_info_id;
+								BASEURL + "master/materi/update_materi/" + materi_info_id;
 						}
 					},
 					error: function () {

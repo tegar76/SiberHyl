@@ -8,7 +8,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title"><?= $title?></h3>
+				<h3 class="page-title"><?= $title ?></h3>
 			</div>
 		</div>
 		<div class="d-flex align-items-center">
@@ -16,7 +16,7 @@
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Setting Jadwal</li>
 					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi') ?>" class="text-muted">Materi</a></li>
-					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
+					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 				</ol>
 			</nav>
 		</div>
@@ -49,27 +49,27 @@
 										<tbody>
 											<tr class="table-borderless">
 												<th scope="row" class="col-sm-8">Nama Admin</th>
-												<td>Lutfi Haryati.S,Pd.</td>
+												<td><?= $materi->nama ?></td>
 											</tr>
 											<tr>
 												<th scope="row" class="col-sm-8">Kelas</th>
-												<td><?= $detailMateri->index_kelas ?></td>
+												<td><?= $materi->kelas ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Jurusan</th>
-												<td><?= (!empty($detailMateri->nama_jurusan)) ? $detailMateri->nama_jurusan : '-' ?></td>
+												<td><?= (!empty($materi->jurusan)) ? $materi->jurusan : '-' ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Mata Pelajaran</th>
-												<td><?= $detailMateri->nama_mapel ?></td>
+												<td><?= $materi->mapel ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Dibuat</th>
-												<td><?= date('Y-m-d H:i:s', strtotime($detailMateri->create_time)) . " WIB" ?></td>
+												<td><?= date('Y-m-d H:i:s', strtotime($materi->create)) . " WIB" ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Diedit</th>
-												<td><?= ($detailMateri->create_time == $detailMateri->update_time) ? '-' : date('Y-m-d H:i:s', strtotime($detailMateri->update_time)) . " WIB" ?></td>
+												<td><?= ($materi->create == $materi->update) ? '-' : date('Y-m-d H:i:s', strtotime($materi->update)) . " WIB" ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Materi Pembelajaran</th>
@@ -77,15 +77,15 @@
 											</tr>
 											<tr class="table-borderless">
 												<td class="item-pdf row">
-													<?php foreach ($bahanMateri as $materi) : ?>
+													<?php foreach ($pdf as $val) : ?>
 														<!-- looping item -->
 														<div class="pdf-file ml-3">
-															<a href="<?= base_url('master/materi/view_materi_pdf/' . $this->secure->encrypt_url($materi->materi_id)) ?>">
+															<a href="<?= base_url('master/materi/view_materi?id=' . $val->materi_id . '&file=' . $val->file_materi) ?>">
 																<div class="card card-pdf">
 																	<div class="container">
 																		<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf">
 																		<hr class="w-50 mx-auto">
-																		<h6 class="text-center mt-n1"><?= $materi->judul ?></h6>
+																		<h6 class="text-center mt-n1"><?= $val->judul ?></h6>
 																	</div>
 																</div>
 															</a>
@@ -100,17 +100,18 @@
 											</tr>
 											<tr class="table-borderless">
 												<td class="item-video row">
-													<!-- looping item -->
-													<?php foreach ($videoMateri as $video) : ?>
+													<?php foreach ($video as $row) : ?>
+														<!-- looping item -->
 														<div class="pdf-file ml-3">
 															<div class="card card-video">
 																<div class="container">
-																	<iframe class="d-block mx-auto" src="<?= $video->materi ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-																	<h6 class="mt-1"><?= date('Y-m-d', strtotime($detailMateri->create_time)) ?></h6>
-																	<h6 class="mt-n1"><?= $video->judul ?></h6>
+																	<iframe class="d-block mx-auto" src="<?= $row->file_materi ?>" title="<?= $row->judul ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+																	<h6 class="mt-1"><?= date('Y-m-d', strtotime($row->create_time)) ?></h6>
+																	<h6 class="mt-n1"><?= $row->judul ?></h6>
 																</div>
 															</div>
 														</div>
+														<!-- looping item -->
 													<?php endforeach; ?>
 												</td>
 											</tr>

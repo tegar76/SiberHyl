@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -43,7 +43,7 @@
 				<div class="activity">
 					<div class="card shadow mb-4">
 						<div class="container my-3">
-							<?= form_open_multipart('master/materi/updateFileMateri/' .  $this->secure->encrypt_url($materi->materi_id)) ?>
+							<?= form_open_multipart('master/materi/update_file_materi/' .  $materi->materi_id) ?>
 							<input type="hidden" name="materi_id" value="<?= $materi->materi_id ?>">
 							<label for="judul_materi_update">Judul Materi</label>
 							<div class="input-group mb-3">
@@ -57,13 +57,10 @@
 								<input type="file" name="file_materi_update" id="file_materi_update" placeholder="Masukan Judul Materi" class="form-control">
 							</div>
 							<div class="input-group mb-3">
-								<p><?= $materi->materi ?></p>
-							</div>
-							<div class="input-group mb-3">
 								<p>*File max 2mb dengan format PDF</p>
 							</div>
 							<div class="btn-aksi">
-								<button type="submit" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
+								<button type="submit" name="update_file" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
 							</div>
 							<?= form_close() ?>
 						</div>

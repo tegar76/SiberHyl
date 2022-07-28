@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -8,7 +8,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title"><?= $title?></h3>
+				<h3 class="page-title"><?= $title ?></h3>
 			</div>
 		</div>
 		<div class="d-flex align-items-center">
@@ -16,7 +16,7 @@
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Setting Jadwal</li>
 					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi') ?>" class="text-muted">Materi</a></li>
-					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
+					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 				</ol>
 			</nav>
 		</div>
@@ -42,7 +42,7 @@
 				<div class="activity">
 					<div class="card shadow mb-4">
 						<div class="container my-3">
-							<?= form_open('master/materi/editMateriVideo/' . $this->secure->encrypt_url($materi->materi_id)) ?>
+							<?= form_open('master/materi/update_materi_video/' . $materi->materi_id) ?>
 							<input type="hidden" name="materi_id" value="<?= $materi->materi_id ?>">
 							<label for="judul_video_update">Judul Video Pembelajaran</label>
 							<div class="input-group mb-3">
@@ -50,13 +50,13 @@
 							</div>
 							<label for="link_video_update">Link</label>
 							<div class="input-group mb-3">
-								<input type="text" name="link_video_update" id="link_video_update" placeholder="Masukan Link Youtube" class="form-control" value="<?= $materi->materi ?>">
+								<input type="text" name="link_video_update" id="link_video_update" placeholder="Masukan Link Youtube" class="form-control" value="<?= $materi->file ?>">
 							</div>
 							<div class="input-group mb-3">
 								<p>*Link Bersumber dari Youtube</p>
 							</div>
 							<div class="btn-aksi">
-								<button type="submit" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
+								<button type="submit" name="update_video" class="btn btn-sm btn-success rounded px-4 py-2 mr-3">Update</button>
 							</div>
 							<?= form_close() ?>
 						</div>

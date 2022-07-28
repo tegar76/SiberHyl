@@ -14,7 +14,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title"><?= $title?></h3>
+				<h3 class="page-title"><?= $title ?></h3>
 			</div>
 		</div>
 		<div class="d-flex align-items-center">
@@ -22,7 +22,7 @@
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Setting Jadwal</li>
 					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi') ?>" class="text-muted">Materi</a></li>
-					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
+					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 				</ol>
 			</nav>
 		</div>
@@ -47,7 +47,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="activity">
-					<?= form_open_multipart('master/materi/tambahMateri') ?>
+					<?= form_open_multipart('master/materi/tambah_materi') ?>
 					<!-- looping card -->
 					<div class="card shadow mb-4">
 						<div class="container my-3">
@@ -121,7 +121,7 @@
 							<input type="hidden" name="jumlah-video" id="jumlah-video" value="1">
 							<div id="next-video"></div>
 							<div class="btn-aksi">
-								<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
+								<button type="submit" name="upload" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
 								<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset Form</button>
 							</div>
 						</div>

@@ -38,7 +38,7 @@
 								<a href="<?= base_url('master/materi') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materi/") ? 'active' : '' ?>"><span class="hide-menu"> Materi (Admin)</span></a>
 							</li>
 							<li class="sidebar-item">
-								<a href="<?= base_url('master/materi/materiGuru') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materiGuru/") ? 'active' : '' ?>"><span class="hide-menu"> Materi (Guru)</span></a>
+								<a href="<?= base_url('master/materi/materi_guru') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materi_guru/") ? 'active' : '' ?>"><span class="hide-menu"> Materi (Guru)</span></a>
 							</li>
 					</ul>
 				</li>

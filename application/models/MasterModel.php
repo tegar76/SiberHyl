@@ -136,32 +136,119 @@ class MasterModel extends CI_Model
 		}
 	}
 
-	public function get_materi()
+	public function materiPembelajaranAdmin()
 	{
-		$this->db->select("*");
-		$this->db->from('materi_info');
-		$this->db->join('mapel', 'mapel.mapel_id=materi_info.mapel_id', 'left');
-		$this->db->join('jurusan', 'jurusan.jurusan_id=materi_info.jurusan_id', 'left');
-		$this->db->order_by('materi_info.create_time', 'DESC');
-		return $this->db->get();
+		$this->db->select("
+			detail.detailmateri_id as id,
+			detail.index_kelas as kelas,
+			detail.create_time as create,
+			detail.update_time as update,
+			detail.status,
+			mapel.nama_mapel as mapel, 
+			jurusan.kode_jurusan as jurusan,
+		");
+		$this->db->from('detailmateri as detail');
+		$this->db->join('mapel', 'mapel.mapel_id=detail.mapel_id', 'left');
+		$this->db->join('jurusan', 'jurusan.jurusan_id=detail.jurusan_id', 'left');
+		$this->db->where('status', 1);
+		$this->db->order_by('detail.create_time', 'DESC');
+		return $this->db->get()->result();
 	}
 
-	public function getDetailMateri($idMateri)
+	public function detailMateri($id)
 	{
-		$query	= $this->db->select('
-		mapel.nama_mapel, jurusan.jurusan_id, jurusan.kode_jurusan, jurusan.nama_jurusan, materi_info.index_kelas,
-		materi_info.create_time, materi_info.update_time, materi_info.materi_info_id
-		')
-			->from('materi_info')
-			->join('mapel', 'mapel.mapel_id=materi_info.mapel_id', 'left')
-			->join('jurusan', 'jurusan.jurusan_id=materi_info.jurusan_id', 'left')
-			->where('materi_info_id', $idMateri)
-			->get();
-		if ($query->num_rows() > 0) {
-			return $query->row();
-		} else {
-			return false;
-		}
+		$this->db->select("
+			detail.detailmateri_id as id,
+			detail.index_kelas as kelas,
+			detail.create_time as create,
+			detail.update_time as update,
+			detail.status,
+			mapel.nama_mapel as mapel, 
+			jurusan.nama_jurusan as jurusan,
+			jurusan.kode_jurusan as kode,
+			jurusan.jurusan_id as j_id,
+			guru.guru_nama as nama,
+		");
+		$this->db->from('detailmateri as detail');
+		$this->db->join('mapel', 'mapel.mapel_id=detail.mapel_id', 'left');
+		$this->db->join('jurusan', 'jurusan.jurusan_id=detail.jurusan_id', 'left');
+		$this->db->join('guru', 'guru.guru_id=detail.guru_id', 'left');
+		$this->db->where('detailmateri_id', $id);
+		return $this->db->get()->row();
+	}
+
+
+	public function modulMateri($jenis, $id)
+	{
+		$this->db->where('jenis', $jenis);
+		$this->db->where('detailmateri_id', $id);
+		return $this->db->get('materipembelajaran')->result();
+	}
+
+	public function getMateri($materi_id)
+	{
+		$this->db->select("
+			materi.materi_id, materi.judul, materi.jenis,
+			materi.file_materi as file,
+			materi.file_type as type,
+			materi.file_size as size,
+			materi.create_time as create,
+			materi.update_time as update,
+			detail.index_kelas as kelas,
+			detail.detailmateri_id as detail_id,
+			jurusan.kode_jurusan as jurusan
+		");
+		$this->db->from('materipembelajaran as materi');
+		$this->db->join('detailmateri as detail', 'detail.detailmateri_id=materi.detailmateri_id', 'left');
+		$this->db->join('jurusan', 'jurusan.jurusan_id=detail.jurusan_id', 'left');
+		$this->db->where('materi_id', $materi_id);
+		return $this->db->get()->row();
+	}
+
+	public function materiGuru()
+	{
+		$this->db->select("
+			detail.detailmateri_id as id,
+			detail.index_kelas as index_kelas,
+			detail.create_time as create,
+			detail.update_time as update,
+			detail.status,
+			kelas.nama_kelas as kelas,
+			mapel.nama_mapel as mapel,
+			guru.guru_nama as guru, 
+			guru.guru_kode as kode_g,
+			jurusan.nama_jurusan as jurusan,
+			jurusan.kode_jurusan as kode_j
+		");
+		$this->db->from('detailmateri as detail');
+		$this->db->join('mapel', 'mapel.mapel_id=detail.mapel_id', 'left');
+		$this->db->join('kelas', 'kelas.kelas_id=detail.kelas_id', 'left');
+		$this->db->join('guru', 'guru.guru_id=detail.guru_id', 'left');
+		$this->db->join('jurusan', 'jurusan.jurusan_id=detail.jurusan_id', 'left');
+		$this->db->where('status', 2);
+		$this->db->order_by('detail.create_time', 'DESC');
+		return $this->db->get()->result();
+	}
+
+	public function getDetailMateriGuru($id)
+	{
+		$this->db->select("
+			detail.detailmateri_id as id,
+			detail.create_time as create,
+			detail.update_time as update,
+			mapel.nama_mapel as mapel, 
+			jurusan.nama_jurusan as jurusan,
+			guru.guru_kode as kode_g,
+			guru.guru_nama as guru,
+			kelas.nama_kelas as kelas
+		");
+		$this->db->from('detailmateri as detail');
+		$this->db->join('mapel', 'mapel.mapel_id=detail.mapel_id', 'left');
+		$this->db->join('kelas', 'kelas.kelas_id=detail.kelas_id', 'left');
+		$this->db->join('jurusan', 'jurusan.jurusan_id=detail.jurusan_id', 'left');
+		$this->db->join('guru', 'guru.guru_id=detail.guru_id', 'left');
+		$this->db->where('detailmateri_id', $id);
+		return $this->db->get()->row();
 	}
 
 	public function getWaliKelas()
