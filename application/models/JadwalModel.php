@@ -90,7 +90,7 @@ class JadwalModel extends CI_Model
 	{
 		$select = "
 			jadwal.hari,jurnal.jurnal_id, 
-			jurnal.tanggal, jurnal.pert_ke, jurnal.pembahasan, jurnal.status,
+			jurnal.tanggal, jurnal.pertemuan, jurnal.pembahasan, jurnal.status,
 			jurnal.catatan_kbm, guru.guru_kode, mapel.nama_mapel, kelas.nama_kelas, kelas.kode_kelas
 		";
 		$this->db->select($select);
@@ -165,20 +165,7 @@ class JadwalModel extends CI_Model
 		return $result;
 	}
 
-	public function activate_tahunajar(int $id, int $active)
-	{
-		$this->db->set('status', $active);
-		$this->db->where('thnakd_id', $id);
-		$this->db->update('tahun_akademik');
-		return true;
-	}
 
-	public function get_activate_tahunajar()
-	{
-		$query = $this->db->get_where('tahun_akademik', ['status' => 1])->row_array();
-		$result = $query;
-		return $result;
-	}
 
 	public function get_info_akademik()
 	{

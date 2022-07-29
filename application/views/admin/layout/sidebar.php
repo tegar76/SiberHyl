@@ -48,15 +48,13 @@
 							<a href="<?= base_url('master/info/info-akademik') ?>" class="sidebar-link"><span class="hide-menu"> Informasi Akademik</span></a>
 						</li>
 						<li class="sidebar-item">
-							<a href="<?= base_url('master/info/tahun-ajar') ?>" class="sidebar-link"><span class="hide-menu"> Tahun Pembelajaran</span></a>
+							<a href="<?= base_url('master/info/tahun-akademik') ?>" class="sidebar-link"><span class="hide-menu"> Tahun Pembelajaran</span></a>
 						</li>
 					</ul>
 				</li>
 				<li class="list-divider"></li>
-				<li class="sidebar-item <?= ($this->uri->segment(2) == "jurnal") ? 'selected' : '' ?>"> <a class="sidebar-link sidebar-link" href="<?= base_url('master/jurnal') ?>" aria-expanded="false"><i data-feather="book" class="feather-icon"></i><span class="hide-menu">Jurnal Materi</span></a></li>
-				<li class="list-divider"></li>
 				<li class="sidebar-item <?= ($this->uri->segment(2) == "") ? 'selected' : '' ?>">
-					<a class="sidebar-link sidebar-link" href="<?= base_url('master/super_visor') ?>" aria-expanded="false">
+					<a class="sidebar-link sidebar-link" href="<?= base_url('master/super-visor') ?>" aria-expanded="false">
 						<i data-feather="airplay" class="feather-icon"></i>
 						<span class="hide-menu">Super Visor
 						</span>

@@ -110,9 +110,9 @@
 									<?php foreach ($info_akademik as $info) : ?>
 										<tr>
 											<td><?= $no++ ?></td>
-											<td><?= date('d-m-Y H:i', strtotime($info->create_time)) ?></td>
-											<td><?= $info->judul_info ?></td>
-											<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik?file=' . $info->file_info) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+											<td><?= date('d-m-Y H:i', strtotime($info->create)) . " WIB" ?></td>
+											<td><?= $info->judul ?></td>
+											<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik?file=' . $info->file) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
 										</tr>
 									<?php endforeach ?>
 								</tbody>
@@ -169,11 +169,10 @@
 				<div class="card">
 					<div class="card-body">
 						<h6 class="card-title">
-							<a class="search-icon" href="<?= base_url('master/jurnal') ?>"><i class="fa fa-magnifying-glass mr-2"></i></a>
 							Pembelajaran Yang Sedang Berlangsung
 						</h6>
 						<div class="mt-4 activity">
-							<table id="table-jurnal" class="table-striped table-bordered" style="width:100%">
+							<table id="table-jadwal-berlangsung" class="table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
 								<thead>
 									<tr>
@@ -188,26 +187,21 @@
 									</tr>
 								</thead>
 								<tbody>
+									<?php $no = 1;
+									foreach ($study as $val) : ?>
+										<tr>
+											<td><?= $no++ ?></td>
+											<td><?= $val->hari ?></td>
+											<td><?= $val->guru ?></td>
+											<td><?= $val->mapel ?></td>
+											<td><?= date('H:i', strtotime($val->jam_masuk)) . ' - ' . date('H:i', strtotime($val->jam_keluar)) . " WIB" ?></td>
+											<td><?= $val->kelas ?></td>
+											<td><?= $val->ruang ?></td>
+											<td><a href="<?= base_url('master/super-visor?kelas=' . $val->kd_kelas) ?>" class="d-block btn btn-sm btn-outline-primary border-blue rounded mx-auto">Kunjungi Kelas</a></td>
+											<!-- <td><a href="" class="d-block btn btn-sm btn-outline-warning border-yellow rounded mx-auto">Sudah Dikunjungi</a></td> -->
+										</tr>
+									<?php endforeach ?>
 									<tr>
-										<td>1</td>
-										<td>Senin</td>
-										<td>AB</td>
-										<td>Bahasa Inggris</td>
-										<td>07.00 - 09.00 WIB</td>
-										<td>XI TKRO 2</td>
-										<td>MM 1</td>
-										<td><a href="" class="d-block btn btn-sm btn-outline-primary border-blue rounded mx-auto">Kunjungi Kelas</a></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Senin</td>
-										<td>AB</td>
-										<td>Bahasa Inggris</td>
-										<td>07.00 - 09.00 WIB</td>
-										<td>XI TKRO 2</td>
-										<td>MM 1</td>
-										<td><a href="" class="d-block btn btn-sm btn-outline-warning border-yellow rounded mx-auto">Sudah Dikunjungi</a></td>
-									</tr>
 								</tbody>
 							</table>
 						</div>

@@ -75,7 +75,7 @@
 							</div>
 							<label for="kelas_jurusan">Kelas</label>
 							<div class="input-group mb-3">
-								<select class="form-control custom-select <?= (form_error('kelas_jurusan[]')) ? 'is-invalid' : '' ?>" id="send" name="kelas_jurusan[]" title="Pilih Jurusan" multiple="multiple">
+								<select class="form-control custom-select <?= (form_error('kelas_jurusan[]')) ? 'is-invalid' : '' ?>" id="kelas_jurusan" name="kelas_jurusan[]" title="Pilih Kelas" multiple="multiple">
 								</select>
 								<div class="invalid-feedback">
 									<?= form_error('kelas_jurusan[]', '<div class="text-danger">', '</div>') ?>
@@ -88,13 +88,6 @@
 									<?= form_error('judul_info', '<div class="text-danger">', '</div>') ?>
 								</div>
 							</div>
-							<!-- <label for="deskripsi_info">Deskripsi</label>
-							<div class="input-group mb-3">
-								<textarea type="text" name="deskripsi_info" id="deskripsi_info" placeholder="Masukan Deskripsi" class="form-control  (form_error('deskripsi_info')) ? 'is-invalid' : '' ?>"> set_value('deskripsi_info') ?></textarea>
-								<div class="invalid-feedback">
-									//= form_error('deskripsi_info', '<div class="text-danger">', '</div>') ?>
-								</div>
-							</div> -->
 							<label for="file_info">Upload File</label>
 							<div class="input-group mb-3">
 								<input type="file" name="file_info" id="file_info" class="form-control <?= (form_error('file_info')) ? 'is-invalid' : '' ?>">
@@ -106,7 +99,7 @@
 								<p>*File max 2 MB dengan format PDF</p>
 							</div>
 							<div class="btn-aksi">
-								<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
+								<button type="submit" name="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
 								<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset</button>
 							</div>
 							<?= form_close() ?>

@@ -9,10 +9,10 @@ class Info extends CI_Controller
 		checkAdminLogin();
 		$this->load->model('MasterModel', 'master', true);
 		$this->load->model('JadwalModel', 'jadwal', true);
-		$tahun_ajar = $this->jadwal->get_activate_tahunajar();
+		$tahun_ajar = $this->master->getActiveTahunAkademik();
 		if ($tahun_ajar == null) {
 			$this->tahun_ajar = [
-				'thnakd_id' => 0,
+				'tahun_id' => 0,
 				'semester' => 0,
 				'tahun' => ''
 			];
@@ -35,36 +35,37 @@ class Info extends CI_Controller
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$data['title'] = 'Info Akademik';
 		$data['content'] = 'admin/contents/info/v_info_akademik';
-		$data['infoakd'] = $this->jadwal->get_info_akademik();
-		$no = 1;
-		foreach ($data['infoakd'] as $row => $value) {
-			$info_akd['nomor'] = $no++;
-			$info_akd['infoakd_id'] = $value->infoakd_id;
-			if ($value->kelas_id != 0) {
-				$kelas = $this->jadwal->get_info_akademik_kelas($value->infoakd_id);
-				foreach ($kelas as $kls) {
-					$cls[] = $kls->nama_kelas;
+		$infoakademik = $this->master->getInfoAkademik();
+		if ($infoakademik) {
+			$no = 1;
+			foreach ($infoakademik as $row => $value) {
+				$info_['nomor'] = $no++;
+				$info_['id'] = $value->id;
+
+				if ($value->kelas_id != 0) {
+					$kelas = $this->master->getPenerimaKelasInfo($value->id);
+					foreach ($kelas as $kls) {
+						$cls[] = $kls->kelas;
+					}
+					$info_['kelas'] = $cls;
+				} elseif ($value->index == 'all' && (empty($value->jurusan) && $value->kelas_id == 0)) {
+					$info_['kelas'] = "Semua Kelas";
+				} elseif (!empty($value->jurusan) && ($value->index == 'all' && $value->kelas_id == 0)) {
+					$jurusan =  ($value->jurusan == 'all') ? 'Semua Jurusan' : $value->jurusan;
+					$info_['kelas'] = "Kelas " . $jurusan . " (X, XI, XII)";
+				} elseif ($value->index != 'all' and (empty($value->jurusan) and $value->kelas_id == 0)) {
+					$info_['kelas'] =  "Kelas " . $value->index;
+				} elseif ($value->index != 'all' and (!empty($value->jurusan) and $value->kelas_id == 0)) {
+					$info_['kelas'] =  "Kelas " . $value->index . " " . $value->jurusan;
 				}
-				$info_akd['kelas'] = $cls;
-			} elseif ($value->index_kelas == 'all' && (empty($value->kode_jurusan) && $value->kelas_id == 0)) {
-				$info_akd['kelas'] = "Semua Kelas";
-			} elseif (!empty($value->kode_jurusan) && ($value->index_kelas == 'all' && $value->kelas_id == 0)) {
-				$jurusan =  ($value->kode_jurusan == 'all') ? 'Semua Jurusan' : $value->kode_jurusan;
-				$info_akd['kelas'] = "Kelas " . $jurusan . " (X, XI, XII)";
-			} elseif ($value->index_kelas != 'all' and (empty($value->kode_jurusan) and $value->kelas_id == 0)) {
-				$info_akd['kelas'] =  "Kelas " . $value->index_kelas;
-			} elseif ($value->index_kelas != 'all' and (!empty($value->kode_jurusan) and $value->kelas_id == 0)) {
-				$info_akd['kelas'] =  "Kelas " . $value->index_kelas . " " . $value->kode_jurusan;
+
+				$info_['judul'] = $value->judul;
+				$info_['slug'] = $value->slug;
+				$info_['file']	= $value->file;
+				$info_['create'] = date('d-m-Y H:i', strtotime($value->create)) . " WIB";
+				$info_['update'] = ($value->create == $value->update) ? '-' : date('d-m-Y H:i', strtotime($value->update)) . " WIB";
+				$info[] = $info_;
 			}
-			$info_akd['judul'] = $value->judul_info;
-			$info_akd['slug'] = $value->slug_judul;
-			$info_akd['deskripsi'] = $value->deskripsi_info;
-			$info_akd['file']	= $value->file_info;
-			$info_akd['create']	= date('d-m-Y H:i', strtotime($value->create_time)) . " WIB";
-			$info_akd['update']	= ($value->create_time == $value->update_time) ? '-' : date('d-m-Y H:i', strtotime($value->update_time)) . " WIB";
-			$info[] = $info_akd;
-		}
-		if (!empty($info)) {
 			$data['info_akademik'] = $info;
 		} else {
 			$data['info_akademik'] = null;
@@ -76,7 +77,7 @@ class Info extends CI_Controller
 	{
 		$file = $this->input->get('file');
 		if ($file) {
-			$data['pdf'] = base_url('storage/info/' . $file);
+			$data['pdf'] = base_url('storage/info_akademik/' . $file);
 			$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
 		} else {
 			redirect('master/dashboard');
@@ -88,79 +89,76 @@ class Info extends CI_Controller
 		$data['title'] = 'Tambah Info Akademik';
 		$data['content'] = 'admin/contents/info/v_tambah_info_akademik';
 		$data['jurusan'] = $this->master->get_tablewhere('jurusan');
-		$this->form_validation->set_rules([
-			[
-				'field' => 'index_kelas',
-				'label' => 'Kelas',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi!',
-					'xss_clean' => 'cek kembali pada {field}'
-				]
-			],
-			[
-				'field' => 'jurusan',
-				'label' => 'Jurusan',
-				'rules' => 'trim|xss_clean',
-				'errors' => [
-					'xss_clean' => 'cek kembali pada {field}'
-				]
-			],
-			[
-				'field' => 'kelas_jurusan[]',
-				'label' => 'Kelas Jurusan',
-				'rules' => 'trim|xss_clean',
-				'errors' => [
-					'xss_clean' => 'cek kembali pada {field}'
-				]
-			],
-			[
-				'field' => 'judul_info',
-				'label' => 'Judul Info Akedemik',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi!',
-					'xss_clean' => 'cek kembali pada {field}'
-				]
-			],
-			// [
-			// 	'field' => 'deskripsi_info',
-			// 	'label' => 'Deskripsi Info Akademik',
-			// 	'rules' => 'trim|required|xss_clean',
-			// 	'errors' => [
-			// 		'required' => '{field} harus diisi!',
-			// 		'xss_clean' => 'cek kembali pada {field}'
-			// 	]
-			// ]
-		]);
-		if (empty($_FILES['file_info']['name'])) {
-			$this->form_validation->set_rules('file_info', 'File Info Akademik', 'required', [
-				'required' => 'Anda harus upload {field}'
+		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules([
+				[
+					'field' => 'index_kelas',
+					'label' => 'Kelas',
+					'rules' => 'trim|required|xss_clean',
+					'errors' => [
+						'required' => '{field} harus diisi!',
+						'xss_clean' => 'cek kembali pada {field}'
+					]
+				],
+				[
+					'field' => 'jurusan',
+					'label' => 'Jurusan',
+					'rules' => 'trim|xss_clean',
+					'errors' => [
+						'xss_clean' => 'cek kembali pada {field}'
+					]
+				],
+				[
+					'field' => 'kelas_jurusan[]',
+					'label' => 'Kelas Jurusan',
+					'rules' => 'trim|xss_clean',
+					'errors' => [
+						'xss_clean' => 'cek kembali pada {field}'
+					]
+				],
+				[
+					'field' => 'judul_info',
+					'label' => 'Judul Info Akedemik',
+					'rules' => 'trim|required|xss_clean',
+					'errors' => [
+						'required' => '{field} harus diisi!',
+						'xss_clean' => 'cek kembali pada {field}'
+					]
+				],
 			]);
-		}
+			if (empty($_FILES['file_info']['name'])) {
+				$this->form_validation->set_rules('file_info', 'File Info Akademik', 'required', [
+					'required' => 'Anda harus upload {field}'
+				]);
+			}
 
-		if ($this->form_validation->run() == false) {
-			$this->load->view('admin/layout/wrapper', $data, FALSE);
-		} else {
-			$this->process_info();
-			$this->message('Berhasil', 'Info Akademik Berhasil Ditambah', 'success');
-			return redirect('master/info/info-akademik');
+			if ($this->form_validation->run() == false) {
+				$this->load->view('admin/layout/wrapper', $data, FALSE);
+			} else {
+				$this->process_info();
+				$this->message('Berhasil', 'Info Akademik Berhasil Ditambah', 'success');
+				return redirect('master/info/info-akademik');
+			}
 		}
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
 	public function process_info()
 	{
 		$tahun_ajar = $this->tahun_ajar;
 		$this->db->trans_start();
-		$path_upload = './storage/info/';
+		$path_upload = './storage/info_akademik/';
 		$uploadInfo = $_FILES['file_info']['name'];
 		if ($uploadInfo) {
 			$config['upload_path'] = $path_upload;
 			$config['allowed_types'] = 'pdf';
 			$config['max_size']	= '2048';
 			$config['encrypt_name'] = true;
+
 			$this->load->library('upload', $config);
 			$this->upload->initialize($config);
+			$this->check_storage_info('info_akademik');
+
 			$_FILES['file']['name']		= $_FILES['file_info']['name'];
 			$_FILES['file']['type'] 	= $_FILES['file_info']['type'];
 			$_FILES['file']['tmp_name'] = $_FILES['file_info']['tmp_name'];
@@ -172,13 +170,12 @@ class Info extends CI_Controller
 				$upload = array(
 					'judul_info' => htmlspecialchars($this->input->post('judul_info', true)),
 					'slug_judul' => url_title($_POST['judul_info'], 'dash', true),
-					// 'deskripsi_info' => htmlspecialchars($this->input->post('deskripsi_info', true)),
 					'file_info' => $file_info['file_name'],
-					'tipe_file' => $file_info['file_ext'],
-					'ukuran_file' => $file_info['file_size'],
-					'thnakd_id' => $tahun_ajar['thnakd_id']
+					'file_type' => $file_info['file_ext'],
+					'file_size' => $file_info['file_size'],
+					'tahun_id' => $tahun_ajar['tahun_id']
 				);
-				$this->db->insert('info_akademik', $upload);
+				$this->db->insert('infoakademik', $upload);
 				$infoakd_id = $this->db->insert_id();
 				if (isset($_POST['kelas_jurusan'])) {
 					$kelas = $_POST['kelas_jurusan'];
@@ -187,9 +184,9 @@ class Info extends CI_Controller
 							'index_kelas' => htmlspecialchars($this->input->post('index_kelas', true)),
 							'kode_jurusan' => (isset($_POST['jurusan'])) ? $_POST['jurusan'] : null,
 							'kelas_id'	=> $_POST['kelas_jurusan'][$row],
-							'infoakd_id' => $infoakd_id
+							'info_id' => $infoakd_id
 						);
-						$this->db->insert('infoakd_kelas', $upload);
+						$this->db->insert('penerimainfo', $upload);
 					}
 					$this->db->trans_complete();
 				} else {
@@ -197,9 +194,9 @@ class Info extends CI_Controller
 						'index_kelas' => htmlspecialchars($this->input->post('index_kelas', true)),
 						'kode_jurusan' => (isset($_POST['jurusan'])) ? $_POST['jurusan'] : null,
 						'kelas_id'	=> 0,
-						'infoakd_id' => $infoakd_id
+						'info_id' => $infoakd_id
 					);
-					$this->db->insert('infoakd_kelas', $upload);
+					$this->db->insert('penerimainfo', $upload);
 					$this->db->trans_complete();
 				}
 			}
@@ -226,65 +223,64 @@ class Info extends CI_Controller
 		echo json_encode($outputs);
 	}
 
-	public function update_info_akademik($params)
+	public function update_info_akademik($id = null)
 	{
-		$infoakd_id = $this->secure->decrypt_url($params);
-		$info	= $this->jadwal->get_info_akademik_detail($infoakd_id);
-		if ($info->kelas_id != 0) {
-			$kelas = $this->jadwal->get_info_akademik_kelas($info->infoakd_id);
-			foreach ($kelas as $kls) {
-				$cls[] = $kls->nama_kelas;
+		$info	= $this->master->detailInfoAkademik($id);
+		if ($id and $info) {
+			if ($info->kelas_id != 0) {
+				$kelas = $this->master->getPenerimaKelasInfo($info->id);
+				foreach ($kelas as $kls) {
+					$cls[] = $kls->kelas;
+				}
+				$clss = $cls;
+			} elseif ($info->kelas == 'all' and (empty($info->jurusan) and $info->kelas_id == 0)) {
+				$clss = "Semua Kelas";
+			} elseif (!empty($info->jurusan) and ($info->kelas == 'all' and $info->kelas_id == 0)) {
+				$clss = "Kelas " . $info->jurusan . " (X, XI, XII)";
+			} elseif ($info->kelas != 'all' and (empty($info->jurusan) and $info->kelas_id == 0)) {
+				$clss =  "Kelas " . $info->kelas;
+			} elseif ($info->kelas != 'all' and (!empty($info->jurusan) and $info->kelas_id == 0)) {
+				$clss =  "Kelas " . $info->kelas . " " . $info->jurusan;
 			}
-			$clss = $cls;
-		} elseif ($info->index_kelas == 'all' && (empty($info->kode_jurusan) && $info->kelas_id == 0)) {
-			$clss = "Semua Kelas";
-		} elseif (!empty($info->kode_jurusan) && ($info->index_kelas == 'all' && $info->kelas_id == 0)) {
-			$clss = "Kelas " . $info->kode_jurusan . " (X, XI, XII)";
-		} elseif ($info->index_kelas != 'all' and (empty($info->kode_jurusan) and $info->kelas_id == 0)) {
-			$clss =  "Kelas " . $info->index_kelas;
-		} elseif ($info->index_kelas != 'all' and (!empty($info->kode_jurusan) and $info->kelas_id == 0)) {
-			$clss =  "Kelas " . $info->index_kelas . " " . $info->kode_jurusan;
-		}
-		$data['kelas'] = $clss;
-		$data['infoakd'] = $info;
-		$data['title'] = 'Edit Info Akademik';
-		$data['content'] = 'admin/contents/info/v_edit_info_akademik';
 
-		$this->form_validation->set_rules([
-			[
-				'field' => 'judul_info_update',
-				'label' => 'Judul Info Akedemik',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi!',
-					'xss_clean' => 'cek kembali pada {field}'
-				]
-			],
-			[
-				'field' => 'deskripsi_info_update',
-				'label' => 'Deskripsi Info Akademik',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi!',
-					'xss_clean' => 'cek kembali pada {field}'
-				]
-			]
-		]);
+			$data['kelas'] = $clss;
+			$data['info'] = $info;
+			$data['title'] = 'Update Info Akademik';
+			$data['content'] = 'admin/contents/info/v_edit_info_akademik';
 
-		if ($this->form_validation->run() == false) {
-			$this->load->view('admin/layout/wrapper', $data, FALSE);
+			if (isset($_POST['update'])) {
+				$this->form_validation->set_rules([
+					[
+						'field' => 'judul_info_update',
+						'label' => 'Judul Info Akedemik',
+						'rules' => 'trim|required|xss_clean',
+						'errors' => [
+							'required' => '{field} harus diisi!',
+							'xss_clean' => 'cek kembali pada {field}'
+						]
+					],
+				]);
+
+				if ($this->form_validation->run() == false) {
+					$this->load->view('admin/layout/wrapper', $data, FALSE);
+				} else {
+					$this->process_update_info();
+					$this->message('Berhasil', 'Info Akademik Berhasil Diupdate', 'success');
+					return redirect('master/info/info-akademik');
+				}
+			}
 		} else {
-			$this->process_update_info();
-			$this->message('Berhasil', 'Info Akademik Berhasil Diupdate', 'success');
-			return redirect('master/info/info-akademik');
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
 	public function process_update_info()
 	{
-		$infoakdID = $this->input->post('infoakd_id', true);
-		$infoakd   = $this->jadwal->get_info_akademik_detail($infoakdID);
-		$path_upload = './storage/info/';
+		$info_id = $this->input->post('id', true);
+		$info	= $this->master->detailInfoAkademik($info_id);
+		$path_upload = './storage/info_akademik/';
 		$uploadInfo = $_FILES['file_info_update']['name'];
 		if ($uploadInfo) {
 			$config['allowed_types'] = 'pdf';
@@ -301,15 +297,15 @@ class Info extends CI_Controller
 			$_FILES['file']['error'] 	= $_FILES['file_info_update']['error'];
 			$_FILES['file']['size'] 	= $_FILES['file_info_update']['size'];
 			if ($this->upload->do_upload('file')) {
-				$infoLama = $infoakd->file_info;
+				$infoLama = $info->file;
 				$infoBaru = $this->upload->data();
 				if ($infoLama != 'default.pdf') {
 					@unlink(FCPATH . $path_upload . $infoLama);
 				}
 				$updateInfo = [
 					'file_info' => $infoBaru['file_name'],
-					'tipe_file' => $infoBaru['file_ext'],
-					'ukuran_file' => $infoBaru['file_size'],
+					'file_type' => $infoBaru['file_ext'],
+					'file_size' => $infoBaru['file_size'],
 				];
 				$this->db->set($updateInfo);
 			}
@@ -318,27 +314,25 @@ class Info extends CI_Controller
 		$setInfo = [
 			'judul_info' => htmlspecialchars($this->input->post('judul_info_update', true)),
 			'slug_judul' => url_title($_POST['judul_info_update'], 'dash', true),
-			'deskripsi_info' => htmlspecialchars($this->input->post('deskripsi_info_update', true)),
 			'update_time' => date('Y-m-d H:i:s')
 		];
 		$this->db->set($setInfo);
-		$this->db->where('infoakd_id', $infoakdID);
-		$this->db->update('info_akademik');
+		$this->db->where('info_id', $info_id);
+		$this->db->update('infoakademik');
 	}
 
 	public function delete_info_akademik()
 	{
-		$infoakd_id = $this->input->post('infoakd_id', true);
-		$infoakd_id = $this->secure->decrypt_url($infoakd_id);
-		// delete kelas
-		$this->db->where_in('infoakd_id', $infoakd_id);
-		$this->db->delete('infoakd_kelas');
-		// delete file info
-		$infoakd   = $this->db->get_where('info_akademik', ['infoakd_id' => $infoakd_id])->row();
-		if (!empty($infoakd)) {
-			@unlink(FCPATH . './storage/info/' . $infoakd->file_info);
-			$this->db->where('infoakd_id', $infoakd_id);
-			$this->db->delete('info_akademik');
+		$info_id = $this->input->post('info_id', true);
+		$info	= $this->master->detailInfoAkademik($info_id);
+		if (!empty($info)) {
+			// delete file info
+			@unlink(FCPATH . './storage/info_akademik/' . $info->file);
+			$this->db->where('info_id', $info_id);
+			$this->db->delete('infoakademik');
+
+			$this->db->where_in('info_id', $info_id);
+			$this->db->delete('penerimainfo');
 			$reponse = [
 				'csrfName' => $this->security->get_csrf_token_name(),
 				'csrfHash' => $this->security->get_csrf_hash(),
@@ -357,10 +351,10 @@ class Info extends CI_Controller
 		echo json_encode($reponse);
 	}
 
-	public function tahunPembelajaran()
+	public function tahunAkademik()
 	{
 		$data['tahun_ajar'] = $this->tahun_ajar;
-		$data['tahun_akademik'] = $this->jadwal->get_tahun_akademik();
+		$data['tahun_akademik'] = $this->master->getTahunAkademik();
 		$data['title'] = 'Tahun Pembelajaran';
 		$data['content'] = 'admin/contents/info/v_tahun_pembelajaran';
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
@@ -368,20 +362,21 @@ class Info extends CI_Controller
 
 	public function check_tahun_akademik()
 	{
-		$thnakd_id = $this->input->post('tahunakd_id');
+		$tahun_id = $this->input->post('tahun_id');
 		$status	= $this->input->post('status');
-		$check = $this->db->get_where('tahun_akademik', ['status' => 1])->row();
+		$check = $this->db->get_where('tahunakademik', ['status' => 1])->row();
 
 		$reponse = [
 			'csrfName' => $this->security->get_csrf_token_name(),
 			'csrfHash' => $this->security->get_csrf_hash(),
-			'message' => 'Anda gagal  merubah tahun akademik',
+			'message' => 'Anda gagal merubah tahun akademik',
 			'success' => false
 		];
+
 		if (!empty($check)) {
-			$this->jadwal->activate_tahunajar($check->thnakd_id, 0);
+			$this->master->activateTahunAkademik($check->tahun_id, 0);
 			if ($status == 1) {
-				$this->jadwal->activate_tahunajar($thnakd_id, 0);
+				$this->master->activateTahunAkademik($tahun_id, 0);
 				$reponse = [
 					'csrfName' => $this->security->get_csrf_token_name(),
 					'csrfHash' => $this->security->get_csrf_hash(),
@@ -389,7 +384,7 @@ class Info extends CI_Controller
 					'success' => true
 				];
 			} else if ($status == 0) {
-				$this->jadwal->activate_tahunajar($thnakd_id, 1);
+				$this->master->activateTahunAkademik($tahun_id, 1);
 				$reponse = [
 					'csrfName' => $this->security->get_csrf_token_name(),
 					'csrfHash' => $this->security->get_csrf_hash(),
@@ -398,7 +393,7 @@ class Info extends CI_Controller
 				];
 			}
 		} else {
-			$this->jadwal->activate_tahunajar($thnakd_id, 1);
+			$this->master->activateTahunAkademik($tahun_id, 1);
 			$reponse = [
 				'csrfName' => $this->security->get_csrf_token_name(),
 				'csrfHash' => $this->security->get_csrf_hash(),
@@ -410,38 +405,55 @@ class Info extends CI_Controller
 		echo json_encode($reponse);
 	}
 
-	public function tambah_tahunajar()
+	public function tambah_tahun_akademik()
 	{
 		$data['title'] = 'Tambah Tahun Pembelajaran';
 		$data['content'] = 'admin/contents/info/v_tambah_tahun_pembelajaran';
-		$this->form_validation->set_rules([
-			[
-				'field' => 'tahun_ajar',
-				'label' => 'Tahun Pembelajaran',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi!',
+		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules([
+				[
+					'field' => 'tahun_ajar',
+					'label' => 'Tahun Pembelajaran',
+					'rules' => 'trim|required|xss_clean',
+					'errors' => [
+						'required' => '{field} harus diisi!',
+					]
+				],
+				[
+					'field' => 'semester',
+					'label' => 'Semester',
+					'rules' => 'trim|required|xss_clean',
+					'errors' => [
+						'required' => '{field} harus diisi!',
+					]
 				]
-			],
-			[
-				'field' => 'semester',
-				'label' => 'Semester',
-				'rules' => 'trim|required|xss_clean',
-				'errors' => [
-					'required' => '{field} harus diisi!',
-				]
-			]
-		]);
-
-		if ($this->form_validation->run() == false) {
-			$this->load->view('admin/layout/wrapper', $data, FALSE);
-		} else {
-			$this->db->insert('tahun_akademik', [
-				'tahun' => $this->input->post('tahun_ajar', true),
-				'semester' => $this->input->post('semester', true)
 			]);
-			$this->message('Berhasil', 'Tahun Pembelajaran Berhasil Ditambahkan', 'success');
-			return redirect('master/info/tahun-ajar');
+
+			if ($this->form_validation->run() == false) {
+				$this->load->view('admin/layout/wrapper', $data, FALSE);
+			} else {
+				$this->db->insert('tahun_akademik', [
+					'tahun' => $this->input->post('tahun_ajar', true),
+					'semester' => $this->input->post('semester', true)
+				]);
+				$this->message('Berhasil', 'Tahun Pembelajaran Berhasil Ditambahkan', 'success');
+				return redirect('master/info/tahun-ajar');
+			}
 		}
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function check_storage_info($dir = null)
+	{
+		if (!is_dir('storage')) :
+			mkdir('./storage', 0777, true);
+		endif;
+
+		$dir_exist = true;
+		if (!is_dir('storage/' . $dir)) :
+			mkdir('./storage/' . $dir, 0777, true);
+			$dir_exist = false; // dir not exist
+		endif;
+		return $dir_exist;
 	}
 }

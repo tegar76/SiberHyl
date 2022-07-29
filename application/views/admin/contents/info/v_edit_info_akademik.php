@@ -1,8 +1,8 @@
 <!-- Import multiple select -->
-<?php include APPPATH.'../assets/MSelectDialogBox-master/import_multiple_select.php';?>
+<?php include APPPATH . '../assets/MSelectDialogBox-master/import_multiple_select.php'; ?>
 
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -45,8 +45,8 @@
 				<div class="activity">
 					<div class="card shadow mb-4">
 						<div class="container my-3">
-							<?= form_open_multipart('master/info/update_info_akademik/' . $this->secure->encrypt_url($infoakd->infoakd_id)) ?>
-							<input type="hidden" name="infoakd_id" value="<?= $infoakd->infoakd_id ?>">
+							<?= form_open_multipart('master/info/update_info_akademik/' . $info->id) ?>
+							<input type="hidden" name="id" value="<?= $info->id ?>">
 							<label for="kelas">Kelas</label>
 							<div class="input-group mb-3">
 								<?php if (is_array($kelas)) : ?>
@@ -57,16 +57,9 @@
 							</div>
 							<label for="judul_info">Judul</label>
 							<div class="input-group mb-3">
-								<input type="text" name="judul_info_update" id="judul_info" placeholder="Masukan Judul" class="form-control <?= (form_error('judul_info')) ? 'is-invalid' : '' ?>" value="<?= $infoakd->judul_info ?>">
+								<input type="text" name="judul_info_update" id="judul_info" placeholder="Masukan Judul" class="form-control <?= (form_error('judul_info')) ? 'is-invalid' : '' ?>" value="<?= $info->judul ?>">
 								<div class="invalid-feedback">
 									<?= form_error('judul_info_update', '<div class="text-danger">', '</div>') ?>
-								</div>
-							</div>
-							<label for="deskripsi_info">Deskripsi</label>
-							<div class="input-group mb-3">
-								<textarea type="text" name="deskripsi_info_update" id="deskripsi_info" placeholder="Masukan Deskripsi" class="form-control <?= (form_error('deskripsi_info')) ? 'is-invalid' : '' ?>"><?= $infoakd->deskripsi_info ?></textarea>
-								<div class="invalid-feedback">
-									<?= form_error('deskripsi_info_update', '<div class="text-danger">', '</div>') ?>
 								</div>
 							</div>
 							<label for="file_info">Upload File</label>
@@ -80,7 +73,7 @@
 								<p>*File max 2 MB dengan format PDF</p>
 							</div>
 							<div class="btn-aksi">
-								<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
+								<button type="submit" name="update" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
 								<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset</button>
 							</div>
 							<?= form_close() ?>

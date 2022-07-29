@@ -8,7 +8,7 @@ class Jadwal extends CI_Controller
 		parent::__construct();
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->load->model('MasterModel', 'master', true);
-		$tahun_ajar = $this->jadwal->get_activate_tahunajar();
+		$tahun_ajar = $this->master->getActiveTahunAkademik();
 		if ($tahun_ajar == null) {
 			$this->tahun_ajar = [
 				'semester' => 0,

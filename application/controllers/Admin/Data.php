@@ -10,9 +10,10 @@ class Data extends CI_Controller
 		$this->load->model('MasterModel', 'master', true);
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('SiswaModel', 'siswa', true);
-		$tahun_ajar = $this->jadwal->get_activate_tahunajar();
+		$tahun_ajar = $this->master->getActiveTahunAkademik();
 		if ($tahun_ajar == null) {
 			$this->tahun_ajar = [
+				'tahun_id' => 0,
 				'semester' => 0,
 				'tahun' => ''
 			];
@@ -115,40 +116,44 @@ class Data extends CI_Controller
 
 	public function update_kelas($kode_kelas = null)
 	{
-		if ($kode_kelas == null) {
-			return false;
-		}
-		$data['title']	= 'Edit Kelas';
-		$data['content'] = 'admin/contents/data/v_edit_kelas';
-		$data['kelas'] = $this->master->getDetailKelas($kode_kelas);
-		$data['jurusan'] = $this->master->get_tablewhere('jurusan');
-		$data['guru'] = $this->master->get_masterdata('guru');
-		$this->form_validation->set_rules('wali_kelas_edit', 'Wali Kelas', 'required');
-		if ($this->form_validation->run() == false) {
-			$this->load->view('admin/layout/wrapper', $data, FALSE);
-		} else {
-			$nip_guru	= $this->input->post('wali_kelas_edit', true);
-			$check_wali = $this->db->get_where('kelas', ['guru_nip' => $nip_guru])->row();
-			if (!empty($check_wali)) {
-				if ($data['kelas']->guru_nip == $check_wali->guru_nip) {
+		$kelas = $this->master->getDetailKelas($kode_kelas);
+		if ($kode_kelas and $kelas) {
+			$data['title']	= 'Edit Kelas';
+			$data['content'] = 'admin/contents/data/v_edit_kelas';
+			$data['kelas'] = $kelas;
+			$data['jurusan'] = $this->master->get_tablewhere('jurusan');
+			$data['guru'] = $this->master->get_masterdata('guru');
+			$this->form_validation->set_rules('wali_kelas_edit', 'Wali Kelas', 'required');
+			if ($this->form_validation->run() == false) {
+				$this->load->view('admin/layout/wrapper', $data, FALSE);
+			} else {
+				$nip_guru	= $this->input->post('wali_kelas_edit', true);
+				$check_wali = $this->db->get_where('kelas', ['guru_nip' => $nip_guru])->row();
+				if (!empty($check_wali)) {
+					if ($data['kelas']->guru_nip == $check_wali->guru_nip) {
+						$this->db->set('update_time',  date('Y-m-d H:i:s'));
+						$this->db->where('kode_kelas', $data['kelas']->kode_kelas);
+						$this->db->update('kelas');
+						$this->message('Berhasil', 'Anda telah mengupdate kelas', 'success');
+						return redirect('master/data/kelas');
+					} else {
+						$this->session->set_flashdata('wali_kelas', 'Wali Kelas sudah sudah tersedia');
+						$this->load->view('admin/layout/wrapper', $data, FALSE);
+					}
+				} else {
+					$this->db->set('guru_nip', $nip_guru);
 					$this->db->set('update_time',  date('Y-m-d H:i:s'));
-					$this->db->where('kode_kelas', $data['kelas']->kode_kelas);
+					$this->db->where('kode_kelas', $kelas->kode_kelas);
 					$this->db->update('kelas');
 					$this->message('Berhasil', 'Anda telah mengupdate kelas', 'success');
 					return redirect('master/data/kelas');
-				} else {
-					$this->session->set_flashdata('wali_kelas', 'Wali Kelas sudah sudah tersedia');
-					$this->load->view('admin/layout/wrapper', $data, FALSE);
 				}
-			} else {
-				$this->db->set('guru_nip', $nip_guru);
-				$this->db->set('update_time',  date('Y-m-d H:i:s'));
-				$this->db->where('kode_kelas', $data['kelas']->kode_kelas);
-				$this->db->update('kelas');
-				$this->message('Berhasil', 'Anda telah mengupdate kelas', 'success');
-				return redirect('master/data/kelas');
 			}
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
 	public function delete_kelas()
@@ -211,53 +216,57 @@ class Data extends CI_Controller
 
 	public function update_mapel($slug = null)
 	{
-		if ($slug == null) {
-			return false;
-		}
-		$data['title'] = 'Data Ruangan';
-		$data['content'] = 'admin/contents/data/v_edit_mapel';
-		$data['mapel'] = $this->db->get_where('mapel', ['slug_mapel' => $slug])->row();
-		$this->form_validation->set_rules([
-			[
-				'field' => 'nama_mapel_edit',
-				'label' => 'Mata Pelajaran',
-				'rules' => 'trim|required|xss_clean|min_length[4]',
-				'errors' => [
-					'required' => '{field} harus diisi',
-					'min_length' => '{field} terlalu pendek'
+		$mapel = $this->db->get_where('mapel', ['slug_mapel' => $slug])->row();
+		if ($slug && $mapel) {
+			$data['title'] = 'Data Ruangan';
+			$data['content'] = 'admin/contents/data/v_edit_mapel';
+			$data['mapel'] = $mapel;
+			$this->form_validation->set_rules([
+				[
+					'field' => 'nama_mapel_edit',
+					'label' => 'Mata Pelajaran',
+					'rules' => 'trim|required|xss_clean|min_length[4]',
+					'errors' => [
+						'required' => '{field} harus diisi',
+						'min_length' => '{field} terlalu pendek'
+					]
 				]
-			]
-		]);
-		if ($this->form_validation->run() == false) {
-			$this->load->view('admin/layout/wrapper', $data, FALSE);
-		} else {
-			$mapel = $this->input->post('nama_mapel_edit', true);
-			$slug  = url_title($mapel, 'dash', true);
-			$check_mapel = $this->db->get_where('mapel', ['slug_mapel' => $slug])->row();
-			if (!empty($check_mapel)) {
-				if ($slug === $check_mapel->slug_mapel) {
-					$this->db->set('update_time',  date('Y-m-d H:i:s'));
+			]);
+			if ($this->form_validation->run() == false) {
+				$this->load->view('admin/layout/wrapper', $data, FALSE);
+			} else {
+				$mapel = $this->input->post('nama_mapel_edit', true);
+				$slug  = url_title($mapel, 'dash', true);
+				$check_mapel = $this->db->get_where('mapel', ['slug_mapel' => $slug])->row();
+				if (!empty($check_mapel)) {
+					if ($slug === $check_mapel->slug_mapel) {
+						$this->db->set('update_time',  date('Y-m-d H:i:s'));
+						$this->db->where('mapel_id', $this->input->post('mapel_id', true));
+						$this->db->update('mapel');
+						$this->message('Berhasil', 'Anda telah mengupdate mata pelajaran', 'success');
+						return redirect('master/data/mata-pelajaran');
+					} else {
+						$this->session->set_flashdata('check_mapel', 'Mata Pelajaran sudah sudah tersedia');
+						$this->load->view('admin/layout/wrapper', $data, FALSE);
+					}
+				} else {
+					$data = array(
+						'slug_mapel' => $slug,
+						'nama_mapel' => $mapel,
+						'update_time' => date('Y-m-d H:i:s')
+					);
+					$this->db->set($data);
 					$this->db->where('mapel_id', $this->input->post('mapel_id', true));
 					$this->db->update('mapel');
 					$this->message('Berhasil', 'Anda telah mengupdate mata pelajaran', 'success');
 					return redirect('master/data/mata-pelajaran');
-				} else {
-					$this->session->set_flashdata('check_mapel', 'Mata Pelajaran sudah sudah tersedia');
-					$this->load->view('admin/layout/wrapper', $data, FALSE);
 				}
-			} else {
-				$data = array(
-					'slug_mapel' => $slug,
-					'nama_mapel' => $mapel,
-					'update_time' => date('Y-m-d H:i:s')
-				);
-				$this->db->set($data);
-				$this->db->where('mapel_id', $this->input->post('mapel_id', true));
-				$this->db->update('mapel');
-				$this->message('Berhasil', 'Anda telah mengupdate mata pelajaran', 'success');
-				return redirect('master/data/mata-pelajaran');
 			}
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
 	public function delete_mapel()
@@ -310,42 +319,45 @@ class Data extends CI_Controller
 
 	public function update_ruangan($ruang = null)
 	{
-		if ($ruang == null) {
-			return false;
-		}
-		$data['title'] = 'Data Ruangan';
-		$data['content'] = 'admin/contents/data/v_edit_ruangan';
-		$data['ruangan'] = $this->db->get_where('ruangan', ['ruang_id' => $ruang])->row();
-		$kode_ruang = $this->input->post('kode_ruang_edit', true);
-		if ($data['ruangan']->kode_ruang == $kode_ruang) {
-			$this->form_validation->set_rules('kode_ruang_edit', 'Kode Ruangan', 'trim|required|xss_clean', [
-				'required' => '{field} harus diisi'
-			]);
+		$ruangan = $this->db->get_where('ruangan', ['ruang_id' => $ruang])->row();
+		if ($ruang && $ruangan) {
+			$data['title'] = 'Data Ruangan';
+			$data['content'] = 'admin/contents/data/v_edit_ruangan';
+			$data['ruangan'] = $ruangan;
+			$kode_ruang = $this->input->post('kode_ruang_edit', true);
+			if ($data['ruangan']->kode_ruang == $kode_ruang) {
+				$this->form_validation->set_rules('kode_ruang_edit', 'Kode Ruangan', 'trim|required|xss_clean', [
+					'required' => '{field} harus diisi'
+				]);
+			} else {
+				$this->form_validation->set_rules('kode_ruang_edit', 'Kode Ruangan', 'trim|required|xss_clean|is_unique[ruangan.kode_ruang]', [
+					'required' => '{field} harus diisi',
+					'is_unique' => '{field} sudah tersedia'
+				]);
+			}
+			if ($this->form_validation->run() == false) {
+				$this->load->view('admin/layout/wrapper', $data, FALSE);
+			} else {
+				$data = array(
+					'kode_ruang' => htmlspecialchars($this->input->post('kode_ruang_edit', true)),
+					'update_time' => date('Y-m-d H:i:s')
+				);
+				$this->db->set($data);
+				$this->db->where('ruang_id', $this->input->post('ruang_id', true));
+				$this->db->update('ruangan');
+				$this->message('Berhasil', 'Anda telah menambahkan ruangan', 'success');
+				return redirect('master/data/ruangan');
+			}
 		} else {
-			$this->form_validation->set_rules('kode_ruang_edit', 'Kode Ruangan', 'trim|required|xss_clean|is_unique[ruangan.kode_ruang]', [
-				'required' => '{field} harus diisi',
-				'is_unique' => '{field} sudah tersedia'
-			]);
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-		if ($this->form_validation->run() == false) {
-			$this->load->view('admin/layout/wrapper', $data, FALSE);
-		} else {
-			$data = array(
-				'kode_ruang' => htmlspecialchars($this->input->post('kode_ruang_edit', true)),
-				'update_time' => date('Y-m-d H:i:s')
-			);
-			$this->db->set($data);
-			$this->db->where('ruang_id', $this->input->post('ruang_id', true));
-			$this->db->update('ruangan');
-			$this->message('Berhasil', 'Anda telah menambahkan ruangan', 'success');
-			return redirect('master/data/ruangan');
-		}
+		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
 	public function delete_ruangan()
 	{
 		$ruang_id = $this->input->post('ruang_id', true);
-
 		$this->db->delete('ruangan', ['ruang_id' => $ruang_id]);
 		$reponse = [
 			'csrfName' => $this->security->get_csrf_token_name(),

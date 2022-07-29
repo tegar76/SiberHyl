@@ -1,8 +1,8 @@
 <!-- import data tables -->
-<?php include APPPATH.'../assets/DataTables/import/import.php';?>
+<?php include APPPATH . '../assets/DataTables/import/import.php'; ?>
 
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -37,7 +37,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<h6 class="card-title">Data Informasi Akademik Semester <?= $semester = ($tahun_ajar['semester'] == 0 ) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
+						<h6 class="card-title">Data Informasi Akademik Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
 						<div class="mt-4 activity">
 							<table id="table-info-akademik" class="table-responsive table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id pesan ada di assets/admin/js/data-table/main.js -->
@@ -67,13 +67,13 @@
 													<?php endif; ?>
 												</td>
 												<td><?= $value['judul'] ?></td>
-												<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik/' . $value['file']) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+												<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik?file=' . $value['file']) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
 												<td><?= $value['create'] ?></td>
 												<td><?= $value['update'] ?></td>
 												<td>
-													<a href="<?= base_url('master/info/update_info_akademik/' . $this->secure->encrypt_url($value['infoakd_id'])) ?>" class="btn btn-sm btn-success mr-2 ml-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+													<a href="<?= base_url('master/info/update_info_akademik/' . $value['id']) ?>" class="btn btn-sm btn-success mr-2 ml-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 													<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
-													<a href="#" class="btn btn-sm btn-danger delete-info-akademik" data-toggle="tooltip" info-akd-id="<?= $this->secure->encrypt_url($value['infoakd_id']) ?>" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+													<a href="javascript:void(0)" class="btn btn-sm btn-danger delete-info-akademik" data-toggle="tooltip" info-id="<?= $value['id'] ?>" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
 												</td>
 											</tr>
 										<?php endforeach ?>

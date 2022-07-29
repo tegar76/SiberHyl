@@ -159,10 +159,14 @@ $route['master/jurnal/(:any)/(:any)'] = 'Admin/JurnalMateri/$1/$2';
 $route['master/jurnal/(:any)/(:any)/(:any)'] = 'Admin/JurnalMateri/$1/$2/$3';
 
 $route['master/info/info-akademik'] = 'Admin/Info/infoAkademik';
-$route['master/info/tahun-ajar'] = 'Admin/Info/tahunPembelajaran';
+$route['master/info/tahun-akademik'] = 'Admin/Info/tahunAkademik';
 $route['master/info/(:any)'] = 'Admin/Info/$1';
 $route['master/info/(:any)/(:any)'] = 'Admin/Info/$1/$2';
 $route['master/info/(:any)/(:any)/(:any)'] = 'Admin/Info/$1/$2/$3';
+
+$route['master/super-visor'] = 'Admin/SuperVisor';
+$route['master/super-visor/(:any)'] = 'Admin/SuperVisor/$1';
+$route['master/super-visor/(:any)/(:any)'] = 'Admin/SuperVisor/$1/$2';
 
 // routing guru
 $route['guru/dashboard'] = 'Guru/Dashboard/index';

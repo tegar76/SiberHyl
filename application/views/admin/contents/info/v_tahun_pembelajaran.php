@@ -1,8 +1,8 @@
 <!-- import data tables -->
-<?php include APPPATH.'../assets/DataTables/import/import.php';?>
+<?php include APPPATH . '../assets/DataTables/import/import.php'; ?>
 
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -37,7 +37,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<h6 class="card-title">Data Mata Pelajaran Semester <?= $semester = ($tahun_ajar['semester'] == 0 ) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
+						<h6 class="card-title">Data Mata Pelajaran Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
 						<div class="mt-4 activity">
 							<table id="table-tahun-akademik" class="table-responsive table-striped table-bordered" style="width:100%">
 								<thead>
@@ -59,10 +59,10 @@
 											<TD><?= date('d-m-Y H:i', strtotime($value->create_time)) . " WIB" ?></TD>
 											<td class="d-flex justify-content-center">
 												<div class="custom-control custom-switch">
-													<label for="customSwitch<?= $value->thnakd_id ?>" class="mr-5 ml-n5">Non Aktif</label>
+													<label for="customSwitch<?= $value->tahun_id ?>" class="mr-5 ml-n5">Non Aktif</label>
 													<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
-													<input type="checkbox" class="custom-control-input change-tahun-akademik" id="customSwitch<?= $value->thnakd_id ?>" value="<?= $value->status ?>" <?= ($value->status == 1) ? 'checked' : '' ?> tahun-akademik-id="<?= $value->thnakd_id ?>">
-													<label class="custom-control-label" for="customSwitch<?= $value->thnakd_id ?>">Aktif</label>
+													<input type="checkbox" class="custom-control-input change-tahun-akademik" id="customSwitch<?= $value->tahun_id ?>" value="<?= $value->status ?>" <?= ($value->status == 1) ? 'checked' : '' ?> tahun-akademik-id="<?= $value->tahun_id ?>">
+													<label class="custom-control-label" for="customSwitch<?= $value->tahun_id ?>">Aktif</label>
 												</div>
 											</td>
 										</tr>
@@ -76,7 +76,7 @@
 		</div>
 
 		<div class="floating-container">
-			<a href="<?= base_url('master/info/tambah_tahunajar') ?>">
+			<a href="<?= base_url('master/info/tambah_tahun_akademik') ?>">
 				<div class="floating-button">+</div>
 			</a>
 		</div>

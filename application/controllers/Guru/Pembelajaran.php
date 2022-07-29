@@ -106,10 +106,10 @@ class Pembelajaran extends CI_Controller
 				foreach ($jurnal as $row) {
 					$abs['nomor'] = $no++;
 					$abs['hari'] = $row->hari;
-					$abs['mapel'] = $row->nama_mapel;
-					$abs['jam'] = date('H:i', strtotime($row->jam_masuk)) . ' - ' . date('H:i', strtotime($row->jam_keluar)) . ' WIB';
-					$abs['ruang'] = $row->nama_ruang;
-					$abs['pert'] = $row->pert_ke;
+					$abs['mapel'] = $row->mapel;
+					$abs['jam'] = date('H:i', strtotime($row->masuk)) . ' - ' . date('H:i', strtotime($row->selesai)) . ' WIB';
+					$abs['ruang'] = $row->ruang;
+					$abs['pert'] = $row->pertemuan;
 					$abs['tanggal'] = date('d-m-Y', strtotime($row->tanggal));
 					$abs['jadwalid'] = $row->jadwal_id;
 					$abs['jurnalid'] = $row->jurnal_id;
@@ -1213,11 +1213,11 @@ class Pembelajaran extends CI_Controller
 					$nama = $siswa->siswa_nama;
 				}
 			} elseif ($guru) {
-				if ($guru->guru_foto == 'default_profile.png') {
+				if ($guru->profile == 'default_profile.png') {
 					$foto = base_url('assets/siswa/img/profile.png');
 					$nama = $guru->guru_nama;
 				} else {
-					$foto = base_url('storage/guru/profile/' . $guru->guru_foto);
+					$foto = base_url('storage/guru/profile/' . $guru->profile);
 					$nama = $guru->guru_nama;
 				}
 			} else {

@@ -1,5 +1,5 @@
 <!-- import style -->
-<?php include APPPATH.'../assets/admin/css/import_style.php';?>
+<?php include APPPATH . '../assets/admin/css/import_style.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -15,7 +15,7 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Master Data</li>
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/Info/tahun-ajar') ?>" class="text-muted">Tahun Pembelajaran</a></li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/info/tahun-akademik') ?>" class="text-muted">Tahun Pembelajaran</a></li>
 					<li class="breadcrumb-item text-muted active" aria-current="page">Tambah Tahun Pembelajaran</li>
 				</ol>
 			</nav>
@@ -44,7 +44,7 @@
 
 					<div class="card shadow mb-4">
 						<div class="container my-3">
-							<?= form_open('master/info/tambah_tahunajar') ?>
+							<?= form_open('master/info/tambah_tahun_akademik') ?>
 							<label for="tahun_ajar">Tahun Pembelajaran</label>
 							<div class="input-group mb-3">
 								<input type="text" name="tahun_ajar" id="tahun_ajar" placeholder="Masukan Tahun Pembelajaran" class="form-control <?= (form_error('tahun_ajar')) ? 'is-invalid' : '' ?>" value="<?= set_value('tahun_ajar') ?>">
@@ -68,7 +68,7 @@
 								</div>
 							</div>
 							<div class="btn-aksi">
-								<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
+								<button type="submit" name="submit" class="btn btn-sm btn-primary rounded px-4 py-2 mr-3">Simpan</button>
 								<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-2">Reset Form</button>
 							</div>
 							<?= form_close() ?>
