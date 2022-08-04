@@ -1155,9 +1155,9 @@ class Pembelajaran extends CI_Controller
         $diskusi = $this->master->detailForum($id);
         if ($id and $diskusi) {
             $data['title'] = 'Forum Diskusi';
-            $data['content'] = 'admin/contents/super_visor/v_detail_diskusi';
-            $data['diskusi'] = $diskusi;
-            $data['jadwal'] = $this->master->getInfoJadwal($diskusi->jadwal_id);
+            $data['content'] = 'guru/contents/pembelajaran/v_detail_diskusi';
+            $data['forum'] = $diskusi;
+            $data['info'] = $this->master->getInfoJadwal($diskusi->jadwal_id);
             $data['reply'] = $this->master->getReplyForum($diskusi->forum_id);
         } else {
             $data['title'] = 'Not Found';
@@ -1218,7 +1218,7 @@ class Pembelajaran extends CI_Controller
         $id_forum = $this->input->get('id', true);
         $where = array(
             'parent_id' => '0',
-            'forum_id' => $id_forum['id'],
+            'forum_id' => $id_forum,
         );
         $query     = $this->db->order_by('create_time', 'DESC')->get_where('detaildiskusi', $where);
         $result    = $query->result();
@@ -1233,13 +1233,13 @@ class Pembelajaran extends CI_Controller
 								<div class="nama-small">' . $user['name'] . '</div>
 								<div class="post-on mb-2">Posted on ' . date('d-m-Y H:i', strtotime($val->create_time)) . ' WIB</div>
 								<div class="komen">' . $val->message . '</div>
-								<a href="javascript:void(0)" class="balas" id-komen="' . $val->diskusi_siswa_id . '">Balas</a>
+								<a href="javascript:void(0)" class="balas" id-komen="' . $val->diskusi_id . '">Balas</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			<hr>';
-            $output .= $this->ambil_reply($val->diskusi_siswa_id);
+            $output .= $this->ambil_reply($val->diskusi_id);
         }
         echo json_encode([$output]);
     }
@@ -1269,13 +1269,13 @@ class Pembelajaran extends CI_Controller
 								<div class="komen">' . $value->message . '</div>';
 
                 if ($tingkat < 2) {
-                    $output .= '<a href="javascript:void(0)" class="balas" id-komen="' . $value->diskusi_siswa_id . '">Balas</a>';
+                    $output .= '<a href="javascript:void(0)" class="balas" id-komen="' . $value->diskusi_id . '">Balas</a>';
                 }
                 $output .= '</div>
 						</div>
 					</div>
 				</div><hr>';
-                $output .= $this->ambil_reply($value->diskusi_siswa_id, $marginleft);
+                $output .= $this->ambil_reply($value->diskusi_id, $marginleft);
             }
         }
         return $output;

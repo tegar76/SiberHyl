@@ -375,7 +375,7 @@ class Data extends CI_Controller
 		$kode = $this->input->get('kelas');
 		$data['classes'] = $this->master->get_masterdata('kelas');
 		if ($kode) {
-			$data['students'] = $this->siswa->getWhere(['kode_kelas' => $kode]);
+			$data['students'] = $this->master->getDataSiswa(['kode_kelas' => $kode]);
 			$data['walikelas'] = $this->master->getDetailKelas($kode);
 		} else {
 			$data['students'] = array();
@@ -811,10 +811,7 @@ class Data extends CI_Controller
 	{
 		$nip = $this->input->get('nip');
 		$guru = $this->guru->getWhere(['guru_nip' => $nip]);
-		if (empty($nip) && empty($guru)) {
-			$data['title'] = 'Not Found';
-			$data['content'] = 'guru/contents/eror/v_not_found';
-		} else {
+		if ($nip && $guru) {
 			$jadwal_guru = $this->jadwal->getJadwalGuru($guru->guru_nip);
 			$no = 1;
 			foreach ($jadwal_guru as $row => $value) {
@@ -841,6 +838,9 @@ class Data extends CI_Controller
 			$data['guru'] = $guru;
 			$data['title'] = 'Detail Guru';
 			$data['content'] = 'admin/contents/data/v_detail_guru';
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}

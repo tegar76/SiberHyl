@@ -38,7 +38,7 @@ class Data extends CI_Controller
 		$data['kelas'] =  $this->guru->kelasGuruPengajar($guru->guru_nip);
 		if ($kelas) {
 			$no = 1;
-			$students = $this->siswa->getWhere(['kode_kelas' => $kelas]);
+			$students = $this->master->getDataSiswa(['kode_kelas' => $kelas]);
 			if (!empty($students)) {
 				foreach ($students as $row => $value) {
 					$siswa['nomor'] = $no++;

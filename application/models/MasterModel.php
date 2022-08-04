@@ -135,6 +135,16 @@ class MasterModel extends CI_Model
 		return $this->db->get('siswa')->result();
 	}
 
+	public function getDataSiswa($where)
+	{
+		$this->db->select("*");
+		$this->db->from('siswa');
+		$this->db->join('kelas', 'kelas.kelas_id=siswa.kelas_id');
+		$this->db->where($where);
+		$this->db->order_by('siswa_nama', 'ASC');
+		return $this->db->get()->result();
+	}
+
 	/* Function Modul Materi Bahan Ajar */
 	public function materiPembelajaranAdmin()
 	{

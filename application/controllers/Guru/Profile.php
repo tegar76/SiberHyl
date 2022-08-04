@@ -33,13 +33,14 @@ class Profile extends CI_Controller
 		$guru = $this->userGuru;
 		if ($_FILES['image_teacher']['name']) {
 			$this->imageConf('guru');
+			$this->check_storage_guru('profile');
 			if (!$this->upload->do_upload('image_teacher')) :
 				$this->message('Oopppsss', $this->upload->display_errors(), 'error');
 				redirect('guru/profile');
 			else :
 				$dataUpload = $this->upload->data();
 				$resolution = ['width' => 500, 'height' => 500];
-				$this->compreesImage('siswa', $dataUpload['file_name'], $resolution);
+				$this->compreesImage('guru', $dataUpload['file_name'], $resolution);
 				if ($guru->profile != 'default_foto.png') {
 					@unlink(FCPATH . './storage/guru/profile/' . $guru->profile);
 				}
@@ -137,5 +138,26 @@ class Profile extends CI_Controller
 			return false;
 		}
 		return true;
+	}
+
+	public function check_storage_guru($dir = null)
+	{
+		if (!is_dir('storage')) :
+			mkdir('./storage', 0777, true);
+		endif;
+
+		$dir_exist = true;
+		if (!is_dir('storage/guru')) :
+			mkdir('./storage/guru', 0777, true);
+			$dir_exist = false; // dir not exist
+		endif;
+
+		if ($dir) {
+			if (!is_dir('storage/guru/' . $dir)) :
+				mkdir('./storage/guru/' . $dir, 0777, true);
+				$dir_exist = false; // dir not exist
+			endif;
+		}
+		return $dir_exist;
 	}
 }
