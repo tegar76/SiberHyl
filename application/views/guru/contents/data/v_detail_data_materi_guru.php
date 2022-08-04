@@ -46,19 +46,19 @@
 										<tbody>
 											<tr>
 												<th scope="row" class="col-sm-8">Kelas</th>
-												<td><?= $detailMateri->nama_kelas ?></td>
+												<td><?= $detailMateri->kelas ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Mata Pelajaran</th>
-												<td><?= $detailMateri->nama_mapel ?></td>
+												<td><?= $detailMateri->mapel ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Dibuat</th>
-												<td><?= date('Y-m-d H:i:s', strtotime($detailMateri->create_time)) . " WIB" ?></td>
+												<td><?= date('Y-m-d H:i:s', strtotime($detailMateri->create)) . " WIB" ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Diedit</th>
-												<td><?= ($detailMateri->create_time == $detailMateri->update_time) ? '-' : date('Y-m-d H:i:s', strtotime($detailMateri->update_time)) . " WIB" ?></td>
+												<td><?= ($detailMateri->create == $detailMateri->update) ? '-' : date('Y-m-d H:i:s', strtotime($detailMateri->update)) . " WIB" ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Materi Pembelajaran</th>
@@ -69,7 +69,7 @@
 													<?php foreach ($bahanMateri as $materi) : ?>
 														<!-- looping item -->
 														<div class="pdf-file ml-3">
-															<a href="<?= base_url('guru/data/view_materi_guru?file=' . $materi->materi) ?>">
+															<a target="_blank" href="<?= base_url('guru/data/view_materi_guru/' . $materi->file_materi) ?>">
 																<div class="card card-pdf">
 																	<div class="container">
 																		<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf">
@@ -94,8 +94,8 @@
 														<div class="pdf-file ml-3">
 															<div class="card card-video">
 																<div class="container">
-																	<iframe class="d-block mx-auto" src="<?= $video->materi ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-																	<h6 class="mt-1"><?= date('Y-m-d', strtotime($detailMateri->create_time)) ?></h6>
+																	<iframe class="d-block mx-auto" src="<?= $video->file_materi ?>" title="<?= $video->judul ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+																	<h6 class="mt-1"><?= date('Y-m-d', strtotime($video->create_time)) ?></h6>
 																	<h6 class="mt-n1"><?= $video->judul ?></h6>
 																</div>
 															</div>
@@ -108,7 +108,7 @@
 									</table>
 									<hr class="mt-n3">
 									<div class="button-action d-flex mb-3 mt-2">
-										<a href="<?= base_url('Guru/data/dataMateriGuru') ?>" class="btn btn-sm btn-primary bg-blue rounded border-0 ml-3 px-3">Kembali</a>
+										<a href="<?= base_url('guru/data/data_materi?user=guru') ?>" class="btn btn-sm btn-primary bg-blue rounded border-0 ml-3 px-3">Kembali</a>
 									</div>
 								</div>
 							</div>

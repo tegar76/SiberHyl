@@ -59,9 +59,9 @@
 								<div class="input-group mb-3">
 									<input type="text" name="nama_mapel" id="nama_mapel" class="form-control" value="<?= $jurnal->nama_mapel ?>" readonly>
 								</div>
-								<label for="nama_ruang">Ruang Kelas</label>
+								<label for="kode_ruang">Ruang Kelas</label>
 								<div class="input-group mb-3">
-									<input type="text" name="nama_ruang" id="nama_ruang" class="form-control" value="<?= $jurnal->nama_ruang ?>" readonly>
+									<input type="text" name="kode_ruang" id="kode_ruang" class="form-control" value="<?= $jurnal->kode_ruang ?>" readonly>
 								</div>
 								<div class="row">
 									<div class="col">
@@ -73,7 +73,7 @@
 									<div class="col">
 										<label for="pertemuan_ke">Pertemuan Ke-</label>
 										<div class="input-group mb-3">
-											<input type="number" name="pertemuan_ke" id="pertemuan_ke" class="form-control" value="<?= $jurnal->pert_ke ?>" readonly>
+											<input type="number" name="pertemuan_ke" id="pertemuan_ke" class="form-control" value="<?= $jurnal->pertemuan ?>" readonly>
 										</div>
 									</div>
 								</div>
@@ -111,27 +111,27 @@
 								</div>
 								<label for="kd_materi">KD Materi</label>
 								<div class="input-group mb-3">
-									<input type="text" name="kd_materi" id="kd_materi" class="form-control <?= (form_error('kd_materi')) ? 'is-invalid' : '' ?>" placeholder="Input KD Materi" value="<?= set_value('kd_materi') ?>">
+									<input type="text" name="kd_materi" id="kd_materi" class="form-control <?= (form_error('kd_materi')) ? 'is-invalid' : '' ?>" placeholder="Input KD Materi" value="<?= (set_value('kd_materi')) ? set_value('kd_materi') : $jurnal->kd_materi ?>">
 									<div id="kd_materiFeedback" class="invalid-feedback">
 										<?= form_error('kd_materi', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
 								<label for="pembahasan">Pembahasan</label>
 								<div class="input-group mb-3">
-									<textarea name="pembahasan" id="pembahasan" class="form-control <?= (form_error('pembahasan')) ? 'is-invalid' : '' ?>" placeholder="Input Pembahasan Materi"><?= set_value('pembahasan') ?></textarea>
+									<textarea name="pembahasan" id="pembahasan" class="form-control <?= (form_error('pembahasan')) ? 'is-invalid' : '' ?>" placeholder="Input Pembahasan Materi"><?= (set_value('pembahasan')) ? set_value('pembahasan') : $jurnal->pembahasan ?></textarea>
 									<div id="pembahasanFeedback" class="invalid-feedback">
 										<?= form_error('pembahasan', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
 								<label for="catatan_kbm">Catatan</label>
 								<div class="input-group mb-3">
-									<textarea name="catatan_kbm" id="catatan_kbm" class="form-control <?= (form_error('catatan_kbm')) ? 'is-invalid' : '' ?>" placeholder="Input Catatan Yang Berhubungan Dengan Absensi atau Jalannya Pembelajaran"><?= set_value('catatan_kbm') ?></textarea>
+									<textarea name="catatan_kbm" id="catatan_kbm" class="form-control <?= (form_error('catatan_kbm')) ? 'is-invalid' : '' ?>" placeholder="Input Catatan Yang Berhubungan Dengan Absensi atau Jalannya Pembelajaran"><?= (set_value('catatan_kbm')) ? set_value('catatan_kbm') : $jurnal->catatan_kbm ?></textarea>
 									<div id="catatan_kbmFeedback" class="invalid-feedback">
 										<?= form_error('catatan_kbm', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
 								<div class="btn-aksi mt-4 mb-2">
-									<button type="submit" class="btn btn-sm btn-primary bg-blue border-0 rounded px-4 py-2 mr-3">Simpan</button>
+									<button type="submit" name="submit_jurnal" class="btn btn-sm btn-primary bg-blue border-0 rounded px-4 py-2 mr-3">Simpan</button>
 									<button type="reset" class="btn btn-sm btn-secondary border-0 rounded px-4 py-2">Reset</button>
 								</div>
 							</div>

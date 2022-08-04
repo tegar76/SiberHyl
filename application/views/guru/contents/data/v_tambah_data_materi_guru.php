@@ -53,7 +53,7 @@
 								<select class="custom-select <?= (form_error('kelas')) ? 'is-invalid' : '' ?>" name="kelas" id="pilih-kelas-materi">
 									<option value="" selected>Pilih Kelas</option>
 									<?php foreach ($kelas as $kls) : ?>
-										<option value="<?= $kls->kelas_id ?>"><?= $kls->nama_kelas ?></option>
+										<option value="<?= $kls->id ?>"><?= $kls->nama ?></option>
 									<?php endforeach ?>
 								</select>
 								<div id="kelasFeedback" class="invalid-feedback">
@@ -65,7 +65,7 @@
 								<select class="custom-select <?= (form_error('mapel')) ? 'is-invalid' : '' ?>" name="mapel" id="pilih-mapel-materi">
 									<option value="" selected>Pilih Mata Pelajaran</option>
 									<?php foreach ($mapel as $mp) : ?>
-										<option value="<?= $mp->mapel_id ?>"><?= $mp->nama_mapel ?></option>
+										<option value="<?= $mp->id ?>"><?= $mp->nama ?></option>
 									<?php endforeach ?>
 								</select>
 								<div id="mapelFeedback" class="invalid-feedback">

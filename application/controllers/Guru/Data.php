@@ -10,9 +10,10 @@ class Data extends CI_Controller
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('SiswaModel', 'siswa', true);
 		$this->userGuru = $this->guru->getWhere(['guru_nip' => $this->session->userdata('nip')]);
-		$tahun_ajar = $this->jadwal->get_activate_tahunajar();
+		$tahun_ajar = $this->master->getActiveTahunAkademik();
 		if ($tahun_ajar == null) {
 			$this->tahun_ajar = [
+				'tahun_id' => 0,
 				'semester' => 0,
 				'tahun' => ''
 			];
@@ -32,35 +33,36 @@ class Data extends CI_Controller
 
 	public function data_siswa($kode = false)
 	{
-		if ($kode == false) {
-			$kode = '';
-		}
 		$guru	= $this->userGuru;
-		$no = 1;
-		$students = $this->siswa->getWhere(['kode_kelas' => $kode]);
-		$data['students'] = array();
-		$data['wali'] = array();
-		if (!empty($students)) {
-			foreach ($students as $row => $value) {
-				$siswa['nomor'] = $no++;
-				$siswa['kelas']	= $value->kode_kelas;
-				$siswa['nis']	= $value->siswa_nis;
-				$siswa['nisn']	= $value->siswa_nisn;
-				$siswa['nama']	= $value->siswa_nama;
-				$siswa['jk']	= $value->siswa_kelamin;
-				$siswa['asal']	= $value->asal_kelas;
-				$siswa['status'] = $value->status;
-				$siswa['online'] = ($value->status_online == 'online') ? '<p class="text-success">Online</p>' : '<p class="text-danger">Offline</p>';
-				$data_siswa[] = $siswa;
+		$kelas = $this->input->get('kelas');
+		$data['kelas'] =  $this->guru->kelasGuruPengajar($guru->guru_nip);
+		if ($kelas) {
+			$no = 1;
+			$students = $this->siswa->getWhere(['kode_kelas' => $kelas]);
+			if (!empty($students)) {
+				foreach ($students as $row => $value) {
+					$siswa['nomor'] = $no++;
+					$siswa['kelas']	= $value->kode_kelas;
+					$siswa['nis']	= $value->siswa_nis;
+					$siswa['nisn']	= $value->siswa_nisn;
+					$siswa['nama']	= $value->siswa_nama;
+					$siswa['jk']	= $value->siswa_kelamin;
+					$siswa['asal']	= $value->asal_kelas;
+					$siswa['status'] = $value->status;
+					$siswa['online'] = ($value->status_online == 'online') ? '<p class="text-success">Online</p>' : '<p class="text-danger">Offline</p>';
+					$data_siswa[] = $siswa;
+				}
+				$data['students'] = $data_siswa;
+				$data['wali']  = $this->master->getDetailKelas($kode);
 			}
-			$data['students'] = $data_siswa;
-			$data['wali']  = $this->master->getDetailKelas($kode);
+		} else {
+			$data['students'] = array();
+			$data['wali'] = array();
 		}
 		$data['title'] = 'Data Siswa';
 		$data['guru'] = $guru;
-		$data['kelas'] =  $this->guru->get_kelas_guru($guru->guru_kode);
 		$data['tahun_ajar'] = $this->tahun_ajar;
-		$data['notif'] = check_new_info();
+		$data['notif'] = '';
 		$data['content'] = 'guru/contents/data/v_data_siswa';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
@@ -68,7 +70,7 @@ class Data extends CI_Controller
 	public function detail_siswa()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = check_new_info();
+		$data['notif'] = '';
 		$nis = $this->input->get('nis');
 		$student = $this->siswa->getWhere(['siswa_nis' => $nis]);
 		if ($student) {
@@ -85,17 +87,17 @@ class Data extends CI_Controller
 	public function data_materi()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = check_new_info();
+		$data['notif'] = 'check_new_info()';
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$user = $this->input->get('user');
 		if ($user == 'guru') {
 			$data['title'] = 'Data Materi (Guru)';
 			$data['content'] = 'guru/contents/data/v_data_materi_guru';
-			$data['materi'] = $this->guru->get_materi_guru($data['guru']->guru_id)->result();
+			$data['materi'] = $this->guru->getMateriGuru($data['guru']->guru_id);
 		} elseif ($user == 'admin') {
 			$data['title'] = 'Data Materi (Admin)';
 			$data['content'] = 'guru/contents/data/v_data_materi_admin';
-			$data['materi'] = $this->master->get_materi()->result();
+			$data['materi'] = $this->master->materiPembelajaranAdmin();
 		} else {
 			$data['title'] = '404 Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
@@ -106,22 +108,22 @@ class Data extends CI_Controller
 	public function detail_materi()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = check_new_info();
+		$data['notif'] = '';
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$user = $this->input->get('user');
 		$id = $this->input->get('id');
 		if ($user == 'guru') {
 			$data['title'] = 'Data Materi (Guru)';
 			$data['content'] = 'guru/contents/data/v_detail_data_materi_guru';
-			$data['detailMateri'] = $this->guru->getDetailMateri($id);
-			$data['bahanMateri'] = $this->db->get_where('materi_kbm', ['materi_info_id' => $id, 'jenis' => 'file'])->result();
-			$data['videoMateri'] = $this->db->get_where('materi_kbm', ['materi_info_id' => $id, 'jenis' => 'link'])->result();
+			$data['detailMateri'] = $this->master->getDetailMateriGuru($id);
+			$data['bahanMateri'] = $this->master->modulMateri('file', $id);
+			$data['videoMateri'] = $this->master->modulMateri('link', $id);
 		} elseif ($user == 'admin') {
 			$data['title'] = 'Detail Data Materi (Admin)';
 			$data['content'] = 'guru/contents/data/v_detail_data_materi_admin';
-			$data['detailMateri'] = $this->master->getDetailMateri($id);
-			$data['bahanMateri'] = $this->db->get_where('materi_kbm', ['materi_info_id' => $id, 'jenis' => 'file'])->result();
-			$data['videoMateri'] = $this->db->get_where('materi_kbm', ['materi_info_id' => $id, 'jenis' => 'link'])->result();
+			$data['detailMateri'] = $this->master->detailMateri($id);
+			$data['bahanMateri'] = $this->master->modulMateri('file', $id);
+			$data['videoMateri'] = $this->master->modulMateri('link', $id);
 		} else {
 			$data['title'] = '404 Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
@@ -132,9 +134,9 @@ class Data extends CI_Controller
 	public function tambah_materi()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = check_new_info();
-		$data['kelas'] =  $this->guru->get_kelas_guru($data['guru']->guru_kode);
-		$data['mapel'] =  $this->guru->get_mapel_guru($data['guru']->guru_kode);
+		$data['notif'] = 'check_new_info()';
+		$data['kelas'] =  $this->guru->kelasGuruPengajar($data['guru']->guru_nip);
+		$data['mapel'] =  $this->guru->mapelGuruPengajar($data['guru']->guru_nip);
 		$data['title'] = 'Tambah Data Materi (Guru)';
 		$data['content'] = 'guru/contents/data/v_tambah_data_materi_guru';
 		if (isset($_POST['submit'])) {
@@ -172,15 +174,16 @@ class Data extends CI_Controller
 	public function process_materi()
 	{
 		$this->db->trans_start();
-		$kelas	= $this->guru->get_kelas_jurusan($this->input->post('kelas', true));
+		$kelas	= $this->guru->jurusanKelas($this->input->post('kelas', true));
 		$data	= array(
-			'index_kelas' => $kelas->index_kelas,
+			'index_kelas' => $kelas->index,
 			'mapel_id'	=> $this->input->post('mapel', true),
-			'jurusan_id' => $kelas->jurusan_id,
+			'jurusan_id' => $kelas->j_id,
 			'guru_id' => $this->session->userdata('id_'),
-			'kelas_id' => $kelas->kelas_id
+			'kelas_id' => $kelas->k_id,
+			'status' => 2
 		);
-		$this->db->insert('materi_info', $data);
+		$this->db->insert('detailmateri', $data);
 		$materi_id = $this->db->insert_id();
 		$file_	= $_FILES['file_materi']['name'];
 		$url_	= $_POST['link_video'];
@@ -192,14 +195,14 @@ class Data extends CI_Controller
 	public function edit_materi($id)
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = check_new_info();
-		$materi = $this->guru->getDetailMateri($id);
+		$data['notif'] =' check_new_info()';
+		$materi = $this->master->getDetailMateriGuru($id);
 		if ($id && $materi) {
 			$data['title'] = 'Edit Data Materi (Guru)';
 			$data['content'] = 'guru/contents/data/v_edit_data_materi_guru';
 			$data['detailMateri'] = $materi;
-			$data['bahanMateri'] = $this->db->get_where('materi_kbm', ['materi_info_id' => $id, 'jenis' => 'file'])->result();
-			$data['videoMateri'] = $this->db->get_where('materi_kbm', ['materi_info_id' => $id, 'jenis' => 'link'])->result();
+			$data['bahanMateri'] = $this->master->modulMateri('file', $id);
+			$data['videoMateri'] = $this->master->modulMateri('link', $id);
 
 			if (isset($_POST['update'])) {
 				$this->form_validation->set_rules([
@@ -233,10 +236,10 @@ class Data extends CI_Controller
 				if ($this->form_validation->run() == false) {
 					$this->load->view('guru/layout/wrapper', $data, FALSE);
 				} else {
-					$infoMateriID = $this->input->post('materi_info_id', true);
+					$infoMateriID = $this->input->post('detailmateri_id', true);
 					$this->db->set('update_time', date('Y-m-d H:i:s'));
-					$this->db->where('materi_info_id', $infoMateriID);
-					$this->db->update('materi_info');
+					$this->db->where('detailmateri_id', $infoMateriID);
+					$this->db->update('detailmateri');
 					$file_	= $_FILES['file_materi']['name'];
 					$url_	= $_POST['link_video'];
 					$this->processMateri($file_, $infoMateriID);
@@ -252,7 +255,7 @@ class Data extends CI_Controller
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
 
-	public function processMateri($file_, $materi_id)
+	public function processMateri($file_, $detailmateri_id)
 	{
 		if (isset($file_)) {
 			$config['upload_path'] = './storage/guru/materi/';
@@ -278,19 +281,19 @@ class Data extends CI_Controller
 						$data = [
 							'judul' => $_POST['judul_materi'][$i],
 							'jenis'	=> 'file',
-							'materi' => $materi['file_name'],
-							'tipe_file' => $materi['file_ext'],
-							'ukuran_file' => $materi['file_size'],
-							'materi_info_id' => $materi_id
+							'file_materi' => $materi['file_name'],
+							'file_type' => $materi['file_ext'],
+							'file_size' => $materi['file_size'],
+							'detailmateri_id' => $detailmateri_id
 						];
-						$this->db->insert('materi_kbm', $data);
+						$this->db->insert('materipembelajaran', $data);
 					}
 				}
 			}
 		}
 	}
 
-	public function processLinkVideo($url_, $materi_id)
+	public function processLinkVideo($url_, $detailmateri_id)
 	{
 		if (array_filter($url_)) {
 			$url_video = $this->input->post('link_video', true);
@@ -301,10 +304,10 @@ class Data extends CI_Controller
 					$dataVideo = [
 						'judul' => $_POST['judul_video'][$i],
 						'jenis'	=> 'link',
-						'materi' => $embed_url[$i],
-						'materi_info_id' => $materi_id
+						'file_materi' => $embed_url[$i],
+						'detailmateri_id' => $detailmateri_id
 					];
-					$this->db->insert('materi_kbm', $dataVideo);
+					$this->db->insert('materipembelajaran', $dataVideo);
 				}
 			}
 		}
@@ -315,15 +318,17 @@ class Data extends CI_Controller
 		$type = $this->input->get('type');
 		$id	= $this->input->get('id');
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = check_new_info();
+		$data['notif'] = 'check_new_info()';
 		if ($type && $id) {
-			if ($type == 'pdf') {
+			$materi =  $this->db->get_where('materipembelajaran', ['materi_id' => $id])->row();
+			if ($type == 'pdf' && $materi) {
 				$data['title'] = 'Edit File Materi (Guru)';
 				$data['content'] = 'guru/contents/data/v_edit_file_materi_guru';
-				$data['materi']	= $this->db->get_where('materi_kbm', ['materi_id' => $id])->row();
-			} elseif ($type == 'video') {
+				$data['materi'] = $materi;
+			} elseif ($type == 'video' && $materi) {
 				$data['title'] = 'Edit Video Materi (Guru)';
 				$data['content'] = 'guru/contents/data/v_edit_video_materi_guru';
+				$data['materi'] = $materi;
 			}
 		} else {
 			$data['title'] = '404 Not Found';
@@ -348,7 +353,7 @@ class Data extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			redirect('guru/data/update_bahan_materi?type=pdf&id=' . $materiID);
 		} else {
-			$materi = $this->master->getFileMateri($materiID);
+			$materi = $this->master->getMateri($materiID);
 			$updateMateri = $_FILES['file_materi_update']['name'];
 			if ($updateMateri) {
 				$config['upload_path'] = './storage/guru/materi/';
@@ -367,15 +372,16 @@ class Data extends CI_Controller
 				$_FILES['file']['size'] 	= $_FILES['file_materi_update']['size'];
 
 				if ($this->upload->do_upload('file')) {
-					$materiLama = $materi->materi;
+					$materiLama = $materi->file;
 					$materiBaru = $this->upload->data();
 					if ($materiLama) {
 						@unlink(FCPATH . './storage/guru/materi/' . $materiLama);
 					}
 					$updateMata = [
-						'materi' => $materiBaru['file_name'],
-						'tipe_file' => $materiBaru['file_ext'],
-						'ukuran_file' => $materiBaru['file_size'],
+						'file_materi' => $materiBaru['file_name'],
+						'file_type' => $materiBaru['file_ext'],
+						'file_size' => $materiBaru['file_size'],
+						'update_time' => date('Y-m-d H:i:s')
 					];
 					$this->db->set($updateMata);
 				}
@@ -383,52 +389,101 @@ class Data extends CI_Controller
 		}
 		$this->db->set('judul', $this->input->post('judul_materi', true));
 		$this->db->where('materi_id', $this->input->post('materi_id', true));
-		$this->db->update('materi_kbm');
-		return redirect('guru/data/edit_materi/' . $materi->materi_info_id);
+		$this->db->update('materipembelajaran');
+		return redirect('guru/data/edit_materi/' . $materi->detail_id);
 	}
 
 	public function process_update_video()
 	{
+		$materi_id = $this->input->post('materi_id', true);
+		$this->form_validation->set_rules([
+			[
+				'field' => 'judul_video_update',
+				'label' => 'Judul Materi Pembelajaran',
+				'rules' => 'trim|required|xss_clean',
+				'errors' => [
+					'required' => '{field} harus diisi'
+				]
+			],
+			[
+				'field' => 'link_video_update',
+				'label' => 'Link Video Materi Pembelajaran',
+				'rules' => 'trim|required|xss_clean|valid_url',
+				'errors' => [
+					'required' => '{field} harus diisi',
+					'valid_url' => '{field} harus Valid!'
+				]
+			]
+		]);
+
+		if ($this->form_validation->run() == false) {
+			redirect('guru/data/update_bahan_materi?type=video&id=' . $materi_id);
+		} else {
+			$materi	= $this->master->getMateri($materi_id);
+			$url_video = $this->input->post('link_video_update', true);
+			if ($materi->file == $url_video) {
+				$this->db->set('file_materi', $url_video);
+			} else {
+				$youtube = preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $url_video, $url_match);
+				$embed_url = 'https://www.youtube.com/embed/' . $url_match[1];
+				$this->db->set('file_materi', $embed_url);
+			}
+			$this->db->set('judul', $this->input->post('judul_video_update', true));
+			$this->db->set('update_time',  date('Y-m-d H:i:s'));
+			$this->db->where('materi_id', $materi_id);
+			$this->db->update('materipembelajaran');
+			return redirect('guru/data/edit_materi/' . $materi->detail_id);
+		}
+
 	}
 
-	public function view_materi()
+	public function view_materi($id = null, $file = null)
 	{
-		$file = $this->input->get('file');
-		if ($file) {
-			$materiPDF = $this->db->get_where('materi_kbm', ['materi' => $file])->row();
-			$infoMateri = $this->master->getDetailMateri($materiPDF->materi_info_id);
-			$kelas = strtolower($infoMateri->index_kelas);
-			$dirKelas = 'kelas-' . $kelas;
-			$path_pdf = '/storage/materi/';
-			if ($infoMateri->kode_jurusan == null) {
-				$path_pdf = '/storage/materi/' . $dirKelas . '/';
+		$materi = $this->master->getMateri($id);
+		if ($id && $file && $materi) {
+			$dirKelas = strtolower('kelas-' . $materi->kelas);
+			$path_pdf = 'storage/materi/';
+			if ($materi->jurusan == null) {
+				$path_pdf = 'storage/materi/' . $dirKelas . '/';
 			} else {
-				$path_pdf = '/storage/materi/' . $dirKelas . '/' . $infoMateri->kode_jurusan . '/';
+				$path_pdf = 'storage/materi/' . $dirKelas . '/' . $materi->jurusan . '/';
 			}
-			$data['file_materi'] = base_url($path_pdf . $materiPDF->materi);
-			$this->load->view('admin/contents/jadwal/materi_pdf/v_materi_pdf', $data);
+			$pdf = FCPATH . './' . $path_pdf . $materi->file;
+			if(file_exists($pdf)) {
+				$data['pdf'] =  base_url($path_pdf . $materi->file);
+				$this->load->view('pdf_viewer/pdf_viewer', $data);
+			} else {
+				show_404();
+			}
+		} else {
+			show_404();
 		}
 	}
 
-	public function view_materi_guru()
+	
+	public function view_materi_guru($file = null) 
 	{
-		$file = $this->input->get('file');
-		if ($file) {
-			$data['file_materi'] = base_url('storage/guru/materi/' . $file);
-			var_dump($data['file_materi']);
-			die;
-			$this->load->view('admin/contents/jadwal/materi_pdf/v_materi_pdf', $data);
+		if($file) {
+			$pdf = FCPATH . './storage/guru/materi/' . $file;
+			if(file_exists($pdf)) {
+				$data['pdf'] = base_url('storage/guru/materi/') . $file;
+				$this->load->view('pdf_viewer/pdf_viewer', $data);
+			} else {
+				show_404();
+			}
+		} else {
+			show_404();
 		}
 	}
 
 	public function delete_materi_pdf()
 	{
 		$materi_id  = $this->input->get('materi_id');
-		$fileMateri = $this->db->get_where('materi_kbm', ['materi_id' => $materi_id])->row();
+		$fileMateri = $this->db->get_where('materipembelajaran', ['materi_id' => $materi_id])->row();
 		if (!empty($fileMateri)) {
 			@unlink(FCPATH . './storage/guru/materi/' . $fileMateri->materi);
 			$this->db->where_in('materi_id', $fileMateri->materi_id);
-			$this->db->delete('materi_kbm');
+			$this->db->delete('materipembelajaran');
 			$reponse = [
 				'csrfName' => $this->security->get_csrf_token_name(),
 				'csrfHash' => $this->security->get_csrf_hash(),
@@ -449,10 +504,10 @@ class Data extends CI_Controller
 	public function delete_materi_video()
 	{
 		$materi_id  = $this->input->get('materi_id');
-		$fileMateri = $this->db->get_where('materi_kbm', ['materi_id' => $materi_id])->row();
+		$fileMateri = $this->db->get_where('materipembelajaran', ['materi_id' => $materi_id])->row();
 		if (!empty($fileMateri)) {
 			$this->db->where_in('materi_id', $fileMateri->materi_id);
-			$this->db->delete('materi_kbm');
+			$this->db->delete('materipembelajaran');
 			$reponse = [
 				'csrfName' => $this->security->get_csrf_token_name(),
 				'csrfHash' => $this->security->get_csrf_hash(),
@@ -472,28 +527,29 @@ class Data extends CI_Controller
 
 	public function delete_all_materi()
 	{
-		$materiInfoID = $this->input->get('id');
-		$materi = $this->master->getDetailMateri($materiInfoID);
+		$materi_id = $this->input->get('id');
+		$materi = $this->master->detailMateri($materi_id);
+
 		// hapus file materi pembelajaran
-		$materiKBM = $this->master->getMateriKBM($materi->materi_info_id, 'file');
-		if (!empty($materiKBM)) {
-			foreach ($materiKBM as $row) {
-				@unlink(FCPATH . './storage/guru/materi/' . $row->materi);
+		$pdf = $this->master->modulMateri('file', $materi->id);
+		if (!empty($pdf)) {
+			foreach ($pdf as $row) {
+				@unlink(FCPATH . '.storage/guru/materi/' . $row->file_materi);
 				$this->db->where_in('materi_id', $row->materi_id);
-				$this->db->delete('materi_kbm');
+				$this->db->delete('materipembelajaran');
 			}
 		}
 
 		// hapus video pembelajaran
-		$materiVideo = $this->master->getMateriKBM($materi->materi_info_id, 'link');
-		if (!empty($materiVideo)) {
-			foreach ($materiVideo as $row) {
+		$video = $this->master->modulMateri('link', $materi->id);
+		if (!empty($video)) {
+			foreach ($video as $row) {
 				$this->db->where_in('materi_id', $row->materi_id);
-				$this->db->delete('materi_kbm');
+				$this->db->delete('materipembelajaran');
 			}
 		}
-		$this->db->where('materi_info_id', $materi->materi_info_id);
-		$this->db->delete('materi_info');
+		$this->db->where('detailmateri_id', $materi->id);
+		$this->db->delete('detailmateri');
 
 		$reponse = [
 			'csrfName' => $this->security->get_csrf_token_name(),

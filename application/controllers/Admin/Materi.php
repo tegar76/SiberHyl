@@ -471,7 +471,7 @@ class Materi extends CI_Controller
 				if ($this->form_validation->run() == false) {
 					$this->load->view('admin/layout/wrapper', $data, FALSE);
 				} else {
-					$this->process_upadte_video();
+					$this->process_upadate_video();
 					$this->message('Berhasil', 'Data Materi Berhasil Diupdate', 'success');
 					return redirect('master/materi/update_materi/' . $materi->detail_id);
 				}
@@ -483,7 +483,7 @@ class Materi extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function process_upadte_video()
+	public function process_upadate_video()
 	{
 		$materi_id = $this->input->post('materi_id', true);
 		$materi	= $this->master->getMateri($materi_id);
@@ -501,22 +501,41 @@ class Materi extends CI_Controller
 		$this->db->update('materipembelajaran');
 	}
 
-	public function view_materi()
+	public function view_materi($id = null, $file = null)
 	{
-		$req = $_REQUEST;
-		$materi = $this->master->getMateri($req['id']);
-		if ($req && $materi) {
+		$materi = $this->master->getMateri($id);
+		if ($id && $file && $materi) {
 			$dirKelas = strtolower('kelas-' . $materi->kelas);
-			$path_pdf = './storage/materi/';
+			$path_pdf = 'storage/materi/';
 			if ($materi->jurusan == null) {
-				$path_pdf = './storage/materi/' . $dirKelas . '/';
+				$path_pdf = 'storage/materi/' . $dirKelas . '/';
 			} else {
-				$path_pdf = './storage/materi/' . $dirKelas . '/' . $materi->jurusan . '/';
+				$path_pdf = 'storage/materi/' . $dirKelas . '/' . $materi->jurusan . '/';
 			}
-			$data['pdf'] = base_url($path_pdf . $materi->file);
-			$this->load->view('pdf_viewer/pdf_viewer', $data);
+			$pdf = FCPATH . './' . $path_pdf . $materi->file;
+			if(file_exists($pdf)) {
+				$data['pdf'] =  base_url($path_pdf . $materi->file);
+				$this->load->view('pdf_viewer/pdf_viewer', $data);
+			} else {
+				show_404();
+			}
 		} else {
-			return redirect('master/materi');
+			show_404();
+		}
+	}
+
+	public function view_materi_guru($file = null) 
+	{
+		if($file) {
+			$pdf = FCPATH . './storage/guru/materi/' . $file;
+			if(file_exists($pdf)) {
+				$data['pdf'] = base_url('storage/guru/materi/') . $file;
+				$this->load->view('pdf_viewer/pdf_viewer', $data);
+			} else {
+				show_404();
+			}
+		} else {
+			show_404();
 		}
 	}
 

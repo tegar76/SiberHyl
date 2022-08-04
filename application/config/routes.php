@@ -50,7 +50,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'home';
-$route['404_override'] = '';
+$route['404_override'] = 'error404';
 $route['translate_uri_dashes'] = FALSE;
 
 /*
@@ -152,6 +152,7 @@ $route['master/materi'] = 'Admin/Materi';
 $route['master/materi/(:any)'] = 'Admin/Materi/$1';
 $route['master/materi/(:any)/(:any)'] = 'Admin/Materi/$1/$2';
 $route['master/materi/(:any)/(:any)/'] = 'Admin/Materi/$1/$2';
+$route['master/materi/(:any)/(:any)/(:any)'] = 'Admin/Materi/$1/$2/$3';
 
 $route['master/jurnal'] = 'Admin/JurnalMateri';
 $route['master/jurnal/(:any)'] = 'Admin/JurnalMateri/$1';
@@ -167,6 +168,12 @@ $route['master/info/(:any)/(:any)/(:any)'] = 'Admin/Info/$1/$2/$3';
 $route['master/super-visor'] = 'Admin/SuperVisor';
 $route['master/super-visor/(:any)'] = 'Admin/SuperVisor/$1';
 $route['master/super-visor/(:any)/(:any)'] = 'Admin/SuperVisor/$1/$2';
+
+
+$route['master/export'] = 'Admin/Docs';
+$route['master/export/(:any)'] = 'Admin/Docs/$1';
+$route['master/export/(:any)/(:any)'] = 'Admin/Docs/$1/$2';
+$route['master/export/(:any)/(:any)/(:any)'] = 'Admin/Docs/$1/$2/$3';
 
 // routing guru
 $route['guru/dashboard'] = 'Guru/Dashboard/index';

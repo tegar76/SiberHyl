@@ -43,15 +43,15 @@
 					<!-- looping card -->
 					<div class="card shadow mb-4">
 						<div class="container my-3">
-							<?= form_open_multipart('guru/data/edit_materi/' . $detailMateri->materi_info_id) ?>
-							<input type="hidden" name="materi_info_id" value="<?= $detailMateri->materi_info_id ?>">
+							<?= form_open_multipart('guru/data/edit_materi/' . $detailMateri->id) ?>
+							<input type="hidden" name="detailmateri_id" value="<?= $detailMateri->id ?>">
 							<label for="kelas_edit">Kelas</label>
 							<div class="input-group mb-3">
-								<input type="text" class="form-control" name="kelas_edit" id="kelas_edit" value="<?= $detailMateri->nama_kelas ?>" readonly>
+								<input type="text" class="form-control" name="kelas_edit" id="kelas_edit" value="<?= $detailMateri->kelas ?>" readonly>
 							</div>
 							<label for="mapel_edit">Mata Pelajaran</label>
 							<div class="input-group mb-3">
-								<input type="text" class="form-control" name="mapel_edit" id="mapel_edit" value="<?= $detailMateri->nama_mapel ?>" readonly>
+								<input type="text" class="form-control" name="mapel_edit" id="mapel_edit" value="<?= $detailMateri->mapel ?>" readonly>
 							</div>
 							<div class="input-group">
 								<button type="button" class="btn btn-primary bg-blue border-0 btn-sm btn-disabled mb-2 mt-2" id="btn-update-materi" data-toggle="tooltip" data-placement="top" title="+ Form Materi"><i class="fa fa-plus"></i> Materi</button>
@@ -111,12 +111,12 @@
 											<!-- looping item -->
 											<div class="pdf-file ml-3">
 												<div class="card d-flex flex-column card-pdf">
-													<a target="_blank" href="<?= base_url('guru/data/view_materi?file=' . $materi->materi) ?>"><img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf"></a>
+													<a target="_blank" href="<?= base_url('guru/data/view_materi_guru/' . $materi->file_materi) ?>"><img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf"></a>
 													<hr class="w-50 mx-auto">
 													<h6 class="text-center mt-n1"><?= $materi->judul ?></h6>
 													<div class="row d-flex justify-content-center mb-3 mt-auto">
 														<a href="<?= base_url('guru/data/update_bahan_materi?type=pdf&id=' . $materi->materi_id) ?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-														<a href="javascript:void(0)" class="btn btn-sm btn-danger hapus-materi-pdf" materi-id="<?= $materi->materi_id ?>" materi-info-id="<?= $materi->materi_info_id ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+														<a href="javascript:void(0)" class="btn btn-sm btn-danger hapus-materi-pdf" materi-id="<?= $materi->materi_id ?>" materi-info-id="<?= $materi->detailmateri_id ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
 													</div>
 												</div>
 											</div>
@@ -134,12 +134,12 @@
 											<!-- Looping Video -->
 											<div class="pdf-file ml-3">
 												<div class="card shadow-sm d-flex flex-column card-video">
-													<iframe class="d-block mx-auto" src="<?= $value->materi ?>" title="<?= $value->judul ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-													<h6 class="mt-1 ml-3"><?= date('Y-m-d', strtotime($detailMateri->create_time)) ?></h6>
+													<iframe class="d-block mx-auto" src="<?= $value->file_materi ?>" title="<?= $value->judul ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+													<h6 class="mt-1 ml-3"><?= date('Y-m-d', strtotime($value->create_time)) ?></h6>
 													<h6 class="mt-n1 ml-3"><?= $value->judul ?></h6>
 													<div class="row d-flex justify-content-center mb-3 mt-auto">
 														<a href="<?= base_url('guru/data/update_bahan_materi?type=video&id=' . $value->materi_id) ?>" class="btn btn-sm btn-success mr-1" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa-solid fa-pen-to-square text-white"></i></a>
-														<a href="javascript:void(0)" class="btn btn-sm btn-danger hapus-materi-video" materi-id="<?= $value->materi_id ?>" materi-info-id="<?= $value->materi_info_id ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+														<a href="javascript:void(0)" class="btn btn-sm btn-danger hapus-materi-video" materi-id="<?= $value->materi_id ?>" materi-info-id="<?= $value->detailmateri_id ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
 													</div>
 												</div>
 											</div>

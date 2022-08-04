@@ -122,7 +122,7 @@
 											<!-- looping item -->
 											<div class="pdf-file ml-3">
 												<div class="card d-flex flex-column card-pdf">
-													<a target="_blank" href="<?= base_url('master/materi/view_materi?id=' . $value->materi_id . '&file=' . $value->file_materi) ?>">
+													<a target="_blank" href="<?= base_url('master/materi/view_materi/' . $value->materi_id . '/' . $value->file_materi) ?>">
 														<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="<?= $value->judul ?>">
 													</a>
 													<hr class="w-50 mx-auto">

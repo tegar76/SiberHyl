@@ -15,7 +15,7 @@
 						<ol class="breadcrumb m-0 p-0">
 							<li class="breadcrumb-item text-muted active">Pembelajaran</li>
 							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajaran') ?>" class="text-muted">Mengajar</a></li>
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajaran/tugas_harian/' . $detail->jadwal_id) ?>" class="text-muted">Tugas Harian</a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajaran/tugas_harian/' . $tugas->jadwal_id) ?>" class="text-muted">Tugas Harian</a></li>
 							<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 						</ol>
 					</nav>
@@ -99,7 +99,7 @@
 				<div class="card">
 					<div class="card-body">
 						<h6 class="card-title">
-							Detail Tugas Harian
+							tugas Tugas Harian
 						</h6>
 						<div class="mt-4 activity">
 							<table class="table-responsive table-bordered" style="width:100%">
@@ -118,13 +118,13 @@
 								<tbody>
 									<tr>
 										<td>1</td>
-										<td><?= $detail->hari ?></td>
-										<td><?= $detail->nama_mapel ?></td>
-										<td><?= $detail->judul_tugas ?></td>
-										<td><?= $detail->deskripsi ?></td>
-										<td><?= $detail->pertemuan ?></td>
-										<td><?= date('d - m - Y, H:i', strtotime($detail->deadline)) ?> WIB</td>
-										<td><a target="_blank" href="<?= base_url('guru/pembelajaran/file_soal_tugas_harian/') . $detail->file_tugas ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+										<td><?= $tugas->hari ?></td>
+										<td><?= $tugas->nama_mapel ?></td>
+										<td><?= $tugas->judul_tugas ?></td>
+										<td><?= $tugas->deskripsi ?></td>
+										<td><?= $tugas->pertemuan ?></td>
+										<td><?= date('d - m - Y, H:i', strtotime($tugas->deadline)) ?> WIB</td>
+										<td><a target="_blank" href="<?= base_url('guru/pembelajaran/file_soal_tugas_harian/' . $tugas->file_tugas) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -136,7 +136,7 @@
 				<div class="card">
 					<div class="card-body">
 						<h6 class="card-title">
-							Data Siswa Kelas <?= $detail->nama_kelas ?> Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?>
+							Data Siswa Kelas <?= $tugas->nama_kelas ?> Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?>
 						</h6>
 						<div class="mt-4 activity">
 							<table id="data_siswa" class="table-responsive table-striped table-bordered" style="width:100%">

@@ -39,8 +39,8 @@ class Dashboard extends CI_Controller
 					$study[] = $row;
 				}
 			}
+			$data['study'] = $study;
 		}
-		$data['study'] = $study;
 		$data['no'] = 1;
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$data['teacherRow'] = $this->master->get_row_data('guru', ['role_id !=' => 1]);

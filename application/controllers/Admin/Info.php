@@ -73,14 +73,18 @@ class Info extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function detail_info_akademik()
+	public function detail_info_akademik($file = null)
 	{
-		$file = $this->input->get('file');
 		if ($file) {
-			$data['pdf'] = base_url('storage/info_akademik/' . $file);
-			$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
+			$check = FCPATH . './storage/info_akademik/' . $file;
+			if(file_exists($check)) {
+				$data['pdf'] = base_url('storage/info_akademik/') . $file;
+				$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
+			} else {
+				show_404();
+			}
 		} else {
-			redirect('master/dashboard');
+			show_404();
 		}
 	}
 
@@ -149,11 +153,13 @@ class Info extends CI_Controller
 		$this->db->trans_start();
 		$path_upload = './storage/info_akademik/';
 		$uploadInfo = $_FILES['file_info']['name'];
+		$file_name = url_title($_POST['judul_info'], 'dash', true);
 		if ($uploadInfo) {
 			$config['upload_path'] = $path_upload;
 			$config['allowed_types'] = 'pdf';
 			$config['max_size']	= '2048';
-			$config['encrypt_name'] = true;
+			$config['overwrite']	= true;
+			$config['file_name'] = $file_name . '-' . time();
 
 			$this->load->library('upload', $config);
 			$this->upload->initialize($config);
@@ -233,14 +239,14 @@ class Info extends CI_Controller
 					$cls[] = $kls->kelas;
 				}
 				$clss = $cls;
-			} elseif ($info->kelas == 'all' and (empty($info->jurusan) and $info->kelas_id == 0)) {
+			} elseif ($info->index == 'all' and (empty($info->jurusan) and $info->kelas_id == 0)) {
 				$clss = "Semua Kelas";
-			} elseif (!empty($info->jurusan) and ($info->kelas == 'all' and $info->kelas_id == 0)) {
+			} elseif (!empty($info->jurusan) and ($info->index == 'all' and $info->kelas_id == 0)) {
 				$clss = "Kelas " . $info->jurusan . " (X, XI, XII)";
-			} elseif ($info->kelas != 'all' and (empty($info->jurusan) and $info->kelas_id == 0)) {
-				$clss =  "Kelas " . $info->kelas;
-			} elseif ($info->kelas != 'all' and (!empty($info->jurusan) and $info->kelas_id == 0)) {
-				$clss =  "Kelas " . $info->kelas . " " . $info->jurusan;
+			} elseif ($info->index != 'all' and (empty($info->jurusan) and $info->kelas_id == 0)) {
+				$clss =  "Kelas " . $info->index;
+			} elseif ($info->index != 'all' and (!empty($info->jurusan) and $info->kelas_id == 0)) {
+				$clss =  "Kelas " . $info->index . " " . $info->jurusan;
 			}
 
 			$data['kelas'] = $clss;
@@ -432,12 +438,12 @@ class Info extends CI_Controller
 			if ($this->form_validation->run() == false) {
 				$this->load->view('admin/layout/wrapper', $data, FALSE);
 			} else {
-				$this->db->insert('tahun_akademik', [
+				$this->db->insert('tahunakademik', [
 					'tahun' => $this->input->post('tahun_ajar', true),
 					'semester' => $this->input->post('semester', true)
 				]);
 				$this->message('Berhasil', 'Tahun Pembelajaran Berhasil Ditambahkan', 'success');
-				return redirect('master/info/tahun-ajar');
+				return redirect('master/info/tahun-akademik');
 			}
 		}
 		$this->load->view('admin/layout/wrapper', $data, FALSE);

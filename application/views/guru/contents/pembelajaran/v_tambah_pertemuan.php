@@ -71,11 +71,11 @@
 										<?= form_error('nama_mapel', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
-								<label for="nama_ruang">Ruang Kelas</label>
+								<label for="kode_ruang">Ruang Kelas</label>
 								<div class="input-group mb-3">
-									<input type="text" name="nama_ruang" id="nama_ruang" class="form-control <?= (form_error('nama_ruang')) ? 'is-invalid' : '' ?>" value="<?= $jadwal->nama_ruang ?>" readonly>
-									<div id="nama_ruangFeedback" class="invalid-feedback">
-										<?= form_error('nama_ruang', '<div class="text-danger">', '</div>') ?>
+									<input type="text" name="kode_ruang" id="kode_ruang" class="form-control <?= (form_error('kode_ruang')) ? 'is-invalid' : '' ?>" value="<?= $jadwal->kode_ruang ?>" readonly>
+									<div id="kode_ruangFeedback" class="invalid-feedback">
+										<?= form_error('kode_ruang', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
 								<div class="row">

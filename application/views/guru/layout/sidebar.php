@@ -26,7 +26,7 @@
 							<a href="<?= base_url('guru/pembelajaran') ?>" class="sidebar-link"><span class="hide-menu">Mengajar</span></a>
 						</li>
 						<li class="sidebar-item">
-							<a href="<?= base_url('Guru/Pembelajaran/surat') ?>" class="sidebar-link"><span class="hide-menu">Surat-surat</span></a>
+							<a href="<?= base_url('guru/pembelajaran/surat') ?>" class="sidebar-link"><span class="hide-menu">Surat-surat</span></a>
 						</li>
 					</ul>
 				</li>
@@ -36,7 +36,7 @@
 						<i data-feather="info" class="feather-icon"></i>
 						<span class="hide-menu">Info Akademik
 							<!-- notif badge -->
-							<?= $notif ?>
+							<!--  $notif ?> -->
 						</span>
 					</a>
 				</li>

@@ -54,11 +54,11 @@
 										<tr>
 											<td><?= $i++ ?></td>
 											<td>Lutfi Haryati.S,Pd</td>
-											<td><?= $value->index_kelas . ' ' . (!empty($value->kode_jurusan)) ? $value->kode_jurusan : '' ?></td>
-											<td><?= $value->nama_mapel ?></td>
-											<td><?= date('d-m-Y H:i', strtotime($value->create_time)) . " WIB" ?></td>
+											<td><?= $value->kelas . ' ' . (!empty($value->jurusan)) ? $value->jurusan : '' ?></td>
+											<td><?= $value->mapel ?></td>
+											<td><?= date('d-m-Y H:i', strtotime($value->create)) . " WIB" ?></td>
 											<td>
-												<a href="<?= base_url('guru/data/detail_materi?user=admin&id=' . $value->materi_info_id) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+												<a href="<?= base_url('guru/data/detail_materi?user=admin&id=' . $value->id) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 											</td>
 										</tr>
 									<?php endforeach ?>

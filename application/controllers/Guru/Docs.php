@@ -188,4 +188,37 @@ class Docs extends CI_Controller
 		$data['title'] = 'Cetak Reporting Tugas Harian';
 		$this->load->view('guru/contents/pembelajaran/v_cetak_report_tugas_harian', $data, FALSE);
 	}
+
+	public function formCetakReportEvaluasi()
+	{
+		$data['guru'] = $this->userGuru;
+		$data['title'] = 'Form Cetak Reporting Evaluasi';
+		$data['content'] = 'guru/contents/pembelajaran/v_form_cetak_report_evaluasi';
+		$this->load->view('guru/layout/wrapper', $data, false);
+	}
+
+	public function cetakReportEvaluasi()
+	{
+		$data['guru'] = $this->userGuru;
+
+		$data['title'] = 'Cetak Reporting Evaluasi';
+		$this->load->view('guru/contents/pembelajaran/v_cetak_report_evaluasi', $data, false);
+	}
+
+	public function formCetakReportJurnalMateri()
+    {
+        $data['guru'] = $this->userGuru;
+        $data['notif'] = '';
+
+        $data['title'] = 'Detail Jurnal Materi';
+        $data['content'] = 'guru/contents/pembelajaran/v_form_cetak_report_jurnal_materi';
+
+        $this->load->view('guru/layout/wrapper', $data, false);
+    }
+
+    public function cetakReportJurnalMateri()
+    {
+        $data['title'] = 'Cetak Reporting Jurnal Materi';
+        $this->load->view('guru/contents/pembelajaran/v_cetak_report_	jurnal_materi', $data, false);
+    }
 }

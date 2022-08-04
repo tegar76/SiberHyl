@@ -46,27 +46,27 @@
 										<tbody>
 											<tr class="table-borderless">
 												<th scope="row" class="col-sm-8">Nama Admin</th>
-												<td>Lutfi Haryati.S,Pd.</td>
+												<td><?= $detailMateri->nama ?></td>
 											</tr>
 											<tr>
 												<th scope="row" class="col-sm-8">Kelas</th>
-												<td><?= $detailMateri->index_kelas ?></td>
+												<td><?= $detailMateri->kelas ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Jurusan</th>
-												<td><?= (!empty($detailMateri->nama_jurusan)) ? $detailMateri->nama_jurusan : '-' ?></td>
+												<td><?= (!empty($detailMateri->jurusan)) ? $detailMateri->jurusan : '-' ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Mata Pelajaran</th>
-												<td><?= $detailMateri->nama_mapel ?></td>
+												<td><?= $detailMateri->mapel ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Dibuat</th>
-												<td><?= date('Y-m-d H:i:s', strtotime($detailMateri->create_time)) . " WIB" ?></td>
+												<td><?= date('Y-m-d H:i:s', strtotime($detailMateri->create)) . " WIB" ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Diedit</th>
-												<td><?= ($detailMateri->create_time == $detailMateri->update_time) ? '-' : date('Y-m-d H:i:s', strtotime($detailMateri->update_time)) . " WIB" ?></td>
+												<td><?= ($detailMateri->create == $detailMateri->update) ? '-' : date('Y-m-d H:i:s', strtotime($detailMateri->update)) . " WIB" ?></td>
 											</tr>
 											<tr>
 												<th scope="row">Materi Pembelajaran</th>
@@ -77,7 +77,7 @@
 													<?php foreach ($bahanMateri as $materi) : ?>
 														<!-- looping item -->
 														<div class="pdf-file ml-3">
-															<a href="<?= base_url('guru/data/view_materi?file=' . $materi->materi) ?>">
+															<a target="_blank" href="<?= base_url('guru/data/view_materi/'. $materi->materi_id . '/' . $materi->file_materi) ?>">
 																<div class="card card-pdf">
 																	<div class="container">
 																		<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf">
@@ -102,8 +102,8 @@
 														<div class="pdf-file ml-3">
 															<div class="card card-video">
 																<div class="container">
-																	<iframe class="d-block mx-auto" src="<?= $video->materi ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-																	<h6 class="mt-1"><?= date('Y-m-d', strtotime($detailMateri->create_time)) ?></h6>
+																	<iframe class="d-block mx-auto" src="<?= $video->file_materi ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+																	<h6 class="mt-1"><?= date('Y-m-d', strtotime($video->create_time)) ?></h6>
 																	<h6 class="mt-n1"><?= $video->judul ?></h6>
 																</div>
 															</div>

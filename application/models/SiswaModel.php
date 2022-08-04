@@ -254,7 +254,7 @@ class SiswaModel extends CI_Model
 	{
 		$this->db->where('siswa_nis', $nis);
 		$this->db->where('tugas_id', $id);
-		$query	= $this->db->get('tugas_siswa');
+		$query	= $this->db->get('nilaitugas');
 		return $query->row();
 	}
 

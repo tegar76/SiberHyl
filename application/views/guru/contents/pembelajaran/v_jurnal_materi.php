@@ -72,15 +72,15 @@
 									<?php foreach ($jurnal as $row => $value) : ?>
 										<tr>
 											<td><?= $no++ ?></td>
-											<td><?= $value->hari ?></td>
-											<td><?= date('d-m-Y', strtotime($value->tanggal)) ?></td>
-											<td><?= $guru->guru_kode ?></td>
-											<td><?= $value->nama_mapel ?></td>
-											<td><?= $value->nama_kelas ?></td>
-											<td><?= $value->pert_ke ?></td>
-											<td><?= $value->pembahasan ?></td>
+											<td><?= $value['hari'] ?></td>
+											<td><?= date('d-m-Y', strtotime($value['tanggal'])) ?></td>
+											<td><?= $value['guru'] ?></td>
+											<td><?= $value['mapel'] ?></td>
+											<td><?= $value['kelas'] ?></td>
+											<td><?= $value['pertemuan'] ?></td>
+											<td><?= $value['pembahasan'] ?></td>
 											<td>
-												<a href="<?= base_url('guru/pembelajaran/detail_jurnal_materi/' . $value->jurnal_id) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+												<a href="<?= base_url('guru/pembelajaran/detail_jurnal_materi?id=' . $value['id']) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 											</td>
 										</tr>
 									<?php endforeach ?>

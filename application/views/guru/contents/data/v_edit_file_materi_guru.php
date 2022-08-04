@@ -13,7 +13,7 @@
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Master Data</li>
 					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/data/data_materi?user=guru') ?>" class="text-muted">Data Materi (Guru)</a></li>
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/data/edit_materi/' . $materi->materi_info_id) ?>" class="text-muted">Edit Data Materi (Guru)</a></li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/data/edit_materi/' . $materi->detailmateri_id) ?>" class="text-muted">Edit Data Materi (Guru)</a></li>
 					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 				</ol>
 			</nav>

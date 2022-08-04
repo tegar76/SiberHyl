@@ -8,10 +8,12 @@ class Dashboard extends CI_Controller
 		parent::__construct();
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->load->model('GuruModel', 'guru', true);
+		$this->load->model('MasterModel', 'master', true);
 		$this->userGuru = $this->guru->getWhere(['guru_nip' => $this->session->userdata('nip')]);
-		$tahun_ajar = $this->jadwal->get_activate_tahunajar();
+		$tahun_ajar = $this->master->getActiveTahunAkademik();
 		if ($tahun_ajar == null) {
 			$this->tahun_ajar = [
+				'tahun_id' => 0,
 				'semester' => 0,
 				'tahun' => ''
 			];
@@ -23,13 +25,13 @@ class Dashboard extends CI_Controller
 	public function index()
 	{
 		$guru = $this->userGuru;
-		$jadwal_guru = $this->jadwal->getJadwalGuru($guru->guru_kode);
+		$jadwal_guru = $this->jadwal->getJadwalGuru($guru->guru_nip);
 		$data['jadwal'] = array();
 		if ($jadwal_guru) {
 			$no = 1;
 			foreach ($jadwal_guru as $row => $value) {
 				$sum = 0;
-				$kompetensi = $this->jadwal->getKelasJadwal($value->mapel_id, $value->guru_kode);
+				$kompetensi = $this->jadwal->getKelasJadwal($value->mapel_id, $value->guru_nip);
 				foreach ($kompetensi as $row => $komp) {
 					$mapel = $komp->mapel_id;
 					$sum += $komp->jumlah_jam;
@@ -46,17 +48,11 @@ class Dashboard extends CI_Controller
 			$data['jadwal'] = $jadwalGuru;
 		}
 		$data['guru'] = $guru;
-		$data['notif'] = check_new_info();
+		$data['notif'] = '';
 		$data['tahun_ajar'] = $this->tahun_ajar;
+		$data['surat'] = $this->guru->getPengajuanSurat($guru->guru_nip, 8);
 		$data['title'] = 'Dashboard Guru';
 		$data['content'] = 'guru/contents/dashboard/v_dashboard';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
-	}
-
-
-	public function lihatFileSurat()
-	{
-		$data['title'] = 'Dashboard Guru';
-		$this->load->view('guru/contents/dashboard/v_dashboard', $data, FALSE);
 	}
 }

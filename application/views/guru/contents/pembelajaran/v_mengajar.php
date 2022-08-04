@@ -43,7 +43,7 @@
 									<div class="mapel">
 										<div class="card shadow-sm p-3" data-toggle="collapse" href="#pembelajaran-sekarang" role="button" aria-expanded="false" aria-controls="pembelajaran-sekarang">
 											<div class="d-flex justify-content-lg-start mt-1">
-												<img role="button" src="<?= ($studying->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $studying->guru_foto) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $studying->guru_nama ?>">
+												<img role="button" src="<?= ($studying->profile == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $studying->profile) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $studying->guru_nama ?>">
 												<div class="mapel w-100">
 													<center>
 														<p><?= $studying->nama_mapel ?></p>
@@ -61,7 +61,7 @@
 												</div>
 												<div class="d-flex justify-content-start">
 													<img src="<?= base_url('assets/siswa/icons/r-kelas.png') ?>" alt="">
-													<p><?= ($studying->nama_ruang) ? $studying->nama_ruang : '-' ?></p>
+													<p><?= ($studying->kode_ruang) ? $studying->kode_ruang : '-' ?></p>
 												</div>
 												<div class="d-flex justify-content-start">
 													<img src="<?= base_url('assets/siswa/icons/kelas.png') ?>" alt="">

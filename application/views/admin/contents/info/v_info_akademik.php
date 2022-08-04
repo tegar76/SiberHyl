@@ -67,7 +67,7 @@
 													<?php endif; ?>
 												</td>
 												<td><?= $value['judul'] ?></td>
-												<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik?file=' . $value['file']) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+												<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik/' . $value['file']) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
 												<td><?= $value['create'] ?></td>
 												<td><?= $value['update'] ?></td>
 												<td>

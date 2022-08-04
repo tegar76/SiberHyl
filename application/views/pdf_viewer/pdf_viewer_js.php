@@ -1,3 +1,6 @@
+<?php 
+// var_dump($pdf_);
+?>
 <script>
         /**
      * @licstart The following is the entire license notice for the

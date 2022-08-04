@@ -366,7 +366,8 @@ class MasterModel extends CI_Model
 	{
 		$this->db->select("
 			guru.guru_kode, 
-			guru.guru_nama, 
+			guru.guru_nama,
+			kelas.kelas_id,
 			kelas.kode_kelas,
 			kelas.nama_kelas,
 			mapel.nama_mapel,
@@ -447,9 +448,32 @@ class MasterModel extends CI_Model
 			$this->db->where_in('status', [2, 4]);
 		}
 		$this->db->where('tugas_id', $id_tugas);
-		$query = $this->db->get('tugas_siswa');
+		$query = $this->db->get('tugassiswa');
 		return $query->num_rows();
 	}
+
+	public function nilaiTugasSiswa($id)
+	{
+		$this->db->select('
+			tugas.tugas_siswa_id,
+			tugas.time_upload,
+			tugas.metode,
+			tugas.file_tugas_siswa,
+			tugas.file_type,
+			tugas.nilai_tugas,
+			tugas.komentar,
+			tugas.status,
+			tugas.siswa_nis, 
+			tugas.tugas_id,
+			siswa.siswa_nama,
+			siswa.siswa_nis
+		');
+		$this->db->from('tugassiswa as tugas');
+		$this->db->join('siswa', 'siswa.siswa_nis=tugas.siswa_nis');
+		$this->db->where('tugas_siswa_id', $id);
+		return $this->db->get()->row();
+	}
+
 
 	// Function Evaluasi
 	public function getEvaluasi($id)
@@ -498,6 +522,28 @@ class MasterModel extends CI_Model
 		$this->db->where('evaluasi_id', $id);
 		$query = $this->db->get('evaluasi_siswa');
 		return $query->num_rows();
+	}
+
+	public function nilaiEvaluasiSiswa($id)
+	{
+		$this->db->select('
+			evaluasi.evaluasi_siswa_id as id,
+			evaluasi.time_upload,
+			evaluasi.metode,
+			evaluasi.file_evaluasi_siswa as file,
+			evaluasi.file_type,
+			evaluasi.nilai,
+			evaluasi.komentar,
+			evaluasi.status,
+			evaluasi.siswa_nis,
+			evaluasi.evaluasi_id,
+			siswa.siswa_nama,
+			siswa.siswa_nis
+		');
+		$this->db->from('evaluasi_siswa as evaluasi');
+		$this->db->join('siswa', 'siswa.siswa_nis=evaluasi_siswa.siswa_nis');
+		$this->db->where('evaluasi_siswa_id', $id);
+		return $this->db->get()->row();
 	}
 
 	// Function Diskusi
@@ -561,6 +607,28 @@ class MasterModel extends CI_Model
 		return $this->db->get();
 	}
 
+	public function addForumDiskusi()
+	{
+		$data = array(
+			'pembuat' => htmlspecialchars($this->input->post('nama_guru', true)),
+			'judul' => htmlspecialchars($this->input->post('judul_diskusi', true)),
+			'deskripsi' => htmlspecialchars($this->input->post('deskripsi', true)),
+			'jadwal_id' => htmlspecialchars($this->input->post('jadwal_id', true)),
+		);
+		$this->db->insert('forumdiskusi', $data);
+	}
+
+	public function insertDiskusi()
+	{
+		$data = array(
+			'parent_id' => $this->input->post('parent_diskusi_id', true),
+			'user_id' => $this->input->post('user_id', true),
+			'message' => $this->input->post('message', true),
+			'forum_id' => $this->input->post('forum_diskusi_id', true),
+		);
+		$this->db->insert('detaildiskusi', $data);
+	}
+
 	// Jurnal Materi
 	public function jurnalPembelajaran($id)
 	{
@@ -604,6 +672,50 @@ class MasterModel extends CI_Model
 		$this->db->join('ruangan', 'ruangan.ruang_id=jadwal.ruang_id');
 		$this->db->where('hari', $hari);
 		return $this->db->get()->result();
+	}
+
+	public function getDataSiswaExport($id)
+	{
+		$this->db->select("
+			siswa_id as id,
+			siswa_nis as nis,
+			siswa_nama as nama
+		");
+		$this->db->from('siswa');
+		$this->db->where('kelas_id', $id);
+		$this->db->order_by('siswa_nama', 'ASC');
+		return $this->db->get()->result();
+	}
+
+	public function getAbsensiSiswa($id, $nis, $pert_awal, $pert_akhir)
+	{
+		$this->db->select("
+			jurnal.jurnal_id,
+			jurnal.pertemuan,
+			jurnal.jadwal_id,
+			absensi.status,
+			absensi.siswa_nis
+		");
+		$this->db->from('absensi');
+		$this->db->join('jurnal', 'jurnal.jurnal_id=absensi.jurnal_id');
+		$this->db->where('jadwal_id', $id);
+		$this->db->where('siswa_nis', $nis);
+		$this->db->where('pertemuan >=', $pert_awal);
+		$this->db->where('pertemuan <=', $pert_akhir);
+		return $this->db->get()->result();
+	}
+
+	public function count_absensi_siswa($status, $nis, $jadwal)
+	{
+		$this->db->select('absensi.status');
+		$this->db->from('absensi');
+		$this->db->join('jurnal', 'jurnal.jurnal_id=absensi.jurnal_id');
+		$this->db->where('absensi.status', $status);
+		$this->db->where('siswa_nis', $nis);
+		$this->db->where('jadwal_id', $jadwal);
+		$this->db->where('pertemuan >=', $this->input->post('pert_awal', true));
+		$this->db->where('pertemuan <=', $this->input->post('pert_akhir', true));
+		return $this->db->get()->num_rows();
 	}
 
 	public function getWaliKelas()

@@ -40,10 +40,11 @@
 				<div class="activity">
 					<div class="card shadow mb-4">
 						<div class="container my-3">
-							<?= form_open('') ?>
+							<?= form_open('guru/data/process_update_video') ?>
+							<input type="hidden" name="materi_id" id="materi_id" class="form-control" value="<?= $materi->materi_id ?>">
 							<label for="judul_video_update">Judul Video Pembelajaran</label>
 							<div class="input-group mb-3">
-								<input type="text" name="judul_video_update" id="judul_video_update" placeholder="Masukan Judul Video Pembelajaran" class="form-control" value="">
+								<input type="text" name="judul_video_update" id="judul_video_update" placeholder="Masukan Judul Video Pembelajaran" class="form-control" value="<?= $materi->judul ?>">
 							</div>
 							<label for="link_video_update">Link</label>
 							<div class="input-group mb-3">

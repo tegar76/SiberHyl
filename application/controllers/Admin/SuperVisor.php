@@ -144,7 +144,7 @@ class SuperVisor extends CI_Controller
 				$absensi['jurnal_id'] = $id;
 				if ($absx) {
 					$bukti = '<a target="_blank" href="' . base_url('guru/bukt_absensi_siswa/fileJawabanTugasHarianImg') . '"><img src="' . base_url('assets/admin/icons/img.png') . '" alt=""></a>';
-					$absensi['pembelajaran'] = $absx->metode_kbm;
+					$absensi['pembelajaran'] = ($absx->metode_absen) ? $absx->metode_absen : '-';
 					$absensi['bukti'] = ($absx->bukti_absen) ? $bukti : '-';
 					$absensi['status_absen'] = $absx->status;
 					$absensi['absensi_id'] = $absx->absensi_id;
@@ -206,7 +206,7 @@ class SuperVisor extends CI_Controller
 			$bm = $jumlah_siswa - ($sm + $sn);
 			$no = 1;
 			foreach ($siswa as $row => $value) {
-				$tugasSiswa = $this->db->get_where('tugas_siswa', [
+				$tugasSiswa = $this->db->get_where('tugassiswa', [
 					'siswa_nis' => $value->siswa_nis,
 					'tugas_id' => $tugas->tugas_id,
 				])->row();
@@ -227,8 +227,10 @@ class SuperVisor extends CI_Controller
 					$tugasx['metode_upload'] = $tugasSiswa->metode;
 					if ($tugasSiswa->file_type == '.pdf') {
 						$icon_tugas = base_url('assets/admin/icons/pdf.png');
+						$type = 'pdf';
 					} else {
 						$icon_tugas = base_url('assets/admin/icons/img.png');
+						$type = 'img';
 					}
 
 					if ($tugasSiswa->status == 0) {
@@ -245,7 +247,7 @@ class SuperVisor extends CI_Controller
 
 					$tugasx['file_tugas'] = '-';
 					if ($tugasSiswa->file_tugas_siswa) {
-						$tugasx['file_tugas'] = '<a target="_blank" href="' . base_url('master/super-visor/file_tugas_siswa/' . $tugasSiswa->tugas_siswa_id) . '"><img src="' . $icon_tugas . '" alt=""></a>';
+						$tugasx['file_tugas'] = '<a target="_blank" href="' . base_url('master/super-visor/file_tugas_siswa/'. $type . '/'. $tugasSiswa->file_tugas_siswa) . '"><img src="' . $icon_tugas . '" alt=""></a>';
 					}
 					$tugasx['komentar_guru'] = $tugasSiswa->komentar;
 					$tugasx['nilai_tugas'] = $tugasSiswa->nilai_tugas;
@@ -274,22 +276,39 @@ class SuperVisor extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function fileSoalTugasHarian()
+	public function file_soal_tugas_harian($file = null) 
 	{
-		$data['title'] = 'File Soal Tugas Harian';
-		$this->load->view('admin/contents/super_visor/file_soal_tugas_harian_pdf/v_file_soal_tugas_harian_pdf', $data, FALSE);
+		if ($file) {
+			$check = FCPATH . './storage/guru/tugas_harian/' . $file;
+			if(file_exists($check)) {
+				$data['pdf'] = base_url('storage/guru/tugas_harian/') . $file;
+				$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
+			} else {
+				show_404();
+			}
+		} else {
+			show_404();
+		}
 	}
-
-	public function fileJawabanTugasHarianImg()
+	public function file_tugas_siswa($type = null, $file = null)
 	{
-		$data['title'] = 'File Jawaban Tugas Harian Img';
-		$this->load->view('admin/contents/super_visor/v_file_jawaban_tugas_harian_img', $data, FALSE);
-	}
-
-	public function fileJawabanTugasHarianPdf()
-	{
-		$data['title'] = 'File Jawaban Tugas Harian Pdf';
-		$this->load->view('admin/contents/super_visor/file_jawaban_tugas_harian_pdf/v_file_jawaban_tugas_harian_pdf', $data, FALSE);
+		if($type && $file) {
+			$check = FCPATH . './storage/siswa/tugas_harian/' . $file;
+			if(file_exists($check)) {
+				if($type == 'pdf') {
+					$data['pdf'] = base_url('storage/siswa/tugas_harian/') . $file;
+					$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
+				} elseif ($type == 'img') {
+					$data['alt'] = 'Tugas Siswa';
+					$data['img'] = base_url('storage/siswa/tugas_harian/') . $file;
+					$this->load->view('image_viewer/image_viewer', $data);
+				}
+			} else {
+				show_404();
+			}
+		} else {
+			show_404();
+		}
 	}
 
 	public function evaluasi($id = null)
@@ -350,8 +369,10 @@ class SuperVisor extends CI_Controller
 					$result['metode_upload'] = $eval_->metode;
 					if ($eval_->file_type == '.pdf') {
 						$icon_file = base_url('assets/admin/icons/pdf.png');
+						$type = 'pdf';
 					} else {
 						$icon_file = base_url('assets/admin/icons/img.png');
+						$type = 'img';
 					}
 
 					if ($eval_->status == 0) {
@@ -368,7 +389,7 @@ class SuperVisor extends CI_Controller
 
 					$result['file_evaluasi_siswa'] = '-';
 					if ($eval_->file_evaluasi_siswa) {
-						$result['file'] = '<a target="_blank" href="' . base_url('master/super-visor/file_evaluasi_siswa/' . $eval_->evaluasi_siswa_id) . '"><img src="' . $icon_file . '" alt=""></a>';
+						$result['file'] = '<a target="_blank" href="' . base_url('master/super-visor/file_evaluasi_siswa/' . $type . '/' . $eval_->file_evaluasi_siswa) . '"><img src="' . $icon_file . '" alt=""></a>';
 					}
 					$result['komentar'] = $eval_->komentar;
 					$result['nilai'] = $eval_->nilai;
@@ -399,28 +420,46 @@ class SuperVisor extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function fileSoalEvaluasi()
+	public function file_soal_evaluasi($file)
 	{
-		$data['title'] = 'File Soal Evaluasi';
-		$this->load->view('admin/contents/super_visor/file_soal_evaluasi_pdf/v_file_soal_evaluasi_pdf', $data, FALSE);
+		if ($file) {
+			$check = FCPATH . './storage/guru/evaluasi/' . $file;
+			if(file_exists($check)) {
+				$data['pdf'] = base_url('storage/guru/evaluasi/') . $file;
+				$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
+			} else {
+				show_404();
+			}
+		} else {
+			show_404();
+		}
 	}
 
-	public function fileJawabanEvaluasiImg()
+	public function file_evaluasi_siswa($type = null, $file = null)
 	{
-		$data['title'] = 'File Jawaban Evaluasi Img';
-		$this->load->view('admin/contents/super_visor/v_file_jawaban_evaluasi_img', $data, FALSE);
-	}
-
-	public function fileJawabanEvaluasiPdf()
-	{
-		$data['title'] = 'File Jawaban Evaluasi Pdf';
-		$this->load->view('admin/contents/super_visor/file_jawaban_evaluasi_pdf/v_file_jawaban_evaluasi_pdf', $data, FALSE);
+		if($type && $file) {
+			$check = FCPATH . './storage/siswa/evaluasi/' . $file;
+			if(file_exists($check)) {
+				if($type == 'pdf') {
+					$data['pdf'] = base_url('storage/siswa/evaluasi/') . $file;
+					$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
+				} elseif ($type == 'img') {
+					$data['alt'] = 'Tugas Siswa';
+					$data['img'] = base_url('storage/siswa/evaluasi/') . $file;
+					$this->load->view('image_viewer/image_viewer', $data);
+				}
+			} else {
+				show_404();
+			}
+		} else {
+			show_404();
+		}
 	}
 
 	public function diskusi($id)
 	{
-		if ($id) {
-			$forum = $this->master->getDiskusi($id);
+		$forum = $this->master->getDiskusi($id);
+		if ($id && $forum) {
 			$data['forum'] = array();
 			if ($forum) {
 				foreach ($forum as $row => $value) {

@@ -84,7 +84,7 @@
 													<?php foreach ($pdf as $val) : ?>
 														<!-- looping item -->
 														<div class="pdf-file ml-3">
-															<a href="<?= base_url('master/materi/view_materi?id=' . $val->materi_id . '&file=' . $val->file_materi) ?>">
+															<a target="_blank" href="<?= base_url('master/materi/view_materi_guru/' . $val->file_materi) ?>">
 																<div class="card card-pdf">
 																	<div class="container">
 																		<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf">

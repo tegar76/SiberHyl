@@ -46,35 +46,45 @@ class GuruModel extends CI_Model
 		return true;
 	}
 
-	public function get_kelas_guru($where)
+	public function kelasGuruPengajar($nip)
 	{
-		$this->db->select("kelas.kelas_id, kelas.kode_kelas, kelas.nama_kelas");
+		$this->db->select("
+			kelas.kelas_id as id,
+			kelas.kode_kelas as kode,
+			kelas.nama_kelas as nama
+		");
 		$this->db->from('kelas');
 		$this->db->join('jadwal', 'jadwal.kelas_id=kelas.kelas_id');
-		$this->db->where('jadwal.guru_kode', $where);
+		$this->db->where('jadwal.guru_nip', $nip);
 		$this->db->group_by('nama_kelas');
 		$this->db->order_by('kelas.nama_kelas', 'ASC');
-		$query = $this->db->get();
-		$result = $query->result();
-		return $result;
+		return $this->db->get()->result();
 	}
 
-	public function get_mapel_guru($where)
+	public function mapelGuruPengajar($nip)
 	{
-		$this->db->select("mapel.mapel_id, mapel.slug_mapel, mapel.nama_mapel");
+		$this->db->select("
+			mapel.mapel_id as id,
+			mapel.slug_mapel as slug,
+			mapel.nama_mapel as nama
+		");
 		$this->db->from('mapel');
 		$this->db->join('jadwal', 'jadwal.mapel_id=mapel.mapel_id');
-		$this->db->where('jadwal.guru_kode', $where);
+		$this->db->where('jadwal.guru_nip', $nip);
 		$this->db->group_by('nama_mapel');
 		$this->db->order_by('mapel.nama_mapel', 'ASC');
-		$query = $this->db->get();
-		$result = $query->result();
-		return $result;
+		return $this->db->get()->result();
 	}
 
-	public function get_kelas_jurusan($id)
+	public function jurusanKelas($id)
 	{
-		$this->db->select('k.kelas_id, k.index_kelas, k.nama_kelas, j.jurusan_id, j.kode_jurusan');
+		$this->db->select("
+			k.kelas_id as k_id,
+			k.index_kelas as index,
+			k.nama_kelas as nama,
+			j.jurusan_id as j_id,
+			j.kode_jurusan as kd_j
+		");
 		$this->db->from('kelas as k');
 		$this->db->join('jurusan as j', 'j.kode_jurusan=k.kode_jurusan');
 		$this->db->where('k.kelas_id', $id);
@@ -104,10 +114,10 @@ class GuruModel extends CI_Model
 			'pembahasan'  => htmlspecialchars($this->input->post('pembahasan', true)),
 			'catatan_kbm'  => htmlspecialchars($this->input->post('catatan_kbm', true)),
 			'jumlah_siswa' => htmlspecialchars($this->input->post('jumlah_siswa', true)),
-			'jumlah_hadir' => htmlspecialchars($this->input->post('jumlah_hadir', true)),
-			'jumlah_alpha' => htmlspecialchars($this->input->post('jumlah_alpha', true)),
-			'jumlah_izin'  => htmlspecialchars($this->input->post('jumlah_izin', true)),
-			'jumlah_sakit'  => htmlspecialchars($this->input->post('jumlah_sakit', true))
+			'hadir' => htmlspecialchars($this->input->post('jumlah_hadir', true)),
+			'alpha' => htmlspecialchars($this->input->post('jumlah_alpha', true)),
+			'izin'  => htmlspecialchars($this->input->post('jumlah_izin', true)),
+			'sakit'  => htmlspecialchars($this->input->post('jumlah_sakit', true))
 		);
 		$this->db->set($jurnal)->where('jurnal_id', $id)->update('jurnal');
 	}
@@ -220,7 +230,6 @@ class GuruModel extends CI_Model
 			$tangaldl = htmlspecialchars($this->input->post('tanggal', true));
 			$jamdl = htmlspecialchars($this->input->post('jam', true));
 			$data = array(
-				'tanggal_tugas' => date('Y-m-d'),
 				'pertemuan'	=> htmlspecialchars($this->input->post('pertemuan', true)),
 				'judul_tugas' => htmlspecialchars($this->input->post('judul_tugas', true)),
 				'deskripsi' => htmlspecialchars($this->input->post('deskripsi', true)),
@@ -228,7 +237,7 @@ class GuruModel extends CI_Model
 				'jadwal_id' =>  htmlspecialchars($this->input->post('jadwal_id', true))
 			);
 			$this->db->set($data);
-			$this->db->insert('tugas');
+			$this->db->insert('tugasharian');
 			$response = [
 				'success' => true,
 				'errors' => ''
@@ -239,7 +248,7 @@ class GuruModel extends CI_Model
 
 	public function check_tugas_exist()
 	{
-		$tugas = $this->db->get_where('tugas', [
+		$tugas = $this->db->get_where('tugasharian', [
 			'pertemuan' => htmlspecialchars($this->input->post('pertemuan', true)),
 			'jadwal_id' => htmlspecialchars($this->input->post('jadwal_id', true))
 		])->num_rows();
@@ -260,7 +269,18 @@ class GuruModel extends CI_Model
 
 	public function get_nilai_siswa($id)
 	{
-		$this->db->select('tugas_siswa.tugas_siswa_id, tugas_siswa.time_upload, tugas_siswa.metode, tugas_siswa.file_tugas_siswa, tugas_siswa.file_type, tugas_siswa.nilai_tugas, tugas_siswa.komentar, tugas_siswa.status, tugas_siswa.siswa_nis, tugas_siswa.tugas_id, siswa.siswa_nama
+		$this->db->select('
+			tugas_siswa.tugas_siswa_id,
+			tugas_siswa.time_upload,
+			tugas_siswa.metode,
+			tugas_siswa.file_tugas_siswa,
+			tugas_siswa.file_type,
+			tugas_siswa.nilai_tugas,
+			tugas_siswa.komentar,
+			tugas_siswa.status,
+			tugas_siswa.siswa_nis, 
+			tugas_siswa.tugas_id,
+			siswa.siswa_nama
 		');
 		$this->db->from('tugas_siswa');
 		$this->db->join('siswa', 'siswa.siswa_nis=tugas_siswa.siswa_nis');
@@ -482,47 +502,59 @@ class GuruModel extends CI_Model
 		$this->db->insert('diskusi_siswa', $data);
 	}
 
-	public function get_materi_guru($id)
+	public function getMateriGuru($id)
 	{
-		$this->db->select("*");
-		$this->db->from('materi_info');
-		$this->db->join('mapel', 'mapel.mapel_id=materi_info.mapel_id', 'left');
-		$this->db->join('kelas', 'kelas.kelas_id=materi_info.kelas_id', 'left');
-		$this->db->where('guru_id', $id);
-		$this->db->order_by('materi_info.create_time', 'DESC');
-		return $this->db->get();
+		$this->db->select("
+			detail.detailmateri_id as id,
+			detail.index_kelas as index_kelas,
+			detail.create_time as create,
+			detail.update_time as update,
+			detail.status,
+			kelas.nama_kelas as kelas,
+			mapel.nama_mapel as mapel,
+			guru.guru_nama as guru, 
+			guru.guru_kode as kode_g,
+			jurusan.nama_jurusan as jurusan,
+			jurusan.kode_jurusan as kode_j
+		");
+		$this->db->from('detailmateri as detail');
+		$this->db->join('mapel', 'mapel.mapel_id=detail.mapel_id', 'left');
+		$this->db->join('kelas', 'kelas.kelas_id=detail.kelas_id', 'left');
+		$this->db->join('guru', 'guru.guru_id=detail.guru_id', 'left');
+		$this->db->join('jurusan', 'jurusan.jurusan_id=detail.jurusan_id', 'left');
+		$this->db->where('detail.guru_id', $id);
+		$this->db->where('status', 2);
+		$this->db->order_by('detail.create_time', 'DESC');
+		return $this->db->get()->result();
 	}
 
-	public function getDetailMateri($idMateri)
+
+	public function getPengajuanSurat($nip, $limit = null)
 	{
-		$query	= $this->db->select('
-		mapel.nama_mapel, materi_info.index_kelas, kelas.nama_kelas,
-		materi_info.create_time, materi_info.update_time, materi_info.materi_info_id
-		')
-			->from('materi_info')
-			->join('mapel', 'mapel.mapel_id=materi_info.mapel_id', 'left')
-			->join('kelas', 'kelas.kelas_id=materi_info.kelas_id', 'left')
-			->where('materi_info_id', $idMateri)
-			->get();
-		if ($query->num_rows() > 0) {
-			return $query->row();
-		} else {
-			return false;
+		$this->db->select("
+			penerima.id as idPen,
+			penerima.guru_nip as nip,
+			penerima.status,
+			surat.surat_id as id,
+			surat.hari,
+			surat.tanggal,
+			surat.jenis, 
+			surat.file_surat as file,
+			surat.file_type as type,
+			surat.siswa_nis as nis,
+			siswa.siswa_nama as nama,
+			kelas.nama_kelas as kelas
+		");
+		$this->db->from('pengajuansurat as surat');
+		$this->db->join('penerimasurat as penerima', 'penerima.surat_id=surat.surat_id');
+		$this->db->join('siswa', 'siswa.siswa_nis=surat.siswa_nis');
+		$this->db->join('kelas', 'kelas.kelas_id=siswa.kelas_id');
+		$this->db->where('penerima.guru_nip', $nip);
+		$this->db->order_by('tanggal', 'DESC');
+		if($limit) {
+			$this->db->limit($limit);
 		}
-	}
-
-	public function get_pengajuan_surat($nip)
-	{
-		$query = $this->db->select("
-			penerima.guru_nip as nip, penerima.status, surat.surat_id as id, surat.hari, surat.tanggal, surat.jenis, 
-			surat.file_surat as file, surat.file_type as type, surat.siswa_nis as nis, siswa.siswa_nama as nama, kelas.nama_kelas as kelas
-		")->from('pengajuansurat as surat')
-			->join('penerimasurat as penerima', 'penerima.surat_id=surat.surat_id')
-			->join('siswa', 'siswa.siswa_nis=surat.siswa_nis')
-			->join('kelas', 'kelas.kelas_id=siswa.kelas_id')
-			->where('guru_nip', $nip)
-			->get();
-		return $query->result();
+		return $this->db->get()->result();
 	}
 
 	public function get_wali_kelas($where)

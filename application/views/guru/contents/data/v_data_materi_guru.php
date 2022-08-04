@@ -52,13 +52,13 @@
 									foreach ($materi as $row) : ?>
 										<tr>
 											<td><?= $no++ ?></td>
-											<td><?= $row->nama_kelas ?></td>
-											<td><?= $row->nama_mapel ?></td>
-											<td><?= date('d-m-Y H:i', strtotime($row->create_time)) ?> WIB</td>
+											<td><?= $row->kelas ?></td>
+											<td><?= $row->mapel ?></td>
+											<td><?= date('d-m-Y H:i', strtotime($row->create)) ?> WIB</td>
 											<td>
-												<a href="<?= base_url('guru/data/detail_materi?user=guru&id=' . $row->materi_info_id) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-												<a href="<?= base_url('guru/data/edit_materi/' . $row->materi_info_id) ?>" class="btn btn-sm btn-success border-0 rounded mr-1"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-												<a href="javascript:void(0)" class="btn btn-sm btn-danger border-0 rounded delete-materi" materi-id="<?= $row->materi_info_id ?>"><i class="fa-solid fa-trash-can text-white" data-toggle="tooltip" data-placement="top" title="Hapus"></i></a>
+												<a href="<?= base_url('guru/data/detail_materi?user=guru&id=' . $row->id) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+												<a href="<?= base_url('guru/data/edit_materi/' . $row->id) ?>" class="btn btn-sm btn-success border-0 rounded mr-1"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+												<a href="javascript:void(0)" class="btn btn-sm btn-danger border-0 rounded delete-materi" materi-id="<?= $row->id ?>"><i class="fa-solid fa-trash-can text-white" data-toggle="tooltip" data-placement="top" title="Hapus"></i></a>
 											</td>
 										</tr>
 									<?php endforeach ?>

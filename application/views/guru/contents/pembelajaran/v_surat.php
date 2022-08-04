@@ -30,7 +30,7 @@
 							Pengajuan Surat Dari Siswa Semester Gasal Tahun Pelajaran 2021/2022
 						</h6>
 						<div class="mt-4 activity">
-							<table id="pengajuan_surat" class="table-striped table-bordered" style="width:100%">
+							<table id="table-pengajuan-surat" class="table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id ada di assets/admin/js/data-table/main.js -->
 								<thead>
 									<tr>
@@ -55,9 +55,19 @@
 											<td><?= $row->kelas ?></td>
 											<td><?= $row->jenis ?></td>
 											<td>
-												<a target="_blank" href="<?= base_url('guru/pembelajaran/view_surat_surat?file=' . $row->file) ?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a>
+												<a target="_blank" href="<?= base_url('guru/pembelajaran/view_surat?file=' . $row->file) ?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a>
 											</td>
-											<td><a id="id_bdt" class="btn btn-sm detail-jurnal btn-outline-danger text-danger btn-rounded-sm">Belum Dilihat</a></td>
+											<td>
+												<?php if ($row->status > 0) {
+													$status = 'Sudah Dilihat';
+													$class = "btn-outline-success text-success";
+												} else {
+													$status = 'Belum Dilihat';
+													$class = "btn-outline-danger text-danger";
+												} ?>
+												<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
+												<a id="view-surat" class="btn btn-sm detail-surat <?= $class ?> btn-rounded-sm" status="<?= $row->status ?>" id-pen="<?= $row->idPen ?>"><?= $status ?></a>
+											</td>
 										</tr>
 									<?php endforeach ?>
 								</tbody>

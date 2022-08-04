@@ -25,15 +25,15 @@
 						<div class="info">
 							<div class="row">
 								<!-- looping info -->
-								<?php foreach ($infoakd as $row => $value) : ?>
+								<?php foreach ($infoAkademik as $row => $value) : ?>
 									<div class="col-md-12">
-										<a target="blank" href="<?= base_url('guru/info_akademik/file_view/' . $value->slug_judul) ?>">
+										<a target="blank" href="<?= base_url('guru/info_akademik/file_view/' . $value->slug) ?>">
 											<div class="media mb-2">
 												<i class='bx bx-info-square bx-md color-cyan mr-2'></i>
 												<div class="row">
 													<div class="col">
-														<div class="tanggal"><?= date('d-m-Y H:i', strtotime($value->create_time)) ?> WIB</div>
-														<div class="judul"><?= $value->judul_info ?></div>
+														<div class="tanggal"><?= date('d-m-Y H:i', strtotime($value->create)) ?> WIB</div>
+														<div class="judul"><?= $value->judul ?></div>
 													</div>
 												</div>
 											</div>

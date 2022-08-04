@@ -142,8 +142,8 @@
 										<td><?= $setting_abs->hari ?></td>
 										<td><?= $setting_abs->nama_mapel ?></td>
 										<td><?= date('H:i', strtotime($setting_abs->jam_masuk)) . ' - ' . date('H:i', strtotime($setting_abs->jam_keluar)) ?></td>
-										<td><?= $setting_abs->nama_ruang ?></td>
-										<td><?= $setting_abs->pert_ke ?></td>
+										<td><?= $setting_abs->kode_ruang ?></td>
+										<td><?= $setting_abs->pertemuan ?></td>
 										<td><?= date('d-m-Y', strtotime($setting_abs->tanggal)) ?></td>
 										<td><?= ($setting_abs->absen_mulai) ? date('H:i', strtotime($setting_abs->absen_mulai)) . " WIB" : '-' ?></td>
 										<td><?= ($setting_abs->absen_selesai) ? date('H:i', strtotime($setting_abs->absen_selesai)) . " WIB" : '-' ?></td>

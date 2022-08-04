@@ -13,7 +13,7 @@ class Profile extends CI_Controller
 	public function index()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = check_new_info();
+		$data['notif'] = '';
 		$data['title'] = 'Profile Guru ' . $this->userGuru->guru_nama;
 		$data['content'] = 'guru/contents/profile/v_profile';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -22,7 +22,7 @@ class Profile extends CI_Controller
 	public function update_profile()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = check_new_info();
+		$data['notif'] = '';
 		$data['title'] = 'Edit Profile Guru ' . $this->userGuru->guru_nama;
 		$data['content'] = 'guru/contents/profile/v_edit_profile';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -40,11 +40,11 @@ class Profile extends CI_Controller
 				$dataUpload = $this->upload->data();
 				$resolution = ['width' => 500, 'height' => 500];
 				$this->compreesImage('siswa', $dataUpload['file_name'], $resolution);
-				if ($guru->guru_foto != 'default_foto.png') {
-					@unlink(FCPATH . './storage/guru/profile/' . $guru->guru_foto);
+				if ($guru->profile != 'default_foto.png') {
+					@unlink(FCPATH . './storage/guru/profile/' . $guru->profile);
 				}
 				$newProfile = $this->upload->data('file_name');
-				$this->db->set('guru_foto', $newProfile);
+				$this->db->set('profile', $newProfile);
 			endif;
 		}
 		$this->db->where(['guru_nip' => $guru->guru_nip]);
@@ -56,7 +56,7 @@ class Profile extends CI_Controller
 	public function update_password()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = check_new_info();
+		$data['notif'] = '';
 		$this->form_validation->set_rules('old_pass', 'Password Lama', 'callback_password_check');
 		$this->form_validation->set_rules([
 			[
@@ -88,7 +88,7 @@ class Profile extends CI_Controller
 			$newPassword = $this->input->post('new_pass', true);
 			$passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
 			$this->db->where('guru_nip', $data['guru']->guru_nip);
-			$this->db->update('guru', ['guru_pass' => $passwordHash]);
+			$this->db->update('guru', ['password' => $passwordHash]);
 			$this->message('Password Berhasil Diupdate', 'Selamat ' .  $data['guru']->guru_nama . ', password anda berhasil diperbarui', 'success');
 			redirect('guru/profile');
 		endif;
@@ -132,7 +132,7 @@ class Profile extends CI_Controller
 	public function password_check($str)
 	{
 		$guru = $this->userGuru;
-		if (!password_verify($str, $guru->guru_pass)) {
+		if (!password_verify($str, $guru->password)) {
 			$this->form_validation->set_message('password_check', '{field} salah!');
 			return false;
 		}

@@ -127,7 +127,7 @@
 										<td><?= $tugas->deskripsi ?></td>
 										<td><?= $tugas->pertemuan ?></td>
 										<td><?= date('d - m - Y, H:i', strtotime($tugas->deadline)) ?> WIB</td>
-										<td><a target="_blank" href="<?= base_url('master/super-visor/file_soal_tugas_harian/') . $tugas->file_tugas ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+										<td><a target="_blank" href="<?= base_url('master/super-visor/file_soal_tugas_harian/'. $tugas->file_tugas)  ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
 									</tr>
 								</tbody>
 							</table>

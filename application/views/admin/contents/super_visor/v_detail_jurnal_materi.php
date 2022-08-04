@@ -15,7 +15,7 @@
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb m-0 p-0">
 						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor') ?>" class="text-muted">Super Visor</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor?kelas=' . $jurnal->kode_kelas) ?>" class="text-muted"><? $jurnal->nama_kelas ?></a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor?kelas=' . $jurnal->kode_kelas) ?>" class="text-muted"><?= $jurnal->nama_kelas ?></a></li>
 						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor/jurnal/' . $jurnal->jadwal_id) ?>" class="text-muted">Jurnal Materi</a></li>
 						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 					</ol>

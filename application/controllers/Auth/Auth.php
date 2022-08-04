@@ -71,7 +71,7 @@ class Auth extends CI_Controller
 	{
 		$data = $this->input->post();
 		$siswa = $this->siswa->getWhere(['siswa_nis' => $data['username']]);
-		$guru  = $this->guru->getWhere(['guru_username' => $data['username']]);
+		$guru  = $this->guru->getWhere(['username' => $data['username']]);
 		if ($siswa) {
 			if (password_verify($data['password'], $siswa->siswa_pass)) {
 				if ($data['hak_akses'] != 'siswa') {
@@ -96,7 +96,7 @@ class Auth extends CI_Controller
 				redirect('login');
 			}
 		} elseif ($guru) {
-			if (password_verify($data['password'], $guru->guru_pass)) {
+			if (password_verify($data['password'], $guru->password)) {
 				if ($data['hak_akses'] == 'guru') {
 					$sess_ = [
 						'fullName' => $guru->guru_nama,
@@ -148,7 +148,6 @@ class Auth extends CI_Controller
 	public function logout()
 	{
 		if ($this->session->userdata('level') == 'siswa') {
-
 			$reponse = [
 				'csrfName' => $this->security->get_csrf_token_name(),
 				'csrfHash' => $this->security->get_csrf_hash(),
@@ -162,7 +161,6 @@ class Auth extends CI_Controller
 			$this->siswa->updateWhere($update_, $this->session->userdata('nis'));
 			$this->session->sess_destroy();
 		} elseif ($this->session->userdata('level') == 'guru' or $this->session->userdata('level') == 'wali-kelas') {
-
 			$reponse = [
 				'csrfName' => $this->security->get_csrf_token_name(),
 				'csrfHash' => $this->security->get_csrf_hash(),
