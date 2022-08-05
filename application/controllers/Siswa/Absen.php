@@ -30,7 +30,7 @@ class Absen extends CI_Controller
 			$data['content'] = 'siswa/contents/errors/404_notfound';
 		} else {
 			$infoJadwal = $this->siswa->get_jadwal_mapel($jadwalID);
-			$infoAbsensi = $this->siswa->get_mulai_absen(['jurnal.jadwal_id' => $jadwalID]);
+			$infoAbsensi = $this->siswa->infoMulaiAbsensi(['jurnal.jadwal_id' => $jadwalID]);
 			if (empty($infoAbsensi)) {
 				$absensi['jurnalID'] = 0;
 				$absensi['jadwalID'] = $infoJadwal->jadwal_id;
@@ -51,9 +51,9 @@ class Absen extends CI_Controller
 					$absensi['kelas'] = $siswa->nama_kelas;
 					$absensi['mapel'] = $infoAbsensi->nama_mapel;
 					$absensi['tanggal'] = date('d-m-Y', strtotime($infoAbsensi->tanggal));
-					$absensi['dibuka'] = date('H:i', strtotime($infoAbsensi->absen_mulai)) . " WIB";
-					$absensi['ditutup'] = date('H:i', strtotime($infoAbsensi->absen_selesai)) . " WIB";
-					$absensi['pertemuan'] = $infoAbsensi->pert_ke;
+					$absensi['dibuka'] = ($infoAbsensi->absen_mulai != '00:00:00') ? date('H:i', strtotime($infoAbsensi->absen_mulai)) . " WIB" : '-';
+					$absensi['ditutup'] = ($infoAbsensi->absen_selesai != '00:00:00') ? date('H:i', strtotime($infoAbsensi->absen_selesai)) . " WIB" : '-';
+					$absensi['pertemuan'] = $infoAbsensi->pertemuan;
 					$absenSiswa = $this->siswa->get_absen_siswa([
 						'siswa_nis' => $siswa->siswa_nis,
 						'jurnal_id' => $infoAbsensi->jurnal_id
@@ -97,17 +97,17 @@ class Absen extends CI_Controller
 			$data['riwayat'] = array();
 			if ($riwayatJurnal) {
 				foreach ($riwayatJurnal as $key => $value) {
-					$absenSiswa = $this->siswa->get_riwayat_absen($siswa->siswa_nis, $value->jurnal_id);
+					$absenSiswa = $this->siswa->riwayatAbsensi($siswa->siswa_nis, $value->jurnal_id);
 					$result_absen['nomor'] = $nomor++;
 					$result_absen['status'] = 'Belum Absen';
 					$result_absen['pembelajaran'] = '-';
 					if (!empty($absenSiswa)) :
 						$result_absen['status'] = $absenSiswa->status;
-						$result_absen['pembelajaran'] = $absenSiswa->metode_kbm;
+						$result_absen['pembelajaran'] = $absenSiswa->metode_absen;
 					endif;
 					$result_absen['tanggal'] = date('d-m-Y', strtotime($value->tanggal));
 					$result_absen['mapel'] = $value->nama_mapel;
-					$result_absen['pertemuan'] = $value->pert_ke;
+					$result_absen['pertemuan'] = $value->pertemuan;
 					$result_absen['pembahasan'] = $value->pembahasan;
 					$riwayatAbsen[] = $result_absen;
 				}

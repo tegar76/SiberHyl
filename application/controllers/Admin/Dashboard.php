@@ -37,6 +37,8 @@ class Dashboard extends CI_Controller
 					&& strtotime($timenow) <= strtotime($row->jam_keluar)
 				) {
 					$study[] = $row;
+				} else {
+					$study = array();
 				}
 			}
 			$data['study'] = $study;

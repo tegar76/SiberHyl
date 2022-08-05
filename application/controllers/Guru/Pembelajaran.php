@@ -739,7 +739,7 @@ class Pembelajaran extends CI_Controller
             );
             $this->db->set($data);
             $this->db->where('tugas_siswa_id', $tugas_siswa_id);
-            $this->db->update('tugas_siswa');
+            $this->db->update('tugassiswa');
         }
         $this->message('Berhasil', 'Tugas dari siswa ' . $_POST['nama'] . ' telah dinilai', 'success');
         return redirect('guru/pembelajaran/detail_tugas_harian/' . $tugas_id);

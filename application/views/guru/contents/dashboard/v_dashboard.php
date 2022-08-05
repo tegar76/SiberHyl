@@ -44,7 +44,7 @@
 											<td><?= $value['nomor'] ?></td>
 											<td><?= $value['mapel'] ?></td>
 											<td>
-												<?php $kelas = $this->jadwal->getKelasJadwal($value['mapel_id'], $value['guru_kode']);
+												<?php $kelas = $this->jadwal->getKelasJadwal($value['mapel_id'], $value['guru_nip']);
 												foreach ($kelas as $row) {
 													echo $row->nama_kelas . '<br>';
 												} ?>

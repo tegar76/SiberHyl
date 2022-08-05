@@ -301,7 +301,7 @@ class SuperVisor extends CI_Controller
 				} elseif ($type == 'img') {
 					$data['alt'] = 'Tugas Siswa';
 					$data['img'] = base_url('storage/siswa/tugas_harian/') . $file;
-					$this->load->view('image_viewer/image_viewer', $data);
+					$this->load->view('img_viewer/img_viewer', $data);
 				}
 			} else {
 				show_404();
@@ -458,8 +458,8 @@ class SuperVisor extends CI_Controller
 
 	public function diskusi($id)
 	{
-		$forum = $this->master->getDiskusi($id);
-		if ($id && $forum) {
+		if ($id) {
+			$forum = $this->master->getDiskusi($id);
 			$data['forum'] = array();
 			if ($forum) {
 				foreach ($forum as $row => $value) {
@@ -481,7 +481,6 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 

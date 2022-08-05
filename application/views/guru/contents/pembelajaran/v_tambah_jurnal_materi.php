@@ -79,7 +79,7 @@
 								</div>
 								<label for="jumlah_siswa">Jumlah Siswa</label>
 								<div class="input-group mb-3">
-									<input type="number" name="jumlah_siswa" id="jumlah_siswa" class="form-control" value="<?= $students ?>" readonly>
+									<input type="number" name="jumlah_siswa" id="jumlah_siswa" class="form-control" value="<?= count($students) ?>" readonly>
 								</div>
 								<div class="row">
 									<div class="col">

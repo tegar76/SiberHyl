@@ -6,13 +6,13 @@ class Diskusi extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		isSiswaLogin(); 
+		$this->load->model('MasterModel', 'master', true);
 		$this->load->model('SiswaModel', 'siswa', true);
-		$this->load->model('GuruModel', 'guru', true);
-		isSiswaLogin();
-		$days = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
-		$this->today = $days[(int)date('w')];
 		$this->datenow = date('Y-m-d');
 		$this->userSiswa = $this->siswa->getWhere(['siswa_nis' => $this->session->userdata('nis')]);
+		$days = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
+		$this->today = $days[(int)date('w')];
 	}
 
 	// message sweetalert 2 flashdata
@@ -30,15 +30,12 @@ class Diskusi extends CI_Controller
 		$data['siswa'] = $this->userSiswa;
 		if ($id) {
 			$id = $this->secure->decrypt_url($id);
-			$data['title'] = 'Diskusi';
-			$data['content'] = 'siswa/contents/diskusi/v_diskusi';
-			$data['info'] = $this->guru->get_jadwal_mapel($id);
-			$forum = $this->guru->get_diskusi($id);
+			$forum = $this->master->getDiskusi($id);
 			$data['forum'] = array();
 			if ($forum) {
 				foreach ($forum as $row => $value) {
-					$reply = $this->guru->get_reply_forum($value->forum_diskusi_id);
-					$frm['id'] = $value->forum_diskusi_id;
+					$reply = $this->master->getReplyForum($value->forum_id);
+					$frm['id'] = $value->forum_id;
 					$frm['author'] = $value->pembuat;
 					$frm['title'] = $value->judul;
 					$frm['desc'] = $value->deskripsi;
@@ -48,6 +45,9 @@ class Diskusi extends CI_Controller
 				}
 				$data['forum'] = $forum_;
 			}
+			$data['info'] = $this->master->getInfoJadwal($id);
+			$data['title'] = 'Diskusi';
+			$data['content'] = 'siswa/contents/diskusi/v_diskusi';
 		} else {
 			$data['title'] = 'Not Found';
 			$data['content'] = 'siswa/contents/errors/404_notfound';
@@ -58,12 +58,11 @@ class Diskusi extends CI_Controller
 
 	public function tambah_diskusi($id = false)
 	{
-		$data['siswa'] = $this->userSiswa;
 		if ($id) {
 			$id = $this->secure->decrypt_url($id);
+			$data['info'] = $this->master->getInfoJadwal($id);
 			$data['title'] = 'Tambah Diskusi';
 			$data['content'] = 'siswa/contents/diskusi/v_tambah_diskusi';
-			$data['info'] = $this->guru->get_jadwal_mapel($id);
 			$this->form_validation->set_rules([
 				[
 					'field' => 'judul_diskusi',
@@ -98,75 +97,56 @@ class Diskusi extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'siswa/contents/errors/404_notfound';
 		}
+		$data['siswa'] = $this->userSiswa;
 		$this->load->view('siswa/layout/wrapper', $data, FALSE);
 	}
 
 	public function forum_diskusi($id = false)
 	{
-		$data['siswa'] = $this->userSiswa;
-		if ($id) {
-			$id = $this->secure->decrypt_url($id);
+		$id = $this->secure->decrypt_url($id);
+		$diskusi = $this->master->detailForum($id);
+		if ($id && $diskusi) {
 			$data['title'] = 'Forum Diskusi';
 			$data['content'] = 'siswa/contents/diskusi/v_detail_diskusi';
-			$data['forum'] = $this->db->get_where('forum_diskusi', ['forum_diskusi_id' => $id])->row();
-			$data['info'] = $this->guru->get_jadwal_mapel($data['forum']->jadwal_id);
-			$data['reply'] = $this->guru->get_reply_forum($id);
+			$data['forum'] = $diskusi;
+			$data['info'] = $this->master->getInfoJadwal($diskusi->jadwal_id);
+			$data['reply'] = $this->master->getReplyForum($diskusi->forum_id);
 		} else {
 			$data['title'] = 'Not Found';
 			$data['content'] = 'siswa/contents/errors/404_notfound';
 		}
+		$data['siswa'] = $this->userSiswa;
 		$this->load->view('siswa/layout/wrapper', $data, FALSE);
 	}
 
 	public function get_komentar()
 	{
 		$output = '';
-		$id_forum = $this->input->get('id', true);
-		$where_diskusi = array(
-			'parent_diskusi_id' => '0',
-			'forum_diskusi_id' => $id_forum,
+		$req = $_REQUEST;
+		$where = array(
+			'parent_id' => '0',
+			'forum_id' => $req['id'],
 		);
-		$query 	= $this->db->order_by('create_time', 'DESC')->get_where('diskusi_siswa', $where_diskusi);
+		$query 	= $this->db->order_by('create_time', 'DESC')->get_where('detaildiskusi', $where);
 		$result	= $query->result();
 		foreach ($result as $key => $val) {
-			$siswa	= $this->guru->get_siswa($val->user_id);
-			$guru	= $this->guru->get_guru($val->user_id);
-			if ($siswa) {
-				if ($siswa->siswa_foto == 'default_foto.png') {
-					$foto = base_url('assets/siswa/img/profile.png');
-					$nama = $siswa->siswa_nama;
-				} else {
-					$foto = base_url('storage/guru/profile/' . $siswa->siswa_foto);
-					$nama = $siswa->siswa_nama;
-				}
-			} elseif ($guru) {
-				if ($guru->guru_foto == 'default_profile.png') {
-					$foto = base_url('assets/siswa/img/profile.png');
-					$nama = $guru->guru_nama;
-				} else {
-					$foto = base_url('storage/guru/profile/' . $guru->guru_foto);
-					$nama = $guru->guru_nama;
-				}
-			} else {
-				$foto = base_url('assets/siswa/img/profile.png');
-				$nama = 'User';
-			}
+			$user = $this->get_user_diskusi($val->user_id);
 			$output .= '
 				<div class="media mb-2">
-					<img src="' . $foto . '" alt="foto-user" class="mr-3 mt-6 rounded-circle" style="width:40px;">
+					<img src="' . $user['img'] . '" alt="foto-user" class="mr-3 mt-6 rounded-circle" style="width:40px;">
 					<div class="media-body">
 							<div class="row">
 							<div class="col-sm-10">
-								<div class="nama-small">' . $nama . '</div>
+								<div class="nama-small">' . $user['name'] . '</div>
 								<div class="post-on mb-2">Posted on ' . date('d-m-Y H:i', strtotime($val->create_time)) . ' WIB</div>
 								<div class="komen">' . $val->message . '</div>
-								<a href="javascript:void(0)" class="balas" id-komen="' . $val->diskusi_siswa_id . '">Balas</a>
+								<a href="javascript:void(0)" class="balas" id-komen="' . $val->diskusi_id . '">Balas</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			<hr>';
-			$output .= $this->ambil_reply($val->diskusi_siswa_id);
+			$output .= $this->ambil_reply($val->diskusi_id);
 		}
 		echo json_encode([$output]);
 	}
@@ -174,12 +154,8 @@ class Diskusi extends CI_Controller
 	public function ambil_reply($parent_id = 0, $marginleft = 0)
 	{
 		$output = '';
-		$where = array(
-			'parent_diskusi_id' => $parent_id
-		);
-		$query 	= $this->guru->get_reply_diskusi($where, 'parent_diskusi_id', 'DESC');
-		// var_dump($query->result());
-		$count = $query->num_rows();
+		$reply = $this->master->getReplyDiskusi($parent_id, 'parent_id', 'DESC');
+		$count = $reply->num_rows();
 		if ($parent_id == 0) {
 			$marginleft = 0;
 		} else {
@@ -187,47 +163,25 @@ class Diskusi extends CI_Controller
 		}
 		$tingkat = $marginleft / 48 + 1;
 		if ($count > 0) {
-			foreach ($query->result() as $value) {
-				$siswa	= $this->guru->get_siswa($value->user_id);
-				$guru	= $this->guru->get_guru($value->user_id);
-				if ($siswa) {
-					if ($siswa->siswa_foto == 'default_foto.png') {
-						$foto = base_url('assets/siswa/img/profile.png');
-						$nama = $siswa->siswa_nama;
-					} else {
-						$foto = base_url('storage/guru/profile/' . $siswa->siswa_foto);
-						$nama = $siswa->siswa_nama;
-					}
-				} elseif ($guru) {
-					if ($guru->guru_foto == 'default_profile.png') {
-						$foto = base_url('assets/siswa/img/profile.png');
-						$nama = $guru->guru_nama;
-					} else {
-						$foto = base_url('storage/guru/profile/' . $guru->guru_foto);
-						$nama = $guru->guru_nama;
-					}
-				} else {
-					$foto = base_url('assets/siswa/img/profile.png');
-					$nama = 'User';
-				}
+			foreach ($reply->result() as $value) {
+				$user = $this->get_user_diskusi($value->user_id);
 				$output .= '
 				<div class="media mb-2" style="margin-left:' . $marginleft . 'px">
-					<img src="' . $foto . '" alt="foto-user" class="mr-3 mt-6 rounded-circle" style="width:40px;">
+					<img src="' . $user['img'] . '" alt="foto-user" class="mr-3 mt-6 rounded-circle" style="width:40px;">
 					<div class="media-body">
 						<div class="row">
 							<div class="col-sm-10">
-								<div class="nama-small">' . $nama . '</div>
+								<div class="nama-small">' . $user['name'] . '</div>
 								<div class="post-on mb-2">Posted on ' . date('d-m-Y H:i', strtotime($value->create_time)) . ' WIB</div>
 								<div class="komen">' . $value->message . '</div>';
-
 				if ($tingkat < 2) {
-					$output .= '<a href="javascript:void(0)" class="balas" id-komen="' . $value->diskusi_siswa_id . '">Balas</a>';
+					$output .= '<a href="javascript:void(0)" class="balas" id-komen="' . $value->diskusi_id . '">Balas</a>';
 				}
 				$output .= '</div>
 						</div>
 					</div>
 				</div><hr>';
-				$output .= $this->ambil_reply($value->diskusi_siswa_id, $marginleft);
+				$output .= $this->ambil_reply($value->diskusi_id, $marginleft);
 			}
 		}
 		return $output;
@@ -249,7 +203,7 @@ class Diskusi extends CI_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$reponse['messages'] = '<div class="alert alert-danger" role="alert">' . validation_errors() . '</div>';
 		} else {
-			$this->guru->insert_diskusi();
+			$this->master->insertDiskusi();
 			$reponse = [
 				'csrfName' => $this->security->get_csrf_token_name(),
 				'csrfHash' => $this->security->get_csrf_hash(),
@@ -257,5 +211,37 @@ class Diskusi extends CI_Controller
 			];
 		}
 		echo json_encode($reponse);
+	}
+
+	public function get_user_diskusi($iduser)
+	{
+		$siswa	= $this->master->getUserSiswa($iduser);
+		$guru	= $this->master->getUserGuru($iduser);
+		if ($siswa) {
+			if ($siswa->siswa_foto == 'default_foto.png') {
+				$foto = base_url('assets/siswa/img/profile.png');
+				$nama = $siswa->siswa_nama;
+			} else {
+				$foto = base_url('storage/guru/profile/' . $siswa->siswa_foto);
+				$nama = $siswa->siswa_nama;
+			}
+		} elseif ($guru) {
+			if ($guru->profile == 'default_profile.png') {
+				$foto = base_url('assets/siswa/img/profile.png');
+				$nama = $guru->guru_nama;
+			} else {
+				$foto = base_url('storage/guru/profile/' . $guru->profile);
+				$nama = $guru->guru_nama;
+			}
+		} else {
+			$foto = base_url('assets/siswa/img/profile.png');
+			$nama = 'User';
+		}
+
+		$data = array(
+			'name' => $nama,
+			'img' => $foto,
+		);
+		return $data;
 	}
 }

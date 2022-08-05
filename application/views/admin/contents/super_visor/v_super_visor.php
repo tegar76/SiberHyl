@@ -91,7 +91,7 @@
 										<div class="card px-3 mt-n5">
 											<div class="row ml-2">
 												<div class="section-menu mr-3">
-													<a href="<?= base_url('master/super-visor/absensi') ?>">
+													<a href="<?= base_url('master/super-visor/absensi/' . $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card  py-1 mt-2 d-flex align-items-center mb-1" style="width: 55px;">
 																<img src="<?= base_url('assets/siswa/icons/cek-absen.png') ?>" alt="">
@@ -101,7 +101,7 @@
 													</a>
 												</div>
 												<div class="section-menu mr-3">
-													<a href="<?= base_url('master/super-visor/tugasHarian') ?>">
+													<a href="<?= base_url('master/super-visor/tugas_harian/' . $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
@@ -111,7 +111,7 @@
 													</a>
 												</div>
 												<div class="section-menu mr-3">
-													<a href="<?= base_url('master/super-visor/evaluasi') ?>">
+													<a href="<?= base_url('master/super-visor/evaluasi/' . $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -121,7 +121,7 @@
 													</a>
 												</div>
 												<div class="section-menu mr-3">
-													<a href="<?= base_url('master/super-visor/diskusi') ?>">
+													<a href="<?= base_url('master/super-visor/diskusi/'  . $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																<span class="badge-info-ds"> </span>
@@ -132,7 +132,7 @@
 													</a>
 												</div>
 												<div class="section-menu mr-3">
-													<a href="<?= base_url('master/super-visor/jurnal') ?>">
+													<a href="<?= base_url('master/super-visor/jurnal/' . $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card  py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																<img src="<?= base_url('assets/siswa/icons/jurnal.png') ?>" alt="">

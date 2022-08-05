@@ -32,7 +32,7 @@
 
 							<?= form_open('#', ['id' => 'submit-diskusi']) ?>
 							<textarea name="message" placeholder="Masukan Pesan" class="form-control mb-3" id="text-message"></textarea>
-							<input type="hidden" name="forum_diskusi_id" id="id_forum" value="<?= $forum->forum_diskusi_id ?>">
+							<input type="hidden" name="forum_diskusi_id" id="id_forum" value="<?= $forum->forum_id ?>">
 							<input type="hidden" name="user_id" value="<?= $siswa->siswa_nis ?>">
 							<input type="hidden" name="parent_diskusi_id" id="diskusi_id" value="0" />
 							<button type="submit" class="btn btn-sm btn-primary bg-blue border-0 rounded px-4 py-1 mr-3">Kirim</button>

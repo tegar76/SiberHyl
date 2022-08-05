@@ -423,7 +423,10 @@ class MasterModel extends CI_Model
 			mapel.nama_mapel,
 			tugas.tugas_id,
 			tugas.judul_tugas,
+			tugas.deskripsi,
+			tugas.file_tugas,
 			tugas.pertemuan,
+			tugas.deadline,
 			tugas.create_time,
 			tugas.update_time
 		");

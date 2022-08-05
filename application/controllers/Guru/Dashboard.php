@@ -38,7 +38,7 @@ class Dashboard extends CI_Controller
 				}
 				$result['nomor'] = $no++;
 				$result['mapel'] = $value->nama_mapel;
-				$result['guru_kode'] = $value->guru_kode;
+				$result['guru_nip'] = $value->guru_nip;
 				$result['mapel_id'] = $mapel;
 				$result['jumlah_rombel'] = count($kompetensi);
 				$result['jumlah_jam'] = $sum;

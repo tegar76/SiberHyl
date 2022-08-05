@@ -112,7 +112,7 @@
 											<td><?= $no++ ?></td>
 											<td><?= date('d-m-Y H:i', strtotime($info->create)) . " WIB" ?></td>
 											<td><?= $info->judul ?></td>
-											<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik?file=' . $info->file) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+											<td><a target="_blank" href="<?= base_url('master/info/detail_info_akademik/' . $info->file) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
 										</tr>
 									<?php endforeach ?>
 								</tbody>
@@ -187,21 +187,22 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php $no = 1;
-									foreach ($study as $val) : ?>
-										<tr>
-											<td><?= $no++ ?></td>
-											<td><?= $val->hari ?></td>
-											<td><?= $val->guru ?></td>
-											<td><?= $val->mapel ?></td>
-											<td><?= date('H:i', strtotime($val->jam_masuk)) . ' - ' . date('H:i', strtotime($val->jam_keluar)) . " WIB" ?></td>
-											<td><?= $val->kelas ?></td>
-											<td><?= $val->ruang ?></td>
-											<td><a href="<?= base_url('master/super-visor?kelas=' . $val->kd_kelas) ?>" class="d-block btn btn-sm btn-outline-primary border-blue rounded mx-auto">Kunjungi Kelas</a></td>
-											<!-- <td><a href="" class="d-block btn btn-sm btn-outline-warning border-yellow rounded mx-auto">Sudah Dikunjungi</a></td> -->
-										</tr>
-									<?php endforeach ?>
-									<tr>
+									<?php if ($study) : ?>
+										<?php $no = 1;
+										foreach ($study as $val) : ?>
+											<tr>
+												<td><?= $no++ ?></td>
+												<td><?= $val->hari ?></td>
+												<td><?= $val->guru ?></td>
+												<td><?= $val->mapel ?></td>
+												<td><?= date('H:i', strtotime($val->jam_masuk)) . ' - ' . date('H:i', strtotime($val->jam_keluar)) . " WIB" ?></td>
+												<td><?= $val->kelas ?></td>
+												<td><?= $val->ruang ?></td>
+												<td><a href="<?= base_url('master/super-visor?kelas=' . $val->kd_kelas) ?>" class="d-block btn btn-sm btn-outline-primary border-blue rounded mx-auto">Kunjungi Kelas</a></td>
+												<!-- <td><a href="" class="d-block btn btn-sm btn-outline-warning border-yellow rounded mx-auto">Sudah Dikunjungi</a></td> -->
+											</tr>
+										<?php endforeach ?>
+									<?php endif ?>
 								</tbody>
 							</table>
 						</div>

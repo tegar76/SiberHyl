@@ -50,7 +50,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'home';
-$route['404_override'] = 'error404';
+$route['404_override'] = 'e
+rror404';
 $route['translate_uri_dashes'] = FALSE;
 
 /*
@@ -168,6 +169,7 @@ $route['master/info/(:any)/(:any)/(:any)'] = 'Admin/Info/$1/$2/$3';
 $route['master/super-visor'] = 'Admin/SuperVisor';
 $route['master/super-visor/(:any)'] = 'Admin/SuperVisor/$1';
 $route['master/super-visor/(:any)/(:any)'] = 'Admin/SuperVisor/$1/$2';
+$route['master/super-visor/(:any)/(:any)/(:any)'] = 'Admin/SuperVisor/$1/$2/$3';
 
 
 $route['master/export'] = 'Admin/Docs';

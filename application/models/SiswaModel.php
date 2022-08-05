@@ -57,122 +57,29 @@ class SiswaModel extends CI_Model
 		return $query->row();
 	}
 
-	public function get_mulai_absen($where)
+
+	/*	
+		fungsi untuk mengecek apakah sudah ada direktori siswa pada direktori storage,
+		jika belum ada maka akan dibuatkan terlebih dahulu
+	*/
+	public function check_storage_siswa($dir)
 	{
-		$select = "jurnal.jurnal_id, jurnal.tanggal, jurnal.pert_ke, jurnal.jenis_kbm, jurnal.absen_mulai, jurnal.absen_selesai,
-		jurnal.status, jadwal.jadwal_id, jadwal.hari, mapel.mapel_id, mapel.nama_mapel";
-		$this->db->select($select);
-		$this->db->from('jurnal');
-		$this->db->join('jadwal', 'jadwal.jadwal_id=jurnal.jadwal_id');
-		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
-		$this->db->where($where);
-		$this->db->order_by('jurnal.tanggal', 'DESC');
-		$this->db->limit(1);
-		$query = $this->db->get();
-		return $query->row();
-	}
-
-	public function get_absen_siswa($where)
-	{
-		// $select = "absensi.tanggal_absen, absensi.metode_kbm, absensi.status, absensi.bukti_absen, absensi.siswa_nis";
-		$this->db->where($where);
-		$this->db->limit(1);
-		$query = $this->db->get('absensi');
-		return $query->row();
-	}
-
-	public function check_absensi($jurnalID)
-	{
-		$query = $this->db->select("jurnal_id, tanggal, pert_ke, jenis_kbm, absen_mulai, absen_selesai")
-			->from('jurnal')
-			->where('jurnal_id', $jurnalID)
-			->get();
-		return $query->row();
-	}
-
-	public function check_absensi_siswa($nis, $jurnal)
-	{
-		$query = $this->db->where('siswa_nis', $nis)
-			->where('jurnal_id', $jurnal)
-			->limit(1)
-			->get('absensi');
-		return $query->num_rows();
-	}
-
-	public function  process_absensi($metode_absen, $nis)
-	{
-		$jurnal_id = $this->input->post('jurnal_id', true);
-		if ($metode_absen == 'offline') :
-			$set_absen = array(
-				'tanggal_absen' => date('Y-m-d'),
-				'metode_kbm' => 'offline',
-				'status' => 'H',
-				'bukti_absen' => null,
-				'siswa_nis' => $nis,
-				'jurnal_id' => $jurnal_id
-			);
-			$this->db->insert('absensi', $set_absen);
-		elseif ($metode_absen == 'online') :
-			if ($_FILES['bukti_absen']['name']) :
-				$conf['upload_path']   = './storage/siswa/absensi';
-				$conf['allowed_types'] = 'gif|jpg|png|jpeg';
-				$conf['max_size']      = 2000;
-				$conf['overwrite']     = TRUE;
-				$conf['encrypt_name'] = TRUE;
-				$this->load->library('upload', $conf);
-
-				if (!is_dir('storage')) :
-					mkdir('./storage', 0777, true);
-				endif;
-
-				$dir_exist = true;
-				if (!is_dir('storage/siswa')) :
-					mkdir('./storage/siswa', 0777, true);
-					$dir_exist = false; // dir not exist
-				endif;
-
-				if (!is_dir('storage/siswa/absensi')) :
-					mkdir('./storage/siswa/absensi', 0777, true);
-					$dir_exist = false; // dir not exist
-				endif;
-
-				if (!$this->upload->do_upload('bukti_absen')) :
-					if (!$dir_exist) :
-						rmdir('/storage/siswa/absensi');
-					endif;
-					return $response = [
-						'csrfName' => $this->security->get_csrf_token_name(),
-						'csrfHash' => $this->security->get_csrf_hash(),
-						'success' => false,
-						'msgabsen' => 'Upload Bukti Absen Gagal',
-						'errorupload' => $this->upload->display_errors('<span>', '</span>')
-					];
-				else :
-					$dataUpload = $this->upload->data();
-					$resolution = ['width' => 500, 'height' => 500];
-					$this->compreesImage('absensi', $dataUpload['file_name'], $resolution);
-					$buktiAbsen = $this->upload->data('file_name');
-					$this->db->set('bukti_absen', $buktiAbsen);
-				endif;
-
-			endif;
-			$set_absen = array(
-				'tanggal_absen' => date('Y-m-d'),
-				'metode_kbm' => 'offline',
-				'status' => 'H',
-				'siswa_nis' => $nis,
-				'jurnal_id' => $jurnal_id
-			);
-			$this->db->set($set_absen);
-			$this->db->insert('absensi');
-			return $response = [
-				'csrfName' => $this->security->get_csrf_token_name(),
-				'csrfHash' => $this->security->get_csrf_hash(),
-				'success' => true,
-				'msgabsen' => 'Absensi Berhasil',
-				'errorupload' => ''
-			];
+		if (!is_dir('storage')) :
+			mkdir('./storage', 0777, true);
 		endif;
+
+		$dir_exist = true;
+		if (!is_dir('storage/siswa')) :
+			mkdir('./storage/siswa', 0777, true);
+			$dir_exist = false; // dir not exist
+		endif;
+
+		if (!is_dir('storage/siswa/' . $dir)) :
+			mkdir('./storage/siswa/' . $dir, 0777, true);
+			$dir_exist = false; // dir not exist
+		endif;
+
+		return $dir_exist;
 	}
 
 	public function compreesImage($dirName, $fileName, $resolution)
@@ -190,40 +97,140 @@ class SiswaModel extends CI_Model
 		$this->image_lib->resize();
 	}
 
-	public function get_riwayat_jurnal($jadwalID)
+	public function infoMulaiAbsensi($where)
 	{
-		$select = "jadwal.jadwal_id, mapel.nama_mapel, jurnal.jurnal_id, jurnal.tanggal, jurnal.pert_ke, jurnal.pembahasan";
-		$this->db->select($select);
+		$this->db->select("
+			jurnal.jurnal_id,
+			jurnal.tanggal,
+			jurnal.pertemuan,
+			jurnal.absen_mulai,
+			jurnal.absen_selesai,
+			jurnal.status,
+			jadwal.jadwal_id,
+			jadwal.hari,
+			mapel.mapel_id,
+			mapel.nama_mapel
+		");
 		$this->db->from('jurnal');
 		$this->db->join('jadwal', 'jadwal.jadwal_id=jurnal.jadwal_id');
 		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
-		$this->db->order_by('jurnal.pert_ke', 'ASC');
+		$this->db->where($where);
+		$this->db->order_by('jurnal.tanggal', 'DESC');
+		$this->db->limit(1);
+		return $this->db->get()->row();
+	}
+
+	public function get_absen_siswa($where)
+	{
+		$this->db->where($where);
+		$this->db->limit(1);
+		return $this->db->get('absensi')->row();
+	}
+
+	public function check_absensi($id)
+	{
+		$this->db->select("jurnal_id, tanggal, pertemuan, absen_mulai, absen_selesai");
+		$this->db->from('jurnal');
+		$this->db->where('jurnal_id', $id);
+		return $this->db->get()->row();
+	}
+
+	public function check_absensi_siswa($nis, $jurnal)
+	{
+		$this->db->where('siswa_nis', $nis);
+		$this->db->where('jurnal_id', $jurnal);
+		$this->db->limit(1);
+		return $this->db->get('absensi')->num_rows();
+	}
+
+	public function process_absensi($metode_absen, $nis)
+	{
+		$jurnal_id = $this->input->post('jurnal_id', true);
+		if ($metode_absen == 'offline') {
+			$set_absen = array(
+				'tanggal_absen' => date('Y-m-d'),
+				'metode_absen' => 'offline',
+				'status' => 'H',
+				'bukti_absen' => null,
+				'siswa_nis' => $nis,
+				'jurnal_id' => $jurnal_id
+			);
+			$this->db->insert('absensi', $set_absen);
+		} elseif ($metode_absen == 'online') {
+			if ($_FILES['bukti_absen']['name']) {
+				$conf['upload_path']   = './storage/siswa/absensi';
+				$conf['allowed_types'] = 'gif|jpg|png|jpeg';
+				$conf['max_size']      = 2000;
+				$conf['overwrite']     = true;
+				$conf['encrypt_name'] = true;
+				$this->load->library('upload', $conf);
+				$this->check_storage_siswa('absensi');
+				if (!$this->upload->do_upload('bukti_absen')) {
+					if (!$this->check_storage_siswa('absensi')) {
+						rmdir('/storage/siswa/absensi');
+					}
+				} else {
+					$dataUpload = $this->upload->data();
+					$resolution = ['width' => 500, 'height' => 500];
+					$this->compreesImage('absensi', $dataUpload['file_name'], $resolution);
+					$buktiAbsen = $this->upload->data('file_name');
+					$this->db->set('bukti_absen', $buktiAbsen);
+				}
+			}
+			$set_absen = array(
+				'tanggal_absen' => date('Y-m-d'),
+				'metode_absen' => 'offline',
+				'status' => 'H',
+				'siswa_nis' => $nis,
+				'jurnal_id' => $jurnal_id
+			);
+			$this->db->set($set_absen);
+			$this->db->insert('absensi');
+		}
+	}
+
+	public function get_riwayat_jurnal($jadwalID)
+	{
+		$this->db->select("
+			jadwal.jadwal_id,
+			mapel.nama_mapel,
+			jurnal.jurnal_id,
+			jurnal.tanggal,
+			jurnal.pertemuan,
+			jurnal.pembahasan
+		");
+		$this->db->from('jurnal');
+		$this->db->join('jadwal', 'jadwal.jadwal_id=jurnal.jadwal_id');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
+		$this->db->order_by('jurnal.pertemuan', 'ASC');
 		$this->db->where('jurnal.jadwal_id', $jadwalID);
-		$query = $this->db->get();
-		return $query->result();
+		return $this->db->get()->result();
 	}
 
-	public function get_riwayat_absen($nis, $jurnal_id)
+	public function riwayatAbsensi($nis, $jurnal_id)
 	{
-		$query = $this->db->get_where('absensi', [
-			'siswa_nis' => $nis,
-			'jurnal_id' => $jurnal_id
-		], 1);
-		$result = $query->row();
-		return $result;
+		$this->db->where('siswa_nis', $nis);
+		$this->db->where('jurnal_id', $jurnal_id);
+		$this->db->limit(1);
+		return $this->db->get('absensi')->row();
 	}
 
-	public function get_jadwal_mapel($jadwalID)
+	public function get_jadwal_mapel($id)
 	{
-		$query = $this->db->select("guru.guru_kode, kelas.nama_kelas, mapel.nama_mapel, jadwal.jadwal_id")
-			->from('jadwal')
-			->join('guru', 'guru.guru_kode=jadwal.guru_kode')
-			->join('kelas', 'kelas.kelas_id=jadwal.kelas_id')
-			->join('mapel', 'mapel.mapel_id=jadwal.mapel_id')
-			->where('jadwal_id', $jadwalID)
-			->get();
-		$result = $query->row();
-		return $result;
+		$this->db->select("
+			guru.guru_kode,
+			guru.guru_nip,
+			guru.guru_nama,
+			kelas.nama_kelas,
+			mapel.nama_mapel,
+			jadwal.jadwal_id
+		");
+		$this->db->from("jadwal");
+		$this->db->join("guru", "guru.guru_nip=jadwal.guru_nip");
+		$this->db->join('kelas', 'kelas.kelas_id=jadwal.kelas_id');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
+		$this->db->where('jadwal_id', $id);
+		return $this->db->get()->row();
 	}
 
 	public function print_riwayat_absen($jadwalID, $nis, $pert_awal, $pert_akhir)
@@ -246,7 +253,7 @@ class SiswaModel extends CI_Model
 	{
 		$this->db->where('jadwal_id', $id_jadwal);
 		$this->db->order_by('create_time', 'DESC');
-		$query	= $this->db->get('tugas');
+		$query	= $this->db->get('tugasharian');
 		return $query->result();
 	}
 
@@ -254,14 +261,14 @@ class SiswaModel extends CI_Model
 	{
 		$this->db->where('siswa_nis', $nis);
 		$this->db->where('tugas_id', $id);
-		$query	= $this->db->get('nilaitugas');
+		$query	= $this->db->get('tugassiswa');
 		return $query->row();
 	}
 
 	public function get_result_tugas($id)
 	{
 		$this->db->select('tugas.tugas_id, tugas.pertemuan, tugas.judul_tugas, mapel.nama_mapel');
-		$this->db->from('tugas');
+		$this->db->from('tugasharian as tugas');
 		$this->db->where('tugas.jadwal_id', $id);
 		$this->db->join('jadwal', 'jadwal.jadwal_id=tugas.jadwal_id');
 		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
@@ -271,8 +278,14 @@ class SiswaModel extends CI_Model
 
 	public function get_info_tugas($id)
 	{
-		$this->db->select("tugas.tugas_id, tugas.pertemuan, tugas.judul_tugas, jadwal.jadwal_id, mapel.nama_mapel");
-		$this->db->from('tugas');
+		$this->db->select("
+			tugas.tugas_id,
+			tugas.pertemuan,
+			tugas.judul_tugas,
+			jadwal.jadwal_id,
+			mapel.nama_mapel
+		");
+		$this->db->from('tugasharian as tugas');
 		$this->db->join('jadwal', 'jadwal.jadwal_id=tugas.jadwal_id', 'left');
 		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left');
 		$this->db->where('tugas.tugas_id', $id);
@@ -283,7 +296,7 @@ class SiswaModel extends CI_Model
 	public function process_assignment()
 	{
 		if ($_FILES['file_tugas']['name']) :
-			$conf['upload_path']   = './storage/siswa/tugas_harian';
+			$conf['upload_path']   = './storage/siswa/tugas_harian/';
 			$conf['allowed_types'] = 'pdf|jpg|png|jpeg';
 			$conf['max_size']      = 2000;
 			$conf['overwrite']     = TRUE;
@@ -331,7 +344,7 @@ class SiswaModel extends CI_Model
 					'tugas_id' => $this->input->post('tugas_id', true)
 				);
 				$this->db->set($desc);
-				$this->db->insert('tugas_siswa');
+				$this->db->insert('tugassiswa');
 			}
 			$result = array(
 				'status' => true,
@@ -341,43 +354,30 @@ class SiswaModel extends CI_Model
 		return $result;
 	}
 
-	public function check_storage_siswa($dir)
-	{
-		if (!is_dir('storage')) :
-			mkdir('./storage', 0777, true);
-		endif;
-
-		$dir_exist = true;
-		if (!is_dir('storage/siswa')) :
-			mkdir('./storage/siswa', 0777, true);
-			$dir_exist = false; // dir not exist
-		endif;
-
-		if (!is_dir('storage/siswa/' . $dir)) :
-			mkdir('./storage/siswa/' . $dir, 0777, true);
-			$dir_exist = false; // dir not exist
-		endif;
-
-		return $dir_exist;
-	}
-
 	public function get_update_tugas($id)
 	{
-		$this->db->select("tugas.tugas_id, tugas.pertemuan, tugas.judul_tugas, jadwal.jadwal_id, mapel.nama_mapel, tugas_siswa.tugas_siswa_id, tugas_siswa.file_tugas_siswa");
-		$this->db->from('tugas_siswa');
-		$this->db->join('tugas', 'tugas.tugas_id=tugas_siswa.tugas_id');
+		$this->db->select("
+			tugas.tugas_id,
+			tugas.pertemuan,
+			tugas.judul_tugas,
+			jadwal.jadwal_id,
+			mapel.nama_mapel,
+			tugas_siswa.tugas_siswa_id,
+			tugas_siswa.file_tugas_siswa
+		");
+		$this->db->from('tugassiswa');
+		$this->db->join('tugasharian as tugas', 'tugas.tugas_id=tugas_siswa.tugas_id');
 		$this->db->join('jadwal', 'jadwal.jadwal_id=tugas.jadwal_id', 'left');
 		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left');
 		$this->db->where('tugas_siswa_id', $id);
-		$query = $this->db->get();
-		return $query->row();
+		return $this->db->get()->row();
 	}
 
 	public function update_assignment()
 	{
 		$tugasSiswa = $this->get_update_tugas($this->input->post('tugas_siswa_id', true));
 		$fileTugas = $tugasSiswa->file_tugas_siswa;
-		if ($_FILES['update_tugas']['name']) :
+		if ($_FILES['update_tugas']['name']) {
 			$conf['upload_path']   = './storage/siswa/tugas_harian';
 			$conf['allowed_types'] = 'pdf|jpg|png|jpeg';
 			$conf['max_size']      = 2000;
@@ -426,13 +426,13 @@ class SiswaModel extends CI_Model
 				);
 				$this->db->set($desc);
 				$this->db->where('tugas_siswa_id', $this->input->post('tugas_siswa_id', true));
-				$this->db->update('tugas_siswa');
+				$this->db->update('tugassiswa');
 				$result = array(
 					'status' => true,
 					'errors' => ''
 				);
 			}
-		endif;
+		}
 		return $result;
 	}
 

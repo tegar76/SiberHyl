@@ -557,6 +557,7 @@ class Materi extends CI_Controller
 				$dir_exist = false; // dir not exist
 			endif;
 		}
+		
 		if ($dir2) {
 			if (!is_dir('storage/materi/' . $dir1 . '/' . $dir2)) :
 				mkdir('./storage/materi/' . $dir1 . '/' . $dir2, 0777, true);

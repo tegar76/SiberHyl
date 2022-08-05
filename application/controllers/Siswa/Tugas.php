@@ -5,8 +5,9 @@ class Tugas extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('SiswaModel', 'siswa', true);
 		isSiswaLogin();
+		$this->load->model('SiswaModel', 'siswa', true);
+		$this->load->model('MasterModel', 'master', true);
 		$days = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
 		$this->today = $days[(int)date('w')];
 		$this->datenow = date('Y-m-d');
@@ -22,14 +23,12 @@ class Tugas extends CI_Controller
 		]);
 	}
 
-	public function tugas_harian($id_ = false)
+	public function tugas_harian($id = false)
 	{
-		$siswa_ = $this->userSiswa;
-		if ($id_ == false) {
-			$data['content'] = 'siswa/contents/errors/404_notfound';
-		} else {
-			$id_ = $this->secure->decrypt_url($id_);
-			$tugas = $this->siswa->get_tugas_harian($id_);
+		$siswa = $this->userSiswa;
+		if ($id) {
+			$id = $this->secure->decrypt_url($id);
+			$tugas = $this->master->getTugasHarian($id);
 			$data['tugas'] = array();
 			if ($tugas) {
 				foreach ($tugas as $key => $value) {
@@ -41,7 +40,7 @@ class Tugas extends CI_Controller
 					$tgs['deadline'] = date('d - m - Y, H : i', strtotime($value->deadline));
 					$tgs['create'] = date('d-m-Y,  H:i', strtotime($value->create_time));
 					$tgs['update'] = ($value->create_time == $value->update_time) ? '-' : date('d-m-Y,  H:i', strtotime($value->update_time));
-					$tugass_ = $this->siswa->get_tugas_siswa($siswa_->siswa_nis, $value->tugas_id);
+					$tugass_ = $this->siswa->get_tugas_siswa($siswa->siswa_nis, $value->tugas_id);
 					$tgs['status'] = 0;
 					if ($tugass_) {
 						$tgs['status'] = 1;
@@ -51,13 +50,13 @@ class Tugas extends CI_Controller
 				$data['tugas'] = $tugas_;
 			}
 
-			$result = $this->siswa->get_result_tugas($id_);
+			$result = $this->siswa->get_result_tugas($id);
 			$data['nilai'] = array();
 			if ($result) {
 				$no = 1;
 				foreach ($result as $row) {
 					$n['nomor'] = $no++;
-					$nilai_ = $this->siswa->get_tugas_siswa($siswa_->siswa_nis, $row->tugas_id);
+					$nilai_ = $this->siswa->get_tugas_siswa($siswa->siswa_nis, $row->tugas_id);
 					if (empty($nilai_)) {
 						$n['ket'] = 'Tugas Belum Dikumpulkan';
 						$n['mapel'] = $row->nama_mapel;
@@ -102,6 +101,9 @@ class Tugas extends CI_Controller
 			}
 			$data['title'] = 'Tugas Harian';
 			$data['content'] = 'siswa/contents/tugas/v_tugas';
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'siswa/contents/errors/404_notfound';
 		}
 		$this->load->view('siswa/layout/wrapper', $data, FALSE);
 	}
@@ -110,7 +112,7 @@ class Tugas extends CI_Controller
 	{
 		$date_now = date('Y-m-d H:i:s');
 		$id_ = $this->secure->decrypt_url($this->input->get('id'));
-		$deadline = $this->db->select('deadline')->where('tugas_id', $id_)->get('tugas')->row();
+		$deadline = $this->db->select('deadline')->where('tugas_id', $id_)->get('tugasharian')->row();
 		if (empty($deadline->deadline)) {
 			$response = [
 				'csrfName' => $this->security->get_csrf_token_name(),
@@ -185,7 +187,7 @@ class Tugas extends CI_Controller
 			'siswa_nis' => $siswa_->siswa_nis,
 			'tugas_id' => $tugasid
 		);
-		$this->db->insert('tugas_siswa', $assignment);
+		$this->db->insert('tugassiswa', $assignment);
 		$reponse = [
 			'csrfName' => $this->security->get_csrf_token_name(),
 			'csrfHash' => $this->security->get_csrf_hash(),
@@ -198,12 +200,15 @@ class Tugas extends CI_Controller
 	public function soal_tugas_harian($soal = false)
 	{
 		if ($soal) {
-			$data['title'] = 'Soal Tugas Harian';
-			$data['file_soal'] = base_url('storage/guru/tugas_harian/') . $soal;
-			$this->load->view('siswa/contents/tugas/soal_tugas_pdf/v_soal_tugas_pdf', $data, FALSE);
+			$check = FCPATH . './storage/guru/tugas_harian/' . $soal;
+			if(file_exists($check)) {
+				$data['pdf'] = base_url('storage/guru/tugas_harian/') . $soal;
+				$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
+			} else {
+				show_404();
+			}
 		} else {
-			$data['content'] = 'siswa/contents/errors/404_notfound';
-			$this->load->view('siswa/layout/wrapper', $data, FALSE);
+			show_404();
 		}
 	}
 
@@ -211,16 +216,19 @@ class Tugas extends CI_Controller
 	{
 		if ($id) {
 			$tugas = $this->db->get_where('tugas_siswa', ['file_tugas_siswa' => $id])->row();
-			if ($tugas) {
+			$check = FCPATH . './storage/siswa/tugas_harian/' . $tugas->file_tugas_siswa;
+			if ($tugas && $check) {
 				if ($tugas->file_type == '.pdf') {
 					$data['title'] = 'Jawaban Tugas';
-					$data['file_'] = base_url('storage/siswa/tugas_harian/') . $tugas->file_tugas_siswa;
-					$this->load->view('siswa/contents/tugas/jawaban_tugas_pdf/v_jawaban_tugas_pdf', $data, FALSE);
+					$data['pdf'] = base_url('storage/siswa/tugas_harian/') . $tugas->file_tugas_siswa;
+					$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
 				} else {
-					$data['title'] = 'Jawaban Tugas';
-					$data['file_'] = base_url('storage/siswa/tugas_harian/') . $tugas->file_tugas_siswa;
-					$this->load->view('siswa/contents/tugas/v_jawaban_tugas_img', $data, FALSE);
+					$data['alt'] = 'Tugas Siswa';
+					$data['img'] = base_url('storage/siswa/tugas_harian/') .  $tugas->file_tugas_siswa;
+					$this->load->view('image_viewer/image_viewer', $data);
 				}
+			} else {
+				show_404();
 			}
 		} else {
 			$data['content'] = 'siswa/contents/errors/404_notfound';
