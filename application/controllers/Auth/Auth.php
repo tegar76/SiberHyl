@@ -7,12 +7,11 @@ class Auth extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		checkLoginUser();
 		$this->load->model('SiswaModel', 'siswa', true);
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('AuthModel', 'auth', true);
 	}
-
+	
 	// message sweetalert 2 flashdata
 	public function message($title = NULL, $text = NULL, $type = NULL)
 	{
@@ -22,9 +21,10 @@ class Auth extends CI_Controller
 			'type' => $type,
 		]);
 	}
-
+	
 	public function index()
 	{
+		checkLoginUser();
 		$this->form_validation->set_rules([
 			[
 				'field' => 'username',
