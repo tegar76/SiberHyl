@@ -114,9 +114,9 @@ $route['siswa/info/(:any)'] = 'Siswa/Info/$1';
 $route['siswa/info/(:any)/(:any)'] = 'Siswa/Info/$1/$2';
 
 # 10. Routing Konsultasi
-$siswa['siswa/konsultasi'] = 'Siswa/Konsultasi';
-$siswa['siswa/konsultasi/(:any)'] = 'Siswa/Konsultasi/$1';
-$siswa['siswa/konsultasi/(:any)/(:any)'] = 'Siswa/Konsultasi/$1/$2';
+$route['siswa/konsultasi'] = 'Siswa/Konsultasi';
+$route['siswa/konsultasi/(:any)'] = 'Siswa/Konsultasi/$1';
+$route['siswa/konsultasi/(:any)/(:any)'] = 'Siswa/Konsultasi/$1/$2';
 
 // routing wali kelas
 $route['wali-kelas/dashboard'] = 'WaliKelas/Dashboard/index';
