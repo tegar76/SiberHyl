@@ -115,7 +115,7 @@ class Konsultasi extends CI_Controller
 			$user = $this->get_user_diskusi($val->user_id);
 			$output .= '
 				<div class="media mb-2">
-					<img src="' . $user['img'] . '" alt="foto-user" class="mr-3 mt-6 rounded-circle" style="width:40px;">
+					<img src="' . $user['img'] . '" alt="foto-user" class="mr-3 mt-6 rounded-circle" style="width:40px; height:40px;">
 					<div class="media-body">
 							<div class="row">
 							<div class="col-sm-10">
@@ -149,7 +149,7 @@ class Konsultasi extends CI_Controller
 				$user = $this->get_user_diskusi($value->user_id);
 				$output .= '
 				<div class="media mb-2" style="margin-left:' . $marginleft . 'px">
-					<img src="' . $user['img'] . '" alt="foto-user" class="mr-3 mt-6 rounded-circle" style="width:40px;">
+					<img src="' . $user['img'] . '" alt="foto-user" class="mr-3 mt-6 rounded-circle" style="width:40px; height:40px">
 					<div class="media-body">
 						<div class="row">
 							<div class="col-sm-10">

@@ -61,7 +61,7 @@
                                     <table class="table">
                                         <tbody>
                                             <tr class="table-borderless">
-                                                <th scope="row" class="col-md-3">Kode Guru</th>
+                                                <th scope="row">Kode Guru</th>
                                                 <td><?= $guru->guru_kode ?></td>
                                             </tr>
                                             <tr>

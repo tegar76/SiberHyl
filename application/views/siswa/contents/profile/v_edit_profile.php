@@ -8,7 +8,7 @@
 			<div class="col-md-4 text-center mb-3">
 				<div class="card shadow py-4">
 					<div class="img-photo justify-content-center">
-						<img class="mx-auto d-block rounded-circle" src="<?= ($siswa->siswa_foto == 'default_foto.png') ? base_url('assets/siswa/img/profile-default-siswa.png') : base_url('storage/siswa/profile/' . $siswa->siswa_foto) ?>" width="150" id="imagePreview" alt="<?= ($siswa->siswa_foto == 'default_foto.png') ? 'Foto Profile Siswa' : $siswa->siswa_nama ?>">
+						<img class="mx-auto d-block rounded-circle" src="<?= ($siswa->siswa_foto == 'default_foto.png') ? base_url('assets/siswa/img/profile-default-siswa.png') : base_url('storage/siswa/profile/' . $siswa->siswa_foto) ?>" id="imagePreview" alt="<?= ($siswa->siswa_foto == 'default_foto.png') ? 'Foto Profile Siswa' : $siswa->siswa_nama ?>" style="width: 150px; height:150px;">
 					</div>
 					<div class="line">
 						<hr>

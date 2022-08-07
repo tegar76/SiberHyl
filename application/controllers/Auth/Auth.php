@@ -11,7 +11,7 @@ class Auth extends CI_Controller
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('AuthModel', 'auth', true);
 	}
-
+	
 	// message sweetalert 2 flashdata
 	public function message($title = NULL, $text = NULL, $type = NULL)
 	{
@@ -21,7 +21,7 @@ class Auth extends CI_Controller
 			'type' => $type,
 		]);
 	}
-
+	
 	public function index()
 	{
 		checkLoginUser();

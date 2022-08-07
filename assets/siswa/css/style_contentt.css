@@ -127,7 +127,7 @@ margin-left: 0.3rem;
 }
 
 .form-group i {
-    margin-left: -30px;
+    margin-left: -43px;
     margin-top: 10px;
     cursor: pointer;
     position: relative;
@@ -1267,13 +1267,13 @@ margin-left: 0.3rem;
     color: #646464;
   }
 
-  .balas a {
+  .balas{
     font-size: 13px;
-    color: #2989A8;
+    color: #2989A8 !important;
   }
 
-  .balas a:hover {
-    color: #467585;
+  .balas:hover {
+    color: #467585 !important;
   }
 
   html {
@@ -1441,6 +1441,10 @@ margin-left: 0.3rem;
     .judul {
       color: #6b6b6b;
       font-size: 15px;
+    }
+
+    .button-action a:hover {
+      color: #ffffff !important;
     }
 
     .info hr {

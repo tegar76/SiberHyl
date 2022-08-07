@@ -8,9 +8,9 @@
 				<div class="card shadow py-4">
 					<div class="img-photo justify-content-center">
 						<?php if ($siswa->siswa_foto == 'default_foto.png') : ?>
-							<img class="mx-auto d-block rounded-circle" src="<?= base_url('assets/siswa/img/profile-default-siswa.png') ?>" width="150" alt="Foto prifile siswa">
+							<img class="mx-auto d-block rounded-circle" src="<?= base_url('assets/siswa/img/profile-default-siswa.png') ?>" alt="Foto prifile siswa" style="width:150px; height:150px;">
 						<?php else : ?>
-							<img class="mx-auto d-block rounded-circle" src="<?= base_url('storage/siswa/profile/' . $siswa->siswa_foto) ?>" width="150" alt="<?= $siswa->siswa_nama ?>">
+							<img class="mx-auto d-block rounded-circle" src="<?= base_url('storage/siswa/profile/' . $siswa->siswa_foto) ?>" alt="<?= $siswa->siswa_nama ?>" style="width:150px; height:150px;">
 						<?php endif ?>
 					</div>
 					<div class="line">
