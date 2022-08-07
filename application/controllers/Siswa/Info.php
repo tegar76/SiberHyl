@@ -19,6 +19,7 @@ class Info extends CI_Controller
 			'kode_jurusan' => 'all',
 			'kelas_id' => 0
 		]);
+		$result = array();
 		if ($infoAll) {
 			foreach ($infoAll as $row) {
 				$val['id'] = $row->info_id;
