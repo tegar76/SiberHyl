@@ -1,7 +1,7 @@
 <!-- import style -->
 <?php include APPPATH . '../assets/siswa/css/import_style_content.php'; ?>
 
-<section class="container section section__height mt-n3" id="about">
+<section class="container section section__height mt-3" id="about">
 	<div class="info pb-5">
 		<div class="row">
 			<?php if ($info) : ?>
