@@ -29,7 +29,7 @@
 
 				<li class="nav__item">
 					<a href="<?= base_url('siswa/konsultasi') ?>" class="nav__link <?= ($this->uri->segment(2) == "konsultasi") ? 'active-link' : '' ?>">
-						<span class="badge-konsul"></span>
+						<!-- <span class="badge-konsul"></span> -->
 						<i class='bx bx-message-rounded-detail nav__icon <?= ($this->uri->segment(2) == "konsultasi") ? 'active-link' : '' ?>'></i>
 						<span class="nav__name">Konsultasi</span>
 					</a>

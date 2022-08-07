@@ -1267,12 +1267,12 @@ margin-left: 0.3rem;
     color: #646464;
   }
 
-  .balas a {
+  .balas{
     font-size: 13px;
     color: #2989A8;
   }
 
-  .balas a:hover {
+  .balas:hover {
     color: #467585;
   }
 

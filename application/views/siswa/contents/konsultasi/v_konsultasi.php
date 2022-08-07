@@ -31,7 +31,7 @@
 														<div class="text-xs ml-2">
 															Komentar
 															<button class="border-0 rounded ml-1 mr-2 px-2"><?= $row['reply'] ?></button>
-															<span class="badge-info-ds"></span>
+															<!-- <span class="badge-info-ds"></span> -->
 														</div>
 													</div>
 												</div>
@@ -77,9 +77,9 @@
 		<?php else : ?>
 			<!-- FALSE -->
 			<div class="alert alert-info" role="alert">
-				<h4 class="alert-heading">Belum Ada Forum Diskusi</h4>
+				<h6 class="alert-heading">Belum Ada Forum Konsultasi</h6>
 				<hr>
-				<p class="mb-0">Silahkan buat forum diskusi baru dengan klik tombol tambah diskusi</p>
+				<p class="mb-0">Silahkan buat forum konsultasi baru dengan klik tombol tambah konsultasi</p>
 			</div>
 		<?php endif ?>
 	</div>
