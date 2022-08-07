@@ -6,6 +6,7 @@ class InfoAkademik extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		isGuruLogin();
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('MasterModel', 'master', true);
 		$this->userGuru = $this->guru->getWhere(['guru_nip' => $this->session->userdata('nip')]);
@@ -23,10 +24,10 @@ class InfoAkademik extends CI_Controller
 	public function file_view($slug = false)
 	{
 		$infoAkademik = $this->db->get_where('infoakademik', ['slug_judul' => $slug])->row();
-		if($slug && $infoAkademik) {
+		if ($slug && $infoAkademik) {
 			$pdf = FCPATH . './storage/info/' . $infoAkademik->file_info;
-			if(file_exists($pdf)) {
-				$data['pdf'] =base_url('storage/info/') . $infoAkademik->file_info;
+			if (file_exists($pdf)) {
+				$data['pdf'] = base_url('storage/info/') . $infoAkademik->file_info;
 				$this->load->view('pdf_viewer/pdf_viewer', $data);
 			} else {
 				show_404();

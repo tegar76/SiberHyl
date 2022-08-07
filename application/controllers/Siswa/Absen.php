@@ -6,8 +6,8 @@ class Absen extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('SiswaModel', 'siswa', true);
 		isSiswaLogin();
+		$this->load->model('SiswaModel', 'siswa', true);
 		$days = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
 		$this->today = $days[(int)date('w')];
 		$this->datenow = date('Y-m-d');
@@ -59,7 +59,9 @@ class Absen extends CI_Controller
 						'jurnal_id' => $infoAbsensi->jurnal_id
 					]);
 
-					if (strtotime($timeNow) >= strtotime($infoAbsensi->absen_selesai)) {
+					if ($infoAbsensi->absen_mulai == '00:00:00' && $infoAbsensi->absen_selesai == '00:00:00') {
+						$absensi['status'] = '<span class="text-danger">Waktu absensi belum dimulai</span>';
+					} elseif (strtotime($timeNow) >= strtotime($infoAbsensi->absen_selesai)) {
 						$absensi['status'] = '<span class="text-danger">Absen Sudah Ditutup</span>';
 					} else {
 						if (empty($absenSiswa)) {
@@ -73,10 +75,10 @@ class Absen extends CI_Controller
 					$absensi['jadwalID'] = $infoAbsensi->jadwal_id;
 					$absensi['kelas'] = $siswa->nama_kelas;
 					$absensi['mapel'] = $infoAbsensi->nama_mapel;
-					$absensi['tanggal'] = '-';
-					$absensi['dibuka'] = '-';
-					$absensi['ditutup'] = '-';
-					$absensi['pertemuan'] = '-';
+					$absensi['tanggal'] = date('d-m-Y', strtotime($infoAbsensi->tanggal));
+					$absensi['dibuka'] = ($infoAbsensi->absen_mulai != '00:00:00') ? date('H:i', strtotime($infoAbsensi->absen_mulai)) . " WIB" : '-';
+					$absensi['ditutup'] =  ($infoAbsensi->absen_selesai != '00:00:00') ? date('H:i', strtotime($infoAbsensi->absen_selesai)) . " WIB" : '-';
+					$absensi['pertemuan'] =  $infoAbsensi->pertemuan;
 					$absensi['status'] = '<span class="text-danger">Belum Dimulai</span>';
 				}
 

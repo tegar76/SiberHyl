@@ -247,7 +247,7 @@ class SuperVisor extends CI_Controller
 
 					$tugasx['file_tugas'] = '-';
 					if ($tugasSiswa->file_tugas_siswa) {
-						$tugasx['file_tugas'] = '<a target="_blank" href="' . base_url('master/super-visor/file_tugas_siswa/'. $type . '/'. $tugasSiswa->file_tugas_siswa) . '"><img src="' . $icon_tugas . '" alt=""></a>';
+						$tugasx['file_tugas'] = '<a target="_blank" href="' . base_url('master/super-visor/file_tugas_siswa/' . $type . '/' . $tugasSiswa->file_tugas_siswa) . '"><img src="' . $icon_tugas . '" alt=""></a>';
 					}
 					$tugasx['komentar_guru'] = $tugasSiswa->komentar;
 					$tugasx['nilai_tugas'] = $tugasSiswa->nilai_tugas;
@@ -276,11 +276,11 @@ class SuperVisor extends CI_Controller
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
 	}
 
-	public function file_soal_tugas_harian($file = null) 
+	public function file_soal_tugas_harian($file = null)
 	{
 		if ($file) {
 			$check = FCPATH . './storage/guru/tugas_harian/' . $file;
-			if(file_exists($check)) {
+			if (file_exists($check)) {
 				$data['pdf'] = base_url('storage/guru/tugas_harian/') . $file;
 				$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
 			} else {
@@ -292,10 +292,10 @@ class SuperVisor extends CI_Controller
 	}
 	public function file_tugas_siswa($type = null, $file = null)
 	{
-		if($type && $file) {
+		if ($type == 'pdf' || $type == 'img' && $file) {
 			$check = FCPATH . './storage/siswa/tugas_harian/' . $file;
-			if(file_exists($check)) {
-				if($type == 'pdf') {
+			if (file_exists($check)) {
+				if ($type == 'pdf') {
 					$data['pdf'] = base_url('storage/siswa/tugas_harian/') . $file;
 					$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
 				} elseif ($type == 'img') {
@@ -343,12 +343,13 @@ class SuperVisor extends CI_Controller
 
 	public function detail_evaluasi($id)
 	{
+		$hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
 		$evaluasi = $this->master->evaluasiDetail($id);
 		if ($id and $evaluasi) {
 			$siswa = $this->master->getSiswaKelas($evaluasi->kelas_id);
 			$no = 1;
 			foreach ($siswa as $row => $value) {
-				$eval_ = $this->db->get_where('evaluasi_siswa', [
+				$eval_ = $this->db->get_where('evaluasisiswa', [
 					'siswa_nis' => $value->siswa_nis,
 					'evaluasi_id' => $evaluasi->evaluasi_id,
 				])->row();
@@ -410,6 +411,7 @@ class SuperVisor extends CI_Controller
 			$data['sn'] = $sn;
 			$data['bm'] = $bm;
 			$data['evaluasi'] = $evaluasi;
+			$data['hariEval'] = $hari[(int)date('w', strtotime($evaluasi->tanggal))];
 			$data['jadwal'] = $this->master->getInfoJadwal($evaluasi->jadwal_id);
 			$data['title'] = 'Detail Evaluasi';
 			$data['content'] = 'admin/contents/super_visor/v_detail_evaluasi';
@@ -424,7 +426,7 @@ class SuperVisor extends CI_Controller
 	{
 		if ($file) {
 			$check = FCPATH . './storage/guru/evaluasi/' . $file;
-			if(file_exists($check)) {
+			if (file_exists($check)) {
 				$data['pdf'] = base_url('storage/guru/evaluasi/') . $file;
 				$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
 			} else {
@@ -437,10 +439,10 @@ class SuperVisor extends CI_Controller
 
 	public function file_evaluasi_siswa($type = null, $file = null)
 	{
-		if($type && $file) {
+		if ($type && $file) {
 			$check = FCPATH . './storage/siswa/evaluasi/' . $file;
-			if(file_exists($check)) {
-				if($type == 'pdf') {
+			if (file_exists($check)) {
+				if ($type == 'pdf') {
 					$data['pdf'] = base_url('storage/siswa/evaluasi/') . $file;
 					$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
 				} elseif ($type == 'img') {
@@ -573,7 +575,7 @@ class SuperVisor extends CI_Controller
 				$foto = base_url('assets/siswa/img/profile.png');
 				$nama = $siswa->siswa_nama;
 			} else {
-				$foto = base_url('storage/guru/profile/' . $siswa->siswa_foto);
+				$foto = base_url('storage/siswa/profile/' . $siswa->siswa_foto);
 				$nama = $siswa->siswa_nama;
 			}
 		} elseif ($guru) {

@@ -6,6 +6,7 @@ class Profile extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		isGuruLogin();
 		$this->load->model('GuruModel', 'guru', true);
 		$this->userGuru = $this->guru->getWhere(['guru_nip' => $this->session->userdata('nip')]);
 	}
@@ -13,7 +14,6 @@ class Profile extends CI_Controller
 	public function index()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = '';
 		$data['title'] = 'Profile Guru ' . $this->userGuru->guru_nama;
 		$data['content'] = 'guru/contents/profile/v_profile';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -22,7 +22,6 @@ class Profile extends CI_Controller
 	public function update_profile()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = '';
 		$data['title'] = 'Edit Profile Guru ' . $this->userGuru->guru_nama;
 		$data['content'] = 'guru/contents/profile/v_edit_profile';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
@@ -57,7 +56,6 @@ class Profile extends CI_Controller
 	public function update_password()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = '';
 		$this->form_validation->set_rules('old_pass', 'Password Lama', 'callback_password_check');
 		$this->form_validation->set_rules([
 			[

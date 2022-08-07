@@ -9,6 +9,7 @@ class Docs extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		isGuruLogin();
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->userGuru = $this->guru->getWhere(['guru_nip' => $this->session->userdata('nip')]);
@@ -206,19 +207,19 @@ class Docs extends CI_Controller
 	}
 
 	public function formCetakReportJurnalMateri()
-    {
-        $data['guru'] = $this->userGuru;
-        $data['notif'] = '';
+	{
+		$data['guru'] = $this->userGuru;
+		$data['notif'] = '';
 
-        $data['title'] = 'Detail Jurnal Materi';
-        $data['content'] = 'guru/contents/pembelajaran/v_form_cetak_report_jurnal_materi';
+		$data['title'] = 'Detail Jurnal Materi';
+		$data['content'] = 'guru/contents/pembelajaran/v_form_cetak_report_jurnal_materi';
 
-        $this->load->view('guru/layout/wrapper', $data, false);
-    }
+		$this->load->view('guru/layout/wrapper', $data, false);
+	}
 
-    public function cetakReportJurnalMateri()
-    {
-        $data['title'] = 'Cetak Reporting Jurnal Materi';
-        $this->load->view('guru/contents/pembelajaran/v_cetak_report_	jurnal_materi', $data, false);
-    }
+	public function cetakReportJurnalMateri()
+	{
+		$data['title'] = 'Cetak Reporting Jurnal Materi';
+		$this->load->view('guru/contents/pembelajaran/v_cetak_report_	jurnal_materi', $data, false);
+	}
 }

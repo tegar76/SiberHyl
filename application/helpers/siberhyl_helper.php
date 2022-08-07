@@ -41,9 +41,12 @@ function checkAdminLogin()
 {
 	$CI = &get_instance();
 	$CI->load->model('GuruModel', 'guru', true);
-	$admin = $CI->guru->getWhere(['guru_id' => $CI->session->userdata('adminId')]);
+	$admin = $CI->guru->getWhere([
+		'username' => $CI->session->userdata('username'),
+		'role_id' => 1
+	]);
 	if (empty($admin)) {
-		return redirect('authadmin');
+		return redirect('admin/login');
 	}
 }
 
@@ -55,27 +58,16 @@ function isAdmin()
 	}
 }
 
-// untuk menampilkan icon notifikasi informasi akademik
-function check_new_info()
-{
-	$CI = &get_instance();
-	$CI->load->model('JadwalModel', 'jadwal', true);
-	$new_info = $CI->jadwal->get_new_info()->row();
-	$date = date('Y-m-d H:i:s');
-	if (strtotime($new_info->date) < strtotime($date)) {
-		$notif = '<span class="badge-info-ak"></span>';
-	} else {
-		$notif = '';
-	}
-	return $notif;
-}
 
 function isGuruLogin()
 {
 	$CI = &get_instance();
 	$CI->load->model('GuruModel', 'guru', true);
 	$nipGuru = $CI->session->userdata('nip');
-	$userGuru = $CI->guru->getWhere(['guru_nip' => $nipGuru]);
+	$userGuru = $CI->guru->getWhere([
+		'guru_nip' => $nipGuru,
+		'role_id' => 2
+	]);
 
 	if (!$CI->session->userdata('logged_in')) {
 		return redirect('login');
@@ -83,4 +75,8 @@ function isGuruLogin()
 		$CI->session->sess_destroy();
 		return redirect('login');
 	}
+}
+
+function isWaliKelasLogin()
+{
 }

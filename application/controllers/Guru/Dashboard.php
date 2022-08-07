@@ -6,6 +6,7 @@ class Dashboard extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		isGuruLogin();
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('MasterModel', 'master', true);
@@ -48,7 +49,6 @@ class Dashboard extends CI_Controller
 			$data['jadwal'] = $jadwalGuru;
 		}
 		$data['guru'] = $guru;
-		$data['notif'] = '';
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$data['surat'] = $this->guru->getPengajuanSurat($guru->guru_nip, 8);
 		$data['title'] = 'Dashboard Guru';

@@ -201,7 +201,7 @@ class Tugas extends CI_Controller
 	{
 		if ($soal) {
 			$check = FCPATH . './storage/guru/tugas_harian/' . $soal;
-			if(file_exists($check)) {
+			if (file_exists($check)) {
 				$data['pdf'] = base_url('storage/guru/tugas_harian/') . $soal;
 				$this->load->view('pdf_viewer/pdf_viewer', $data, FALSE);
 			} else {
@@ -214,10 +214,10 @@ class Tugas extends CI_Controller
 
 	public function file_tugas($id = false)
 	{
-		if ($id) {
-			$tugas = $this->db->get_where('tugas_siswa', ['file_tugas_siswa' => $id])->row();
+		$tugas = $this->db->get_where('tugassiswa', ['file_tugas_siswa' => $id])->row();
+		if ($id && $tugas) {
 			$check = FCPATH . './storage/siswa/tugas_harian/' . $tugas->file_tugas_siswa;
-			if ($tugas && $check) {
+			if ($tugas && file_exists($check)) {
 				if ($tugas->file_type == '.pdf') {
 					$data['title'] = 'Jawaban Tugas';
 					$data['pdf'] = base_url('storage/siswa/tugas_harian/') . $tugas->file_tugas_siswa;
@@ -225,14 +225,13 @@ class Tugas extends CI_Controller
 				} else {
 					$data['alt'] = 'Tugas Siswa';
 					$data['img'] = base_url('storage/siswa/tugas_harian/') .  $tugas->file_tugas_siswa;
-					$this->load->view('image_viewer/image_viewer', $data);
+					$this->load->view('img_viewer/img_viewer', $data);
 				}
 			} else {
 				show_404();
 			}
 		} else {
-			$data['content'] = 'siswa/contents/errors/404_notfound';
-			$this->load->view('siswa/layout/wrapper', $data, FALSE);
+			show_404();
 		}
 	}
 

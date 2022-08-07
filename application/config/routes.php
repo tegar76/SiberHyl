@@ -50,15 +50,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'home';
-$route['404_override'] = 'e
-rror404';
+$route['404_override'] = 'Error404';
 $route['translate_uri_dashes'] = FALSE;
 
 /*
 	custom route
 */
 
-$route['login'] = 'Auth/Auth/login';
+$route['login'] = 'Auth/Auth';
 $route['auth/logout'] = 'Auth/Auth/logout';
 
 // routing siswa
@@ -113,8 +112,8 @@ $route['siswa/surat/(:any)/(:any)'] = 'Siswa/Surat/$1/$2';
 $route['wali-kelas/dashboard'] = 'WaliKelas/Dashboard/index';
 
 // routing admin
-$route['authadmin'] = 'Admin/Login';
-$route['authadmin/logout'] = 'Admin/Login/logout';
+$route['admin/login'] = 'Auth/AuthAdmin';
+$route['admin/logout'] = 'Auth/AuthAdmin/logout';
 
 $route['master/dashboard'] = 'Admin/Dashboard';
 $route['master/dashboard/(:any)'] = 'Admin/Dashboard/$1';

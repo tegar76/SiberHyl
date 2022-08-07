@@ -7,6 +7,7 @@ class Auth extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		checkLoginUser();
 		$this->load->model('SiswaModel', 'siswa', true);
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('AuthModel', 'auth', true);
@@ -24,12 +25,6 @@ class Auth extends CI_Controller
 
 	public function index()
 	{
-		show_404();
-	}
-
-	public function login()
-	{
-		checkLoginUser();
 		$this->form_validation->set_rules([
 			[
 				'field' => 'username',
@@ -72,6 +67,7 @@ class Auth extends CI_Controller
 		$data = $this->input->post();
 		$siswa = $this->siswa->getWhere(['siswa_nis' => $data['username']]);
 		$guru  = $this->guru->getWhere(['username' => $data['username']]);
+		$data['title'] = 'Masuk Akun';
 		if ($siswa) {
 			if (password_verify($data['password'], $siswa->siswa_pass)) {
 				if ($data['hak_akses'] != 'siswa') {
@@ -97,7 +93,7 @@ class Auth extends CI_Controller
 			}
 		} elseif ($guru) {
 			if (password_verify($data['password'], $guru->password)) {
-				if ($data['hak_akses'] == 'guru') {
+				if ($guru->role_id == 2 && $data['hak_akses'] == 'guru') {
 					$sess_ = [
 						'fullName' => $guru->guru_nama,
 						'nip' => $guru->guru_nip,
@@ -112,7 +108,7 @@ class Auth extends CI_Controller
 					$this->guru->updateWhere(['status_online' => 'online'], $guru->guru_nip);
 					$this->message('Selamat Datang ' . $guru->guru_nama . ' ! ', 'Semoga hari anda menyenangkan :)', 'success');
 					redirect('guru/dashboard');
-				} elseif ($data['hak_akses'] == 'wali-kelas') {
+				} elseif ($guru->role_id == 2 && $data['hak_akses'] == 'wali-kelas') {
 					$sess_ = [
 						'fullName' => $guru->guru_nama,
 						'nip' 	=> $guru->guru_nip,
@@ -129,17 +125,14 @@ class Auth extends CI_Controller
 					redirect('wali-kelas/dashboard');
 				} else {
 					$this->session->set_flashdata('message', 'Pengisian akun tidak sesuai ,silahkan cek kembali');
-					$data['title'] = 'Masuk Akun';
 					$this->load->view('auth/v_auth', $data, FALSE);
 				}
 			} else {
 				$this->session->set_flashdata('message', 'password salah');
-				$data['title'] = 'Masuk Akun';
 				$this->load->view('auth/v_auth', $data, FALSE);
 			}
 		} else {
 			$this->session->set_flashdata('message', 'username & password tidak tersedia');
-			$data['title'] = 'Masuk Akun';
 			$this->load->view('auth/v_auth', $data, FALSE);
 		}
 	}
@@ -178,3 +171,6 @@ class Auth extends CI_Controller
 		echo json_encode($reponse);
 	}
 }
+
+/* End of file Auth.php */
+/* Location: ./application/controllers/Auth/Auth.php */

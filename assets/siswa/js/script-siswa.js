@@ -76,6 +76,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+	$("#nilai_tugas").DataTable();
 	var csrfName = $(".csrf_token").attr("name");
 	var csrfHash = $(".csrf_token").val();
 	var jadwal_id = $(".jadwal-id").val();
@@ -292,5 +293,56 @@ $(document).ready(function () {
 	$("#guru_pengajar").select2({
 		placeholder: "Pilih Guru",
 		// minimumResultsForSearch: -1,
+	});
+});
+
+$(document).ready(function () {
+	load_comment();
+	$("#submit-konsultasi").submit(function (e) {
+		e.preventDefault();
+		var form = this;
+		var formdata = new FormData(form);
+		$.ajax({
+			url: BASEURL + "siswa/konsultasi/submit_konsultasi",
+			type: "POST",
+			processData: false,
+			contentType: false,
+			data: formdata,
+			dataType: "json",
+			success: function (response) {
+				if (response.success == true) {
+					$("#konsultasi_id").val("0");
+					load_comment();
+					form.reset();
+				}
+			},
+			error: function () {
+				swal.fire(
+					"Penambahan Komentar Gagal",
+					"Ada Kesalahan Saat penambahan Komentar!",
+					"error"
+				);
+			},
+		});
+	});
+
+	function load_comment() {
+		var id_forum = $("#id_forum").val();
+		$.ajax({
+			type: "GET",
+			url: BASEURL + "siswa/konsultasi/get_komentar?id=" + id_forum,
+			dataType: "json",
+			success: function (reponse) {
+				$("#display_konsultasi").html(reponse);
+			},
+			error: function (reponse) {
+				console.log(reponse.responseText);
+			},
+		});
+	}
+	$(document).on("click", ".balas", function (e) {
+		var id_forum = $(e.target).attr("id-komen");
+		$("#konsultasi_id").val(id_forum);
+		$("#text-message-konsultasi").focus();
 	});
 });

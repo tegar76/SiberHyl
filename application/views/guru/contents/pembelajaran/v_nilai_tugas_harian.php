@@ -63,9 +63,9 @@
 								<div class="input-group mb-3">
 									<?php if ($result['metode'] == 'online') : ?>
 										<?php if ($result['file_ext'] == '.pdf') : ?>
-											<a target="_blank" href="<?= base_url('guru/pembelajaran/file_tugas_siswa/' . $result['id']) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a>
+											<a target="_blank" href="<?= base_url('guru/pembelajaran/file_tugas_siswa/pdf/' . $result['file']) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a>
 										<?php else : ?>
-											<a target="_blank" href="<?= base_url('guru/pembelajaran/file_tugas_siswa/' . $result['id']) ?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a>
+											<a target="_blank" href="<?= base_url('guru/pembelajaran/file_tugas_siswa/img/' . $result['file']) ?>"><img src="<?= base_url('assets/admin/icons/img.png') ?>" alt=""></a>
 										<?php endif ?>
 									<?php elseif ($result['metode'] == 'langsung') : ?>
 										<div class="h6 text-secondary opacity-7">Pengumpulan secara langsung</div>

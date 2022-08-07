@@ -126,21 +126,7 @@
 	</div><!-- /.job-tab -->
 	</div>
 
-	<!-- Modals Confirm button -->
-	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="confirm-modal">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close ml-n2 mr-1" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h6 class="modal-title text-secondary" id="myModalLabel">Apakah tugas sudah di serahkan ke guru pengajar ?</h6>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-success" id="modal-btn-sudah">Sudah</button>
-					<button type="button" class="btn btn-secondary" id="modal-btn-belum">Belum</button>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 	<script>
 		// Modal Confirm

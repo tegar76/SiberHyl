@@ -52,13 +52,13 @@
 				<div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
 					<div class="panel border bg-white">
 						<div class="panel-body p-3">
-							<?= form_open('authadmin') ?>
+							<?= form_open('admin/login') ?>
 							<div class="logo d-flex justify-content-center mb-3">
 								<img src="<?= base_url('assets/logo/logo-big.png') ?>" alt="logo">
 							</div>
 							<hr>
 							<div class="title-form text-center mb-2">ADMIN</div>
-							
+
 							<?php if ($this->session->flashdata('message')) : ?>
 								<div class="alert alert-warning alert-login" role="alert">
 									<?= $this->session->flashdata('message') ?>
@@ -89,12 +89,12 @@
 
 				</div>
 
-				
-				
+
+
 			</div>
 		</div>
 
-		
+
 
 		<script>
 			// Show Toggle Password

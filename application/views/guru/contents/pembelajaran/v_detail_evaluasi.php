@@ -120,7 +120,7 @@
 								<tbody>
 									<tr>
 										<td>1</td>
-										<td><?= $detail->hari . ', ' . date('d-m-Y', strtotime($detail->tanggal)) ?></td>
+										<td><?= $hariEval . ', ' . date('d-m-Y', strtotime($detail->tanggal)) ?></td>
 										<td><?= $detail->nama_mapel ?></td>
 										<td><?= $detail->evaluasi_ke ?></td>
 										<td><?= $detail->judul ?></td>

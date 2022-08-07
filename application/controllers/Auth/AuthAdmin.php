@@ -1,8 +1,11 @@
 <?php
 
-class Login extends CI_Controller
-{
+/*
+ * File ini adalah Controller untuk autentifikasi dari Admin.
+*/
 
+class AuthAdmin extends CI_Controller
+{
 	public function __construct()
 	{
 		parent::__construct();
@@ -25,7 +28,7 @@ class Login extends CI_Controller
 				redirect('master/dashboard');
 			} else {
 				$this->session->unset_userdata('backToken');
-				redirect('authadmin/logout');
+				redirect('admin/logout');
 			}
 		}
 	}
@@ -66,6 +69,7 @@ class Login extends CI_Controller
 	{
 		$data 	= $this->input->post();
 		$admin  = $this->auth->getAdminByUsername($data['username']);
+		$data['title'] = 'Masuk Sebagai Admin';
 		if ($admin) {
 			if (password_verify($data['password'], $admin->password)) {
 				if ($admin->role_id === '1') {
@@ -83,17 +87,14 @@ class Login extends CI_Controller
 					redirect('master/dashboard');
 				} else {
 					$this->session->set_flashdata('message', 'Hak akses Anda tidak tersedia untuk masuk kedalam sistem Admin!');
-					$data['title'] = 'Masuk Sebagai Admin';
 					$this->load->view('admin/login/v_login');
 				}
 			} else {
 				$this->session->set_flashdata('message', 'password salah');
-				$data['title'] = 'Masuk Sebagai Ad Admin';
 				$this->load->view('admin/login/v_login');
 			}
 		} else {
 			$this->session->set_flashdata('message', 'username & password tidak tersedia');
-			$data['title'] = 'Masuk Sebagai Ad Admin';
 			$this->load->view('admin/login/v_login');
 		}
 	}
@@ -111,3 +112,6 @@ class Login extends CI_Controller
 		echo json_encode($reponse);
 	}
 }
+
+/* End of file AuthAdmin.php */
+/* Location: ./application/models/AuthAmin.php */

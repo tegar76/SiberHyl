@@ -378,8 +378,10 @@ class MasterModel extends CI_Model
 			guru.guru_kode, 
 			guru.guru_nama,
 			kelas.kelas_id,
+			kelas.index_kelas,
 			kelas.kode_kelas,
 			kelas.nama_kelas,
+			mapel.mapel_id,
 			mapel.nama_mapel,
 			jadwal.jadwal_id
 		");
@@ -533,14 +535,14 @@ class MasterModel extends CI_Model
 			$this->db->where_in('status', [2, 4]);
 		}
 		$this->db->where('evaluasi_id', $id);
-		$query = $this->db->get('evaluasi_siswa');
+		$query = $this->db->get('evaluasisiswa');
 		return $query->num_rows();
 	}
 
 	public function nilaiEvaluasiSiswa($id)
 	{
 		$this->db->select('
-			evaluasi.evaluasi_siswa_id as id,
+			evaluasi.evaluasi_insertDiskusi as id,
 			evaluasi.time_upload,
 			evaluasi.metode,
 			evaluasi.file_evaluasi_siswa as file,
@@ -553,7 +555,7 @@ class MasterModel extends CI_Model
 			siswa.siswa_nama,
 			siswa.siswa_nis
 		');
-		$this->db->from('evaluasi_siswa as evaluasi');
+		$this->db->from('evaluasisiswa as evaluasi');
 		$this->db->join('siswa', 'siswa.siswa_nis=evaluasi_siswa.siswa_nis');
 		$this->db->where('evaluasi_siswa_id', $id);
 		return $this->db->get()->row();
@@ -583,7 +585,7 @@ class MasterModel extends CI_Model
 
 	public function getUserSiswa($id)
 	{
-		$this->db->select('siswa.siswa_id, siswa.siswa_nama, siswa.siswa_nis, siswa.siswa_foto');
+		$this->db->select('siswa.siswa_nama, siswa.siswa_nis, siswa.siswa_foto');
 		$this->db->from('siswa');
 		$this->db->where('siswa.siswa_nis', $id);
 		$query = $this->db->get();
@@ -690,7 +692,6 @@ class MasterModel extends CI_Model
 	public function getDataSiswaExport($id)
 	{
 		$this->db->select("
-			siswa_id as id,
 			siswa_nis as nis,
 			siswa_nama as nama
 		");

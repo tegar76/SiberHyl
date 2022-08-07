@@ -55,18 +55,10 @@
 					<!-- ============================================================== -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-							<span class="ml-2 d-none d-lg-inline-block"><span>Selamat Datang,</span> <span class="text-dark mr-1"><?= $this->session->userdata('fullName') ?></span>
-								<img src="<?= ($guru->guru_foto == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $guru->guru_foto) ?>" alt="user" class="rounded-circle" width="40">
+							<span class="ml-2 d-none d-lg-inline-block"><span>Selamat Datang,</span>
+								<span class="text-dark mr-1"><?= $this->session->userdata('fullName') ?></span>
+								<img src="<?= ($guru->profile == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $guru->profile) ?>" alt="user" class="rounded-circle" width="40">
 						</a>
-						<div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-							<a class="dropdown-item" href="<?= base_url('wali-kelas/profile') ?>"><i data-feather="user" class="svg-icon mr-2 ml-1"></i>
-								Profil</a>
-							<a class="dropdown-item" href="<?= base_url('wali-kelas/profile/update_password') ?>"><i data-feather="key" class="svg-icon mr-2 ml-1"></i>
-								Edit Password</a>
-							<hr>
-							<a class="dropdown-item" id="logout-wali-kelas" href="javascript:void(0)"><i data-feather="power" class="svg-icon mr-2 ml-1"></i>
-								Logout</a>
 					</li>
 					<!-- ============================================================== -->
 					<!-- User profile and search -->

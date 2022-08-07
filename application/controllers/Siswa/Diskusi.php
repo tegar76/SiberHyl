@@ -6,7 +6,7 @@ class Diskusi extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		isSiswaLogin(); 
+		isSiswaLogin();
 		$this->load->model('MasterModel', 'master', true);
 		$this->load->model('SiswaModel', 'siswa', true);
 		$this->datenow = date('Y-m-d');
@@ -58,6 +58,7 @@ class Diskusi extends CI_Controller
 
 	public function tambah_diskusi($id = false)
 	{
+		$data['siswa'] = $this->userSiswa;
 		if ($id) {
 			$id = $this->secure->decrypt_url($id);
 			$data['info'] = $this->master->getInfoJadwal($id);
@@ -97,7 +98,6 @@ class Diskusi extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'siswa/contents/errors/404_notfound';
 		}
-		$data['siswa'] = $this->userSiswa;
 		$this->load->view('siswa/layout/wrapper', $data, FALSE);
 	}
 
@@ -222,7 +222,7 @@ class Diskusi extends CI_Controller
 				$foto = base_url('assets/siswa/img/profile.png');
 				$nama = $siswa->siswa_nama;
 			} else {
-				$foto = base_url('storage/guru/profile/' . $siswa->siswa_foto);
+				$foto = base_url('storage/siswa/profile/' . $siswa->siswa_foto);
 				$nama = $siswa->siswa_nama;
 			}
 		} elseif ($guru) {

@@ -405,14 +405,14 @@ class GuruModel extends CI_Model
 			$this->db->where_in('status', [2, 4]);
 		}
 		$this->db->where('evaluasi_id', $id);
-		$query = $this->db->get('evaluasi_siswa');
+		$query = $this->db->get('evaluasisiswa');
 		return $query->num_rows();
 	}
 
 	public function get_nilai_evaluasi($id)
 	{
-		$this->db->select('evaluasi_siswa.evaluasi_siswa_id, evaluasi_siswa.time_upload, evaluasi_siswa.metode, evaluasi_siswa.file_evaluasi_siswa, evaluasi_siswa.file_type, evaluasi_siswa.nilai, evaluasi_siswa.komentar, evaluasi_siswa.status, evaluasi_siswa.siswa_nis, evaluasi_siswa.evaluasi_id, siswa.siswa_nama');
-		$this->db->from('evaluasi_siswa');
+		$this->db->select('evaluasisiswa.evaluasi_siswa_id, evaluasisiswa.time_upload, evaluasisiswa.metode, evaluasisiswa.file_evaluasi_siswa, evaluasisiswa.file_type, evaluasisiswa.nilai, evaluasisiswa.komentar, evaluasisiswa.status, evaluasisiswa.siswa_nis, evaluasisiswa.evaluasi_id, siswa.siswa_nama');
+		$this->db->from('evaluasisiswa');
 		$this->db->join('siswa', 'siswa.siswa_nis=evaluasi_siswa.siswa_nis');
 		$this->db->where('evaluasi_siswa_id', $id);
 		$query = $this->db->get();
@@ -551,7 +551,7 @@ class GuruModel extends CI_Model
 		$this->db->join('kelas', 'kelas.kelas_id=siswa.kelas_id');
 		$this->db->where('penerima.guru_nip', $nip);
 		$this->db->order_by('tanggal', 'DESC');
-		if($limit) {
+		if ($limit) {
 			$this->db->limit($limit);
 		}
 		return $this->db->get()->result();
@@ -561,8 +561,8 @@ class GuruModel extends CI_Model
 	{
 		$this->db->select('guru.guru_kode, guru.guru_nama, kelas.kelas_id, kelas.kode_kelas, kelas.nama_kelas, kelas.create_time, kelas.update_time');
 		$this->db->from('kelas');
-		$this->db->join('guru', 'guru.guru_kode=kelas.guru_kode');
-		$this->db->where('kelas.guru_kode', $where);
+		$this->db->join('guru', 'guru.guru_nip=kelas.guru_nip');
+		$this->db->where('kelas.guru_nip', $where);
 		$query = $this->db->get();
 		return $query->row();
 	}

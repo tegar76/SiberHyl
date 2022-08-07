@@ -16,13 +16,13 @@
 </head>
 
 <body>
-    <div class="d-flex align-items-center" style="min-height: 100vh">
-        <div class="box w-100 text-center mx-5">
-            <div class="h4 text-danger">Oops!</div>
-            <div class="h5">404 Not Found</div>
-            <div class="h6 text-muted">Maaf, halaman yang anda minta belum tersedia !</div>
-        </div>
-    </div>
+	<div class="d-flex align-items-center" style="min-height: 100vh">
+		<div class="box w-100 text-center mx-5">
+			<div class="h4 text-danger">Oops!</div>
+			<div class="h5">404 Not Found</div>
+			<div class="h6 text-muted">Maaf, halaman yang anda minta belum tersedia !</div>
+		</div>
+	</div>
 </body>
 
 </html>

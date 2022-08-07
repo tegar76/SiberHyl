@@ -15,7 +15,7 @@ class Profile extends CI_Controller
 	public function index()
 	{
 		$data['siswa'] = $this->siswa;
-		$data['title'] = 'Profile Siswa' . $data['siswa']->siswa_nama;
+		$data['title'] = 'Profile Siswa ' . $data['siswa']->siswa_nama;
 		$data['content'] = 'siswa/contents/profile/v_profile';
 		$this->load->view('siswa/layout/wrapper', $data);
 	}
@@ -23,48 +23,52 @@ class Profile extends CI_Controller
 	public function editProfile()
 	{
 		$data['siswa'] = $this->siswa;
-		if ($data['siswa']->siswa_email == htmlspecialchars($this->input->post('email'))) {
-			$rule_username = 'trim|xss_clean|valid_email';
-		} else {
-			$rule_username = 'trim|xss_clean|valid_email|is_unique[siswa.siswa_email]';
-		}
-		$this->form_validation->set_rules([
-			[
-				'field' => 'email',
-				'label' => 'Email',
-				'rules' => $rule_username,
-				'errors' => [
-					'xss_clean' => 'cek kembali pada {field}',
-					'valid_email' => '{field} yang Anda masukan harus valid',
-					'is_unique' => '{field} telah tersedia, silahkan masukan kembali'
-				]
-			],
-			[
-				'field' => 'telepon',
-				'label' => 'Nomor Telepon',
-				'rules' => 'trim|xss_clean|numeric',
-				'errors' => [
-					'xss_clean' => 'cek kembali pada {field}',
-					'numeric' => '{field} harus berupa angka'
-				]
-			],
-			[
-				'field' => 'alaamt',
-				'label' => 'Alamat',
-				'rules' => 'trim|xss_clean',
-				'errors' => [
-					'xss_clean' => 'cek kembali pada {field}'
-				]
-			]
-		]);
+		$data['title'] = 'Update Profile Siswa ' . $data['siswa']->siswa_nama;
+		$data['content'] = 'siswa/contents/profile/v_edit_profile';
 
-		if ($this->form_validation->run() == false) {
-			$data['title'] = 'Update Profile Siswa' . $data['siswa']->siswa_nama;
-			$data['content'] = 'siswa/contents/profile/v_edit_profile';
-			$this->load->view('siswa/layout/wrapper', $data);
-		} else {
-			$this->process_update();
+		if (isset($_POST['update'])) {
+			if ($data['siswa']->siswa_email == htmlspecialchars($this->input->post('email'))) {
+				$rule_username = 'trim|xss_clean|valid_email';
+			} else {
+				$rule_username = 'trim|xss_clean|valid_email|is_unique[siswa.siswa_email]';
+			}
+			$this->form_validation->set_rules([
+				[
+					'field' => 'email',
+					'label' => 'Email',
+					'rules' => $rule_username,
+					'errors' => [
+						'xss_clean' => 'cek kembali pada {field}',
+						'valid_email' => '{field} yang Anda masukan harus valid',
+						'is_unique' => '{field} telah tersedia, silahkan masukan kembali'
+					]
+				],
+				[
+					'field' => 'telepon',
+					'label' => 'Nomor Telepon',
+					'rules' => 'trim|xss_clean|numeric',
+					'errors' => [
+						'xss_clean' => 'cek kembali pada {field}',
+						'numeric' => '{field} harus berupa angka'
+					]
+				],
+				[
+					'field' => 'alaamt',
+					'label' => 'Alamat',
+					'rules' => 'trim|xss_clean',
+					'errors' => [
+						'xss_clean' => 'cek kembali pada {field}'
+					]
+				]
+			]);
+
+			if ($this->form_validation->run() == false) {
+				$this->load->view('siswa/layout/wrapper', $data);
+			} else {
+				$this->process_update();
+			}
 		}
+		$this->load->view('siswa/layout/wrapper', $data);
 	}
 
 	public function process_update()
@@ -72,6 +76,7 @@ class Profile extends CI_Controller
 		$siswa = $this->siswa;
 		if ($_FILES['image']['name']) {
 			$this->imageConf('siswa');
+			$this->check_storage('profile');
 			if (!$this->upload->do_upload('image')) :
 				$this->message('Oopppsss', $this->upload->display_errors(), 'error');
 				redirect('siswa/profile');
@@ -94,7 +99,7 @@ class Profile extends CI_Controller
 		$this->db->set($updateSiswa);
 		$this->db->where(['siswa_nis' => $siswa->siswa_nis]);
 		$this->db->update('siswa');
-		$this->message('Profile Berhasil Diupdate', 'Selamat' . $siswa->siswa_nama . ', profile anda berhasil diperbarui', 'success');
+		$this->message('Profile Berhasil Diupdate', 'Selamat ' . $siswa->siswa_nama . ', profile anda berhasil diperbarui', 'success');
 		redirect('siswa/profile');
 	}
 
@@ -123,54 +128,47 @@ class Profile extends CI_Controller
 		$this->image_lib->resize();
 	}
 
-	// message sweetalert 2 flashdata
-	public function message($title = NULL, $text = NULL, $type = NULL)
-	{
-		return $this->session->set_flashdata([
-			'title' => $title,
-			'text' => $text,
-			'type' => $type,
-		]);
-	}
-
 	public function editPassword()
 	{
 		$data['siswa'] = $this->siswa;
-		$this->form_validation->set_rules('old_pass', 'Password Lama', 'callback_password_check');
-		$this->form_validation->set_rules([
-			[
-				'field' => 'new_pass',
-				'label' => 'Password Baru',
-				'rules' => 'required|trim|xss_clean|min_length[8]|matches[conf_pass]',
-				'errors' => [
-					'matches' => 'konfirmasi password tidak sama!',
-					'min_length' => '{field} terlalu pendek! (minimal 8 karakter)',
-					'required' => '{field} harus diisi!'
+		$data['title'] = 'Update Password';
+		$data['content'] = 'siswa/contents/profile/v_edit_password';
+		if (isset($_POST['update_pass'])) {
+			$this->form_validation->set_rules('old_pass', 'Password Lama', 'callback_password_check');
+			$this->form_validation->set_rules([
+				[
+					'field' => 'new_pass',
+					'label' => 'Password Baru',
+					'rules' => 'required|trim|xss_clean|min_length[8]|matches[conf_pass]',
+					'errors' => [
+						'matches' => 'konfirmasi password tidak sama!',
+						'min_length' => '{field} terlalu pendek! (minimal 8 karakter)',
+						'required' => '{field} harus diisi!'
+					]
+				],
+				[
+					'field' => 'conf_pass',
+					'label' => 'Konfirmasi Password',
+					'rules' => 'required|trim|xss_clean|min_length[8]|matches[new_pass]',
+					'errors' => [
+						'matches' => 'konfirmasi password tidak sama!',
+						'min_length' => '{field} terlalu pendek! (minimal 8 karakter)',
+						'required' => '{field} harus diisi!'
+					]
 				]
-			],
-			[
-				'field' => 'conf_pass',
-				'label' => 'Konfirmasi Password',
-				'rules' => 'required|trim|xss_clean|min_length[8]|matches[new_pass]',
-				'errors' => [
-					'matches' => 'konfirmasi password tidak sama!',
-					'min_length' => '{field} terlalu pendek! (minimal 8 karakter)',
-					'required' => '{field} harus diisi!'
-				]
-			]
-		]);
-		if ($this->form_validation->run() == false) {
-			$data['title'] = 'Update Password';
-			$data['content'] = 'siswa/contents/profile/v_edit_password';
-			$this->load->view('siswa/layout/wrapper', $data);
-		} else {
-			$newPassword = $this->input->post('new_pass', true);
-			$passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
-			$this->db->where('siswa_nis', $data['siswa']->siswa_nis);
-			$this->db->update('siswa', ['siswa_pass' => $passwordHash]);
-			$this->message('Password Berhasil Diupdate', 'Selamat' .  $data['siswa']->siswa_nama . ', password anda berhasil diperbarui', 'success');
-			redirect('siswa/profile');
+			]);
+			if ($this->form_validation->run() == false) {
+				$this->load->view('siswa/layout/wrapper', $data);
+			} else {
+				$newPassword = $this->input->post('new_pass', true);
+				$passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+				$this->db->where('siswa_nis', $data['siswa']->siswa_nis);
+				$this->db->update('siswa', ['siswa_pass' => $passwordHash]);
+				$this->message('Password Berhasil Diupdate', 'Selamat ' .  $data['siswa']->siswa_nama . ' , password anda berhasil diperbarui', 'success');
+				redirect('siswa/profile');
+			}
 		}
+		$this->load->view('siswa/layout/wrapper', $data);
 	}
 
 
@@ -182,5 +180,36 @@ class Profile extends CI_Controller
 			return false;
 		}
 		return true;
+	}
+
+	public function check_storage($dir)
+	{
+		if (!is_dir('storage')) {
+			mkdir('./storage', 0777, true);
+		}
+
+		$dir_exist = true;
+		if (!is_dir('storage/siswa')) {
+			mkdir('./storage/siswa', 0777, true);
+			$dir_exist = false; // dir not exist
+		}
+
+		if ($dir) {
+			if (!is_dir('storage/siswa/' . $dir)) {
+				mkdir('./storage/siswa/' . $dir, 0777, true);
+				$dir_exist = false; // dir not exist
+			}
+		}
+		return $dir_exist;
+	}
+
+	// message sweetalert 2 flashdata
+	public function message($title = NULL, $text = NULL, $type = NULL)
+	{
+		return $this->session->set_flashdata([
+			'title' => $title,
+			'text' => $text,
+			'type' => $type,
+		]);
 	}
 }

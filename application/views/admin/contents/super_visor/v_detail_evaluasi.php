@@ -123,7 +123,7 @@
 								<tbody>
 									<tr>
 										<td>1</td>
-										<td><?= $evaluasi->hari . ', ' . date('d-m-Y', strtotime($evaluasi->tanggal)) ?></td>
+										<td><?= $hariEval . ', ' . date('d-m-Y', strtotime($evaluasi->tanggal)) ?></td>
 										<td><?= $evaluasi->nama_mapel ?></td>
 										<td><?= $evaluasi->evaluasi_ke ?></td>
 										<td><?= $evaluasi->judul ?></td>

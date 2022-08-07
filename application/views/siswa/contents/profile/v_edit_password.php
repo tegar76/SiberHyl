@@ -43,7 +43,7 @@
 						<?= form_error('conf_pass', '<small class="text-danger">', '</s>') ?>
 					</div>
 					<div class="button-action d-flex mb-3 mt-2">
-						<button type="submit" class="btn btn-sm btn-success mr-2 px-4">Update</button>
+						<button type="submit" name="update_pass" class="btn btn-sm btn-success mr-2 px-4">Update</button>
 						<button type="reset" class="btn btn-sm btn-secondary px-4">Reset</button>
 					</div>
 					<?= form_close() ?>

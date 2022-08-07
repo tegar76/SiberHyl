@@ -5,6 +5,7 @@ class Data extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		isGuruLogin();
 		$this->load->model('MasterModel', 'master', true);
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->load->model('GuruModel', 'guru', true);
@@ -62,7 +63,6 @@ class Data extends CI_Controller
 		$data['title'] = 'Data Siswa';
 		$data['guru'] = $guru;
 		$data['tahun_ajar'] = $this->tahun_ajar;
-		$data['notif'] = '';
 		$data['content'] = 'guru/contents/data/v_data_siswa';
 		$this->load->view('guru/layout/wrapper', $data, FALSE);
 	}
@@ -70,7 +70,6 @@ class Data extends CI_Controller
 	public function detail_siswa()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = '';
 		$nis = $this->input->get('nis');
 		$student = $this->siswa->getWhere(['siswa_nis' => $nis]);
 		if ($student) {
@@ -108,7 +107,6 @@ class Data extends CI_Controller
 	public function detail_materi()
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] = '';
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$user = $this->input->get('user');
 		$id = $this->input->get('id');
@@ -195,7 +193,7 @@ class Data extends CI_Controller
 	public function edit_materi($id)
 	{
 		$data['guru'] = $this->userGuru;
-		$data['notif'] =' check_new_info()';
+		$data['notif'] = ' check_new_info()';
 		$materi = $this->master->getDetailMateriGuru($id);
 		if ($id && $materi) {
 			$data['title'] = 'Edit Data Materi (Guru)';
@@ -434,7 +432,6 @@ class Data extends CI_Controller
 			$this->db->update('materipembelajaran');
 			return redirect('guru/data/edit_materi/' . $materi->detail_id);
 		}
-
 	}
 
 	public function view_materi($id = null, $file = null)
@@ -449,7 +446,7 @@ class Data extends CI_Controller
 				$path_pdf = 'storage/materi/' . $dirKelas . '/' . $materi->jurusan . '/';
 			}
 			$pdf = FCPATH . './' . $path_pdf . $materi->file;
-			if(file_exists($pdf)) {
+			if (file_exists($pdf)) {
 				$data['pdf'] =  base_url($path_pdf . $materi->file);
 				$this->load->view('pdf_viewer/pdf_viewer', $data);
 			} else {
@@ -460,12 +457,12 @@ class Data extends CI_Controller
 		}
 	}
 
-	
-	public function view_materi_guru($file = null) 
+
+	public function view_materi_guru($file = null)
 	{
-		if($file) {
+		if ($file) {
 			$pdf = FCPATH . './storage/guru/materi/' . $file;
-			if(file_exists($pdf)) {
+			if (file_exists($pdf)) {
 				$data['pdf'] = base_url('storage/guru/materi/') . $file;
 				$this->load->view('pdf_viewer/pdf_viewer', $data);
 			} else {

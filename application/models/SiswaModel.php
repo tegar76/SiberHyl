@@ -24,6 +24,7 @@ class SiswaModel extends CI_Model
 		$query	= $this->db->select('*')
 			->from('siswa as siswa')
 			->join('kelas as kelas', 'siswa.kelas_id=kelas.kelas_id')
+			->join('jurusan', 'jurusan.kode_jurusan=kelas.kode_jurusan')
 			->where($params)
 			->order_by('siswa_nama', 'ASC')
 			->get();
@@ -362,11 +363,11 @@ class SiswaModel extends CI_Model
 			tugas.judul_tugas,
 			jadwal.jadwal_id,
 			mapel.nama_mapel,
-			tugas_siswa.tugas_siswa_id,
-			tugas_siswa.file_tugas_siswa
+			tugassiswa.tugas_siswa_id,
+			tugassiswa.file_tugas_siswa
 		");
 		$this->db->from('tugassiswa');
-		$this->db->join('tugasharian as tugas', 'tugas.tugas_id=tugas_siswa.tugas_id');
+		$this->db->join('tugasharian as tugas', 'tugas.tugas_id=tugassiswa.tugas_id');
 		$this->db->join('jadwal', 'jadwal.jadwal_id=tugas.jadwal_id', 'left');
 		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left');
 		$this->db->where('tugas_siswa_id', $id);
@@ -448,7 +449,7 @@ class SiswaModel extends CI_Model
 
 	public function get_evaluasi($jadwalId)
 	{
-		$query = $this->db->where('jadwal_id', $jadwalId)->get('evaluasi');
+		$query = $this->db->where('jadwal_id', $jadwalId)->order_by('evaluasi_ke')->get('evaluasi');
 		return $query->result();
 	}
 
@@ -456,7 +457,7 @@ class SiswaModel extends CI_Model
 	{
 		$this->db->where('siswa_nis', $nis);
 		$this->db->where('evaluasi_id', $id);
-		$query = $this->db->get('evaluasi_siswa');
+		$query = $this->db->get('evaluasisiswa');
 		return $query->row();
 	}
 
@@ -522,7 +523,7 @@ class SiswaModel extends CI_Model
 					'evaluasi_id' => $this->input->post('evaluasi_id', true)
 				);
 				$this->db->set($desc);
-				$this->db->insert('evaluasi_siswa');
+				$this->db->insert('evaluasisiswa');
 			}
 			$result = array(
 				'status' => true,
@@ -540,7 +541,7 @@ class SiswaModel extends CI_Model
 			'deskripsi' => htmlspecialchars($this->input->post('deskripsi', true)),
 			'jadwal_id' => htmlspecialchars($this->input->post('jadwal_id', true)),
 		);
-		$this->db->insert('forum_diskusi', $data);
+		$this->db->insert('forumdiskusi', $data);
 	}
 
 	public function pengajuanSurat($nis)
@@ -562,5 +563,125 @@ class SiswaModel extends CI_Model
 		$this->db->where('ps.surat_id', $id);
 		$query = $this->db->get();
 		return $query->result();
+	}
+
+	public function getInfoAkademik($where)
+	{
+		$this->db->select("*");
+		$this->db->from('infoakademik');
+		$this->db->join('penerimainfo', 'penerimainfo.info_id=infoakademik.info_id');
+		if ($where) $this->db->where($where);
+		$this->db->order_by('create_time', 'DESC');
+		return $this->db->get()->result();
+	}
+
+	public function materiPembelajaranAdmin($where)
+	{
+		$this->db->select("
+			detail.detailmateri_id as id,
+			detail.index_kelas as kelas,
+			detail.create_time as create,
+			detail.update_time as update,
+			detail.status,
+			mapel.nama_mapel as mapel, 
+			jurusan.kode_jurusan as jurusan,
+		");
+		$this->db->from('detailmateri as detail');
+		$this->db->join('mapel', 'mapel.mapel_id=detail.mapel_id', 'left');
+		$this->db->join('jurusan', 'jurusan.jurusan_id=detail.jurusan_id', 'left');
+		$this->db->where('status', 1);
+		$this->db->order_by('detail.create_time', 'DESC');
+		return $this->db->get()->result();
+	}
+
+	public function getMateriAdmin($index = null, $mapel = null, $jurusan = null)
+	{
+		$this->db->select("
+			materi.materi_id, materi.judul, materi.jenis,
+			materi.file_materi as file,
+			materi.file_size as size,
+			materi.create_time as create,
+			detail.detailmateri_id as detail_id,
+		");
+		$this->db->from('materipembelajaran as materi');
+		$this->db->join('detailmateri as detail', 'detail.detailmateri_id=materi.detailmateri_id', 'left');
+		$this->db->where('status', 1);
+		if ($index) {
+			$this->db->or_where('detail.index_kelas', $index);
+		}
+		if ($mapel) {
+			$this->db->where('detail.mapel_id', $mapel);
+		}
+		if ($jurusan) {
+			$this->db->or_where('detail.jurusan_id', $jurusan);
+		}
+
+		return $this->db->get()->result();
+	}
+
+	public function getMateriGuru($jenis, $kelas, $mapel)
+	{
+		$this->db->select("
+			materi.materi_id, materi.judul, materi.jenis,
+			materi.file_materi as file,
+			materi.file_size as size,
+			materi.create_time as create,
+			detail.detailmateri_id as detail_id,
+		");
+		$this->db->from('materipembelajaran as materi');
+		$this->db->join('detailmateri as detail', 'detail.detailmateri_id=materi.detailmateri_id', 'left');
+		$this->db->where('jenis', $jenis);
+		$this->db->where('status', 2);
+		$this->db->where('kelas_id', $kelas);
+		$this->db->where('mapel_id', $mapel);
+		$this->db->order_by('detail.create_time', 'DESC');
+		return $this->db->get()->result();
+	}
+
+	public function getWaliKelas($id)
+	{
+		$this->db->select("
+			guru.guru_nip as nip,
+			guru.guru_kode as kode,
+			guru.guru_nama as wali,
+			kelas.nama_kelas as kelas
+		");
+		$this->db->from("guru");
+		$this->db->join("kelas", "kelas.guru_nip=guru.guru_nip");
+		$this->db->where("kelas_id", $id);
+		return $this->db->get()->row();
+	}
+
+	// Function Konsultasi
+	public function getKonsultasi($id)
+	{
+		$this->db->where('kelas_id', $id);
+		$this->db->order_by('create_time', 'DESC');
+		return $this->db->get('forumdiskusi')->result();
+	}
+
+	public function getReplyForum($id)
+	{
+		$this->db->where('forum_id', $id);
+		$this->db->order_by('create_time', 'DESC');
+		$query = $this->db->get('detaildiskusi');
+		return $query->result();
+	}
+
+	public function detailForum($id)
+	{
+		$this->db->where('forum_id', $id);
+		return $this->db->get('forumdiskusi')->row();
+	}
+
+	public function addKonsultasi()
+	{
+		$data = array(
+			'pembuat' => htmlspecialchars($this->input->post('nama_siswa', true)),
+			'judul' => htmlspecialchars($this->input->post('judul', true)),
+			'deskripsi' => htmlspecialchars($this->input->post('deskripsi', true)),
+			'kelas_id' => htmlspecialchars($this->input->post('kelas_id', true)),
+		);
+		$this->db->insert('forumdiskusi', $data);
 	}
 }
