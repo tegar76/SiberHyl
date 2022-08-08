@@ -17,7 +17,7 @@
 	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
 	<!-- style -->
-	<link rel="stylesheet" href="<?= base_url('assets/login/css/styles.css') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/login/css/style.css') ?>">
 
 	<title>Login</title>
 </head>
@@ -68,9 +68,8 @@
 						<div id="hak_aksesFeedback" class="invalid-feedback d-block mt-n3 mb-3">
 							<?= form_error('hak_akses', '<div class="text-danger">', '</div>') ?>
 						</div>
-						<div class="form-group btn-submit mt-4 d-flex justify-content-between">
-							<button type="submit" class="btn btn-masuk">Masuk</button>
-							<a href="" class="mt-2"> Lupa Password ?</a>
+						<div class="form-group btn-submit mt-4 d-flex">
+							<button type="submit" class="btn btn-masuk mx-auto w-full">Masuk</button>
 						</div>
 						<div class="catatan mt-4">
 							<h6>Catatan : </h6>

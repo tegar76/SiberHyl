@@ -135,14 +135,14 @@ p {
 
 /*===== All Section Title Style =====*/
 .section-title .title {
-	font-size: 30px;
+	font-size: 24px;
 	font-weight: 500;
 	line-height: 55px;
 	color: #121212;
 }
 
 .section-title .sub-title {
-	font-size: 24px;
+	font-size: 20px;
 	font-weight: 500;
 	line-height: 55px;
 	color: #121212;
@@ -150,7 +150,11 @@ p {
 
 @media (max-width: 767px) {
 	.section-title .title {
-		font-size: 30px;
+		font-size: 18px;
+		line-height: 40px;
+	}
+	.section-title .sub-title {
+		font-size: 16px;
 		line-height: 40px;
 	}
 }
@@ -762,7 +766,7 @@ p {
 .single-pricing .pricing-header .price {
 	margin-right: 5px;
 	display: block;
-	font-size: 26px;
+	font-size: 18px;
 	font-weight: 500;
 	line-height: 100px;
 	color: #121212;
@@ -770,13 +774,13 @@ p {
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
 	.single-pricing .pricing-header .price {
-		font-size: 16px;
+		font-size: 15px;
 	}
 }
 
 @media (max-width: 767px) {
 	.single-pricing .pricing-header .price {
-		font-size: 16px;
+		font-size: 15px;
 	}
 }
 
