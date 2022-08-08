@@ -231,3 +231,25 @@ $route['wali-kelas/konsultasi/(:any)/(:any)'] = 'WaliKelas/Konsultasi/$1/$2';
 $route['wali-kelas/info_akademik'] = 'WaliKelas/InfoAkademik';
 $route['wali-kelas/info_akademik/(:any)'] = 'WaliKelas/InfoAkademik/$1';
 $route['wali-kelas/info_akademik/(:any)/(:any)'] = 'WaliKelas/InfoAkademik/$1/$2';
+
+
+/* 
+ * Mulai pada baris ini adalah routing untuk user Kepala Sekolah
+ * 
+*/
+# 0. Autentifikasi Login dan Logout
+$route['kepsek/login'] = 'Auth/AuthKepsek';
+$route['kepsek/logout'] = 'Auth/AuthKepsek/logout';
+
+# 1. Dashboard
+$route['kepala_sekolah/dashboard'] = 'KepalaSekolah/Dashboard';
+
+# 2. Data
+$route['kepala_sekolah/master_data'] = 'KepalaSekolah/Data';
+$route['kepala_sekolah/master_data/(:any)'] = 'KepalaSekolah/Data/$1';
+$route['kepala_sekolah/master_data/(:any)/(:any)'] = 'KepalaSekolah/Data/$1/$2';
+$route['kepala_sekolah/master_data/(:any)/(:any)/(:any)'] = 'KepalaSekolah/Data/$1/$2/$3';
+
+/* 
+ * End of routing Kepala Sekolah
+*/

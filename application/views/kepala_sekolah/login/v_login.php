@@ -24,24 +24,42 @@
 	<!-- style -->
 	<link rel="stylesheet" href="<?= base_url('assets/login/css/styles.css') ?>">
 
-	<title>Login Admin</title>
+	<title><?= $title ?></title>
 </head>
 
 <body>
+
 	<body oncontextmenu='return false' class='snippet-body'>
+
+		<script>
+			$(function() {
+				var title = '<?= $this->session->flashdata("title") ?>';
+				var text = '<?= $this->session->flashdata("text") ?>';
+				var type = '<?= $this->session->flashdata("type") ?>';
+				if (title) {
+					swal.fire({
+						icon: type,
+						title: title,
+						text: text,
+						type: type,
+						button: true,
+					});
+				};
+			});
+		</script>
 
 		<div class="container">
 			<div class="row">
 				<div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
 					<div class="panel border bg-white">
 						<div class="panel-body p-3">
-							<?= form_open('KepalaSekolah/Dashboard') ?>
+							<?= form_open('kepsek/login') ?>
 							<div class="logo d-flex justify-content-center mb-3">
 								<img src="<?= base_url('assets/logo/logo-big.png') ?>" alt="logo">
 							</div>
 							<hr>
 							<div class="title-form text-center mb-2">Kepala Sekolah</div>
-							
+
 							<?php if ($this->session->flashdata('message')) : ?>
 								<div class="alert alert-warning alert-login" role="alert">
 									<?= $this->session->flashdata('message') ?>
@@ -60,7 +78,7 @@
 								<?= form_error('password', '<div class="text-danger">', '</div>') ?>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-masuk ml-0">Masuk</button>
+								<button type="submit" name="login" class="btn btn-masuk ml-0">Masuk</button>
 							</div>
 							</form>
 
@@ -72,8 +90,8 @@
 
 				</div>
 
-				
-				
+
+
 			</div>
 		</div>
 

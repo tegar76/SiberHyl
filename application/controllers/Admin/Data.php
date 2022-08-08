@@ -746,8 +746,8 @@ class Data extends CI_Controller
 
 	public function process_update_siswa()
 	{
-		$siswa_id = $this->input->post('siswa_id', true);
-		$siswa = $this->db->get_where('siswa', ['siswa_id' => $siswa_id])->row();
+		$siswa_nis = $this->input->post('siswa_nis', true);
+		$siswa = $this->db->get_where('siswa', ['siswa_nis' => $siswa_nis])->row();
 		$kelas_edit	= $this->input->post('kelas_edit', true);
 		$kelas_id	= $this->input->post('kelas_id', true);
 		if (isset($kelas_edit)) {
@@ -775,15 +775,15 @@ class Data extends CI_Controller
 			'update_time' => date('Y-m-d H:i:s')
 		);
 		$this->db->set($updateSiswa);
-		$this->db->where('siswa_id', $this->input->post('siswa_id', true));
+		$this->db->where('siswa_nis', $this->input->post('siswa_nis', true));
 		$this->db->update('siswa');
 	}
 
 	public function delete_siswa()
 	{
-		$siswa_id = $this->input->post('siswa_id', true);
-		$siswa_id = $this->secure->decrypt_url($siswa_id);
-		$this->db->delete('siswa', ['siswa_id' => $siswa_id]);
+		$siswa_nis = $this->input->post('siswa_nis', true);
+		$siswa_nis = $this->secure->decrypt_url($siswa_nis);
+		$this->db->delete('siswa', ['siswa_nis' => $siswa_nis]);
 		$reponse = [
 			'csrfName' => $this->security->get_csrf_token_name(),
 			'csrfHash' => $this->security->get_csrf_hash(),
@@ -799,7 +799,7 @@ class Data extends CI_Controller
 		$data['title'] = 'Admin Siberyl - Data Guru';
 		$data['content'] = 'admin/contents/data/v_data_guru';
 		$data['guru'] = array();
-		$guru = $this->db->get_where('guru', ['role_id !=' => 1])->result();
+		$guru = $this->db->get_where('guru', ['role_id !=' => 1, 'role_id !=' => 3])->result();
 		if ($guru) {
 			$data['guru'] = $guru;
 		}

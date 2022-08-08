@@ -1,5 +1,5 @@
 <!-- import data tables -->
-<?php include APPPATH.'../assets/DataTables/import/import.php';?>
+<?php include APPPATH . '../assets/DataTables/import/import.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -8,7 +8,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title"><?= $title?></h3>
+				<h3 class="page-title"><?= $title ?></h3>
 			</div>
 		</div>
 	</div>
@@ -20,7 +20,7 @@
 					<div class="d-flex d-lg-flex d-md-block align-items-center">
 						<div class="total">
 							<div class="d-inline-flex align-items-center">
-								<h2>0</h2>
+								<h2><?= $teacherRow; ?></h2>
 							</div>
 							<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total Guru</h6>
 						</div>
@@ -34,7 +34,7 @@
 				<div class="card-body">
 					<div class="d-flex d-lg-flex d-md-block align-items-center">
 						<div class="total">
-							<h2>0</h2>
+							<h2><?= $classRow; ?></h2>
 							<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total Wali Kelas
 							</h6>
 						</div>
@@ -49,7 +49,7 @@
 					<div class="d-flex d-lg-flex d-md-block align-items-center">
 						<div class="total">
 							<div class="d-inline-flex align-items-center">
-								<h2>0</h2>
+								<h2><?= $studentRow; ?></h2>
 							</div>
 							<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total Siswa</h6>
 						</div>
@@ -63,7 +63,7 @@
 				<div class="card-body">
 					<div class="d-flex d-lg-flex d-md-block align-items-center">
 						<div class="total">
-							<h2>0</h2>
+							<h2><?= $classRow; ?></h2>
 							<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total Kelas</h6>
 						</div>
 						<div class="ml-auto mt-md-3 mt-lg-0">
@@ -79,10 +79,10 @@
 				<div class="card">
 					<div class="card-body">
 						<h6 class="card-title">
-							Pembelajaran yang sedang Berlangsung						
+							Pembelajaran yang sedang Berlangsung
 						</h6>
 						<div class="mt-4 activity">
-							<table id="pembelajaran_berlangsung" class="table-striped table-bordered" style="width:100%">
+							<table id="table-jadwal-berlangsung" class="table-striped table-bordered" style="width:100%">
 								<!-- pemanggilan tabel id ada di assets/admin/js/data-table/main.js -->
 								<thead>
 									<tr>
@@ -97,27 +97,22 @@
 									</tr>
 								</thead>
 								<tbody>
-										<tr>
-											<td>1</td>
-											<td>Senin</td>
-											<td>AZ</td>
-											<td>Bahasa Inggris</td>
-											<td>07.00 - 09.00 WIB</td>
-											<td>XI TKRO 1</td>
-											<td>4</td>
-											<!-- Redirect ke filter kelas yang dituju -->
-											<td><a href="<?= base_url('KepalaSekolah/SuperVisor')?>" class="btn btn-sm btn-outline-primary text-cyan rounded w-100">Kunjungi Kelas</a></td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Senin</td>
-											<td>AZ</td>
-											<td>Bahasa Inggris</td>
-											<td>07.00 - 09.00 WIB</td>
-											<td>XI TKRO 1</td>
-											<td>4</td>
-											<td><a  class="btn btn-sm btn-outline-warning text-warning rounded w-100">Sudah Dikunjungi</a></td>
-										</tr>
+									<?php if ($study) : ?>
+										<?php $no = 1;
+										foreach ($study as $val) : ?>
+											<tr>
+												<td><?= $no++ ?></td>
+												<td><?= $val->hari ?></td>
+												<td><?= $val->guru ?></td>
+												<td><?= $val->mapel ?></td>
+												<td><?= date('H:i', strtotime($val->jam_masuk)) . ' - ' . date('H:i', strtotime($val->jam_keluar)) . " WIB" ?></td>
+												<td><?= $val->kelas ?></td>
+												<td><?= $val->ruang ?></td>
+												<td><a href="<?= base_url('master/super-visor?kelas=' . $val->kd_kelas) ?>" class="d-block btn btn-sm btn-outline-primary border-blue rounded mx-auto">Kunjungi Kelas</a></td>
+												<!-- <td><a href="" class="d-block btn btn-sm btn-outline-warning border-yellow rounded mx-auto">Sudah Dikunjungi</a></td> -->
+											</tr>
+										<?php endforeach ?>
+									<?php endif ?>
 								</tbody>
 							</table>
 						</div>
@@ -126,4 +121,3 @@
 			</div>
 		</div>
 	</div>
-

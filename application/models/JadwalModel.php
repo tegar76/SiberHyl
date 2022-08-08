@@ -242,4 +242,24 @@ class JadwalModel extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	public function getSearchJadwal($kelas, $params)
+	{
+		$this->db->select("
+			kelas.kelas_id, kelas.nama_kelas,
+			mapel.mapel_id, mapel.nama_mapel, 
+			guru.guru_nip, guru.guru_nama, guru.guru_kode, guru.profile,
+			ruangan.ruang_id, ruangan.kode_ruang,
+			jadwal.jadwal_id, jadwal.hari, jadwal.jumlah_jam,
+			jadwal.jam_masuk, jadwal.jam_keluar, jadwal.create_time, jadwal.update_time
+		");
+		$this->db->from('jadwal');
+		$this->db->join('kelas', 'kelas.kelas_id=jadwal.kelas_id', 'left');
+		$this->db->join('guru', 'guru.guru_nip=jadwal.guru_nip', 'left');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left');
+		$this->db->join('ruangan', 'ruangan.ruang_id=jadwal.ruang_id', 'left');
+		$this->db->like($params);
+		$this->db->where('jadwal.kelas_id', $kelas);
+		return $this->db->get();
+	}
 }

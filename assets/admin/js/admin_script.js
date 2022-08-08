@@ -203,7 +203,7 @@ $(document).ready(function () {
 							showConfirmButton: false,
 							allowOutsideClick: false,
 						});
-						window.location.href = BASEURL + "admin/login";
+						window.location.href = BASEURL;
 					},
 				});
 			}
@@ -745,11 +745,11 @@ $(document).ready(function () {
 	$("#data-siswa").DataTable();
 	$("#data-siswa").on("click", ".delete-siswa", function (e) {
 		e.preventDefault();
-		var siswa_id = $(e.currentTarget).attr("siswa-id");
+		var siswa_nis = $(e.currentTarget).attr("siswa-id");
 		var kode_kelas = $(e.currentTarget).attr("kode-kelas");
 		var dataJson = {
 			[csrfName]: csrfHash,
-			siswa_id: siswa_id,
+			siswa_nis: siswa_nis,
 		};
 		Swal.fire({
 			title: "Hapus Data Siswa",
@@ -1027,4 +1027,17 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 	$("#table-jurnal-materi-admin").DataTable();
+});
+
+// Kepala Sekolah
+$(document).ready(function () {
+	$("#change-kelas-kepsek").change(function () {
+		var data = $("#change-kelas-kepsek option:selected").val();
+		if (data === "") {
+			window.location = BASEURL + "kepala_sekolah/master_data/siswa";
+		} else {
+			window.location =
+				BASEURL + "kepala_sekolah/master_data/siswa?kelas=" + data;
+		}
+	});
 });

@@ -39,6 +39,13 @@ class AuthModel extends CI_Model
 		$this->db->where('siswa_nis', $nis);
 		return $this->db->get('siswa')->row_object();
 	}
+
+	public function getKepsekByUsername($username)
+	{
+		$this->db->where('username', $username);
+		$this->db->where('role_id', 3);
+		return $this->db->get('guru')->row();
+	}
 }
 
 /* End of file AuthModel.php */

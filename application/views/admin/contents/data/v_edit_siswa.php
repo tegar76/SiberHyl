@@ -44,7 +44,7 @@
 					<div class="card shadow mb-4">
 						<div class="container my-3">
 							<?= form_open('master/data/siswa/update_siswa/' . $student->siswa_nis) ?>
-							<input type="hidden" name="siswa_id" value="<?= $student->siswa_id ?>">
+							<input type="hidden" name="siswa_nis" value="<?= $student->siswa_nis ?>">
 							<input type="hidden" name="kelas_id" value="<?= $student->kelas_id ?>">
 							<label for="nis_edit">NIS</label>
 							<div class="input-group mb-3">

@@ -1,5 +1,5 @@
 <!-- import data tables -->
-<?php include APPPATH.'../assets/DataTables/import/import.php';?>
+<?php include APPPATH . '../assets/DataTables/import/import.php'; ?>
 
 <div class="page-wrapper">
 	<!-- ============================================================== -->
@@ -34,9 +34,15 @@
 		<div class="row">
 			<div class="form-group col-md-4">
 				<div class="input-group mb-2">
-					<select id="change-kelas" class="form-control">
-						<option value="">Pilih Kelas</option>
-						<option value="">XI TKRO 1</option>
+					<select id="change-kelas-kepsek" class="form-control">
+						<?php foreach ($classes as $row => $value) : ?>
+							<?php if (isset($_GET['kelas']) && $value->kode_kelas == $_GET['kelas']) : ?>
+								<?php $selected = 'selected' ?>
+							<?php else : ?>
+								<?php $selected = '' ?>
+							<?php endif ?>
+							<option value="<?= $value->kode_kelas ?>" <?= $selected ?>><?= $value->nama_kelas ?></option>
+						<?php endforeach ?>
 					</select>
 					<div class="input-group-prepend">
 						<div class="input-group-text"><i class="fas fa-filter"></i></div>
@@ -46,13 +52,11 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<h6 class="card-title">
-							Data  Siswa  Semester Gasal Tahun Pelajaran 2021/2022   
-						</h6>
+						<h6 class="card-title">Data Siswa Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></h6>
 						<div class="sub-title">
 							<div class="info">
-								<p>Kode Guru : <span class="ml-2">AZ</span></p>
-								<p>Nama :  <span class="ml-2">Sulton Akbar Pamungkas, S. Pd.</span></p>
+								<p>Kode Guru : <span class="ml-2"><?= (empty($walikelas)) ? '-' : $walikelas->nama_kelas ?></span></p>
+								<p>Nama : <span class="ml-2"><?= (empty($walikelas)) ? '-' : $walikelas->guru_nama ?></span></p>
 							</div>
 						</div>
 						<div class="mt-4 activity">
@@ -72,32 +76,24 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>2010049</td>
-										<td>0041944023</td>
-										<td>ADIT PRAYITNO</td>
-										<td>Laki - laki</td>
-										<td>X TO 2</td>
-										<td>Tidak Aktif</td>
-										<td class="text-danger">Offline</td>
-										<td>
-											<a href="<?= base_url('KepalaSekolah/Data/detailSiswa')?>" class="btn btn-sm btn-primary bg-blue border-0 rounded"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>2010049</td>
-										<td>0041944023</td>
-										<td>ADIT PRAYITNO</td>
-										<td>Laki - laki</td>
-										<td>X TO 2</td>
-										<td>Aktif</td>
-										<td class="text-success">Online</td>
-										<td>
-											<a href="<?= base_url('KepalaSekolah/Data/detailSiswa')?>" class="btn btn-sm btn-primary bg-blue border-0  rounded"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
-										</td>
-									</tr>
+									<?php if (!empty($students)) : ?>
+										<?php $no = 1;
+										foreach ($students as $row => $value) : ?>
+											<tr>
+												<td><?= $no++ ?></td>
+												<td><?= $value->siswa_nis ?></td>
+												<td><?= $value->siswa_nisn ?></td>
+												<td><?= $value->siswa_nama ?></td>
+												<td><?= $value->siswa_kelamin ?></td>
+												<td><?= $value->asal_kelas ?></td>
+												<td><?= $value->status ?></td>
+												<td><?= ($value->status_online == 'online') ? '<p class="text-success">Online</p>' : '<p class="text-danger">Offline</p>' ?></td>
+												<td class="d-flex justify-content-center">
+													<a href="<?= base_url('kepala_sekolah/master_data/detail_siswa?nis=' . $value->siswa_nis) ?>" class="btn btn-sm btn-primary mr-2"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+												</td>
+											</tr>
+										<?php endforeach ?>
+									<?php endif ?>
 								</tbody>
 							</table>
 						</div>

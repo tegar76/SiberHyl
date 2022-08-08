@@ -26,7 +26,6 @@ class Dashboard extends CI_Controller
 	public function index()
 	{
 		isAdmin();
-
 		$jadwal = $this->master->jadwalBerlangsung($this->hariIni);
 		$timenow = date('H:i');
 		$data['study'] = array();
@@ -45,7 +44,7 @@ class Dashboard extends CI_Controller
 		}
 		$data['no'] = 1;
 		$data['tahun_ajar'] = $this->tahun_ajar;
-		$data['teacherRow'] = $this->master->get_row_data('guru', ['role_id !=' => 1]);
+		$data['teacherRow'] = $this->master->get_row_data('guru', ['role_id !=' => 1, 'role_id !=' => 3]);
 		$data['studentRow'] = $this->master->get_row_data('siswa');
 		$data['classRow'] = $this->master->get_row_data('kelas');
 		$data['pesan'] = $this->master->get_pesan();

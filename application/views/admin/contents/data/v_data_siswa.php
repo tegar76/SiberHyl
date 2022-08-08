@@ -91,7 +91,7 @@
 													<a href="<?= base_url('master/data/siswa/detail_siswa?nis=' . $value->siswa_nis) ?>" class="btn btn-sm btn-primary mr-2"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 													<a href="<?= base_url('master/data/siswa/update_siswa/' . $value->siswa_nis) ?>" class="btn btn-sm btn-success mr-2"><i class="fa-solid fa-pen-to-square text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
 													<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
-													<a href="javascript:void(0)" class="btn btn-sm btn-danger delete-siswa" kode-kelas="<?= $value->kode_kelas ?>" siswa-id="<?= $this->secure->encrypt_url($value->siswa_id) ?>" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
+													<a href="javascript:void(0)" class="btn btn-sm btn-danger delete-siswa" kode-kelas="<?= $value->kode_kelas ?>" siswa-id="<?= $this->secure->encrypt_url($value->siswa_nis) ?>" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="fa-solid fa-trash-can text-white"></i></a>
 												</td>
 											</tr>
 										<?php endforeach ?>

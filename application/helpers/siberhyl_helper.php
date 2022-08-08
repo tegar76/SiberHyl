@@ -80,3 +80,13 @@ function isGuruLogin()
 function isWaliKelasLogin()
 {
 }
+
+function checkKepsekLogin()
+{
+	$CI = &get_instance();
+	$CI->load->model('AuthModel', 'auth', true);
+	$kepsek = $CI->auth->getKepsekByUsername($CI->session->userdata('username'));
+	if (empty($kepsek)) {
+		return redirect('kepsek/login');
+	}
+}

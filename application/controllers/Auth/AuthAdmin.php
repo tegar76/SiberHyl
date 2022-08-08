@@ -114,4 +114,4 @@ class AuthAdmin extends CI_Controller
 }
 
 /* End of file AuthAdmin.php */
-/* Location: ./application/models/AuthAmin.php */
+/* Location: ./application/controllers/Auth/AuthAmin.php */
