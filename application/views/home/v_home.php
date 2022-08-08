@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/default.css">
 
 	<!--====== Style css ======-->
-	<link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/style.css">
+	<link rel="stylesheet" href="<?= base_url('assets/') ?>home/css/styles.css">
 
 	<!-- SweetAlert 2 -->
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">
@@ -221,11 +221,11 @@
 								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Absensi</li>
 								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Materi</li>
 								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Video Pembelajaran</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Tugas </li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Ujian/Ulangan Harian </li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Tugas Harian</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Evaluasi</li>
 								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi</li>
 								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Pengajuan Surat</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Konsultasi bersama Wali Kelas </li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Konsultasi dengan Wali Kelas </li>
 							</ul>
 						</div>
 					</div> <!-- single pricing -->
@@ -241,16 +241,15 @@
 						</div>
 						<div class="pricing-list">
 							<ul>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola informasi terbaru </li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Melihat Data Siswa Yang Diajar</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Menerima Pengajuan Surat</li>
 								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Data Absensi</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Jurnal Materi</li>
 								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Data Materi</li>
 								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Data Tugas Harian</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Ulangan Harian</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Jurnal Materi</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola catatan KBM</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Menerima Pengajuan Surat</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi antara guru & siwa</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi antara guru & Wali Kelas</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengelola Evaluasi</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi Antara Guru & Siswa</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Melihat Info Akademik</li>
 							</ul>
 
 						</div>
@@ -267,13 +266,11 @@
 						</div>
 						<div class="pricing-list">
 							<ul>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Jadwal</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Melihat data Siswa</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Data Absensi Siswa</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mlihat Jadwal Kelas yang dipimpin</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi Antara Wali Kelas & Siswa</li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi Antara Wali Kelas & Guru </li>
-								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Mengontrol Catatan KBM Dari Guru </li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Melihat Jadwal Kelas Yang Dibimbing</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Melihat Data Siswa Yang Dibimbing</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Melihat Jurnal Materi Dari Guru</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Ruang Diskusi Wali Kelas Dan Siswa</li>
+								<li> <i class="fa fa-check-circle-o" aria-hidden="true"></i> Info Akademik</li>
 							</ul>
 
 						</div>
