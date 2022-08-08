@@ -98,6 +98,7 @@ class Data extends CI_Controller
 		if ($guru) {
 			$data['guru'] = $guru;
 		}
+		$data['tahun_ajar'] = $this->tahun_ajar;
 		$data['title'] = 'Data Guru';
 		$data['content'] = 'kepala_sekolah/contents/data/v_data_guru';
 		$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);

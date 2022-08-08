@@ -28,11 +28,11 @@
 				<li class="list-divider"></li>
 				<li class="sidebar-item <?= ($this->uri->segment(2) == "materi") ? 'selected' : '' ?>"> <a class=" sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="layers" class="feather-icon"></i><span class="hide-menu">Materi Pelajaran </span></a>
 					<ul aria-expanded="false" class="collapse  first-level base-level-line">
+						<!-- <li class="sidebar-item">
+							<a href="< base_url('kepala_sekolah/materi/dataMateriAdmin') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Admin)</span></a>
+						</li> -->
 						<li class="sidebar-item">
-							<a href="<?= base_url('kepala_sekolah/materi/dataMateriAdmin') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Admin)</span></a>
-						</li>
-						<li class="sidebar-item">
-							<a href="<?= base_url('kepala_sekolah/materi/dataMateriGuru') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Guru)</span></a>
+							<a href="<?= base_url('kepala_sekolah/materi/data_materi') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Guru)</span></a>
 						</li>
 					</ul>
 				</li>

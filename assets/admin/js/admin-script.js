@@ -1031,6 +1031,9 @@ $(document).ready(function () {
 
 // Kepala Sekolah
 $(document).ready(function () {
+	$("#change-kelas-kepsek").select2({
+		placeholder: "Pilih Kelas",
+	});
 	$("#change-kelas-kepsek").change(function () {
 		var data = $("#change-kelas-kepsek option:selected").val();
 		if (data === "") {

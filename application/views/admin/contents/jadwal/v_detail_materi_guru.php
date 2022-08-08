@@ -14,9 +14,15 @@
 		<div class="d-flex align-items-center">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
-					<li class="breadcrumb-item text-muted active">Setting Jadwal</li>
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi/materi_guru') ?>" class="text-muted">Materi</a></li>
-					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
+					<?php if ($this->session->userdata('level') == 'admin') : ?>
+						<li class="breadcrumb-item text-muted active">Setting Jadwal</li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi/materi_guru') ?>" class="text-muted">Materi</a></li>
+						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
+					<?php elseif ($this->session->userdata('level') == 'kepsek') : ?>
+						<li class="breadcrumb-item text-muted active">Materi Pelajaran</li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('kepala_sekolah/materi/materi_guru') ?>" class="text-muted">Data Materi (Guru)</a></li>
+						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
+					<?php endif ?>
 				</ol>
 			</nav>
 		</div>
@@ -84,15 +90,19 @@
 													<?php foreach ($pdf as $val) : ?>
 														<!-- looping item -->
 														<div class="pdf-file ml-3">
-															<a target="_blank" href="<?= base_url('master/materi/view_materi_guru/' . $val->file_materi) ?>">
-																<div class="card card-pdf">
-																	<div class="container">
-																		<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf">
-																		<hr class="w-50 mx-auto">
-																		<h6 class="text-center mt-n1"><?= $val->judul ?></h6>
+															<?php if ($this->session->userdata('level') == 'admin') : ?>
+																<a target="_blank" href="<?= base_url('master/materi/view_materi_guru/' . $val->file_materi) ?>">
+																<?php elseif ($this->session->userdata('level') == 'kepsek') : ?>
+																	<a target="_blank" href="<?= base_url('kepala_sekolah/materi/view_materi_guru/' . $val->file_materi) ?>">
+																	<?php endif ?>
+																	<div class="card card-pdf">
+																		<div class="container">
+																			<img class="d-block mx-auto" src="<?= base_url('assets/admin/icons/pdf-md.png') ?>" alt="file pdf">
+																			<hr class="w-50 mx-auto">
+																			<h6 class="text-center mt-n1"><?= $val->judul ?></h6>
+																		</div>
 																	</div>
-																</div>
-															</a>
+																	</a>
 														</div>
 														<!-- looping item -->
 													<?php endforeach ?>
@@ -123,7 +133,11 @@
 									</table>
 									<hr class="mt-n3">
 									<div class="button-action d-flex mb-3 mt-2">
-										<a href="<?= base_url('master/materi/materi_guru') ?>" class="btn btn-sm btn-primary rounded ml-3 px-3">Kembali</a>
+										<?php if ($this->session->userdata('level') == 'admin') : ?>
+											<a href="<?= base_url('master/materi/materi_guru') ?>" class="btn btn-sm btn-primary rounded ml-3 px-3">Kembali</a>
+										<?php elseif ($this->session->userdata('level') == 'kepsek') : ?>
+											<a href="<?= base_url('kepala_sekolah/materi/materi_guru') ?>" class="btn btn-sm btn-primary rounded ml-3 px-3">Kembali</a>
+										<?php endif ?>
 									</div>
 								</div>
 							</div>

@@ -250,6 +250,12 @@ $route['kepala_sekolah/master_data/(:any)'] = 'KepalaSekolah/Data/$1';
 $route['kepala_sekolah/master_data/(:any)/(:any)'] = 'KepalaSekolah/Data/$1/$2';
 $route['kepala_sekolah/master_data/(:any)/(:any)/(:any)'] = 'KepalaSekolah/Data/$1/$2/$3';
 
+# 3. Data Materi
+$route['kepala_sekolah/materi/(:any)'] = 'KepalaSekolah/MateriPelajaran/$1';
+$route['kepala_sekolah/materi/(:any)/(:any)'] = 'KepalaSekolah/MateriPelajaran/$1/$2';
+$route['kepala_sekolah/materi/(:any)/(:any)/(:any)'] = 'KepalaSekolah/MateriPelajaran/$1/$2/$3';
+$route['kepala_sekolah/materi/(:any)/(:any)/(:any)/(:any)'] = 'KepalaSekolah/MateriPelajaran/$1/$2/$3/$4';
+
 /* 
  * End of routing Kepala Sekolah
 */
