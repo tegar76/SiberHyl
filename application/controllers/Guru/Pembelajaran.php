@@ -605,10 +605,52 @@ class Pembelajaran extends CI_Controller
 
 
 	// edit deadline tugas harian
-	public function editDeadlineTugasHarian()
+	public function set_deadline_tugas($id)
 	{
-		$data['title'] = 'Edit Deadline Tugas Harian';
-		$data['content'] = 'guru/contents/pembelajaran/v_edit_deadline_tugas_harian';
+		$data['guru'] = $this->userGuru;
+		$tugas = $this->master->detailTugasHarian($id);
+		if ($id && $tugas) {
+			$data['tugas'] = $tugas;
+			$data['title'] = 'Edit Deadline Tugas Harian';
+			$data['content'] = 'guru/contents/pembelajaran/v_edit_deadline_tugas_harian';
+			if (isset($_POST['set_deadline'])) {
+				$this->form_validation->set_rules([
+					[
+						'field' => 'tanggal',
+						'label' => 'Tanggal Deadline',
+						'rules' => 'trim|required|xss_clean',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}'
+						]
+					],
+					[
+						'field' => 'jam',
+						'label' => 'Jam Deadline',
+						'rules' => 'trim|required|xss_clean',
+						'errors' => [
+							'required' => '{field} harus diisi',
+							'xss_clean' => 'cek kembali pada {field}'
+						]
+					],
+				]);
+				if ($this->form_validation->run() == false) {
+					$this->load->view('guru/layout/wrapper', $data, false);
+				} else {
+					$deadline = $this->input->post();
+					$deadline_ = $deadline['tanggal'] . ' ' . $deadline['jam'];
+					$set_time = array(
+						'deadline' => $deadline_
+					);
+					$this->db->update('tugasharian', $set_time, ['tugas_id' => $this->input->post('tugas_id', true)]);
+					$this->message('Berhasil', 'Waktu dealine tugas harian berhasil disetting', 'success');
+					return redirect('guru/pembelajaran/detail_tugas_harian/' . $id);
+				}
+			}
+		} else {
+			$data['title'] = '404 Halaman Tidak Ditemukan';
+			$data['content'] = 'guru/contents/eror/v_not_found';
+		}
 		$this->load->view('guru/layout/wrapper', $data, false);
 	}
 
