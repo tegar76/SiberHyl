@@ -223,7 +223,7 @@ class Pembelajaran extends CI_Controller
 				$absensi['jurnal_id'] = $id;
 				$absensi['url_absen'] = 'guru/pembelajaran/edit_status_absen/' . $id . '/' . $siswa->siswa_nis;
 				if ($absx) {
-					$bukti = '<a target="_blank" href="' . base_url('guru/pembelajaran/bukt_absensi_siswa') . '"><img src="' . base_url('assets/admin/icons/img.png') . '" alt=""></a>';
+					$bukti = '<a target="_blank" href="' . base_url('guru/pembelajaran/bukti_absen/' . $absx->bukti_absen) . '"><img src="' . base_url('assets/admin/icons/img.png') . '" alt=""></a>';
 					$absensi['pembelajaran'] = ($absx->metode_absen) ? $absx->metode_absen : '-';
 					$absensi['bukti'] = ($absx->bukti_absen) ? $bukti : '-';
 					$absensi['status_absen'] = $absx->status;
@@ -397,6 +397,21 @@ class Pembelajaran extends CI_Controller
 		echo json_encode($reponse);
 	}
 
+	public function bukti_absen($file)
+	{
+		if ($file) {
+			$check = FCPATH . './storage/siswa/absensi/' . $file;
+			if (file_exists($check)) {
+				$data['alt'] = 'Tugas Siswa';
+				$data['img'] = base_url('storage/siswa/absensi/') . $file;
+				$this->load->view('img_viewer/img_viewer', $data);
+			} else {
+				show_404();
+			}
+		} else {
+			show_404();
+		}
+	}
 	// ruang tugas harian
 	public function tugas_harian($id = false)
 	{

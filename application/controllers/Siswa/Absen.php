@@ -60,7 +60,7 @@ class Absen extends CI_Controller
 					]);
 
 					if ($infoAbsensi->absen_mulai == '00:00:00' && $infoAbsensi->absen_selesai == '00:00:00') {
-						$absensi['status'] = '<span class="text-danger">Waktu absensi belum dimulai</span>';
+						$absensi['status'] = '<span class="text-danger">Waktu absensi belum dibuka</span>';
 					} elseif (strtotime($timeNow) >= strtotime($infoAbsensi->absen_selesai)) {
 						$absensi['status'] = '<span class="text-danger">Absen Sudah Ditutup</span>';
 					} else {
@@ -146,11 +146,15 @@ class Absen extends CI_Controller
 						'csrfHash' => $this->security->get_csrf_hash(),
 						'success' => true,
 						'msgabsen' => 'Absensi telah berhasil',
-						'errorupload' => 'Absensi Berhasil'
 					];
 				} elseif ($metode_absen === 'online') {
-					$result_absen = $this->siswa->process_absensi($metode_absen, $siswa->siswa_nis);
-					$response = $result_absen;
+					$this->siswa->process_absensi($metode_absen, $siswa->siswa_nis);
+					$response = [
+						'csrfName' => $this->security->get_csrf_token_name(),
+						'csrfHash' => $this->security->get_csrf_hash(),
+						'success' => true,
+						'msgabsen' => 'Absensi telah berhasil',
+					];
 				}
 			endif;
 		else :
