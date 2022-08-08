@@ -180,7 +180,7 @@ class SiswaModel extends CI_Model
 			}
 			$set_absen = array(
 				'tanggal_absen' => date('Y-m-d'),
-				'metode_absen' => 'offline',
+				'metode_absen' => 'online',
 				'status' => 'H',
 				'siswa_nis' => $nis,
 				'jurnal_id' => $jurnal_id

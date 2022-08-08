@@ -64,9 +64,9 @@
 									<label for="judul_tugas">Judul</label>
 									<div class="input-group mb-3">
 										<input type="text" name="judul_tugas" id="judul_tugas" class="form-control <?= (form_error('judul_tugas')) ? 'is-invalid' : '' ?>" placeholder="Masukan Judul Tugas" value="<?= set_value('judul_tugas') ?>">
-									</div>
-									<div id="judul_tugasFeedback" class="invalid-feedback">
-										<?= form_error('', '<div class="text-danger">', '</div>') ?>
+										<div id="judul_tugasFeedback" class="invalid-feedback">
+											<?= form_error('judul_tugas', '<div class="text-danger">', '</div>') ?>
+										</div>
 									</div>
 								</div>
 								<div class="col">

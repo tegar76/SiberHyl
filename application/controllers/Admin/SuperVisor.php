@@ -143,7 +143,7 @@ class SuperVisor extends CI_Controller
 				$absensi['absensi_id'] = 0;
 				$absensi['jurnal_id'] = $id;
 				if ($absx) {
-					$bukti = '<a target="_blank" href="' . base_url('guru/bukt_absensi_siswa/fileJawabanTugasHarianImg') . '"><img src="' . base_url('assets/admin/icons/img.png') . '" alt=""></a>';
+					$bukti = '<a target="_blank" href="' . base_url('guru/bukt_absensi_siswa/bukti_absen/' . $absx->bukti_absen) . '"><img src="' . base_url('assets/admin/icons/img.png') . '" alt=""></a>';
 					$absensi['pembelajaran'] = ($absx->metode_absen) ? $absx->metode_absen : '-';
 					$absensi['bukti'] = ($absx->bukti_absen) ? $bukti : '-';
 					$absensi['status_absen'] = $absx->status;
@@ -162,6 +162,22 @@ class SuperVisor extends CI_Controller
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
 		$this->load->view('admin/layout/wrapper', $data, FALSE);
+	}
+
+	public function bukti_absen($file)
+	{
+		if ($file) {
+			$check = FCPATH . './storage/siswa/absensi/' . $file;
+			if (file_exists($check)) {
+				$data['alt'] = 'Tugas Siswa';
+				$data['img'] = base_url('storage/siswa/absensi/') . $file;
+				$this->load->view('img_viewer/img_viewer', $data);
+			} else {
+				show_404();
+			}
+		} else {
+			show_404();
+		}
 	}
 
 	public function tugas_harian($id = null)
