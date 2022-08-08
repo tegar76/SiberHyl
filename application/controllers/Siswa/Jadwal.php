@@ -10,15 +10,26 @@ class Jadwal extends CI_Controller
 		$hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
 		$this->load->model('SiswaModel', 'siswa', true);
 		$this->load->model('JadwalModel', 'jadwal', true);
+		$this->load->model('MasterModel', 'master', true);
 		$this->siswa = $this->siswa->getWhere(['siswa_nis' => $this->session->userdata('nis')]);
 		$this->hariIni = $hari[(int)date('w')];
+		$tahun_ajar = $this->master->getActiveTahunAkademik();
+		if ($tahun_ajar == null) {
+			$this->tahun_ajar = [
+				'tahun_id' => 0,
+				'semester' => 0,
+				'tahun' => ''
+			];
+		} else {
+			$this->tahun_ajar = $tahun_ajar;
+		}
 	}
 
 	public function index()
 	{
 		$siswa = $this->siswa;
 		$req = $_REQUEST;
-		if ($req) {
+		if (isset($req['search'])) {
 			if ($req['search'] == '') {
 				$data['jadwal'] = null;
 			} else {
@@ -36,6 +47,7 @@ class Jadwal extends CI_Controller
 			$data['content'] = 'siswa/contents/jadwal/v_search_jadwal';
 			$this->load->view('siswa/layout/wrapper', $data);
 		} else {
+			$data['tahun_ajar'] = $this->tahun_ajar;
 			$data['today'] = $this->hariIni;
 			$data['siswa'] = $this->siswa;
 			$data['days']  = ["Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];

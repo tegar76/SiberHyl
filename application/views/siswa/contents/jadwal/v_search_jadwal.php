@@ -138,18 +138,17 @@
 							</div>
 						</div>
 					</div>
+				<?php endforeach ?>
+			<?php else : ?>
+				<!-- FALSE -->
+				<div class="row">
+					<div class="col-md-12 mb-3">
+						<div class="alert-pembelajaran alert border-blue-black" role="alert">
+							Mata Pelajaran tidak ditemukan!
+						</div>
+					</div>
+				</div>
+			<?php endif ?>
 		</div>
-	<?php endforeach ?>
-<?php else : ?>
-	<!-- FALSE -->
-	<div class="row">
-		<div class="col-md-12 mb-3">
-			<div class="alert-pembelajaran alert border-blue-black" role="alert">
-				Tidak ditemukan!
-			</div>
-		</div>
-	</div>
-<?php endif ?>
-	</div>
 	</div>
 </section>

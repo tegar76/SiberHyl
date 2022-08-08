@@ -24,6 +24,9 @@
 <!-- Jquery -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 
+<?php $CI = &get_instance();
+$CI->load->model('SiswaModel', 'siswa_m', true);
+$CI->load->model('JadwalModel', 'jadwal', true); ?>
 <section class="container section section__height">
 
 	<div class="search-box d-flex justify-content-end">
@@ -51,9 +54,21 @@
 											<p><?= $nowStudying->nama_mapel ?></p>
 										</center>
 									</div>
+									<?php
+									$absensi = $CI->siswa_m->infoMulaiAbsensi(['jurnal.jadwal_id' => $nowStudying->jadwal_id]);
+									$absenOpen = 'bg-absen-close';
+									if ($absensi) {
+										if (
+											$nowStudying->hari == $today &&
+											strtotime(date('H:i')) >= strtotime($absensi->absen_mulai) &&
+											strtotime(date('H:i')) <= strtotime($absensi->absen_selesai)
+										) {
+											$absenOpen = 'bg-absen-open';
+										}
+									} ?>
 									<a href="<?= base_url('siswa/absensi/ruang_absensi/' . $this->secure->encrypt_url($nowStudying->jadwal_id)) ?>">
 										<div class="absen d-block justify-content-center">
-											<div class="card bg-absen-open shadow-sm px-3 pt-3">
+											<div class="card <?= $absenOpen ?> shadow-sm px-3 pt-3">
 												<img src="<?= base_url() ?>assets/siswa/icons/absen.png" alt="" class="mx-auto">
 												<p>Absen</p>
 											</div>
@@ -141,7 +156,7 @@
 
 	<div class="jadwal-pelajaran">
 		<div class="section-title mt-3">
-			Jadwal Pelajaran Kelas XI TKRO 1 Semester Genap Tahun Pelajaran 2021/2022
+			Jadwal Pelajaran Kelas <?= $siswa->nama_kelas; ?> Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?>
 			<hr>
 		</div>
 
@@ -155,8 +170,7 @@
 								<p class="text-uppercase p-3 my-auto"><?= $day ?></p>
 							</div>
 						</div>
-						<?php $CI = &get_instance();
-						$CI->load->model('JadwalModel', 'jadwal', true);
+						<?php
 						$studying = $CI->jadwal->getJadwalHariIni([
 							'hari' => $day,
 							'jadwal.kelas_id' => $siswa->kelas_id
@@ -174,14 +188,17 @@
 													<p id="mapel"><?= $study->nama_mapel ?></p>
 												</center>
 											</div>
-											<?php if (
-												$study->hari == $today &&
-												strtotime(date('H:i')) >= strtotime($study->jam_masuk) &&
-												strtotime(date('H:i')) <= strtotime($study->jam_keluar)
-											) {
-												$absenOpen = 'bg-absen-open';
-											} else {
-												$absenOpen = 'bg-absen-close';
+											<?php
+											$absensi = $CI->siswa_m->infoMulaiAbsensi(['jurnal.jadwal_id' => $study->jadwal_id]);
+											$absenOpen = 'bg-absen-close';
+											if ($absensi) {
+												if (
+													$study->hari == $today &&
+													strtotime(date('H:i')) >= strtotime($absensi->absen_mulai) &&
+													strtotime(date('H:i')) <= strtotime($absensi->absen_selesai)
+												) {
+													$absenOpen = 'bg-absen-open';
+												}
 											} ?>
 											<a href="<?= base_url('siswa/absensi/ruang_absensi/' . $this->secure->encrypt_url($study->jadwal_id)) ?>">
 												<div class="absen d-block justify-content-center">
