@@ -12,11 +12,11 @@
 							<a href="<?= base_url('guru/data/data_siswa') ?>" class="sidebar-link"><span class="hide-menu"> Data Siswa</span></a>
 						</li>
 						<li class="sidebar-item">
-							<a href="<?= base_url('guru/data/data_materi?user=guru') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Guru)</span></a>
+							<a href="<?= base_url('guru/data/data_materi?user=guru') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi</span></a>
 						</li>
-						<li class="sidebar-item">
+						<!-- <li class="sidebar-item">
 							<a href="<?= base_url('guru/data/data_materi?user=admin') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Admin)</span></a>
-						</li>
+						</li> -->
 					</ul>
 				</li>
 				<li class="list-divider"></li>

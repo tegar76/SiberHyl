@@ -15,7 +15,7 @@
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb m-0 p-0">
 					<li class="breadcrumb-item text-muted active">Setting Jadwal</li>
-					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi/materi_guru') ?>" class="text-muted">Materi</a></li>
+					<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/materi/materi_guru') ?>" class="text-muted">Materi (Guru)</a></li>
 					<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 				</ol>
 			</nav>
@@ -48,7 +48,7 @@
 									<table class="table">
 										<tbody>
 											<tr class="table-borderless">
-												<th scope="row" class="col-sm-8">Kode Guru</th>
+												<th scope="row">Kode Guru</th>
 												<td><?= $materi->kode_g ?></td>
 											</tr>
 											<tr>

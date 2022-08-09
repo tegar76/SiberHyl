@@ -90,7 +90,7 @@ class Data extends CI_Controller
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$user = $this->input->get('user');
 		if ($user == 'guru') {
-			$data['title'] = 'Data Materi (Guru)';
+			$data['title'] = 'Data Materi';
 			$data['content'] = 'guru/contents/data/v_data_materi_guru';
 			$data['materi'] = $this->guru->getMateriGuru($data['guru']->guru_id);
 		} elseif ($user == 'admin') {

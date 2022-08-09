@@ -582,7 +582,7 @@ class Materi extends CI_Controller
 		$id = $this->input->get('id');
 		$materi = $this->master->getDetailMateriGuru($id);
 		if ($id && $materi) {
-			$data['title'] = 'Materi (Guru)';
+			$data['title'] = 'Detail Materi (Guru)';
 			$data['content'] = 'admin/contents/jadwal/v_detail_materi_guru';
 			$data['tahun_ajar'] = $this->tahun_ajar;
 			$data['materi'] = $materi;

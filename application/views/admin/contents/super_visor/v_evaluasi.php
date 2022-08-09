@@ -43,7 +43,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<a href="<?= base_url('Admin/SuperVisor/formCetakReportEvaluasi') ?>">
+						<!-- <a href="<?= base_url('Admin/SuperVisor/formCetakReportEvaluasi') ?>">
 							<div class="card mb-3 py-1 px-2 card-reporting">
 								<div class="container">
 									<div class="row">
@@ -52,7 +52,7 @@
 									</div>
 								</div>
 							</div>
-						</a>
+						</a> -->
 						<h6 class="card-title">
 							Data Evaluasi Kelas <?= $jadwal->nama_kelas ?> Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?>
 						</h6>

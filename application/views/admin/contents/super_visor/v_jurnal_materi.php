@@ -40,7 +40,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<a href="<?= base_url('Admin/SuperVisor/cetakReportJurnalMateri') ?>">
+						<!-- <a href="<?= base_url('Admin/SuperVisor/cetakReportJurnalMateri') ?>">
 							<div class="card mb-3 py-1 px-2 card-reporting">
 								<div class="container">
 									<div class="row">
@@ -49,7 +49,7 @@
 									</div>
 								</div>
 							</div>
-						</a>
+						</a> -->
 						<h6 class="card-title">
 							<span><a href=""><i class="fa fa-search mr-2"></i></a></span>
 							Jurnal Materi Kelas <?= $jadwal->nama_kelas ?> Semester <?= $semester = ($tahun_ajar['semester'] == 0) ? '-' : (($tahun_ajar['semester'] % 2 == 0) ? 'Genap' : 'Gasal') ?> Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?>

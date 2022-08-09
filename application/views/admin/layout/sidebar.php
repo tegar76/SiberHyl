@@ -34,9 +34,9 @@
 							<li class="sidebar-item">
 								<a href="<?= base_url('master/jadwal/pratinjau_jadwal') ?>" class="sidebar-link <?= ($this->uri->segment(3) == "pratinjau_jadwal") ? 'active' : '' ?>"><span class="hide-menu"> Pratinjau</span></a>
 							</li>
-							<li class="sidebar-item">
+							<!-- <li class="sidebar-item">
 								<a href="<?= base_url('master/materi') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materi/") ? 'active' : '' ?>"><span class="hide-menu"> Materi (Admin)</span></a>
-							</li>
+							</li> -->
 							<li class="sidebar-item">
 								<a href="<?= base_url('master/materi/materi_guru') ?>" class="sidebar-link <?= ($this->uri->segment(2) == "materi_guru/") ? 'active' : '' ?>"><span class="hide-menu"> Materi (Guru)</span></a>
 							</li>

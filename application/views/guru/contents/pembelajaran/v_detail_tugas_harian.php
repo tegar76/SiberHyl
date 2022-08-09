@@ -124,7 +124,10 @@
 										<td><?= $tugas->deskripsi ?></td>
 										<td><?= $tugas->pertemuan ?></td>
 										<td><?= date('d - m - Y, H:i', strtotime($tugas->deadline)) ?> WIB</td>
-										<td><a target="_blank" href="<?= base_url('guru/pembelajaran/file_soal_tugas_harian/' . $tugas->file_tugas) ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+										<td>
+											<a target="_blank" href="<?= base_url('Guru/Pembelajaran/fileSoalTugasHarian')?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="detail"></i></a>
+											<a href="<?= base_url('Guru/Pembelajaran/editDeadlineTugasHarian')?>" class="btn btn-sm btn-success border-0 rounded"><i class="fa fa-edit text-white" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+										</td>
 									</tr>
 								</tbody>
 							</table>

@@ -7,7 +7,7 @@
 			<ul class="nav__list">
 				<li class="nav__item">
 					<a href="<?= base_url('siswa/info') ?>" class="nav__link <?= ($this->uri->segment(2) == "info") ? 'active-link' : '' ?> ">
-						<span class="badge-info-ak"></span>
+						<!-- <span class="badge-info-ak"></span> -->
 						<i class='bx bx-info-square nav__icon <?= ($this->uri->segment(2) == "info") ? 'active-link' : '' ?> '></i>
 						<span class="nav__name">Info</span>
 					</a>
