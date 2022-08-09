@@ -55,7 +55,7 @@ class MasterModel extends CI_Model
 			return $result;
 		} elseif ($table == 'guru') {
 			$query = $this->db->select('guru_nip, guru_kode, guru_nama', 'role_id')
-				->from($table)->where('role_id !=', 1)->order_by('guru_kode', 'ASC')->get();
+				->from($table)->where('role_id', 2)->order_by('guru_kode', 'ASC')->get();
 			$result = $query->result();
 			return $result;
 		} elseif ($table == 'ruangan') {
@@ -96,7 +96,7 @@ class MasterModel extends CI_Model
 			$this->db->like('guru_nip', $search);
 			$this->db->like('guru_kode', $search);
 			$this->db->like('guru_nama', $search);
-			$this->db->where('role_id !=', 1);
+			$this->db->where('role_id', 2);
 			$this->db->order_by('guru_kode', 'ASC');
 			$query	= $this->db->get();
 			if ($query->num_rows() == null) {
@@ -143,6 +143,13 @@ class MasterModel extends CI_Model
 		$this->db->where($where);
 		$this->db->order_by('siswa_nama', 'ASC');
 		return $this->db->get()->result();
+	}
+
+	public function getDataGuru()
+	{
+		$this->db->where('role_id', 2);
+		$this->db->order_by('guru_nama', 'ASC');
+		return $this->db->get('guru');
 	}
 
 	/* Function Modul Materi Bahan Ajar */

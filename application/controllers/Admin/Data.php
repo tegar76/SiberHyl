@@ -46,7 +46,7 @@ class Data extends CI_Controller
 		$data['title'] = 'Admin Siberhyl - Tambah Kelas';
 		$data['content'] = 'admin/contents/data/v_tambah_kelas';
 		$data['jurusan'] = $this->master->get_tablewhere('jurusan');
-		$data['guru'] = $this->master->get_masterdata('guru');
+		$data['guru'] = $this->master->getDataGuru()->result();
 		$this->form_validation->set_rules([
 			[
 				'field' => 'index_kelas',
@@ -799,7 +799,7 @@ class Data extends CI_Controller
 		$data['title'] = 'Admin Siberyl - Data Guru';
 		$data['content'] = 'admin/contents/data/v_data_guru';
 		$data['guru'] = array();
-		$guru = $this->db->get_where('guru', ['role_id !=' => 1, 'role_id !=' => 3])->result();
+		$guru = $this->master->getDataGuru()->result();
 		if ($guru) {
 			$data['guru'] = $guru;
 		}
