@@ -62,7 +62,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 
-	<script src="<?= base_url('assets/guru/js/script_wali_kelas.js') ?>"></script>
+	<script src="<?= base_url('assets/guru/js/script_walikelas.js') ?>"></script>
+
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>

@@ -111,7 +111,7 @@ class JadwalModel extends CI_Model
 	public function getJurnalWhere(array $params)
 	{
 		$select = "jadwal.jadwal_id, jadwal.hari, jadwal.jam_masuk, jadwal.jam_keluar, 
-		jurnal.jurnal_id, jurnal.tanggal, jurnal.pert_ke, jurnal.kd_materi, jurnal.absen_mulai, jurnal.absen_selesai,
+		jurnal.jurnal_id, jurnal.tanggal, jurnal., jurnal.kd_materi, jurnal.absen_mulai, jurnal.absen_selesai,
 		jurnal.jumlah_siswa, jurnal.jumlah_hadir, jurnal.jumlah_alpha, jurnal.jumlah_izin, 
 		jurnal.jumlah_sakit, jurnal.pembahasan, jurnal.status, jurnal.catatan_kbm, 
 		guru.guru_kode, mapel.nama_mapel, kelas.kelas_id, kelas.nama_kelas, ruangan.kode_ruang, ruangan.nama_ruang

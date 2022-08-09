@@ -2,10 +2,12 @@
 
 class JurnalMateri extends CI_Controller
 {
+
 	public function __construct()
 	{
 		parent::__construct();
 		isGuruLogin();
+		$days = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->userGuru = $this->guru->getWhere(['guru_nip' => $this->session->userdata('nip')]);
@@ -24,41 +26,62 @@ class JurnalMateri extends CI_Controller
 
 	public function index()
 	{
+		$days = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
 		$data['tahun_ajar'] = $this->tahun_ajar;
 		$data['guru'] = $this->userGuru;
 		$data['wali'] = $this->guru->getWaliKelas($data['guru']->guru_nip);
 		$data['jurnal'] = array();
-		$jadwal = $this->jadwal->getJadwalHariIni([
-			'jadwal.kelas_id' => $data['wali']->kelas_id,
-		])->result();
-		foreach ($jadwal as $value) {
-			$jurnal = $this->master->getJurnalAbsensi($value->jadwal_id);
-			foreach ($jurnal as $row) {
-				$jurnal_[] = $row;
+		$jurnal = $this->guru->getJurnalWali($data['wali']->kelas_id);
+		if ($jurnal) {
+			$no = 1;
+			foreach ($jurnal as $value) {
+				$result['nomor'] = $no++;
+				$result['hari']  =   $days[(int)date("w", strtotime($value->tanggal))];
+				$result['tanggal'] = date('d-m-Y', strtotime($value->tanggal));
+				$result['guru'] = $value->guru_kode;
+				$result['mapel'] = $value->nama_mapel;
+				$result['kelas'] = $value->nama_kelas;
+				$result['pert'] = $value->pertemuan;
+				$result['pembahasan'] = $value->pembahasan;
+				$result['id'] = $value->jurnal_id;
+				if ($value->status == 0) {
+					$bg = 'btn-outline-danger text-danger';
+					$st = 'Belum Dilihat';
+					$s = $value->status;
+				} else {
+					$bg = 'btn-outline-success text-success';
+					$st = 'Sudah Dilihat';
+					$s = $value->status;
+				}
+				$result['status'] = ['bg' => $bg, 'st' => $st, 's' => $s];
+				$ress_[] = $result;
 			}
 		}
-		$data['jurnal'] = $jurnal_;
+		$data['jurnal'] = $ress_;
 		$data['title'] = 'Jurnal Materi';
 		$data['content'] = 'wali_kelas/contents/jurnal_materi/v_jurnal_materi';
 		$this->load->view('wali_kelas/layout/wrapper', $data, FALSE);
 	}
 
-	public function detail_jurnal($jurnal_id = false)
+	public function detail_jurnal()
 	{
-		$jurnal_id = $this->secure->decrypt_url($jurnal_id);
-		$jurnal = $this->master->getJurnalWhere(['jurnal_id' => $jurnal_id]);
-		$data['title'] = 'Jurnal Materi';
-		$data['result'] = $jurnal;
+		$id = $this->input->get('id');
 		$data['guru'] = $this->userGuru;
-		$data['title'] = 'Detail Jurnal Materi';
-		$data['content'] = 'wali_kelas/contents/jurnal_materi/v_detail_jurnal_materi';
+		$jurnal = $this->master->getJurnalWhere(['jurnal_id' => $id])->row();
+		if (isset($id) && $jurnal) {
+			$data['jurnal'] = $jurnal;
+			$data['title'] = 'Detail Jurnal Materi';
+			$data['content'] = 'wali_kelas/contents/jurnal_materi/v_detail_jurnal_materi';
+		} else {
+			$data['title'] = 'Not Found';
+			$data['content'] = 'guru/contents/eror/v_not_found';
+		}
 		$this->load->view('wali_kelas/layout/wrapper', $data, FALSE);
 	}
 
 	public function show_jurnal()
 	{
 		$jurnal_id = $this->input->post('jurnal_id', true);
-		$jurnal_id = $this->secure->decrypt_url($jurnal_id);
 		$jurnal = $this->db->select('status')->where('jurnal_id', $jurnal_id)->get('jurnal')->row();
 		$status = $jurnal->status;
 		$status = $status + 1;

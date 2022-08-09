@@ -84,12 +84,12 @@ $(document).ready(function () {
 				data: dataJson,
 				success: function (data) {
 					window.location =
-						BASEURL + "wali-kelas/jurnal_materi/detail_jurnal/" + jurnal_id;
+						BASEURL + "wali-kelas/jurnal_materi/detail_jurnal?id=" + jurnal_id;
 				},
 			});
 		} else {
 			window.location =
-				BASEURL + "wali-kelas/jurnal_materi/detail_jurnal/" + jurnal_id;
+				BASEURL + "wali-kelas/jurnal_materi/detail_jurnal?id=" + jurnal_id;
 		}
 	});
 });

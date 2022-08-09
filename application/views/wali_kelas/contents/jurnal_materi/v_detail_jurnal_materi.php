@@ -63,7 +63,7 @@
 									</tr>
 									<tr>
 										<th scope="row">Pertemuan Ke-</th>
-										<td><?= $jurnal->pert_ke ?></td>
+										<td><?= $jurnal->pertemuan ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Ruang Kelas</th>
@@ -83,19 +83,19 @@
 									</tr>
 									<tr>
 										<th scope="row">Hadir</th>
-										<td><?= $jurnal->jumlah_hadir ?></td>
+										<td><?= $jurnal->hadir ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Alpa</th>
-										<td><?= $jurnal->jumlah_alpha ?></td>
+										<td><?= $jurnal->alpha ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Izin</th>
-										<td><?= $jurnal->jumlah_izin ?></td>
+										<td><?= $jurnal->izin ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Sakit</th>
-										<td><?= $jurnal->jumlah_sakit ?></td>
+										<td><?= $jurnal->sakit ?></td>
 									</tr>
 									<tr>
 										<th scope="row">Catatan</th>
@@ -105,7 +105,7 @@
 							</table>
 							<hr class="mt-n3">
 							<div class="button-action d-flex mb-3 mt-2">
-								<a href="<?= base_url('wali_kelas/jurnal_materi') ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded ml-3 px-3">Kembali</a>
+								<a href="<?= base_url('wali-kelas/jurnal_materi') ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded ml-3 px-3">Kembali</a>
 							</div>
 						</div>
 					</div>

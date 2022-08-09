@@ -645,4 +645,26 @@ class GuruModel extends CI_Model
 		$this->db->where('kelas.guru_nip', $nip);
 		return $this->db->get()->row();
 	}
+
+	public function getJurnalWali($kelas)
+	{
+		$this->db->select("
+			guru.guru_kode,
+			kelas.nama_kelas,
+			mapel.nama_mapel,
+			jurnal.jurnal_id,
+			jurnal.tanggal,
+			jurnal.pertemuan,
+			jurnal.pembahasan,
+			jurnal.status
+		");
+		$this->db->from('jadwal');
+		$this->db->join('jurnal', 'jurnal.jadwal_id=jadwal.jadwal_id', 'right');
+		$this->db->join('kelas', 'kelas.kelas_id=jadwal.kelas_id');
+		$this->db->join('guru', 'guru.guru_nip=jadwal.guru_nip');
+		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
+		$this->db->where('kelas.kelas_id', $kelas);
+		$this->db->order_by('tanggal', 'DESC');
+		return $this->db->get()->result();
+	}
 }
