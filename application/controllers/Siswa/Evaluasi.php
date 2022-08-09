@@ -28,8 +28,6 @@ class Evaluasi extends CI_Controller
 
 	public function index($id = false)
 	{
-		// var_dump($this->get_today_date);
-		// die;
 		$siswa_ = $this->userSiswa;
 		if ($id) {
 			$date = date('Y-m-d');
@@ -38,6 +36,7 @@ class Evaluasi extends CI_Controller
 			$mapel = $this->siswa->get_jadwal_mapel($id_);
 			$evaluasi = $this->siswa->get_evaluasi($id_);
 			$data['evaluasi'] = array();
+			$data['nilai'] = array();
 			if ($evaluasi) {
 				$no1 = 1;
 				foreach ($evaluasi as $key => $value) {
