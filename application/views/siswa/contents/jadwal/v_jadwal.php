@@ -47,8 +47,8 @@ $CI->load->model('JadwalModel', 'jadwal', true); ?>
 					<div class="card shadow p-3" data-toggle="collapse" href="#pembelajaran-sekarang" role="button" aria-expanded="false" aria-controls="pembelajaran-sekarang">
 						<div class="jadwal">
 							<div class="mapel">
-								<div class="d-flex justify-content-lg-start">
-									<img role="button" src="<?= ($nowStudying->profile == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $nowStudying->profile) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $nowStudying->guru_nama ?>">
+								<summary class="d-flex justify-content-lg-start">
+									<img role="button" src="<?= ($nowStudying->profile == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $nowStudying->profile) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $nowStudying->guru_nama ?>" style="width:60px; height:45px;">
 									<div class="mapel w-100">
 										<center>
 											<p><?= $nowStudying->nama_mapel ?></p>
@@ -74,7 +74,7 @@ $CI->load->model('JadwalModel', 'jadwal', true); ?>
 											</div>
 										</div>
 									</a>
-								</div>
+								</summary>
 								<div class="ket-mapel">
 									<div class="d-flex justify-content-start">
 										<img src="<?= base_url('assets/siswa/icons/guru.png') ?>" alt="">
@@ -128,7 +128,7 @@ $CI->load->model('JadwalModel', 'jadwal', true); ?>
 											<a href="<?= base_url('siswa/diskusi/ruang_diskusi/' . $this->secure->encrypt_url($nowStudying->jadwal_id)) ?>">
 												<div class="menu">
 													<div class="card py-1 mt-2 d-flex align-items-center mb-3">
-														<span class="badge-info-ds"> </span>
+														<!-- <span class="badge-info-ds"> </span> -->
 														<img src="<?= base_url('assets/siswa/icons/diskusi.png') ?>" alt="">
 														<p class="my-auto pt-1">Diskusi</p>
 													</div>
@@ -182,7 +182,7 @@ $CI->load->model('JadwalModel', 'jadwal', true); ?>
 								<div class="mapel mt-3" data-toggle="collapse" href="#collapse-<?= $study->jadwal_id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $study->jadwal_id ?>">
 									<div class="card shadow p-2">
 										<div class="d-flex justify-content-lg-start">
-											<img role="button" src="<?= ($study->profile == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $study->profile) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $study->guru_nama ?>">
+											<img role="button" src="<?= ($study->profile == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $study->profile) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $study->guru_nama ?>" >
 											<div class="mapel w-100">
 												<center>
 													<p id="mapel"><?= $study->nama_mapel ?></p>
@@ -264,7 +264,7 @@ $CI->load->model('JadwalModel', 'jadwal', true); ?>
 												<a href="<?= base_url('siswa/diskusi/ruang_diskusi/' . $this->secure->encrypt_url($study->jadwal_id)) ?>">
 													<div class="menu">
 														<div class="card py-1 mt-2 d-flex align-items-center mb-3">
-															<span class="badge-info-ds"> </span>
+															<!-- <span class="badge-info-ds"> </span> -->
 															<img src="<?= base_url('assets/siswa/icons/diskusi.png') ?>" alt="">
 															<p class="my-auto pt-1">Diskusi </p>
 														</div>

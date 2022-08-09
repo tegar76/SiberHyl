@@ -5,7 +5,7 @@
 	<div class="page-breadcrumb">
 		<div class="row">
 			<div class="col-7 align-self-center">
-				<h3 class="page-title"><?= $title . ' Kelas ' ?> <?= (!empty($studying)) ? $studying->nama_kelas : '-' ?></h3>
+				<h3 class="page-title"><?= $title ?></h3>
 				<div class="d-flex align-items-center">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb m-0 p-0">
@@ -43,7 +43,7 @@
 									<div class="mapel">
 										<div class="card shadow-sm p-3" data-toggle="collapse" href="#pembelajaran-sekarang" role="button" aria-expanded="false" aria-controls="pembelajaran-sekarang">
 											<div class="d-flex justify-content-lg-start mt-1">
-												<img role="button" src="<?= ($studying->profile == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $studying->profile) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $studying->guru_nama ?>">
+												<img role="button" src="<?= ($studying->profile == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $studying->profile) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $studying->guru_nama ?>" style="width:60px; height:45px;">
 												<div class="mapel w-100">
 													<center>
 														<p><?= $studying->nama_mapel ?></p>
@@ -107,7 +107,7 @@
 													<a href="<?= base_url('guru/pembelajaran/diskusi/' .  $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
-																<span class="badge-info-ds"> </span>
+																<!-- <span class="badge-info-ds"> </span> -->
 																<img src="<?= base_url('assets/siswa/icons/diskusi.png') ?>" alt="">
 																<p class="my-auto pt-1">Diskusi</p>
 															</div>
@@ -136,7 +136,7 @@
 				</div>
 			<?php else : ?>
 				<div class="row">
-					<div class="col-md-4 mb-3">
+					<div class="col-md-12 mb-3">
 						<div class="alert-pembelajaran alert border-blue-black" role="alert">
 							Tidak ada pembelajaran yang sedang berlangsung !!
 						</div>
@@ -159,9 +159,9 @@
 									<?php foreach ($value['sch'] as $row) : ?>
 										<div class="jadwal mt-2">
 											<div class="mapel">
-												<div class="card shadow-sm p-3" data-toggle="collapse" href="#sch-<?= $row['id'] ?>" role="button" aria-expanded="false" aria-controls="<?= $row['id'] ?>">
+												<summary class="card shadow-sm p-3" data-toggle="collapse" href="#sch-<?= $row['id'] ?>" role="button" aria-expanded="false" aria-controls="<?= $row['id'] ?>">
 													<div class="d-flex justify-content-lg-start mt-1">
-														<img role="button" src="<?= ($row['foto'] == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $row['foto']) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $row['nama'] ?>">
+														<img role="button" src="<?= ($row['foto'] == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $row['foto']) ?>" alt="" class="rounded-circle mr-3" data-toggle="tooltip" data-placement="top" title="<?= $row['nama'] ?>"  style="width:60px; height:45px;">
 														<div class="mapel w-100">
 															<center>
 																<p><?= $row['mapel'] ?></p>
@@ -186,7 +186,7 @@
 															<p><?= $row['kelas'] ?></p>
 														</div>
 													</div>
-												</div>
+												</summary>
 											</div>
 											<div class="features-menu collapse multi-collapse" id="sch-<?= $row['id'] ?>">
 												<div class="card px-2 mt-n5">
@@ -225,7 +225,7 @@
 															<a href="<?= base_url('guru/pembelajaran/diskusi/' . $row['id']) ?>">
 																<div class="menu">
 																	<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
-																		<span class="badge-info-ds"> </span>
+																		<!-- <span class="badge-info-ds"> </span> -->
 																		<img src="<?= base_url('assets/siswa/icons/diskusi.png') ?>" alt="">
 																		<p class="my-auto pt-1">Diskusi</p>
 																	</div>

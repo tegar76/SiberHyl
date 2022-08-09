@@ -129,8 +129,8 @@
 										<th style="width:20%;">Mapel</th>
 										<th style="width:12%;">Jam Pelajaran</th>
 										<th style="width:12%;">Ruang</th>
-										<th style="width:12%;">Pertemuan Ke-</th>
-										<th style="width:10%;">Tanggal</th>
+										<th style="width:14%;">Pertemuan Ke-</th>
+										<th style="width:13%;">Tanggal</th>
 										<th style="width:10%;">Mulai</th>
 										<th style="width:10%;">Selesai</th>
 									</tr>

@@ -48,7 +48,7 @@
 							<div class="col-md-3 text-center mb-3">
 								<div class="card shadow py-4">
 									<div class="img-photo justify-content-center">
-										<img class="mx-auto d-block rounded-circle" src="<?= ($guru->profile != 'default_profile.png') ? base_url('storage/guru/profile/' . $guru->profile) : base_url('assets/siswa/img/profile-default-siswa.png') ?>" width="150" alt="<?= $guru->guru_nama ?>">
+										<img class="mx-auto d-block rounded-circle" src="<?= ($guru->profile != 'default_profile.png') ? base_url('storage/guru/profile/' . $guru->profile) : base_url('assets/siswa/img/profile.png') ?>" width="150" height="150" alt="<?= $guru->guru_nama ?>">
 									</div>
 								</div>
 							</div>

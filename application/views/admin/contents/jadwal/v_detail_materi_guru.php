@@ -54,7 +54,7 @@
 									<table class="table">
 										<tbody>
 											<tr class="table-borderless">
-												<th scope="row" class="col-sm-8">Kode Guru</th>
+												<th scope="row">Kode Guru</th>
 												<td><?= $materi->kode_g ?></td>
 											</tr>
 											<tr>

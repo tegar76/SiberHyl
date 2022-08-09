@@ -46,7 +46,7 @@
 							<div class="col-md-4 text-center mb-3">
 								<div class="card shadow py-4">
 									<div class="img-photo justify-content-center">
-										<img class="mx-auto d-block rounded-circle" src="<?= ($siswa->siswa_foto != 'default_foto.png') ? base_url('storage/siswa/profile/' . $siswa->siswa_foto) : base_url('assets/siswa/img/profile-default-siswa.png') ?>" width="150" alt="<?= $siswa->siswa_nama ?>">
+										<img class="mx-auto d-block rounded-circle" src="<?= ($siswa->siswa_foto != 'default_foto.png') ? base_url('storage/siswa/profile/' . $siswa->siswa_foto) : base_url('assets/siswa/img/profile.png') ?>" width="150" height="150" alt="<?= $siswa->siswa_nama ?>">
 									</div>
 									<div class="line">
 										<hr>

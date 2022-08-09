@@ -46,7 +46,7 @@
                                     <div class="img-photo justify-content-center">
                                         <?php if ($guru->profile == 'default_profile.png') : ?>
                                         <img class="mx-auto d-block rounded-circle"
-                                            src="<?= base_url('assets/siswa/img/profile-default-siswa.png') ?>"
+                                            src="<?= base_url('assets/siswa/img/profile.png') ?>"
                                             width="150" alt="Foto Profile guru">
                                         <?php else : ?>
                                         <img class="mx-auto d-block rounded-circle"

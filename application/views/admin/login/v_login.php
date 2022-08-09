@@ -22,7 +22,7 @@
 	<link rel="stylesheet" href="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.min.css">
 	<script src="<?= base_url('assets/') ?>plugin/sweetalert2/sweetalert2.all.min.js"></script>
 	<!-- style -->
-	<link rel="stylesheet" href="<?= base_url('assets/login/css/styles.css') ?>">
+	<link rel="stylesheet" href="<?= base_url('assets/login/css/styless.css') ?>">
 
 	<title>Login Admin</title>
 </head>

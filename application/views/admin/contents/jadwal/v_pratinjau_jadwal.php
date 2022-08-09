@@ -102,7 +102,7 @@
 														<div class="mapel">
 															<div class="card shadow-sm p-2">
 																<div class="d-flex justify-content-lg-start">
-																	<img role="button" src="<?= ($study['foto'] == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $study['foto']) ?>" alt="" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="<?= $study['nama'] ?>">
+																	<img role="button" src="<?= ($study['foto'] == 'default_profile.png') ? base_url('assets/siswa/img/profile.png') : base_url('storage/guru/profile/' . $study['foto']) ?>" alt="" class="rounded-circle" data-toggle="tooltip" data-placement="top" title="<?= $study['nama'] ?>" style="width:60px; height:45px;">
 																	<div class="mapel w-100">
 																		<center>
 																			<p><?= $study['mapel'] ?></p>
