@@ -8,33 +8,26 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+		
 		<!-- style -->
 		<style>
-			body {
-				width: 230mm;
-				height: 100%;
-				margin: 0 auto;
-				padding: 0;
-				font-size: 12pt;
-				background: rgb(204, 204, 204);
-			}
-
 			* {
 				box-sizing: border-box;
 				-moz-box-sizing: border-box;
 			}
 
 			.main-page {
-				width: 210mm;
-				min-height: 297mm;
 				margin: 10mm auto;
 				background: white;
 				box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 			}
 
 			.sub-page {
-				padding: 1cm;
-				height: 297mm;
+				padding-left: 2cm;
+				padding-right: 2cm;
+				padding-top: 1cm;
+				padding-bottom: 1cm;
+			
 			}
 
 			@page {
@@ -43,13 +36,6 @@
 			}
 
 			@media print {
-
-				html,
-				body {
-					width: 210mm;
-					height: 297mm;
-				}
-
 				.main-page {
 					margin: 0;
 					border: initial;
@@ -73,9 +59,9 @@
 			}
 
 			.sub-title {
-				font: 15px;
+				font: 16px;
 				color: #444444;
-				padding-bottom: 10px;
+				padding-bottom: 8px;
 			}
 
 			.date {
@@ -85,7 +71,7 @@
 			}
 
 			.atribute {
-				font-size: 14px;
+				font-size: 15px;
 				color: #4b4b4b;
 			}
 
@@ -94,18 +80,8 @@
 				margin-left: 10px;
 			}
 
-			.button {
-				background-color: #4CAF50;
-				/* Green */
-				border: none;
-				color: white;
-				padding: 10px;
-				text-align: center;
-				text-decoration: none;
-				font-size: 15px;
-				border-radius: 5px;
-				margin-left: 40px;
-				margin-top: 40px;
+			table {
+				width: 100%;
 			}
 
 			table,
@@ -115,7 +91,7 @@
 				border-collapse: collapse;
 				font-size: 14px;
 				color: #4b4b4b;
-				margin-top: 40px;
+				margin-top: 20px;
 			}
 		</style>
 
@@ -126,8 +102,6 @@
 	<body>
 
 		<div class="container">
-			<br>
-			<a role="button" href="" class="button">Unduh</a>
 			<div class="main-page">
 				<div class="sub-page">
 					<div class="title-page">
@@ -189,13 +163,6 @@
 				</div>
 			</div>
 		</div>
-
-		<footer>
-			<center>
-				<p>&copy; 2022 Team Paradoks Technology</p>
-			</center>
-		</footer>
-
 	</body>
 
 </html>

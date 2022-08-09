@@ -21,6 +21,10 @@
 	<div class="input-group mb-3">
 		<input type="text" name="mapel" id="mapel" class="form-control" value="<?= $result->nama_mapel ?>" readonly>
 	</div>
+	<label for="format_print">Format</label>
+	<div class="input-group mb-3">
+		<input type="text" name="format_export" id="format_print" class="form-control" value="pdf" readonly>
+	</div>
 	<label for="pert_awal">Pertemuan Ke-</label>
 	<div class="input-group mb-3">
 		<select name="pert_awal" id="pert_awal" class="form-control custom-select <?= (form_error('pert_awal')) ? 'is-invalid' : '' ?>">
@@ -44,10 +48,6 @@
 		<div id="pert_akhir" class="invalid-feedback">
 			<?= form_error('pert_akhir', '<div class="text-danger">', '</div>') ?>
 		</div>
-	</div>
-	<label for="format_print">Format</label>
-	<div class="input-group mb-3">
-		<input type="text" name="format_export" id="format_print" class="form-control" value="pdf" readonly>
 	</div>
 	<div class="btn-aksi mb-4">
 		<button type="submit" name="print" class="btn btn-sm btn-primary rounded px-4 py-1 mr-3">Kirim</button>
