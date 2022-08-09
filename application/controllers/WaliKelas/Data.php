@@ -6,6 +6,7 @@ class Data extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		isWaliKelasLogin();
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('SiswaModel', 'siswa', true);

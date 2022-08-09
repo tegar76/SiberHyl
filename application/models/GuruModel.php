@@ -646,7 +646,7 @@ class GuruModel extends CI_Model
 		return $this->db->get()->row();
 	}
 
-	public function getJurnalWali($kelas)
+	public function getJurnalWali($kelas, $limit = null)
 	{
 		$this->db->select("
 			guru.guru_kode,
@@ -664,7 +664,10 @@ class GuruModel extends CI_Model
 		$this->db->join('guru', 'guru.guru_nip=jadwal.guru_nip');
 		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
 		$this->db->where('kelas.kelas_id', $kelas);
-		$this->db->order_by('tanggal', 'DESC');
+		$this->db->order_by('jurnal_id', 'DESC');
+		if ($limit) {
+			$this->db->limit($limit);
+		}
 		return $this->db->get()->result();
 	}
 }

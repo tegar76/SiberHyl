@@ -5,7 +5,7 @@ class Materi extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		checkKepsekLogin();
+		checkAdminLogin();
 		$this->load->model('MasterModel', 'master', true);
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$tahun_ajar = $this->master->getActiveTahunAkademik();
@@ -18,7 +18,6 @@ class Materi extends CI_Controller
 		} else {
 			$this->tahun_ajar = $tahun_ajar;
 		}
-		checkAdminLogin();
 	}
 
 	public function message($title = NULL, $text = NULL, $type = NULL)

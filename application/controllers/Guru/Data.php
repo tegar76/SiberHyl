@@ -93,10 +93,10 @@ class Data extends CI_Controller
 			$data['title'] = 'Data Materi';
 			$data['content'] = 'guru/contents/data/v_data_materi_guru';
 			$data['materi'] = $this->guru->getMateriGuru($data['guru']->guru_id);
-		} elseif ($user == 'admin') {
-			$data['title'] = 'Data Materi (Admin)';
-			$data['content'] = 'guru/contents/data/v_data_materi_admin';
-			$data['materi'] = $this->master->materiPembelajaranAdmin();
+			// } elseif ($user == 'admin') {
+			// 	$data['title'] = 'Data Materi (Admin)';
+			// 	$data['content'] = 'guru/contents/data/v_data_materi_admin';
+			// 	$data['materi'] = $this->master->materiPembelajaranAdmin();
 		} else {
 			$data['title'] = '404 Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';

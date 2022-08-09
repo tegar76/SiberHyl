@@ -6,8 +6,8 @@ class JurnalMateri extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		isGuruLogin();
-		$days = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
+		isWaliKelasLogin();
+
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->userGuru = $this->guru->getWhere(['guru_nip' => $this->session->userdata('nip')]);
@@ -56,8 +56,8 @@ class JurnalMateri extends CI_Controller
 				$result['status'] = ['bg' => $bg, 'st' => $st, 's' => $s];
 				$ress_[] = $result;
 			}
+			$data['jurnal'] = $ress_;
 		}
-		$data['jurnal'] = $ress_;
 		$data['title'] = 'Jurnal Materi';
 		$data['content'] = 'wali_kelas/contents/jurnal_materi/v_jurnal_materi';
 		$this->load->view('wali_kelas/layout/wrapper', $data, FALSE);

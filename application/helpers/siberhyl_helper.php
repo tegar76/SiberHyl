@@ -79,6 +79,14 @@ function isGuruLogin()
 
 function isWaliKelasLogin()
 {
+	$CI = &get_instance();
+	$wali = $CI->session->userdata('level');
+	if (!$CI->session->userdata('logged_in')) {
+		return redirect('login');
+	} elseif ($wali != 'wali-kelas') {
+		$CI->session->sess_destroy();
+		return redirect('login');
+	}
 }
 
 function checkKepsekLogin()

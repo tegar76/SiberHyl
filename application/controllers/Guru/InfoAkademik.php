@@ -25,9 +25,9 @@ class InfoAkademik extends CI_Controller
 	{
 		$infoAkademik = $this->db->get_where('infoakademik', ['slug_judul' => $slug])->row();
 		if ($slug && $infoAkademik) {
-			$pdf = FCPATH . './storage/info/' . $infoAkademik->file_info;
+			$pdf = FCPATH . './storage/info_akademik/' . $infoAkademik->file_info;
 			if (file_exists($pdf)) {
-				$data['pdf'] = base_url('storage/info/') . $infoAkademik->file_info;
+				$data['pdf'] = base_url('storage/info_akademik/') . $infoAkademik->file_info;
 				$this->load->view('pdf_viewer/pdf_viewer', $data);
 			} else {
 				show_404();

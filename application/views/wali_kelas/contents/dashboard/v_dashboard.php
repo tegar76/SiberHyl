@@ -70,18 +70,17 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php $no = 1; ?>
 									<?php foreach ($jurnal as $row => $value) : ?>
 										<tr>
-											<td><?= $no++ ?></td>
-											<td><?= $value->hari ?></td>
-											<td><?= date('d-m-Y', strtotime($value->tanggal)) ?></td>
-											<td><?= $guru->guru_kode ?></td>
-											<td><?= $value->nama_mapel ?></td>
-											<td><?= $value->nama_kelas ?></td>
-											<td><?= $value->pert_ke ?></td>
-											<td><?= $value->pembahasan ?></td>
-											<td><a id="id_bdt" href="#" class="btn btn-sm detail-jurnal <?= ($value->status == 0) ? 'btn-outline-danger text-danger' : 'btn-outline-success text-success' ?>   btn-rounded-sm " jurnal-id="<?= $this->secure->encrypt_url($value->jurnal_id) ?>" status="<?= $value->status ?>"><?= ($value->status == 0) ? 'Belum Dilihat' : 'Sudah Dilihat' ?></a></td>
+											<td><?= $value['nomor'] ?></td>
+											<td><?= $value['hari'] . ', ' . $value['tanggal'] ?></td>
+											<td><?= $value['guru'] ?></td>
+											<td><?= $value['mapel'] ?></td>
+											<td><?= $value['kelas'] ?></td>
+											<td><?= $value['pert'] ?></td>
+											<td><?= $value['pembahasan'] ?></td>
+											<input type="hidden" class="csrf_token" name="<?= $this->security->get_csrf_token_name() ?>" value="<?= $this->security->get_csrf_hash() ?>">
+											<td><a id="id_bdt" href="javascript:void(0)" class="btn btn-sm detail-jurnal <?= $value['status']['bg'] ?> btn-rounded-sm " jurnal-id="<?= $value['id'] ?>" status="<?= $value['status']['s'] ?>"><?= $value['status']['st']; ?></a></td>
 										</tr>
 									<?php endforeach ?>
 								</tbody>
