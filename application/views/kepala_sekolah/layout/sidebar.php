@@ -32,7 +32,7 @@
 							<a href="< base_url('kepala_sekolah/materi/dataMateriAdmin') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Admin)</span></a>
 						</li> -->
 						<li class="sidebar-item">
-							<a href="<?= base_url('kepala_sekolah/materi/data_materi') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Guru)</span></a>
+							<a href="<?= base_url('kepala_sekolah/materi/materi_guru') ?>" class="sidebar-link"><span class="hide-menu"> Data Materi (Guru)</span></a>
 						</li>
 					</ul>
 				</li>
@@ -48,14 +48,14 @@
 				</li>
 				<li class="list-divider"></li>
 				<li class="sidebar-item <?= ($this->uri->segment(2) == "") ? 'selected' : '' ?>">
-					<a class="sidebar-link sidebar-link" href="<?= base_url('kepala_sekolah/super_visor') ?>" aria-expanded="false">
+					<a class="sidebar-link sidebar-link" href="<?= base_url('kepala_sekolah/super-visor') ?>" aria-expanded="false">
 						<i data-feather="airplay" class="feather-icon"></i>
 						<span class="hide-menu">Super Visor
 						</span>
 					</a>
 				</li>
 				<li class="list-divider"></li>
-				<li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#" id="logout" aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span class="hide-menu">Logout</span></a></li>
+				<li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="javascript:void(0)" id="logout-kepsek" aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span class="hide-menu">Logout</span></a></li>
 				<li class="list-divider"></li>
 			</ul>
 		</nav>

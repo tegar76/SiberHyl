@@ -18,7 +18,11 @@ class SuperVisor extends CI_Controller
 		}
 		$hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
 		$this->hariIni = $hari[(int)date('w')];
-		checkAdminLogin();
+		if ($this->session->userdata('level') == 'master') {
+			checkAdminLogin();
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			checkKepsekLogin();
+		}
 	}
 
 	public function index()
@@ -82,7 +86,12 @@ class SuperVisor extends CI_Controller
 			$data['schedule'] = null;
 			$data['days'] = $days;
 		}
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 
 	public function absensi($id = false)
@@ -114,7 +123,12 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Absensi';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 
 	public function detail_absensi($id)
@@ -143,7 +157,7 @@ class SuperVisor extends CI_Controller
 				$absensi['absensi_id'] = 0;
 				$absensi['jurnal_id'] = $id;
 				if ($absx) {
-					$bukti = '<a target="_blank" href="' . base_url('guru/bukt_absensi_siswa/bukti_absen/' . $absx->bukti_absen) . '"><img src="' . base_url('assets/admin/icons/img.png') . '" alt=""></a>';
+					$bukti = '<a target="_blank" href="' . base_url($this->session->userdata('level') . '/super-visor/bukti_absen/' . $absx->bukti_absen) . '"><img src="' . base_url('assets/admin/icons/img.png') . '" alt=""></a>';
 					$absensi['pembelajaran'] = ($absx->metode_absen) ? $absx->metode_absen : '-';
 					$absensi['bukti'] = ($absx->bukti_absen) ? $bukti : '-';
 					$absensi['status_absen'] = $absx->status;
@@ -161,7 +175,12 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 
 	public function bukti_absen($file)
@@ -208,7 +227,12 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 
 	public function detail_tugas_harian($id)
@@ -263,7 +287,7 @@ class SuperVisor extends CI_Controller
 
 					$tugasx['file_tugas'] = '-';
 					if ($tugasSiswa->file_tugas_siswa) {
-						$tugasx['file_tugas'] = '<a target="_blank" href="' . base_url('master/super-visor/file_tugas_siswa/' . $type . '/' . $tugasSiswa->file_tugas_siswa) . '"><img src="' . $icon_tugas . '" alt=""></a>';
+						$tugasx['file_tugas'] = '<a target="_blank" href="' . base_url($this->session->userdata('level') . '/super-visor/file_tugas_siswa/' . $type . '/' . $tugasSiswa->file_tugas_siswa) . '"><img src="' . $icon_tugas . '" alt=""></a>';
 					}
 					$tugasx['komentar_guru'] = $tugasSiswa->komentar;
 					$tugasx['nilai_tugas'] = $tugasSiswa->nilai_tugas;
@@ -288,8 +312,12 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 
 	public function file_soal_tugas_harian($file = null)
@@ -354,7 +382,12 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 
 	public function detail_evaluasi($id)
@@ -406,7 +439,7 @@ class SuperVisor extends CI_Controller
 
 					$result['file_evaluasi_siswa'] = '-';
 					if ($eval_->file_evaluasi_siswa) {
-						$result['file'] = '<a target="_blank" href="' . base_url('master/super-visor/file_evaluasi_siswa/' . $type . '/' . $eval_->file_evaluasi_siswa) . '"><img src="' . $icon_file . '" alt=""></a>';
+						$result['file'] = '<a target="_blank" href="' . base_url($this->session->userdata('level') . '/super-visor/file_evaluasi_siswa/' . $type . '/' . $eval_->file_evaluasi_siswa) . '"><img src="' . $icon_file . '" alt=""></a>';
 					}
 					$result['komentar'] = $eval_->komentar;
 					$result['nilai'] = $eval_->nilai;
@@ -435,7 +468,12 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 
 	public function file_soal_evaluasi($file)
@@ -499,7 +537,12 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 
 	public function detail_diskusi($id)
@@ -515,7 +558,12 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 
 	public function get_komentar()
@@ -643,7 +691,12 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 
 	public function detail_jurnal()
@@ -658,6 +711,11 @@ class SuperVisor extends CI_Controller
 			$data['title'] = 'Not Found';
 			$data['content'] = 'guru/contents/eror/v_not_found';
 		}
-		$this->load->view('admin/layout/wrapper', $data, FALSE);
+		$data['level'] = $this->session->userdata('level');
+		if ($this->session->userdata('level') == 'master') {
+			$this->load->view('admin/layout/wrapper', $data, FALSE);
+		} elseif ($this->session->userdata('level') == 'kepala_sekolah') {
+			$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
+		}
 	}
 }

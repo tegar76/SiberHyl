@@ -16,9 +16,9 @@
 				<div class="d-flex align-items-center">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb m-0 p-0">
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor') ?>" class="text-muted">Super Visor</a></li>
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor?kelas=' . $jadwal->kode_kelas) ?>" class="text-muted"><?= $jadwal->nama_kelas ?></a></li>
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor/tugas_harian/' . $jadwal->jadwal_id) ?>" class="text-muted">Tugas Harian</a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor') ?>" class="text-muted">Super Visor</a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor?kelas=' . $jadwal->kode_kelas) ?>" class="text-muted"><?= $jadwal->nama_kelas ?></a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor/tugas_harian/' . $jadwal->jadwal_id) ?>" class="text-muted">Tugas Harian</a></li>
 							<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 						</ol>
 					</nav>
@@ -127,7 +127,7 @@
 										<td><?= $tugas->deskripsi ?></td>
 										<td><?= $tugas->pertemuan ?></td>
 										<td><?= date('d - m - Y, H:i', strtotime($tugas->deadline)) ?> WIB</td>
-										<td><a target="_blank" href="<?= base_url('master/super-visor/file_soal_tugas_harian/'. $tugas->file_tugas)  ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
+										<td><a target="_blank" href="<?= base_url($level . '/super-visor/file_soal_tugas_harian/' . $tugas->file_tugas)  ?>"><img src="<?= base_url('assets/admin/icons/pdf.png') ?>" alt=""></a></td>
 									</tr>
 								</tbody>
 							</table>

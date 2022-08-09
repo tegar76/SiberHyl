@@ -53,7 +53,7 @@ function checkAdminLogin()
 function isAdmin()
 {
 	$CI = &get_instance();
-	if ($CI->session->userdata('level') != 'admin') {
+	if ($CI->session->userdata('level') != 'master') {
 		return redirect('block');
 	}
 }

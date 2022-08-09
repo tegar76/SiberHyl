@@ -261,9 +261,17 @@ $route['kepala_sekolah/master_data/(:any)/(:any)/(:any)'] = 'KepalaSekolah/Data/
 # 3. Data Materi
 $route['kepala_sekolah/materi/(:any)'] = 'KepalaSekolah/MateriPelajaran/$1';
 $route['kepala_sekolah/materi/(:any)/(:any)'] = 'KepalaSekolah/MateriPelajaran/$1/$2';
-$route['kepala_sekolah/materi/(:any)/(:any)/(:any)'] = 'KepalaSekolah/MateriPelajaran/$1/$2/$3';
-$route['kepala_sekolah/materi/(:any)/(:any)/(:any)/(:any)'] = 'KepalaSekolah/MateriPelajaran/$1/$2/$3/$4';
 
+# 4. Info Akademik
+$route['kepala_sekolah/info_akademik'] = 'KepalaSekolah/InfoAkademik';
+$route['kepala_sekolah/info_akademik/(:any)'] = 'KepalaSekolah/InfoAkademik/$1';
+$route['kepala_sekolah/info_akademik/(:any)/(:any)'] = 'KepalaSekolah/InfoAkademik/$1/$2';
+
+# 5. Super Visor Kepala Sekolah
+$route['kepala_sekolah/super-visor'] = 'Admin/SuperVisor';
+$route['kepala_sekolah/super-visor/(:any)'] = 'Admin/SuperVisor/$1';
+$route['kepala_sekolah/super-visor/(:any)/(:any)'] = 'Admin/SuperVisor/$1/$2';
+$route['kepala_sekolah/super-visor/(:any)/(:any)/(:any)'] = 'Admin/SuperVisor/$1/$2/$3';
 /* 
  * End of routing Kepala Sekolah
 */

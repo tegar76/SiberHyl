@@ -16,9 +16,9 @@
 				<div class="d-flex align-items-center">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb m-0 p-0">
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor') ?>" class="text-muted">Super Visor</a></li>
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor?kelas=' . $setting_abs->kode_kelas) ?>" class="text-muted"><?= $setting_abs->nama_kelas ?></a></li>
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor/absensi/' . $setting_abs->jadwal_id) ?>" class="text-muted">Absensi</a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor') ?>" class="text-muted">Super Visor</a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor?kelas=' . $setting_abs->kode_kelas) ?>" class="text-muted"><?= $setting_abs->nama_kelas ?></a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor/absensi/' . $setting_abs->jadwal_id) ?>" class="text-muted">Absensi</a></li>
 							<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 						</ol>
 					</nav>

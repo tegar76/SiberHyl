@@ -16,9 +16,9 @@
 				<div class="d-flex align-items-center">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb m-0 p-0">
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor') ?>" class="text-muted">Super Visor</a></li>
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor?kelas=' . $jadwal->kode_kelas) ?>" class="text-muted"><?= $jadwal->nama_kelas ?></a></li>
-							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor/evaluasi/' . $jadwal->jadwal_id) ?>" class="text-muted">Evaluasi</a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor') ?>" class="text-muted">Super Visor</a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor?kelas=' . $jadwal->kode_kelas) ?>" class="text-muted"><?= $jadwal->nama_kelas ?></a></li>
+							<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor/evaluasi/' . $jadwal->jadwal_id) ?>" class="text-muted">Evaluasi</a></li>
 							<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 						</ol>
 					</nav>
@@ -132,7 +132,7 @@
 										<td><?= date('H:i', strtotime($evaluasi->waktu_selesai)) . " WIB" ?> </td>
 										<td><?= date('H:i', strtotime($evaluasi->waktu_deadline)) . " WIB" ?> </td>
 										<td>
-											<a target="_blank" href="<?= base_url('master/super-visor/file_soal_evaluasi/' . $evaluasi->file_evaluasi) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
+											<a target="_blank" href="<?= base_url($level . '/super-visor/file_soal_evaluasi/' . $evaluasi->file_evaluasi) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded mr-1"><i class="fa fa-search text-white" data-toggle="tooltip" data-placement="top" title="Detail"></i></a>
 
 										</td>
 									</tr>

@@ -78,7 +78,7 @@ class AuthAdmin extends CI_Controller
 						'fullName'	=> $admin->guru_nama,
 						'username'	=> $admin->username,
 						'backToken' => crypt($admin->guru_nama, ''),
-						'level'		=> 'admin',
+						'level'		=> 'master',
 						'logged_in'	=> true
 					];
 					$this->session->set_userdata($sess_);

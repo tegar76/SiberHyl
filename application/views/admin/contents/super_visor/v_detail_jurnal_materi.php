@@ -14,9 +14,9 @@
 			<div class="d-flex align-items-center">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb m-0 p-0">
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor') ?>" class="text-muted">Super Visor</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor?kelas=' . $jurnal->kode_kelas) ?>" class="text-muted"><?= $jurnal->nama_kelas ?></a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('master/super-visor/jurnal/' . $jurnal->jadwal_id) ?>" class="text-muted">Jurnal Materi</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor') ?>" class="text-muted">Super Visor</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor?kelas=' . $jurnal->kode_kelas) ?>" class="text-muted"><?= $jurnal->nama_kelas ?></a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url($level . '/super-visor/jurnal/' . $jurnal->jadwal_id) ?>" class="text-muted">Jurnal Materi</a></li>
 						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 					</ol>
 				</nav>
@@ -110,7 +110,7 @@
 								</table>
 								<hr class="mt-n3">
 								<div class="button-action d-flex mb-3 mt-2">
-									<a href="<?= base_url('master/super-visor/jurnal/' . $jurnal->jadwal_id) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded ml-3 px-3">Kembali</a>
+									<a href="<?= base_url($level . '/super-visor/jurnal/' . $jurnal->jadwal_id) ?>" class="btn btn-sm btn-primary bg-blue border-0 rounded ml-3 px-3">Kembali</a>
 								</div>
 							</div>
 						</div>

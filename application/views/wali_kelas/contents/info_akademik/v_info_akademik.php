@@ -28,7 +28,7 @@
 									<!-- TRUE -->
 									<?php foreach ($infoAkademik as $row => $value) : ?>
 										<div class="col-md-12">
-											<a target="blank" href="<?= base_url('wali-kelas/info_akademik/file_view/' . $value->slug) ?>">
+											<a target="blank" href="<?= base_url($this->session->userdata('level') . '/info_akademik/file_view/' . $value->slug) ?>">
 												<div class="media mb-2">
 													<i class='bx bx-info-square bx-md color-cyan mr-2'></i>
 													<div class="row">

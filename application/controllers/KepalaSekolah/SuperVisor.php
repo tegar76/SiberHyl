@@ -2,6 +2,24 @@
 
 class SuperVisor extends CI_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		checkKepsekLogin();
+		$this->load->model('JadwalModel', 'jadwal', true);
+		$this->load->model('MasterModel', 'master', true);
+		$tahun_ajar = $this->master->getActiveTahunAkademik();
+		if ($tahun_ajar == null) {
+			$this->tahun_ajar = [
+				'semester' => 0,
+				'tahun' => ''
+			];
+		} else {
+			$this->tahun_ajar = $tahun_ajar;
+		}
+		$hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu");
+		$this->hariIni = $hari[(int)date('w')];
+	}
 
 	public function index()
 	{
@@ -166,8 +184,4 @@ class SuperVisor extends CI_Controller
 		$data['content'] = 'kepala_sekolah/contents/super_visor/v_detail_jurnal_materi';
 		$this->load->view('kepala_sekolah/layout/wrapper', $data, FALSE);
 	}
-
-	
 }
-
-?>

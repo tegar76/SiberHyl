@@ -35,7 +35,7 @@
 			<div class="form-group col-md-4">
 				<label for="">Kelas</label>
 				<div class="input-group mb-2">
-					<select id="change-kelas-visor" class="form-control">
+					<select id="change-kelas-visor" level-user="<?= $level ?>" class="form-control">
 						<option selected value="">Pilih Kelas</option>
 						<?php foreach ($classes as $cls) : ?>
 							<?php if (isset($_GET['kelas']) && $cls->kode_kelas == $_GET['kelas']) : ?>
@@ -91,7 +91,7 @@
 										<div class="card px-3 mt-n5">
 											<div class="row ml-2">
 												<div class="section-menu mr-3">
-													<a href="<?= base_url('master/super-visor/absensi/' . $studying->jadwal_id) ?>">
+													<a href="<?= base_url($level . '/super-visor/absensi/' . $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card  py-1 mt-2 d-flex align-items-center mb-1" style="width: 55px;">
 																<img src="<?= base_url('assets/siswa/icons/cek-absen.png') ?>" alt="">
@@ -101,7 +101,7 @@
 													</a>
 												</div>
 												<div class="section-menu mr-3">
-													<a href="<?= base_url('master/super-visor/tugas_harian/' . $studying->jadwal_id) ?>">
+													<a href="<?= base_url($level . '/super-visor/tugas_harian/' . $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
@@ -111,7 +111,7 @@
 													</a>
 												</div>
 												<div class="section-menu mr-3">
-													<a href="<?= base_url('master/super-visor/evaluasi/' . $studying->jadwal_id) ?>">
+													<a href="<?= base_url($level . '/super-visor/evaluasi/' . $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -121,7 +121,7 @@
 													</a>
 												</div>
 												<div class="section-menu mr-3">
-													<a href="<?= base_url('master/super-visor/diskusi/'  . $studying->jadwal_id) ?>">
+													<a href="<?= base_url($level . '/super-visor/diskusi/'  . $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																<!-- <span class="badge-info-ds"> </span> -->
@@ -132,7 +132,7 @@
 													</a>
 												</div>
 												<div class="section-menu mr-3">
-													<a href="<?= base_url('master/super-visor/jurnal/' . $studying->jadwal_id) ?>">
+													<a href="<?= base_url($level . '/super-visor/jurnal/' . $studying->jadwal_id) ?>">
 														<div class="menu">
 															<div class="card  py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																<img src="<?= base_url('assets/siswa/icons/jurnal.png') ?>" alt="">
@@ -226,7 +226,7 @@
 													<div class="card px-2 mt-n5">
 														<div class="row ml-1">
 															<div class="section-menu mr-3">
-																<a href="<?= base_url('master/super-visor/absensi/' . $row['id']) ?>">
+																<a href="<?= base_url($level . '/super-visor/absensi/' . $row['id']) ?>">
 																	<div class="menu">
 																		<div class="card  py-1 mt-2 d-flex align-items-center mb-1" style="width: 55px;">
 																			<img src="<?= base_url('assets/siswa/icons/cek-absen.png') ?>" alt="">
@@ -236,7 +236,7 @@
 																</a>
 															</div>
 															<div class="section-menu mr-3">
-																<a href="<?= base_url('master/super-visor/tugas_harian/' . $row['id']) ?>">
+																<a href="<?= base_url($level . '/super-visor/tugas_harian/' . $row['id']) ?>">
 																	<div class="menu">
 																		<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																			<img src="<?= base_url('assets/siswa/icons/tugas.png') ?>" alt="">
@@ -246,7 +246,7 @@
 																</a>
 															</div>
 															<div class="section-menu mr-3">
-																<a href="<?= base_url('master/super-visor/evaluasi/' . $row['id']) ?>">
+																<a href="<?= base_url($level . '/super-visor/evaluasi/' . $row['id']) ?>">
 																	<div class="menu">
 																		<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																			<img src="<?= base_url('assets/siswa/icons/evaluasi.png') ?>" alt="">
@@ -256,7 +256,7 @@
 																</a>
 															</div>
 															<div class="section-menu mr-3">
-																<a href="<?= base_url('master/super-visor/diskusi/' . $row['id']) ?>">
+																<a href="<?= base_url($level . '/super-visor/diskusi/' . $row['id']) ?>">
 																	<div class="menu">
 																		<div class="card py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																			<!-- <span class="badge-info-ds"> </span> -->
@@ -267,7 +267,7 @@
 																</a>
 															</div>
 															<div class="section-menu mr-3">
-																<a href="<?= base_url('master/super-visor/jurnal/' . $row['id']) ?>">
+																<a href="<?= base_url($level . '/super-visor/jurnal/' . $row['id']) ?>">
 																	<div class="menu">
 																		<div class="card  py-1 mt-2 d-flex align-items-center mb-1" style="width:55px">
 																			<img src="<?= base_url('assets/siswa/icons/jurnal.png') ?>" alt="">

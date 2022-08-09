@@ -77,7 +77,7 @@ class AuthKepsek extends CI_Controller
 						'fullName'	=> $kepsek->guru_nama,
 						'username'	=> $kepsek->username,
 						'backToken' => crypt($kepsek->guru_nama, ''),
-						'level'		=> 'kepsek',
+						'level'		=> 'kepala_sekolah',
 						'logged_in'	=> true
 					];
 					$this->session->set_userdata($sess_);

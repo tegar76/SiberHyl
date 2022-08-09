@@ -978,7 +978,8 @@ $(document).ready(function () {
 	});
 	$("#change-kelas-visor").change(function () {
 		var kelas = $("#change-kelas-visor").val();
-		window.location = BASEURL + "master/super-visor?kelas=" + kelas;
+		var level = $("#change-kelas-visor").attr("level-user");
+		window.location = BASEURL + level + "/super-visor?kelas=" + kelas;
 	});
 });
 
@@ -1042,5 +1043,47 @@ $(document).ready(function () {
 			window.location =
 				BASEURL + "kepala_sekolah/master_data/siswa?kelas=" + data;
 		}
+	});
+});
+
+// logout admin
+$(document).ready(function () {
+	$("#logout-kepsek").click(function (event) {
+		event.preventDefault();
+		Swal.fire({
+			title: "Anda Yakin Keluar?",
+			text: "Anda yakin ingin keluar dari Siberhyl?",
+			icon: "warning",
+			showConfirmButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Logout",
+		}).then((result) => {
+			if (result.value) {
+				$.ajax({
+					type: "GET",
+					url: BASEURL + "kepsek/logout",
+					beforeSend: function () {
+						swal.fire({
+							imageUrl: BASEURL + "assets/logo/rolling.png",
+							title: "Logging Out",
+							text: "silahkan tunggu...",
+							showConfirmButton: false,
+							allowOutsideClick: false,
+						});
+					},
+					success: function (data) {
+						swal.fire({
+							icon: "success",
+							title: "Logout",
+							text: "Silahkan login kembali untuk melanjutkan :)",
+							showConfirmButton: false,
+							allowOutsideClick: false,
+						});
+						window.location.href = BASEURL;
+					},
+				});
+			}
+		});
 	});
 });

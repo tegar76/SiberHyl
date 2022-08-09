@@ -92,8 +92,7 @@ class Data extends CI_Controller
 	{
 		$data['guru'] = array();
 		$guru = $this->db->get_where('guru', [
-			'role_id !=' => 1,
-			'role_id !=' => 3
+			'role_id' => 2,
 		])->result();
 		if ($guru) {
 			$data['guru'] = $guru;

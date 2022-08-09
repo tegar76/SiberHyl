@@ -42,7 +42,7 @@ class Dashboard extends CI_Controller
 			$data['study'] = $study;
 		}
 		$data['tahun_ajar'] = $this->tahun_ajar;
-		$data['teacherRow'] = $this->master->get_row_data('guru', ['role_id !=' => 1, 'role_id !=' => 3]);
+		$data['teacherRow'] = $this->master->get_row_data('guru', ['role_id' => 2]);
 		$data['studentRow'] = $this->master->get_row_data('siswa');
 		$data['classRow'] = $this->master->get_row_data('kelas');
 		$data['title'] = 'Dashboard Kepala Sekolah';

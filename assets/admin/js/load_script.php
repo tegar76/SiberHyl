@@ -1,1 +1,1 @@
-<script src="<?= base_url('assets/admin/js/admin-script.js') ?>"></script>
+<script src="<?= base_url('assets/admin/js/admin_script.js') ?>"></script>

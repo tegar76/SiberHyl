@@ -6,6 +6,7 @@ class Dashboard extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		isWaliKelasLogin();
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->userGuru = $this->guru->getWhere(['guru_nip' => $this->session->userdata('nip')]);
