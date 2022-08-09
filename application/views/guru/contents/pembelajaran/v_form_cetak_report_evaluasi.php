@@ -55,6 +55,10 @@
 								<div class="input-group mb-3">
 									<input type="text" name="mapel" id="mapel" class="form-control" value="<?= $info->nama_mapel ?>" readonly>
 								</div>
+								<label for="format_export">Format</label>
+								<div class="input-group mb-3">
+									<input type="text" name="format_export" id="format_print" class="form-control" value="pdf" readonly>
+								</div>
 								<div class="row">
 									<div class="col">
 										<label for="pert_awal">Pertemuan Ke-</label>
@@ -83,16 +87,6 @@
 												<?= form_error('pert_akhir', '<div class="text-danger">', '</div>') ?>
 											</div>
 										</div>
-									</div>
-								</div>
-								<label for="format_export">Format</label>
-								<div class="input-group mb-3">
-									<select name="format_export" id="format_export" class="form-control custom-select <?= (form_error('format_export')) ? 'is-invalid' : '' ?>">
-										<option value="">Pilih Format</option>
-										<option value="pdf">PDF</option>
-									</select>
-									<div id="format_exportFeedback" class="invalid-feedback">
-										<?= form_error('format_export', '<div class="text-danger">', '</div>') ?>
 									</div>
 								</div>
 								<div class="btn-aksi mt-4 mb-2">
