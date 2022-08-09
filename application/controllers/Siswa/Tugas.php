@@ -26,6 +26,7 @@ class Tugas extends CI_Controller
 	public function tugas_harian($id = false)
 	{
 		$siswa = $this->userSiswa;
+		$dateNow = date('Y-m-d H:i:s');
 		if ($id) {
 			$id = $this->secure->decrypt_url($id);
 			$tugas = $this->master->getTugasHarian($id);
@@ -70,7 +71,11 @@ class Tugas extends CI_Controller
 						$n['id'] = 0;
 					} else {
 						if ($nilai_->status == 1) {
-							$n['ket'] = '<a href="' . base_url('siswa/ruang_tugas/edit_tugas/' . $this->secure->encrypt_url($nilai_->tugas_siswa_id)) . '" class="btn btn-sm btn-success text-white px-4 py-1">Edit</a>';
+							if (strtotime($row->deadline) <= strtotime($dateNow) && strtotime($dateNow) > strtotime($row->deadline)) {
+								$n['ket'] = 'Waktu Sudah Lewat';
+							} else {
+								$n['ket'] = '<a href="' . base_url('siswa/ruang_tugas/edit_tugas/' . $this->secure->encrypt_url($nilai_->tugas_siswa_id)) . '" class="btn btn-sm btn-success text-white px-4 py-1">Edit</a>';
+							}
 						} elseif ($nilai_->status == 2 || $nilai_->status == 4) {
 							$n['ket'] = 'Tugas Sudah Dinilai';
 						} elseif ($nilai_->status == 3) {
@@ -78,6 +83,7 @@ class Tugas extends CI_Controller
 						} else {
 							$n['ket'] = 'Tidak Mengerjakan';
 						}
+
 						$n['mapel'] = $row->nama_mapel;
 						$n['pert'] = $row->pertemuan;
 						$n['judul'] = $row->judul_tugas;

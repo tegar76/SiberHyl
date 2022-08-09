@@ -236,15 +236,15 @@ class SiswaModel extends CI_Model
 
 	public function print_riwayat_absen($jadwalID, $nis, $pert_awal, $pert_akhir)
 	{
-		$select = "jurnal.jurnal_id, jurnal.pert_ke, jurnal.jadwal_id,
+		$select = "jurnal.jurnal_id, jurnal.pertemuan, jurnal.jadwal_id,
 		absensi.status, absensi.siswa_nis";
 
 		$query = $this->db->select($select)
 			->from('absensi')->join('jurnal', 'jurnal.jurnal_id=absensi.jurnal_id')
 			->where('jadwal_id', $jadwalID)
 			->where('siswa_nis', $nis)
-			->where('pert_ke >=', $pert_awal)
-			->where('pert_ke <=', $pert_akhir)
+			->where('pertemuan >=', $pert_awal)
+			->where('pertemuan <=', $pert_akhir)
 			->get();
 		$result = $query->result();
 		return $result;
@@ -268,7 +268,7 @@ class SiswaModel extends CI_Model
 
 	public function get_result_tugas($id)
 	{
-		$this->db->select('tugas.tugas_id, tugas.pertemuan, tugas.judul_tugas, mapel.nama_mapel');
+		$this->db->select('tugas.tugas_id, tugas.pertemuan, tugas.judul_tugas, tugas.deadline, mapel.nama_mapel');
 		$this->db->from('tugasharian as tugas');
 		$this->db->where('tugas.jadwal_id', $id);
 		$this->db->join('jadwal', 'jadwal.jadwal_id=tugas.jadwal_id');

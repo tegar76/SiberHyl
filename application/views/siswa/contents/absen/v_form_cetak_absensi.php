@@ -3,7 +3,7 @@
 
 <section class="container section section__height">
 
-	<?= form_open('siswa/absensi/cetak_absensi/' . $this->secure->encrypt_url($result->jadwal_id)) ?>
+	<?= form_open('siswa/eksport/absensi/' . $this->secure->encrypt_url($result->jadwal_id)) ?>
 	<input type="hidden" name="jadwal_id" value="<?= $result->jadwal_id ?>">
 	<input type="hidden" name="siswa_nis" value="<?= $this->session->userdata('nis') ?>">
 	<div class="title-form mb-3">
@@ -25,7 +25,7 @@
 	<div class="input-group mb-3">
 		<select name="pert_awal" id="pert_awal" class="form-control custom-select <?= (form_error('pert_awal')) ? 'is-invalid' : '' ?>">
 			<option value="" selected>Pilih Pertemuan Ke-</option>
-			<?php for ($i = 1; $i <= 10; $i++) : ?>
+			<?php for ($i = 1; $i <= $pertemuan; $i++) : ?>
 				<option value="<?= $i ?>">Pertemuan <?= $i ?></option>
 			<?php endfor ?>
 		</select>
@@ -37,7 +37,7 @@
 	<div class="input-group mb-3">
 		<select name="pert_akhir" id="pert_akhir" class="form-control custom-select <?= (form_error('pert_akhir')) ? 'is-invalid' : '' ?>">
 			<option value="" selected>Pilih Sampai Pertemuan Ke-</option>
-			<?php for ($i = 1; $i <= 10; $i++) : ?>
+			<?php for ($i = 1; $i <= $pertemuan; $i++) : ?>
 				<option value="<?= $i ?>">Pertemuan <?= $i ?></option>
 			<?php endfor ?>
 		</select>
@@ -47,12 +47,10 @@
 	</div>
 	<label for="format_print">Format</label>
 	<div class="input-group mb-3">
-		<input type="text" name="format_print" id="format_print" class="form-control" value="PDF" readonly>
+		<input type="text" name="format_export" id="format_print" class="form-control" value="pdf" readonly>
 	</div>
 	<div class="btn-aksi mb-4">
-		<button type="submit" class="btn btn-sm btn-primary rounded px-4 py-1 mr-3">Kirim</button>
+		<button type="submit" name="print" class="btn btn-sm btn-primary rounded px-4 py-1 mr-3">Kirim</button>
 		<button type="reset" class="btn btn-sm btn-secondary rounded px-4 py-1">Reset</button>
 	</div>
 	<?= form_close() ?>
-
-	Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, asperiores!

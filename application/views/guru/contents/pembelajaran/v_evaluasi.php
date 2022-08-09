@@ -37,7 +37,7 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<a href="<?= base_url('Guru/Pembelajaran/formCetakReportEvaluasi') ?>">
+						<a href="<?= base_url('guru/export/evaluasi/' . $info->jadwal_id) ?>">
 							<div class="card mb-3 py-1 px-2 card-reporting">
 								<div class="container">
 									<div class="row">

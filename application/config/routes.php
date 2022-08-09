@@ -118,6 +118,11 @@ $route['siswa/konsultasi'] = 'Siswa/Konsultasi';
 $route['siswa/konsultasi/(:any)'] = 'Siswa/Konsultasi/$1';
 $route['siswa/konsultasi/(:any)/(:any)'] = 'Siswa/Konsultasi/$1/$2';
 
+# 11. Route Eksport
+$route['siswa/eksport/(:any)'] = 'Siswa/Docs/$1';
+$route['siswa/eksport/(:any)/(:any)'] = 'Siswa/Docs/$1/$2';
+$route['siswa/eksport/(:any)/(:any)/(:any)'] = 'Siswa/Docs/$1/$2/$3';
+
 // routing wali kelas
 $route['wali-kelas/dashboard'] = 'WaliKelas/Dashboard/index';
 
@@ -204,6 +209,9 @@ $route['guru/pembelajaran/(:any)/(:any)'] = 'Guru/Pembelajaran/$1/$2';
 
 
 $route['guru/export/absensi_siswa/(:any)'] = 'Guru/Docs/export_absensi_siswa/$1';
+$route['guru/export/tugas_harian/(:any)'] = 'Guru/Docs/tugas_harian/$1';
+$route['guru/export/evaluasi/(:any)'] = 'Guru/Docs/evaluasi/$1';
+$route['guru/export/jurnal/(:any)'] = 'Guru/Docs/jurnal/$1';
 
 $route['guru/info_akademik'] = 'Guru/InfoAkademik';
 $route['guru/info_akademik/(:any)'] = 'Guru/InfoAkademik/$1';

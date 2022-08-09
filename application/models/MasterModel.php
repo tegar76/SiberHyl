@@ -369,6 +369,7 @@ class MasterModel extends CI_Model
 		$this->db->join('mapel', 'mapel.mapel_id=jadwal.mapel_id');
 		$this->db->join('ruangan', 'ruangan.ruang_id=jadwal.ruang_id');
 		$this->db->where('jurnal.jadwal_id', $id);
+		$this->db->order_by('tanggal', 'DESC');
 		return $this->db->get()->result();
 	}
 
@@ -657,6 +658,7 @@ class MasterModel extends CI_Model
 			jurnal.kd_materi,
 			jurnal.pertemuan,
 			jurnal.pembahasan, 
+			jurnal.catatan_kbm,
 			jurnal.jurnal_id
 		");
 		$this->db->from('jurnal');

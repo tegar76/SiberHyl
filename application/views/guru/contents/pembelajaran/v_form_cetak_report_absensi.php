@@ -61,7 +61,7 @@
 									<div class="input-group mb-3">
 										<select name="pert_awal" id="pert_awal" class="form-control custom-select <?= (form_error('pert_awal')) ? 'is-invalid' : '' ?>">
 											<option value="" selected>Pilih Pertemuan Ke-</option>
-											<?php for ($i = 1; $i <= 10; $i++) : ?>
+											<?php for ($i = 1; $i <= $pertemuan; $i++) : ?>
 												<option value="<?= $i ?>">Pertemuan <?= $i ?></option>
 											<?php endfor ?>
 										</select>
@@ -75,7 +75,7 @@
 									<div class="input-group mb-3">
 										<select name="pert_akhir" id="pert_akhir" class="form-control custom-select <?= (form_error('pert_akhir')) ? 'is-invalid' : '' ?>">
 											<option value="" selected>Pilih Sampai Pertemuan Ke-</option>
-											<?php for ($i = 1; $i <= 10; $i++) : ?>
+											<?php for ($i = 1; $i <= $pertemuan; $i++) : ?>
 												<option value="<?= $i ?>">Pertemuan <?= $i ?></option>
 											<?php endfor ?>
 										</select>
@@ -90,7 +90,6 @@
 								<select name="format_export" id="format_export" class="form-control custom-select <?= (form_error('format_export')) ? 'is-invalid' : '' ?>">
 									<option value="">Pilih Format</option>
 									<option value="pdf">PDF</option>
-									<option value="excel">EXCEL</option>
 								</select>
 								<div id="format_exportFeedback" class="invalid-feedback">
 									<?= form_error('format_export', '<div class="text-danger">', '</div>') ?>

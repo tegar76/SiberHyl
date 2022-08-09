@@ -12,7 +12,7 @@
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb m-0 p-0">
 						<li class="breadcrumb-item text-muted active">Pembelajaran</li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajaran/mengajar') ?>" class="text-muted">Mengajar</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajaran') ?>" class="text-muted">Mengajar</a></li>
 						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajaran/tugas_harian/' . $tugas->jadwal_id) ?>" class="text-muted">Tugas Harian</a></li>
 						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajaran/detail_tugas_harian/' . $tugas->tugas_id) ?>" class="text-muted">Detail Tugas Harian</a></li>
 						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
@@ -40,7 +40,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="activity">
-						<?= form_open('guru/pembelajaran/set_deadline_tugas/' . $tugas->tugas_id) ?>\
+						<?= form_open('guru/pembelajaran/set_deadline_tugas/' . $tugas->tugas_id) ?>
 						<input type="hidden" name="tugas_id" value="<?= $tugas->tugas_id ?>">
 						<div class="card shadow mb-4">
 							<div class="container my-3">

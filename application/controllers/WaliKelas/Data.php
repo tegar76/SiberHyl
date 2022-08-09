@@ -6,14 +6,15 @@ class Data extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('MasterModel', 'master', true);
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$this->load->model('GuruModel', 'guru', true);
 		$this->load->model('SiswaModel', 'siswa', true);
 		$this->userGuru = $this->guru->getWhere(['guru_nip' => $this->session->userdata('nip')]);
-		$tahun_ajar = $this->jadwal->get_activate_tahunajar();
+		$this->load->model('MasterModel', 'master', true);
+		$tahun_ajar = $this->master->getActiveTahunAkademik();
 		if ($tahun_ajar == null) {
 			$this->tahun_ajar = [
+				'tahun_id' => 0,
 				'semester' => 0,
 				'tahun' => ''
 			];
@@ -25,7 +26,7 @@ class Data extends CI_Controller
 	public function data_siswa()
 	{
 		$guru	= $this->userGuru;
-		$wali 	= $this->guru->get_wali_kelas($guru->guru_kode);
+		$wali 	= $this->guru->getWaliKelas($guru->guru_nip);
 		$students = $this->siswa->getWhere(['siswa.kelas_id' => $wali->kelas_id]);
 		$data['students'] = array();
 		if (!empty($students)) {
@@ -71,7 +72,7 @@ class Data extends CI_Controller
 	public function jadwal_pelajaran()
 	{
 		$guru = $this->userGuru;
-		$wali 	= $this->guru->get_wali_kelas($guru->guru_kode);
+		$wali 	= $this->guru->getWaliKelas($guru->guru_nip);
 		$data['days']  = ["Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
 		foreach ($data['days'] as $hari) {
 			$study = $this->jadwal->getJadwalHariIni([
@@ -86,12 +87,12 @@ class Data extends CI_Controller
 					if ($value->hari == $hari) {
 						$sch['hari'] = $value->hari;
 						$sch['id'] = $value->jadwal_id;
-						$sch['foto'] = $value->guru_foto;
+						$sch['foto'] = $value->profile;
 						$sch['nama'] = $value->guru_nama;
 						$sch['kode'] = $value->guru_kode;
 						$sch['mapel'] = $value->nama_mapel;
 						$sch['jam'] = date('H:i', strtotime($value->jam_masuk)) . ' - ' . date('H:i', strtotime($value->jam_keluar));
-						$sch['ruang'] = ($value->nama_ruang) ? $value->nama_ruang : '-';
+						$sch['ruang'] = ($value->kode_ruang) ? $value->kode_ruang : '-';
 						$sch['kelas'] =  $value->nama_kelas;
 						$newsch[] = $sch;
 					}

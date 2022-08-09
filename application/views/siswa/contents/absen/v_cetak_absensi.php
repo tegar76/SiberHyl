@@ -121,88 +121,66 @@
 
 		<title><?= $title ?></title>
 
-		<!-- style -->
-		<link rel="stylesheet" href="<?= base_url('assets/siswa/css/print/styles.css') ?>">
-
-		<title><?= $title ?></title>
-
 	</head>
 
 	<body>
 
 		<div class="container">
-			<a href="<?= base_url('siswa/absensi/cetak_riwayat_absensi/') ?>" role="button" class="btn btn-success btn-sm text-white ml-4 mt-3 mb-n4" data-toggle="popover" data-placement="bottom"><i class="fa-solid fa-download text-white ml-1"></i> Unduh</a>
+			<br>
+			<a role="button" href="" class="button">Unduh</a>
 			<div class="main-page">
-				<div class="sub-page text-center">
-					<div class="title mb-1">LAPORAN HASIL HASIL ABSENSI SISWA</div>
-					<div class="sub-title mb-1">Semester Genap Tahun Pelajaran 2021/2022</div>
-					<div class="sub-title mb-4">SMK Kesatrian Purwokerto</div>
-					<div class="date text-right mb-3">Tanggal Cetak : <?= $print['tanggal_cetak'] ?></div>
-					<div class="row atribute text-left">
-						<div class="col-sm-3">
-							<p>Kode Guru</p>
-						</div>
-						<div class="col">
-							<p><span> : </span><?= $print['kode_guru'] ?></p>
-						</div>
+				<div class="sub-page">
+					<div class="title-page">
+						<div class="title">LAPORAN HASIL ABSENSI SISWA</div>
+						<div class="sub-title">Semester Genap Tahun Pelajaran <?= ($tahun_ajar['tahun'] == '') ? '-' : $tahun_ajar['tahun'] ?></div>
+						<div class="sub-title">SMK Kesatrian Purwokerto</div>
 					</div>
-					<div class="row atribute text-left">
-						<div class="col-sm-3">
-							<p>Kelas</p>
-						</div>
-						<div class="col">
-							<p><span> : </span><?= $print['kelas'] ?></p>
-						</div>
+					<div class="date">
+						<p>Tanggal Cetak : <?= $dateExport ?></p>
 					</div>
-					<div class="row atribute text-left">
-						<div class="col-sm-3">
-							<p>Mapel</p>
-						</div>
-						<div class="col">
-							<p><span> : </span><?= $print['mapel'] ?></p>
-						</div>
+					<div class="atribute">
+						<p>Kode Guru <span>: <?= $teacherCode ?></span></p>
+						<p>Kelas <span>: <?= $className ?></span></p>
+						<p>Mapel <span>: <?= $lessonName ?></span></p>
+						<p>Pertemuan Ke- <span>: <?= $pertKe ?></span></p>
 					</div>
-					<div class="row atribute text-left mb-4">
-						<div class="col-sm-3">
-							<p>Pertemuan Ke-</p>
-						</div>
-						<div class="col">
-							<p><span> : </span><?= $print['pertemuan'] ?></p>
-						</div>
-					</div>
-					<div class="content">
-						<table border="1" cellpadding="10">
-							<tr>
-								<th rowspan="2">No</th>
-								<th rowspan="2">NIS</th>
-								<th rowspan="2">Nama</th>
-								<th colspan="<?= count($print['rekap_absen']) ?>">Pertemuan Ke-</th>
-								<th colspan="4">Total</th>
-							</tr>
-							<tr>
-								<!-- <td>1</td>
-                            <td>2010049</td>
-                            <td>ADIT PRAYITNO</td> -->
-								<?php foreach ($print['rekap_absen'] as $row) : ?>
-									<th><?= $row->pert_ke ?></th>
-								<?php endforeach; ?>
-								<th>H</th>
-								<th>A</th>
-								<th>S</th>
-								<th>I</th>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td><?= $print['siswa_nis'] ?></td>
-								<td><?= $print['siswa_nama'] ?></td>
-								<?php foreach ($print['rekap_absen'] as $row) : ?>
-									<th><?= $row->status ?></th>
-								<?php endforeach; ?>
-								<td>5</td>
-								<td>0</td>
-								<td>2</td>
-								<td>0</td>
-							</tr>
+
+					<div class="content text-left">
+						<table cellpadding="14">
+							<thead>
+								<tr>
+									<th rowspan="2">No</th>
+									<th rowspan="2">NIS</th>
+									<th rowspan="2">Nama</th>
+									<th colspan="<?= count($absen) ?>">Pertemuan Ke-</th>
+									<th colspan="4">Total</th>
+								</tr>
+								<tr>
+									<?php
+									foreach ($absen as $row) {
+										echo '<th>' . $row->pertemuan . '</th>';
+									} ?>
+									<th>H</th>
+									<th>A</th>
+									<th>S</th>
+									<th>I</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><?= $reporting['nomor']; ?></td>
+									<td><?= $reporting['nis']; ?></td>
+									<td><?= $reporting['nama']; ?></td>
+									<?php foreach ($reporting['status'] as $row) : ?>
+										<td><?= $row['ket']; ?></td>
+									<?php endforeach ?>
+									<td><?= $reporting['H']; ?></td>
+									<td><?= $reporting['A']; ?></td>
+									<td><?= $reporting['I']; ?></td>
+									<td><?= $reporting['S']; ?></td>
+								</tr>
+							</tbody>
+							<!-- Tampilkan Seluruh data -->
 						</table>
 					</div>
 				</div>

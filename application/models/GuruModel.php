@@ -126,7 +126,7 @@ class GuruModel extends CI_Model
 	{
 		$query = $this->db->select("guru.guru_kode, kelas.kelas_id, kelas.nama_kelas, mapel.nama_mapel, jadwal.jadwal_id")
 			->from('jadwal')
-			->join('guru', 'guru.guru_kode=jadwal.guru_kode')
+			->join('guru', 'guru.guru_nip=jadwal.guru_nip')
 			->join('kelas', 'kelas.kelas_id=jadwal.kelas_id')
 			->join('mapel', 'mapel.mapel_id=jadwal.mapel_id')
 			->where('jadwal_id', $jadwalID)
@@ -137,18 +137,58 @@ class GuruModel extends CI_Model
 
 	public function print_riwayat_absen($jadwalID, $nis, $pert_awal, $pert_akhir)
 	{
-		$select = "jurnal.jurnal_id, jurnal.pert_ke, jurnal.jadwal_id,
+		$select = "jurnal.jurnal_id, jurnal.pertemuan, jurnal.jadwal_id,
 		absensi.status, absensi.siswa_nis";
 
 		$query = $this->db->select($select)
 			->from('absensi')->join('jurnal', 'jurnal.jurnal_id=absensi.jurnal_id')
 			->where('jadwal_id', $jadwalID)
 			->where('siswa_nis', $nis)
-			->where('pert_ke >=', $pert_awal)
-			->where('pert_ke <=', $pert_akhir)
+			->where('pertemuan >=', $pert_awal)
+			->where('pertemuan <=', $pert_akhir)
 			->get();
 		$result = $query->result();
 		return $result;
+	}
+
+	public function getExportData($table, $jadwal)
+	{
+		$this->db->where('jadwal_id', $jadwal);
+		$this->db->where("pertemuan >=", $this->input->post('pert_awal', true));
+		$this->db->where("pertemuan <=", $this->input->post('pert_akhir', true));
+		return $this->db->get($table)->result();
+	}
+
+	public function getAbsensiSiswa($id, $nis)
+	{
+		$this->db->where('jurnal_id', $id);
+		$this->db->where('siswa_nis', $nis);
+		return $this->db->get('absensi')->row();
+	}
+
+	public function getNilaiTugas($id, $nis)
+	{
+		$this->db->select('nilai_tugas as nilai, siswa_nis as nis');
+		$this->db->from('tugassiswa');
+		$this->db->where('tugas_id', $id);
+		$this->db->where('siswa_nis', $nis);
+		$result = $this->db->get()->row();
+		return $result;
+	}
+
+	public function getNilaiTugasSiswa($type, $id, $nis)
+	{
+		if ($type == 'avg') {
+			$this->db->select_avg('nilai_tugas');
+		} elseif ($type == 'sum') {
+			$this->db->select_sum('nilai_tugas');
+		}
+		$this->db->join('tugasharian', 'tugasharian.tugas_id=tugassiswa.tugas_id');
+		$this->db->where("pertemuan >=", $this->input->post('pert_awal', true));
+		$this->db->where("pertemuan <=", $this->input->post('pert_akhir', true));
+		$this->db->where('jadwal_id', $id);
+		$this->db->where('siswa_nis', $nis);
+		return $this->db->get('tugassiswa')->row();
 	}
 
 	public function count_absensi_siswa($status, $nis, $jadwal)
@@ -159,12 +199,44 @@ class GuruModel extends CI_Model
 		$this->db->where('absensi.status', $status);
 		$this->db->where('siswa_nis', $nis);
 		$this->db->where('jadwal_id', $jadwal);
-		$this->db->where('pert_ke >=', $this->input->post('pert_awal', true));
-		$this->db->where('pert_ke <=', $this->input->post('pert_akhir', true));
+		$this->db->where('pertemuan >=', $this->input->post('pert_awal', true));
+		$this->db->where('pertemuan <=', $this->input->post('pert_akhir', true));
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
+
+	public function getExportEvaluasi($jadwal)
+	{
+		$this->db->where('jadwal_id', $jadwal);
+		$this->db->where("evaluasi_ke >=", $this->input->post('pert_awal', true));
+		$this->db->where("evaluasi_ke <=",  $this->input->post('pert_akhir', true));
+		return $this->db->get('evaluasi')->result();
+	}
+
+	public function getNilaiEvaluasi($id, $nis)
+	{
+		$this->db->select('nilai');
+		$this->db->from('evaluasisiswa');
+		$this->db->where('evaluasi_id', $id);
+		$this->db->where('siswa_nis', $nis);
+		return $this->db->get()->row();
+	}
+
+	public function getAvgSumEvaluasi($type, $id, $nis)
+	{
+		if ($type == 'avg') {
+			$this->db->select_avg('nilai');
+		} elseif ($type == 'sum') {
+			$this->db->select_sum('nilai');
+		}
+		$this->db->join('evaluasi', 'evaluasi.evaluasi_id=evaluasisiswa.evaluasi_id');
+		$this->db->where("evaluasi_ke >=", $this->input->post('pert_awal', true));
+		$this->db->where("evaluasi_ke <=", $this->input->post('pert_akhir', true));
+		$this->db->where('jadwal_id', $id);
+		$this->db->where('siswa_nis', $nis);
+		return $this->db->get('evaluasisiswa')->row();
+	}
 
 	public function get_info_tugas($id_jadwal)
 	{
@@ -557,13 +629,20 @@ class GuruModel extends CI_Model
 		return $this->db->get()->result();
 	}
 
-	public function get_wali_kelas($where)
+	public function getWaliKelas($nip)
 	{
-		$this->db->select('guru.guru_kode, guru.guru_nama, kelas.kelas_id, kelas.kode_kelas, kelas.nama_kelas, kelas.create_time, kelas.update_time');
+		$this->db->select("
+			guru.guru_kode,
+			guru.guru_nama,
+			kelas.kelas_id,
+			kelas.kode_kelas,
+			kelas.nama_kelas,
+			kelas.create_time,
+			kelas.update_time
+		");
 		$this->db->from('kelas');
 		$this->db->join('guru', 'guru.guru_nip=kelas.guru_nip');
-		$this->db->where('kelas.guru_nip', $where);
-		$query = $this->db->get();
-		return $query->row();
+		$this->db->where('kelas.guru_nip', $nip);
+		return $this->db->get()->row();
 	}
 }

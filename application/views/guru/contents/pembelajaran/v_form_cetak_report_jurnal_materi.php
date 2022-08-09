@@ -5,16 +5,16 @@
 		<div class="page-breadcrumb">
 			<div class="row">
 				<div class="col-7 align-self-center">
-					<h3 class="page-title"><?= $title?></h3>
+					<h3 class="page-title"><?= $title ?></h3>
 				</div>
 			</div>
 			<div class="d-flex align-items-center">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb m-0 p-0">
 						<li class="breadcrumb-item text-muted active">Pembelajaran</li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/mengajar') ?>" class="text-muted">Mengajar</a></li>
-						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('Guru/Pembelajaran/tugasHarian') ?>" class="text-muted">Tugas Harian</a></li>
-						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title?></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajran') ?>" class="text-muted">Mengajar</a></li>
+						<li class="breadcrumb-item" aria-current="page"><a href="<?= base_url('guru/pembelajran/tugas_harian') ?>" class="text-muted">Tugas Harian</a></li>
+						<li class="breadcrumb-item text-muted active" aria-current="page"><?= $title ?></li>
 					</ol>
 				</nav>
 			</div>

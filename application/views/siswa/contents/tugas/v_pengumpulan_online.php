@@ -3,7 +3,7 @@
 
 <section class="container section section__height">
 
-	<?= form_open_multipart('siswa/tugas/pengumpulan_online/' . $this->secure->encrypt_url($tugas->tugas_id)) ?>
+	<?= form_open_multipart('siswa/ruang_tugas/pengumpulan_online/' . $this->secure->encrypt_url($tugas->tugas_id)) ?>
 	<input type="hidden" name="nis" value="<?= $siswa->siswa_nis ?>	">
 	<input type="hidden" name="tugas_id" value="<?= $tugas->tugas_id ?>">
 	<div class="title-form mb-1">

@@ -84,7 +84,7 @@
 					<div class="col-xs-6 col-sm-12">
 						<div class="card shadow mb-4">
 							<div class="card-body">
-								<a href="<?= base_url('siswa/absensi/cetak_absensi/' . $this->secure->encrypt_url($absensi['jadwalID'])) ?>">
+								<a href="<?= base_url('siswa/eksport/absensi/' . $this->secure->encrypt_url($absensi['jadwalID'])) ?>">
 									<div class="card mb-3 py-1 px-2 card-reporting">
 										<div class="container">
 											<div class="row">

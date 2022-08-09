@@ -258,7 +258,6 @@ class Faker extends CI_Controller
 				'siswa_email' => $this->faker->email(),
 				'siswa_alamat' => $this->faker->address(),
 				'kelas_id' => $idkelas,
-				'role_id' => 4
 			];
 		}
 		$this->db->insert_batch('siswa', $siswa);

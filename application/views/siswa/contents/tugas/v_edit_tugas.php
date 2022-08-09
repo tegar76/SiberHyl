@@ -3,7 +3,7 @@
 
 <section class="container section section__height">
 
-	<?= form_open_multipart('siswa/tugas/edit_tugas/' . $this->secure->encrypt_url($tugas->tugas_siswa_id)) ?>
+	<?= form_open_multipart('siswa/ruang_tugas/edit_tugas/' . $this->secure->encrypt_url($tugas->tugas_siswa_id)) ?>
 	<input type="hidden" name="tugas_siswa_id" value="<?= $tugas->tugas_siswa_id ?>">
 	<div class="title-form mb-1">
 		Form Edit Tugas (Online)

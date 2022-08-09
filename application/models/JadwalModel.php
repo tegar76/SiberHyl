@@ -119,7 +119,7 @@ class JadwalModel extends CI_Model
 
 		$query = $this->db->select($select)->from('jurnal')
 			->join('jadwal', 'jadwal.jadwal_id=jurnal.jadwal_id', 'left')
-			->join('guru', 'guru.guru_kode=jadwal.guru_kode', 'left')
+			->join('guru', 'guru.guru_nip=jadwal.guru_nip', 'left')
 			->join('kelas', 'kelas.kelas_id=jadwal.kelas_id', 'left')
 			->join('mapel', 'mapel.mapel_id=jadwal.mapel_id', 'left')
 			->join('ruangan', 'ruangan.ruang_id=jadwal.ruang_id', 'left')

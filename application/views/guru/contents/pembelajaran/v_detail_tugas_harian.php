@@ -112,7 +112,7 @@
 										<th style="width:14%;">Deskripsi Tugas</th>
 										<th style="width:6%;">Pertemuan Ke-</th>
 										<th style="width:6%;">Deadline</th>
-										<th style="width:6%;">Aksi</th>
+										<th style="width:10%;">Aksi</th>
 									</tr>
 								</thead>
 								<tbody>

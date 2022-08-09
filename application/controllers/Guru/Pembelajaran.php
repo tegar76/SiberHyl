@@ -886,7 +886,7 @@ class Pembelajaran extends CI_Controller
 					$this->load->view('guru/layout/wrapper', $data, false);
 				} else {
 					$this->guru->tambah_evaluasi();
-					$this->message('Berhasil', 'Evaluasi ' . $_POST['evaluasi_ke'] . 'berhasil ditambahkan', 'success');
+					$this->message('Berhasil', 'Evaluasi ' . $_POST['evaluasi_ke'] . ' berhasil ditambahkan', 'success');
 					return redirect('guru/pembelajaran/evaluasi/' . $_POST['jadwal_id']);
 				}
 			}
