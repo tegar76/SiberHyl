@@ -5,6 +5,7 @@ class Materi extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		checkKepsekLogin();
 		$this->load->model('MasterModel', 'master', true);
 		$this->load->model('JadwalModel', 'jadwal', true);
 		$tahun_ajar = $this->master->getActiveTahunAkademik();
@@ -513,7 +514,7 @@ class Materi extends CI_Controller
 				$path_pdf = 'storage/materi/' . $dirKelas . '/' . $materi->jurusan . '/';
 			}
 			$pdf = FCPATH . './' . $path_pdf . $materi->file;
-			if(file_exists($pdf)) {
+			if (file_exists($pdf)) {
 				$data['pdf'] =  base_url($path_pdf . $materi->file);
 				$this->load->view('pdf_viewer/pdf_viewer', $data);
 			} else {
@@ -524,11 +525,11 @@ class Materi extends CI_Controller
 		}
 	}
 
-	public function view_materi_guru($file = null) 
+	public function view_materi_guru($file = null)
 	{
-		if($file) {
+		if ($file) {
 			$pdf = FCPATH . './storage/guru/materi/' . $file;
-			if(file_exists($pdf)) {
+			if (file_exists($pdf)) {
 				$data['pdf'] = base_url('storage/guru/materi/') . $file;
 				$this->load->view('pdf_viewer/pdf_viewer', $data);
 			} else {
@@ -557,7 +558,7 @@ class Materi extends CI_Controller
 				$dir_exist = false; // dir not exist
 			endif;
 		}
-		
+
 		if ($dir2) {
 			if (!is_dir('storage/materi/' . $dir1 . '/' . $dir2)) :
 				mkdir('./storage/materi/' . $dir1 . '/' . $dir2, 0777, true);
